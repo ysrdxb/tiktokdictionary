@@ -1,47 +1,62 @@
 <?php
-// Debug Toolkit Phase 4: Flat Structure + URL Check
+// Debug Toolkit Phase 5: Laravel Boot & Route Check
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Directory is now root
-$baseDir = __DIR__ . '/';
-$manifestFile = $baseDir . 'build/manifest.json';
-// URL Base
-$uri = $_SERVER['REQUEST_URI'];
-// /tiktokdictionary/debug.php -> base is /tiktokdictionary
-$scriptName = $_SERVER['SCRIPT_NAME'];
-$urlBase = dirname($scriptName); 
-if ($urlBase === '/' || $urlBase === '\\') $urlBase = '';
+echo "<style>body{font-family:sans-serif;max-width:900px;margin:20px auto} .box{padding:15px;margin:10px 0;border:1px solid #ccc;background:#f9f9f9} .ok{color:green} .fail{color:red}</style>";
+echo "<h1>🚀 Root Structure & Route Diagnostic</h1>";
 
-echo "<style>body{font-family:sans-serif;max-width:800px;margin:20px auto} .ok{color:green} .fail{color:red} .box{background:#f9f9f9;padding:15px;margin:15px 0;border-left:5px solid #333}</style>";
-echo "<h1>🚀 Root Structure Diagnostic</h1>";
+$baseDir = __DIR__;
 
-// 1. MANIFEST
-if (file_exists($manifestFile)) {
-    echo "<div class='box ok'>✓ Manifest Found at: build/manifest.json</div>";
-    $json = json_decode(file_get_contents($manifestFile), true);
-    $css = $json['resources/css/app.css']['file'] ?? '';
-    
-    if ($css) {
-        $realPath = $baseDir . 'build/' . $css;
-        // The URL should be base/build/assets/file.css
-        $assetUrl = "http://" . $_SERVER['HTTP_HOST'] . $urlBase . "/build/" . $css;
-        
-        echo "<div><strong>CSS Asset:</strong> $css</div>";
-        echo "<div><strong>Checking URL:</strong> <a href='$assetUrl' target='_blank'>$assetUrl</a></div>";
-        
-        $headers = @get_headers($assetUrl);
-        if ($headers && strpos($headers[0], '200') !== false) {
-             echo "<div class='ok'>✅ 200 OK - Asset should load!</div>";
-        } elseif ($headers) {
-             echo "<div class='fail'>❌ " . $headers[0] . " - Still Redirecting or missing?</div>";
-        } else {
-             echo "<div class='fail'>❌ Connection Failed</div>";
-        }
-        
+// 1. FILE CHECK
+echo "<h3>1. File Structure</h3>";
+$files = [
+    'vendor/autoload.php',
+    'bootstrap/app.php',
+    '.env',
+    'build/manifest.json'
+];
+foreach($files as $f) {
+    if(file_exists($baseDir . '/' . $f)) {
+        echo "<div class='ok'>✓ Found: $f</div>";
+    } else {
+        echo "<div class='fail'>❌ MISSING: $f</div>";
     }
-} else {
-    echo "<div class='box fail'>❌ Manifest NOT FOUND at: $manifestFile</div>";
+}
+
+// 2. BOOT LARAVEL
+echo "<h3>2. Booting Laravel...</h3>";
+try {
+    require $baseDir . '/vendor/autoload.php';
+    $app = require_once $baseDir . '/bootstrap/app.php';
+    
+    // Register the Public Path fix manually here to test
+    $app->usePublicPath($baseDir);
+    
+    $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+    
+    // Create Request
+    $request = Illuminate\Http\Request::capture();
+    
+    echo "<div class='box'>";
+    echo "<strong>URI:</strong> " . $request->getRequestUri() . "<br>";
+    echo "<strong>Path Info:</strong> " . $request->getPathInfo() . "<br>";
+    echo "<strong>Base URL:</strong> " . $request->getBaseUrl() . "<br>";
+    echo "<strong>Method:</strong> " . $request->getMethod() . "<br>";
+    echo "<strong>Detected Public Path:</strong> " . public_path() . "<br>";
+    echo "</div>";
+    
+    // Check Manifest Path via Laravel
+    $manifestPath = public_path('build/manifest.json');
+    echo "<div>Laravel looking for manifest at: $manifestPath</div>";
+    if (file_exists($manifestPath)) {
+        echo "<div class='ok'>✓ Laravel finds manifest!</div>";
+    } else {
+        echo "<div class='fail'>❌ Laravel CANNOT find manifest. (Public Path mismatch?)</div>";
+    }
+
+} catch (Throwable $e) {
+    echo "<div class='fail box'>❌ <strong>CRITICAL BOOT ERROR:</strong><br>" . $e->getMessage() . "<br><pre>" . $e->getTraceAsString() . "</pre></div>";
 }
 
 echo "<hr><a href='index.php'>Go to Homepage</a>";
