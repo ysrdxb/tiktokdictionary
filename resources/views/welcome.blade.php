@@ -1,6 +1,6 @@
 <x-layouts.app>
     <!-- Hero Section with Header Inside -->
-    <section class="relative min-h-[620px] flex flex-col">
+    <section class="relative min-h-[620px] flex flex-col overflow-hidden">
         <!-- Blue Gradient Background -->
         <!-- Richer Gradient Background with Mesh/Noise effect -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10 bg-[#002B5B]">
@@ -56,7 +56,7 @@
                 @endauth
                 
                 <!-- Mobile Nav Component -->
-                <x-layouts.mobile-nav />
+                <x-layouts.mobile-nav theme="dark" />
             </div>
         </header>
         

@@ -1,8 +1,10 @@
-<div x-data="{ open: false, searchTriggered: false }">
+<div x-data="{ open: false, searchTriggered: false }" {{ $attributes }}>
+    @props(['theme' => 'light'])
+
     <!-- Hamburger Button -->
     <button 
         @click="open = true" 
-        class="lg:hidden p-2 text-[#002B5B] dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg transition-colors"
+        class="lg:hidden p-2 rounded-lg transition-colors {{ $theme === 'dark' ? 'text-white hover:bg-white/10' : 'text-[#002B5B] dark:text-white hover:bg-slate-100 dark:hover:bg-white/10' }}"
         aria-label="Open Menu"
     >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
