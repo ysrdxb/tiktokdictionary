@@ -2,7 +2,7 @@
     'items' => [] // Collection of Words
 ])
 
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 auto-rows-[200px]">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 auto-rows-[200px]">
     @foreach($items as $index => $word)
         @php
             // The first item is arguably the biggest trend

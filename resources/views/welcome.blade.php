@@ -116,7 +116,7 @@
                 <!-- Header -->
                 <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
                     <div>
-                        <h2 class="text-5xl md:text-[72px] font-bold text-white tracking-tight leading-none mb-3">
+                        <h2 class="text-4xl md:text-[72px] font-bold text-white tracking-tight leading-none mb-3">
                             Viral <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-brand-accent">Velocity</span>
                         </h2>
                         <p class="text-white/80 font-medium text-lg tracking-wide max-w-2xl">
@@ -202,7 +202,7 @@
             <div class="max-w-[1240px] mx-auto px-6">
                 <!-- Header -->
                 <div class="mb-14">
-                    <h2 class="text-6xl md:text-[80px] font-bold text-[#002B5B] tracking-tight mb-4 leading-none">Fresh Submissions</h2>
+                    <h2 class="text-4xl md:text-[80px] font-bold text-[#002B5B] tracking-tight mb-4 leading-none">Fresh Submissions</h2>
                     <p class="text-[#002B5B] font-medium text-xl tracking-wide">Latest words discovered by users like you.</p>
                 </div>
                 
@@ -256,7 +256,7 @@
             <div class="max-w-[1240px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <!-- Left Text -->
                 <div>
-                   <h2 class="text-6xl md:text-[80px] font-bold text-[#002B5B] leading-[0.95] tracking-tight mb-8">
+                   <h2 class="text-4xl md:text-[80px] font-bold text-[#002B5B] leading-[0.95] tracking-tight mb-8">
                         Why TikTok<br>
                         Dictionary Exists
                     </h2>
@@ -266,7 +266,7 @@
                 </div>
 
                 <!-- Right Stats Grid (Blue Cards) -->
-                <div class="grid grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="bg-[#F0F6FB] rounded-[24px] p-10 text-center flex flex-col justify-center h-48">
                         <span class="block text-[42px] font-bold text-[#002B5B] mb-1 tracking-tight"><span x-data x-counter="{{ $stats['words'] }}">0</span>+</span>
                         <span class="text-[#002B5B]/70 text-[14px] font-bold">Words Defined</span>
@@ -287,7 +287,7 @@
     <!-- Submit Section -->
     <section id="submit" class="bg-[#002B5B] py-24 text-center">
         <div class="max-w-3xl mx-auto px-6">
-            <h2 class="text-6xl md:text-[80px] font-bold text-white tracking-tight mb-6 leading-none">Submit a Word</h2>
+            <h2 class="text-4xl md:text-[80px] font-bold text-white tracking-tight mb-6 leading-none">Submit a Word</h2>
             <p class="text-white/80 mb-10 text-xl font-medium">Saw a new TikTok word? Add it before it blows up.</p>
 
             <a href="{{ route('word.create') }}"

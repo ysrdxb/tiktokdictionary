@@ -118,7 +118,7 @@
                 </a>
 
                 <!-- Desktop Nav -->
-                <div class="hidden md:flex items-center gap-6">
+                <div class="hidden lg:flex items-center gap-6">
                      <a href="{{ route('explore.feed') }}" class="text-sm font-bold text-slate-600 dark:text-white/80 hover:text-brand-primary dark:hover:text-white transition-colors flex items-center gap-2">
                         <svg class="w-4 h-4 text-brand-primary dark:text-brand-accent animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         Live Feed
@@ -150,7 +150,7 @@
                 </div>
                 
                 @auth
-                    <div class="flex items-center gap-4">
+                    <div class="hidden lg:flex items-center gap-4">
                         @if(Auth::user()->is_admin)
                              <a href="{{ route('admin.dashboard') }}" class="text-white/70 text-sm font-bold hover:text-white">Admin</a>
                         @endif
@@ -165,11 +165,14 @@
                         </div>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="group relative px-6 py-2.5 bg-white text-[#002B5B] text-sm font-bold rounded-full transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] overflow-hidden">
+                    <a href="{{ route('login') }}" class="hidden lg:flex group relative px-6 py-2.5 bg-white text-[#002B5B] text-sm font-bold rounded-full transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] overflow-hidden">
                         <span class="relative z-10">Login</span>
                         <div class="absolute inset-0 bg-brand-accent opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
                     </a>
                 @endauth
+                
+                <!-- Mobile Nav Component -->
+                <x-layouts.mobile-nav />
             </div>
         </header>
 

@@ -9,11 +9,11 @@
     @endphp
 
     <!-- Section 1: Word Card (Main Definition) -->
-    <section class="w-full bg-white dark:bg-[#00152e]/40 py-10 transition-colors duration-300">
+    <section class="w-full bg-white dark:bg-[#00152e]/40 py-6 md:py-10 transition-colors duration-300">
         <div class="max-w-[1240px] mx-auto px-6">
             <!-- Title -->
             <div class="flex items-center gap-4 mb-5 flex-wrap">
-                <h1 class="text-5xl md:text-6xl font-bold text-[#002B5B] dark:text-white tracking-tight leading-none break-words">
+                <h1 class="text-4xl md:text-6xl font-bold text-[#002B5B] dark:text-white tracking-tight leading-none break-words">
                     {{ $word->term }}
                 </h1>
                 @if($word->rfci_score)

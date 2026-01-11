@@ -2980,38 +2980,129 @@ Floating labels that animate up, focus ring effects, shake on errors.
 
 ---
 
+
+---
+
+### TASK-039: Mobile Responsive Navigation
+```
+Status: DONE
+Priority: HIGH
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
+```
+
+**What To Build:**
+Fully responsive navigation bar with hamburger menu for mobile devices.
+
+**Step-by-Step:**
+1. Create `resources/views/components/layout/mobile-nav.blade.php`:
+   - Slide-over menu or drop-down
+   - Navigation links
+   - Mobile search bar
+2. Update `resources/views/components/layouts/app.blade.php`:
+   - Hide desktop nav on mobile (`hidden md:flex`)
+   - Show hamburger button on mobile (`block md:hidden`)
+   - Include mobile menu component
+
+**Acceptance Criteria:**
+- [ ] Hamburger menu opens/closes smoothly
+- [ ] Links are touch-friendly (44px min height)
+- [ ] Search bar accessible on mobile
+- [ ] No horizontal scroll when menu open
+
+---
+
+### TASK-040: Responsive Layouts (Homepage & Detail)
+```
+Status: DONE
+Priority: HIGH
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
+```
+
+**What To Build:**
+Ensure Homepage, Bento Grid, and Word Detail pages look great on all device sizes (Mobile, Tablet, Desktop).
+
+**Step-by-Step:**
+1. Update `resources/views/components/ui/bento-grid.blade.php`:
+   - Grid columns: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`
+2. Update `resources/views/word/show.blade.php`:
+   - Stack layout for mobile (`flex-col`)
+   - Adjust typography sizes (H1 from `text-6xl` to `text-4xl` on mobile)
+   - Ensure tables/lists don't overflow
+3. Update `resources/views/welcome.blade.php`:
+   - "Fresh Submissions" grid responsive
+   - Hero section stats stacking
+
+**Acceptance Criteria:**
+- [ ] Homepage bento grid stacks correctly on mobile
+- [ ] Word detail page readable on mobile (no zooming needed)
+- [ ] Font sizes adjusted for smaller screens
+- [ ] Stats section stacks on mobile
+
+---
+
+### TASK-041: Responsive Forms & Inputs
+```
+Status: TODO
+Priority: MEDIUM
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Ensure all forms (Submit Word, Add Definition) are usable on mobile devices.
+
+**Step-by-Step:**
+1. Update Form Blade Views:
+   - Full width inputs on mobile
+   - Large touch targets for submit buttons
+   - Prevent zoom on input focus (font-size >= 16px)
+   - Vertical padding adjustments
+
+**Acceptance Criteria:**
+- [ ] Inputs readable and accessible on mobile
+- [ ] Submit buttons easily tappable
+- [ ] Error messages displayed correctly on narrow screens
+
+---
+
 ## QUICK REFERENCE
 
-### Total Tasks: 38
+### Total Tasks: 41
 
 | Phase | Tasks | Status |
 |-------|-------|--------|
-| Phase 1: Database | TASK-001 to TASK-005 | 0/5 Done |
-| Phase 2: Frontend | TASK-006 to TASK-011 | 0/6 Done |
+| Phase 1: Database | TASK-001 to TASK-005 | 5/5 Done |
+| Phase 2: Frontend | TASK-006 to TASK-011 | 4/6 Done |
 | Phase 3: Admin | TASK-012 to TASK-017 | 0/6 Done |
-| Phase 4: Advanced | TASK-018 to TASK-026 | 0/9 Done (1 in progress) |
-| Phase 5: Creative/UX | TASK-027 to TASK-038 | 0/12 Done |
+| Phase 4: Advanced | TASK-018 to TASK-026 | 0/9 Done |
+| Phase 5: Creative/UX | TASK-027 to TASK-041 | 1/15 Done |
 
 ### Next Available Tasks (TODO) - No Dependencies:
 | Task | Name | Priority |
 |------|------|----------|
-| TASK-001 | Categories Table | CRITICAL |
-| TASK-004 | Settings Table | HIGH |
-| TASK-005 | Update Users Table | CRITICAL |
-| TASK-006 | Domain Checker | CRITICAL (MONETIZATION!) |
-| TASK-007 | RFCI Score Display | HIGH |
-| TASK-008 | Lore Timeline Display | HIGH |
-| TASK-009 | Live View Counter | HIGH |
-| TASK-022 | Puter.js Audio - Listen Button | HIGH |
-| TASK-024 | Search-to-Submit Inline | HIGH |
-| TASK-027 | Word of the Day | MEDIUM |
-| TASK-028 | Rising Stars | MEDIUM |
-| TASK-031 | Skeleton Loading States | HIGH |
-| TASK-034 | Mobile Swipe Gestures | MEDIUM |
-| TASK-035 | Empty States | MEDIUM |
-| TASK-036 | Animated Number Counters | HIGH |
-| TASK-037 | Card Entrance Animations | MEDIUM |
-| TASK-038 | Input Field Animations | MEDIUM |
+| TASK-010 | Report/Flag Button | HIGH |
+| TASK-011 | Slang Sticker Generator | MEDIUM |
+| TASK-039 | Mobile Resp. Navigation | HIGH |
+| TASK-040 | Responsive Layouts | HIGH |
+| TASK-041 | Responsive Forms | MEDIUM |
+
+### UX Enhancements (AI Recommended)
+- [ ] Skeleton Loading States (TASK-031)
+- [ ] Celebration Animations (TASK-032)
+- [ ] Keyboard Shortcuts (TASK-033)
+- [ ] Mobile Swipe Gestures (TASK-034)
+- [ ] Empty States with Illustrations (TASK-035)
+- [x] Animated Number Counters - count up effect (TASK-036) - DONE
+- [ ] Card Entrance Animations - fade up staggered (TASK-037)
+- [ ] Input Field Animations - floating labels (TASK-038)
+- [ ] Mobile Responsive Navigation (TASK-039)
+- [ ] Responsive Layouts (TASK-040)
+- [ ] Responsive Forms & Inputs (TASK-041)
 
 ### In Progress:
 | Task | Name | Claimed By |
