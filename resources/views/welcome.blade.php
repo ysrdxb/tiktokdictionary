@@ -31,9 +31,9 @@
                 </a>
                 
                 @auth
-                    <div class="flex items-center gap-4">
+                    <div class="hidden lg:flex items-center gap-4">
                          @if(Auth::user()->is_admin)
-                             <a href="{{ route('admin.dashboard') }}" class="hidden md:block text-white/80 hover:text-white text-sm font-bold transition-colors">Admin Panel</a>
+                             <a href="{{ route('admin.dashboard') }}" class="text-white/80 hover:text-white text-sm font-bold transition-colors">Admin Panel</a>
                         @endif
                         
                         <div class="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 pl-4 pr-1 py-1 rounded-full">
@@ -48,12 +48,15 @@
                     </div>
                 @else
                     <!-- Improved Login Button -->
-                    <a href="{{ route('login') }}" class="group relative px-8 py-3 bg-white text-[#002B5B] text-sm font-bold rounded-full transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:-translate-y-0.5 overflow-hidden">
+                    <a href="{{ route('login') }}" class="hidden lg:flex group relative px-8 py-3 bg-white text-[#002B5B] text-sm font-bold rounded-full transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:-translate-y-0.5 overflow-hidden">
                         <span class="relative z-10">Login / Sign Up</span>
                         <div class="absolute inset-0 bg-brand-accent opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
                         <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></span>
                     </a>
                 @endauth
+                
+                <!-- Mobile Nav Component -->
+                <x-layouts.mobile-nav />
             </div>
         </header>
         
@@ -62,8 +65,8 @@
             <div class="max-w-[1240px] w-full mx-auto px-6 text-center relative z-10">
             <!-- Main Headline -->
             <h1 class="text-white leading-[0.95] tracking-tight mb-14 drop-shadow-2xl select-none">
-                <span class="block text-[42px] md:text-[56px] font-bold -mb-3 opacity-90">Search Any</span>
-                <span class="relative inline-block text-[58px] md:text-[76px] font-bold pb-2">
+                <span class="block text-4xl md:text-[56px] font-bold -mb-3 opacity-90">Search Any</span>
+                <span class="relative inline-block text-5xl md:text-[76px] font-bold pb-2">
                     <span class="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-brand-accent">Tiktok Word...</span>
                     <!-- Dashed Line -->
                     <div class="absolute top-[85px] left-[-15%] right-[-15%] h-[1px] border-t-2 border-dashed border-white/20 z-0"></div>
