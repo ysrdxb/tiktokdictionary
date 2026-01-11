@@ -35,7 +35,7 @@
                                 @endif
                                 <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                             </span>
-                            {{ number_format($word->views) }}
+                            <span x-data x-counter="{{ $word->views }}">0</span>
                         </div>
                     @endif
                 </div>

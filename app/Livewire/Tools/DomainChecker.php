@@ -33,6 +33,22 @@ class DomainChecker extends Component
         $this->isLoading = false;
     }
 
+    /**
+     * Get affiliate URL for a specific TLD.
+     */
+    public function getAffiliateUrl($tld)
+    {
+        $affiliateId = \App\Models\Setting::get('godaddy_affiliate_id', '');
+        $domain = $this->term;
+        $url = "https://godaddy.com/domain-search/results?checkAvail=1&domainToCheck={$domain}.{$tld}";
+        
+        if (!empty($affiliateId)) {
+            $url .= "&isc={$affiliateId}";
+        }
+        
+        return $url;
+    }
+
     public function render()
     {
         return view('livewire.tools.domain-checker');

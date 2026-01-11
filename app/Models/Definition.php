@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Flaggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Definition extends Model
 {
+    use Flaggable;
+
     protected $fillable = [
         'word_id',
         'definition',

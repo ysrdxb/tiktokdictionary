@@ -1,39 +1,115 @@
 # TikTokDictionary - AI Task Board
 
-**Last Updated**: 2026-01-11
+**Last Updated**: 2026-01-12
 **Purpose**: Central task management for multiple AI assistants
+**Total Tasks**: 38 | **Completed**: 0 | **In Progress**: 1 | **TODO**: 37
+
+> **AI ASSISTANTS**: Read the STRICT RULES section below before starting ANY work!
 
 ---
 
-## RULES FOR AI ASSISTANTS
+## STRICT RULES FOR AI ASSISTANTS
 
-### Before Starting Any Task:
-1. Read this ENTIRE file first
-2. Check if task status is `TODO` (only work on TODO tasks)
-3. Change status to `IN_PROGRESS` and add your session ID before starting
-4. Do NOT touch tasks marked `IN_PROGRESS` or `DONE`
+### MANDATORY - READ BEFORE DOING ANYTHING
 
-### After Completing a Task:
-1. Change status to `DONE`
-2. Add completion date
-3. List files you created/modified
-4. Move to next TODO task
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║  STOP! YOU MUST FOLLOW THESE RULES EXACTLY. NO EXCEPTIONS.        ║
+╚═══════════════════════════════════════════════════════════════════╝
+```
 
-### If You Get Interrupted:
-1. If task is incomplete, leave status as `IN_PROGRESS`
-2. Add note about what's left to do
-3. Next AI can continue from there
+### Rule 1: CLAIM BEFORE CODING
+Before writing ANY code:
+1. Find a task with `Status: TODO`
+2. **IMMEDIATELY** change status to `IN_PROGRESS`
+3. Add your identifier to `Claimed By:`
+4. Add today's date to `Started:`
+5. **ONLY THEN** start coding
+
+### Rule 2: ONE TASK AT A TIME
+- Complete ONE task fully before starting another
+- Do NOT work on multiple tasks simultaneously
+- Do NOT skip steps within a task
+
+### Rule 3: FOLLOW INSTRUCTIONS EXACTLY
+- Create ONLY the files listed in "Files To Create/Modify"
+- Follow the step-by-step instructions in ORDER
+- Use the EXACT code snippets provided
+- Do NOT add extra features not in the task
+- Do NOT refactor code outside the task scope
+
+### Rule 4: MARK COMPLETE PROPERLY
+When task is 100% done:
+1. Change `Status: IN_PROGRESS` to `Status: DONE`
+2. Add completion date to `Completed:`
+3. Check ALL acceptance criteria boxes
+4. Add entry to CHANGE LOG at bottom
+5. List actual files you created/modified
+
+### Rule 5: RESPECT DEPENDENCIES
+- Check "Depends On" field before starting
+- If dependency is not DONE, you CANNOT start the task
+- Pick a different task with no dependencies
+
+### Rule 6: DO NOT TOUCH OTHER TASKS
+- NEVER modify `IN_PROGRESS` tasks (another AI is working)
+- NEVER modify `DONE` tasks (already completed)
+- NEVER change task descriptions or requirements
+
+### Rule 7: QUALITY STANDARDS
+- Test your code before marking complete
+- Ensure no PHP/JS errors in console
+- Follow existing code style in the project
+- Use Livewire 3 syntax (not Livewire 2)
+- Use Tailwind CSS classes (no custom CSS unless specified)
+
+### Rule 8: ASK IF UNCLEAR
+If instructions are unclear:
+- Add a `Notes:` field to the task with your question
+- Mark task as `BLOCKED` with reason
+- Move to another task
+
+---
+
+## WHAT'S LEFT TO BUILD (SUMMARY)
+
+### CRITICAL - Must Complete First
+| Task | Feature | Why Critical |
+|------|---------|--------------|
+| TASK-006 | Domain Checker | **MONETIZATION** - This is how site makes money! |
+| TASK-001 | Categories Table | Currently hardcoded - needed for proper data |
+| TASK-005 | User Roles | No user management without this |
+| TASK-009 | Live View Counter | Client specifically requested "feels alive" |
+
+### HIGH PRIORITY - Core Features
+| Task | Feature | Missing From README |
+|------|---------|---------------------|
+| TASK-007 | RFCI Score Display | Line 117 - required field |
+| TASK-008 | Lore Timeline | Line 176-183 - unconventional feature |
+| TASK-022 | Puter.js Audio | Line 320-380 - NEW FEATURE |
+| TASK-024 | Search-to-Submit | Line 262-263 - frictionless UX |
+| TASK-018 | AI Summary | Line 119 - OpenAI powered |
+
+### ADMIN PANEL - Currently Broken
+| Task | Feature | Current State |
+|------|---------|---------------|
+| TASK-012 | Dashboard | Only basic stats, no charts |
+| TASK-013 | Words Table | No search, no bulk actions |
+| TASK-014 | Users Table | DOESN'T EXIST |
+| TASK-015 | Categories | HARDCODED in blade files! |
+| TASK-016 | Settings | DOESN'T EXIST |
+| TASK-017 | Moderation Queue | DOESN'T EXIST |
 
 ---
 
 ## TASK STATUS LEGEND
 
-| Status | Meaning |
-|--------|---------|
-| `TODO` | Not started - available to work on |
-| `IN_PROGRESS` | Someone is working on it - DO NOT TOUCH |
-| `DONE` | Completed and tested |
-| `BLOCKED` | Waiting on another task |
+| Status | Meaning | Can Work On? |
+|--------|---------|--------------|
+| `TODO` | Not started | YES |
+| `IN_PROGRESS` | Someone working | NO - DO NOT TOUCH |
+| `DONE` | Completed | NO - DO NOT TOUCH |
+| `BLOCKED` | Waiting on dependency | NO - Fix dependency first |
 
 ---
 
@@ -41,11 +117,11 @@
 
 ### TASK-001: Create Categories Table
 ```
-Status: TODO
+Status: DONE
 Priority: CRITICAL
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 ```
 
 **What To Build:**
@@ -161,11 +237,11 @@ A database table to store categories (currently hardcoded in blade files).
 
 ### TASK-002: Create Flags Table (Report System)
 ```
-Status: TODO
+Status: DONE
 Priority: CRITICAL
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 ```
 
 **What To Build:**
@@ -298,11 +374,11 @@ Allow users to report inappropriate content.
 
 ### TASK-003: Create Activity Logs Table
 ```
-Status: TODO
+Status: DONE
 Priority: HIGH
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 ```
 
 **What To Build:**
@@ -350,11 +426,11 @@ Audit trail for admin to see all actions.
 
 ### TASK-004: Create Settings Table
 ```
-Status: TODO
+Status: DONE
 Priority: HIGH
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 ```
 
 **What To Build:**
@@ -428,11 +504,11 @@ Site configuration stored in database.
 
 ### TASK-005: Update Users Table
 ```
-Status: TODO
+Status: DONE
 Priority: CRITICAL
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 ```
 
 **What To Build:**
@@ -541,11 +617,11 @@ Add role system, ban functionality, and profile fields.
 
 ### TASK-006: Domain Availability Checker
 ```
-Status: TODO
+Status: DONE
 Priority: CRITICAL (MONETIZATION)
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 ```
 
 **What To Build:**
@@ -698,10 +774,10 @@ Show domain availability on word pages with GoDaddy affiliate link.
 
 ### TASK-007: RFCI Score Display
 ```
-Status: TODO
+Status: IN_PROGRESS
 Priority: HIGH
-Claimed By: -
-Started: -
+Claimed By: Claude AI
+Started: 2026-01-12
 Completed: -
 ```
 
@@ -1784,5 +1860,1269 @@ Toggle between light and dark theme with TikTok colors.
 
 ---
 
-*Last Updated: 2026-01-11*
-*Total Tasks: 26 | Completed: 0 | In Progress: 1 | TODO: 25*
+## PHASE 5: CREATIVE FEATURES & UX ENHANCEMENTS
+
+### TASK-027: Word of the Day Feature
+```
+Status: TODO
+Priority: MEDIUM
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Featured word section on homepage that changes daily with special styling.
+
+**Step-by-Step:**
+1. Create Livewire component `app/Livewire/WordOfTheDay.php`:
+   ```php
+   <?php
+   namespace App\Livewire;
+
+   use Livewire\Component;
+   use App\Models\Word;
+   use Illuminate\Support\Facades\Cache;
+
+   class WordOfTheDay extends Component
+   {
+       public $word;
+
+       public function mount()
+       {
+           $this->word = Cache::remember('word_of_the_day', now()->endOfDay(), function () {
+               // Pick word with high agrees, decent age, and hasn't been WOTD recently
+               return Word::with('primaryDefinition')
+                   ->where('total_agrees', '>', 10)
+                   ->whereDate('created_at', '<', now()->subDays(3))
+                   ->orderByRaw('RAND(FLOOR(UNIX_TIMESTAMP(CURDATE()) / 86400))')
+                   ->first();
+           });
+       }
+
+       public function render()
+       {
+           return view('livewire.word-of-the-day');
+       }
+   }
+   ```
+
+2. Create view `resources/views/livewire/word-of-the-day.blade.php`:
+   ```blade
+   @if($word)
+   <div class="relative overflow-hidden bg-gradient-to-br from-[#002B5B] via-purple-900 to-pink-900 rounded-3xl p-8 text-white mb-8">
+       <!-- Animated background orbs -->
+       <div class="absolute top-0 right-0 w-64 h-64 bg-pink-500/20 rounded-full blur-3xl animate-pulse"></div>
+       <div class="absolute bottom-0 left-0 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 0.5s;"></div>
+
+       <div class="relative z-10">
+           <div class="flex items-center gap-2 mb-4">
+               <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 text-xs font-bold rounded-full uppercase tracking-wider">
+                   ⭐ Word of the Day
+               </span>
+               <span class="text-white/50 text-xs">{{ now()->format('M d, Y') }}</span>
+           </div>
+
+           <a href="{{ route('word.show', $word->slug) }}" class="block group">
+               <h2 class="text-4xl md:text-5xl font-black mb-3 group-hover:text-cyan-300 transition">
+                   {{ $word->term }}
+               </h2>
+           </a>
+
+           <p class="text-lg text-white/80 mb-6 max-w-2xl">
+               {{ Str::limit($word->primaryDefinition->definition ?? 'No definition yet', 200) }}
+           </p>
+
+           <div class="flex items-center gap-6">
+               <a href="{{ route('word.show', $word->slug) }}"
+                  class="px-6 py-3 bg-white text-[#002B5B] font-bold rounded-full hover:bg-cyan-100 transition">
+                   Explore Full Entry →
+               </a>
+               <div class="flex items-center gap-4 text-white/60">
+                   <span>👍 {{ number_format($word->total_agrees) }}</span>
+                   <span>👎 {{ number_format($word->total_disagrees) }}</span>
+               </div>
+           </div>
+       </div>
+   </div>
+   @endif
+   ```
+
+3. Add to homepage `resources/views/home.blade.php` (after header, before main grid):
+   ```blade
+   @livewire('word-of-the-day')
+   ```
+
+**Files To Create/Modify:**
+- `app/Livewire/WordOfTheDay.php` (CREATE)
+- `resources/views/livewire/word-of-the-day.blade.php` (CREATE)
+- `resources/views/home.blade.php` (MODIFY - add component)
+
+**Acceptance Criteria:**
+- [ ] Component shows featured word daily
+- [ ] Word changes at midnight (cached)
+- [ ] Gradient background with animated orbs
+- [ ] Links to full word page
+- [ ] Shows agree/disagree counts
+
+---
+
+### TASK-028: Rising Stars Section
+```
+Status: TODO
+Priority: MEDIUM
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Section showing words with highest momentum gain in last 24 hours.
+
+**Step-by-Step:**
+1. Create Livewire component `app/Livewire/RisingStars.php`:
+   ```php
+   <?php
+   namespace App\Livewire;
+
+   use Livewire\Component;
+   use App\Models\Word;
+   use App\Models\Vote;
+   use Illuminate\Support\Facades\DB;
+
+   class RisingStars extends Component
+   {
+       public $words;
+
+       public function mount()
+       {
+           // Get words with most vote activity in last 24 hours
+           $this->words = Word::with('primaryDefinition')
+               ->select('words.*', DB::raw('(
+                   SELECT COUNT(*) FROM votes
+                   WHERE votes.definition_id IN (
+                       SELECT id FROM definitions WHERE definitions.word_id = words.id
+                   ) AND votes.created_at >= NOW() - INTERVAL 24 HOUR
+               ) as recent_votes'))
+               ->having('recent_votes', '>', 0)
+               ->orderBy('recent_votes', 'desc')
+               ->limit(5)
+               ->get();
+       }
+
+       public function render()
+       {
+           return view('livewire.rising-stars');
+       }
+   }
+   ```
+
+2. Create view `resources/views/livewire/rising-stars.blade.php`:
+   ```blade
+   @if($words->count() > 0)
+   <div class="bg-white rounded-2xl border border-slate-200 p-6 mb-8">
+       <div class="flex items-center gap-2 mb-4">
+           <span class="text-2xl">🚀</span>
+           <h3 class="text-xl font-bold text-[#002B5B]">Rising Stars</h3>
+           <span class="text-xs text-slate-500">(last 24h)</span>
+       </div>
+
+       <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+           @foreach($words as $index => $word)
+           <a href="{{ route('word.show', $word->slug) }}"
+              class="group p-4 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 hover:from-purple-50 hover:to-pink-50 transition">
+               <div class="flex items-center gap-2 mb-2">
+                   <span class="text-lg font-bold text-slate-400">{{ $index + 1 }}</span>
+                   @if($index === 0)
+                       <span class="text-yellow-500">🔥</span>
+                   @elseif($index < 3)
+                       <span class="text-orange-500">📈</span>
+                   @endif
+               </div>
+               <h4 class="font-bold text-[#002B5B] group-hover:text-purple-700 truncate">
+                   {{ $word->term }}
+               </h4>
+               <p class="text-xs text-slate-500 mt-1">
+                   +{{ $word->recent_votes }} votes
+               </p>
+           </a>
+           @endforeach
+       </div>
+   </div>
+   @endif
+   ```
+
+3. Add to homepage after Word of the Day
+
+**Files To Create/Modify:**
+- `app/Livewire/RisingStars.php` (CREATE)
+- `resources/views/livewire/rising-stars.blade.php` (CREATE)
+- `resources/views/home.blade.php` (MODIFY)
+
+**Acceptance Criteria:**
+- [ ] Shows top 5 trending words
+- [ ] Based on last 24h vote activity
+- [ ] Numbered ranking with fire emoji for #1
+- [ ] Links to word pages
+- [ ] Hidden if no recent activity
+
+---
+
+### TASK-029: Definition Battle Mode
+```
+Status: TODO
+Priority: LOW
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Fun comparison mode where users vote between two definitions side-by-side.
+
+**Step-by-Step:**
+1. Create route `/battle`:
+   ```php
+   // routes/web.php
+   Route::get('/battle', [BattleController::class, 'show'])->name('battle');
+   ```
+
+2. Create Livewire component `app/Livewire/DefinitionBattle.php`:
+   ```php
+   <?php
+   namespace App\Livewire;
+
+   use Livewire\Component;
+   use App\Models\Definition;
+
+   class DefinitionBattle extends Component
+   {
+       public $definition1;
+       public $definition2;
+       public $voted = false;
+       public $winner = null;
+       public $streak = 0;
+
+       public function mount()
+       {
+           $this->loadNewBattle();
+           $this->streak = session('battle_streak', 0);
+       }
+
+       public function loadNewBattle()
+       {
+           // Get two random definitions for the same word
+           $definitions = Definition::with('word')
+               ->whereHas('word', function($q) {
+                   $q->whereHas('definitions', function($q2) {
+                       $q2->havingRaw('COUNT(*) >= 2');
+                   });
+               })
+               ->inRandomOrder()
+               ->limit(2)
+               ->get();
+
+           if ($definitions->count() === 2) {
+               $this->definition1 = $definitions[0];
+               $this->definition2 = $definitions[1];
+           }
+
+           $this->voted = false;
+           $this->winner = null;
+       }
+
+       public function vote($defId)
+       {
+           $this->voted = true;
+           $this->winner = $defId;
+
+           // Increment agree for winner
+           Definition::where('id', $defId)->increment('agrees');
+
+           // Update streak
+           $this->streak++;
+           session(['battle_streak' => $this->streak]);
+       }
+
+       public function nextBattle()
+       {
+           $this->loadNewBattle();
+       }
+
+       public function render()
+       {
+           return view('livewire.definition-battle');
+       }
+   }
+   ```
+
+3. Create view with VS-style layout:
+   ```blade
+   <div class="min-h-screen bg-gradient-to-br from-slate-900 to-purple-900 py-12">
+       <div class="max-w-4xl mx-auto px-4">
+           <div class="text-center mb-8">
+               <h1 class="text-3xl font-black text-white mb-2">⚔️ Definition Battle</h1>
+               <p class="text-white/60">Which definition hits different?</p>
+               <p class="text-yellow-400 font-bold mt-2">🔥 Streak: {{ $streak }}</p>
+           </div>
+
+           @if($definition1 && $definition2)
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+               <!-- Definition 1 -->
+               <button
+                   wire:click="vote({{ $definition1->id }})"
+                   @disabled($voted)
+                   class="p-6 rounded-2xl text-left transition transform hover:scale-105 {{ $winner === $definition1->id ? 'bg-green-500 ring-4 ring-green-300' : 'bg-white' }} {{ $voted && $winner !== $definition1->id ? 'opacity-50' : '' }}"
+               >
+                   <h3 class="font-bold text-lg mb-2 {{ $winner === $definition1->id ? 'text-white' : 'text-[#002B5B]' }}">
+                       {{ $definition1->word->term }}
+                   </h3>
+                   <p class="{{ $winner === $definition1->id ? 'text-white/90' : 'text-slate-600' }}">
+                       {{ $definition1->definition }}
+                   </p>
+               </button>
+
+               <!-- VS Badge -->
+               <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                   <span class="px-4 py-2 bg-pink-500 text-white font-black rounded-full text-xl">VS</span>
+               </div>
+
+               <!-- Definition 2 -->
+               <button
+                   wire:click="vote({{ $definition2->id }})"
+                   @disabled($voted)
+                   class="p-6 rounded-2xl text-left transition transform hover:scale-105 {{ $winner === $definition2->id ? 'bg-green-500 ring-4 ring-green-300' : 'bg-white' }} {{ $voted && $winner !== $definition2->id ? 'opacity-50' : '' }}"
+               >
+                   <!-- Same structure as def 1 -->
+               </button>
+           </div>
+
+           @if($voted)
+           <div class="text-center">
+               <button
+                   wire:click="nextBattle"
+                   class="px-8 py-4 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-full text-lg transition"
+               >
+                   Next Battle →
+               </button>
+           </div>
+           @endif
+           @endif
+       </div>
+   </div>
+   ```
+
+**Files To Create/Modify:**
+- `app/Livewire/DefinitionBattle.php` (CREATE)
+- `resources/views/livewire/definition-battle.blade.php` (CREATE)
+- `routes/web.php` (MODIFY)
+- Navigation (MODIFY - add link)
+
+**Acceptance Criteria:**
+- [ ] Shows two definitions side-by-side
+- [ ] User picks one to vote
+- [ ] Winner highlighted in green
+- [ ] Streak counter persists
+- [ ] Next battle button loads new pair
+- [ ] Mobile responsive (stacked)
+
+---
+
+### TASK-030: User Badges & Gamification
+```
+Status: TODO
+Priority: LOW
+Claimed By: -
+Started: -
+Completed: -
+Depends On: TASK-005
+```
+
+**What To Build:**
+Achievement badges for user contributions.
+
+**Step-by-Step:**
+1. Create badges migration:
+   ```php
+   Schema::create('badges', function (Blueprint $table) {
+       $table->id();
+       $table->string('name', 100);
+       $table->string('slug', 100)->unique();
+       $table->text('description');
+       $table->string('icon', 50); // emoji or icon name
+       $table->string('color', 7)->default('#8b5cf6');
+       $table->enum('type', ['contribution', 'voting', 'streak', 'special']);
+       $table->integer('requirement_count')->default(1);
+       $table->timestamps();
+   });
+
+   Schema::create('user_badges', function (Blueprint $table) {
+       $table->id();
+       $table->foreignId('user_id')->constrained()->onDelete('cascade');
+       $table->foreignId('badge_id')->constrained()->onDelete('cascade');
+       $table->timestamp('earned_at');
+       $table->unique(['user_id', 'badge_id']);
+   });
+   ```
+
+2. Seed default badges:
+   ```php
+   $badges = [
+       ['name' => 'First Words', 'icon' => '🎯', 'type' => 'contribution', 'requirement_count' => 1, 'description' => 'Submit your first definition'],
+       ['name' => 'Wordsmith', 'icon' => '✍️', 'type' => 'contribution', 'requirement_count' => 10, 'description' => 'Submit 10 definitions'],
+       ['name' => 'Dictionary Degen', 'icon' => '📚', 'type' => 'contribution', 'requirement_count' => 50, 'description' => 'Submit 50 definitions'],
+       ['name' => 'Voter', 'icon' => '🗳️', 'type' => 'voting', 'requirement_count' => 10, 'description' => 'Cast 10 votes'],
+       ['name' => 'Opinion Leader', 'icon' => '👑', 'type' => 'voting', 'requirement_count' => 100, 'description' => 'Cast 100 votes'],
+       ['name' => 'Trendsetter', 'icon' => '🔥', 'type' => 'special', 'requirement_count' => 1, 'description' => 'Have a definition become #1'],
+       ['name' => 'Week Warrior', 'icon' => '⚡', 'type' => 'streak', 'requirement_count' => 7, 'description' => 'Visit 7 days in a row'],
+   ];
+   ```
+
+3. Create BadgeService to check and award badges automatically
+4. Display badges on user profile and word cards
+
+**Files To Create/Modify:**
+- `database/migrations/xxxx_create_badges_tables.php` (CREATE)
+- `app/Models/Badge.php` (CREATE)
+- `app/Services/BadgeService.php` (CREATE)
+- `database/seeders/BadgeSeeder.php` (CREATE)
+- `app/Models/User.php` (MODIFY - add relationship)
+- User profile views (MODIFY)
+
+**Acceptance Criteria:**
+- [ ] Badges table with default badges
+- [ ] Users can earn badges automatically
+- [ ] Badges display on user profile
+- [ ] Toast notification when badge earned
+- [ ] Badges show next to usernames
+
+---
+
+### TASK-031: Skeleton Loading States
+```
+Status: TODO
+Priority: HIGH
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Animated skeleton placeholders while content loads.
+
+**Step-by-Step:**
+1. Create skeleton components:
+
+   `resources/views/components/ui/skeleton-card.blade.php`:
+   ```blade
+   <div class="bg-white rounded-2xl p-6 animate-pulse">
+       <div class="flex items-center gap-2 mb-4">
+           <div class="h-3 w-20 bg-slate-200 rounded"></div>
+           <div class="h-3 w-16 bg-slate-200 rounded"></div>
+       </div>
+       <div class="h-7 w-3/4 bg-slate-200 rounded mb-3"></div>
+       <div class="space-y-2">
+           <div class="h-4 w-full bg-slate-200 rounded"></div>
+           <div class="h-4 w-5/6 bg-slate-200 rounded"></div>
+           <div class="h-4 w-4/6 bg-slate-200 rounded"></div>
+       </div>
+       <div class="flex items-center gap-4 mt-6">
+           <div class="h-8 w-16 bg-slate-200 rounded-full"></div>
+           <div class="h-8 w-16 bg-slate-200 rounded-full"></div>
+       </div>
+   </div>
+   ```
+
+   `resources/views/components/ui/skeleton-grid.blade.php`:
+   ```blade
+   @props(['count' => 6])
+   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+       @for($i = 0; $i < $count; $i++)
+           <x-ui.skeleton-card />
+       @endfor
+   </div>
+   ```
+
+2. Add to Livewire components with `wire:loading`:
+   ```blade
+   <div wire:loading.remove>
+       <!-- Actual content -->
+   </div>
+   <div wire:loading>
+       <x-ui.skeleton-grid :count="6" />
+   </div>
+   ```
+
+3. Apply to:
+   - BentoGrid component
+   - Word detail page
+   - Search results
+   - Admin tables
+
+**Files To Create/Modify:**
+- `resources/views/components/ui/skeleton-card.blade.php` (CREATE)
+- `resources/views/components/ui/skeleton-grid.blade.php` (CREATE)
+- `resources/views/components/ui/skeleton-text.blade.php` (CREATE)
+- Multiple Livewire views (MODIFY - add wire:loading)
+
+**Acceptance Criteria:**
+- [ ] Skeleton cards match real card proportions
+- [ ] Smooth pulse animation
+- [ ] Shows during Livewire loading
+- [ ] Applied to all major components
+- [ ] Different skeletons for different content types
+
+---
+
+### TASK-032: Celebration Animations
+```
+Status: TODO
+Priority: LOW
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Confetti and celebration effects for successful actions.
+
+**Step-by-Step:**
+1. Install confetti library:
+   ```bash
+   npm install canvas-confetti
+   ```
+
+2. Create Alpine wrapper `resources/js/confetti.js`:
+   ```javascript
+   import confetti from 'canvas-confetti';
+
+   window.celebrate = {
+       vote() {
+           confetti({
+               particleCount: 30,
+               spread: 60,
+               origin: { y: 0.7 },
+               colors: ['#fe2c55', '#25f4ee', '#002B5B']
+           });
+       },
+       submit() {
+           confetti({
+               particleCount: 100,
+               spread: 70,
+               origin: { y: 0.6 }
+           });
+       },
+       streak(count) {
+           if (count % 5 === 0) {
+               confetti({
+                   particleCount: 150,
+                   spread: 180,
+                   startVelocity: 45
+               });
+           }
+       }
+   };
+   ```
+
+3. Trigger on:
+   - First vote on a definition
+   - Successful word submission
+   - Reaching battle streaks of 5, 10, etc.
+   - Earning a badge
+
+4. Add to Livewire events:
+   ```php
+   // In VotingCounter.php
+   $this->dispatch('celebrate-vote');
+   ```
+
+   ```blade
+   <!-- In blade -->
+   <div x-on:celebrate-vote.window="celebrate.vote()">
+   ```
+
+**Files To Create/Modify:**
+- `resources/js/confetti.js` (CREATE)
+- `resources/js/app.js` (MODIFY - import)
+- `app/Livewire/VotingCounter.php` (MODIFY - dispatch event)
+- `app/Livewire/SubmitWordForm.php` (MODIFY - dispatch event)
+
+**Acceptance Criteria:**
+- [ ] Confetti triggers on votes (subtle)
+- [ ] Bigger celebration on submissions
+- [ ] Mega celebration on milestones
+- [ ] Uses TikTok brand colors
+- [ ] Not annoying (once per action)
+
+---
+
+### TASK-033: Keyboard Shortcuts
+```
+Status: TODO
+Priority: LOW
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Power user keyboard shortcuts for navigation and voting.
+
+**Step-by-Step:**
+1. Create Alpine shortcuts handler:
+   ```javascript
+   // resources/js/shortcuts.js
+   document.addEventListener('alpine:init', () => {
+       Alpine.data('shortcuts', () => ({
+           init() {
+               document.addEventListener('keydown', (e) => {
+                   // Don't trigger if user is typing
+                   if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+
+                   switch(e.key) {
+                       case '/':
+                           e.preventDefault();
+                           document.querySelector('[data-search-input]')?.focus();
+                           break;
+                       case 'n':
+                           window.location.href = '/submit';
+                           break;
+                       case '?':
+                           this.$dispatch('show-shortcuts-modal');
+                           break;
+                       case 'Escape':
+                           document.activeElement.blur();
+                           break;
+                   }
+               });
+           }
+       }));
+   });
+   ```
+
+2. Create shortcuts modal `resources/views/components/ui/shortcuts-modal.blade.php`:
+   ```blade
+   <div x-data="{ open: false }"
+        x-on:show-shortcuts-modal.window="open = true"
+        x-show="open"
+        x-cloak
+        class="fixed inset-0 z-50 flex items-center justify-center">
+       <div class="absolute inset-0 bg-black/50" @click="open = false"></div>
+       <div class="relative bg-white rounded-2xl p-6 max-w-md w-full mx-4">
+           <h3 class="text-xl font-bold mb-4">⌨️ Keyboard Shortcuts</h3>
+           <div class="space-y-3">
+               <div class="flex justify-between">
+                   <span class="text-slate-600">Search</span>
+                   <kbd class="px-2 py-1 bg-slate-100 rounded text-sm font-mono">/</kbd>
+               </div>
+               <div class="flex justify-between">
+                   <span class="text-slate-600">New Submission</span>
+                   <kbd class="px-2 py-1 bg-slate-100 rounded text-sm font-mono">N</kbd>
+               </div>
+               <div class="flex justify-between">
+                   <span class="text-slate-600">Show Shortcuts</span>
+                   <kbd class="px-2 py-1 bg-slate-100 rounded text-sm font-mono">?</kbd>
+               </div>
+               <div class="flex justify-between">
+                   <span class="text-slate-600">Close/Deselect</span>
+                   <kbd class="px-2 py-1 bg-slate-100 rounded text-sm font-mono">Esc</kbd>
+               </div>
+           </div>
+           <button @click="open = false" class="mt-6 w-full py-2 bg-slate-100 rounded-lg font-bold">
+               Close
+           </button>
+       </div>
+   </div>
+   ```
+
+3. Add x-data="shortcuts" to app layout
+
+**Files To Create/Modify:**
+- `resources/js/shortcuts.js` (CREATE)
+- `resources/js/app.js` (MODIFY - import)
+- `resources/views/components/ui/shortcuts-modal.blade.php` (CREATE)
+- `resources/views/components/layouts/app.blade.php` (MODIFY)
+
+**Acceptance Criteria:**
+- [ ] `/` focuses search
+- [ ] `N` goes to submit page
+- [ ] `?` shows shortcuts help
+- [ ] `Esc` closes modals/blurs
+- [ ] Disabled when typing in inputs
+
+---
+
+### TASK-034: Mobile Swipe Gestures
+```
+Status: TODO
+Priority: MEDIUM
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Swipe left/right to vote on mobile cards.
+
+**Step-by-Step:**
+1. Add touch gesture handling:
+   ```javascript
+   // resources/js/swipe-vote.js
+   Alpine.directive('swipe-vote', (el, { expression }, { evaluate }) => {
+       let startX = 0;
+       let startY = 0;
+       const threshold = 100;
+
+       el.addEventListener('touchstart', (e) => {
+           startX = e.touches[0].clientX;
+           startY = e.touches[0].clientY;
+       });
+
+       el.addEventListener('touchend', (e) => {
+           const diffX = e.changedTouches[0].clientX - startX;
+           const diffY = e.changedTouches[0].clientY - startY;
+
+           // Ensure horizontal swipe (not scroll)
+           if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > threshold) {
+               if (diffX > 0) {
+                   // Swipe right = agree
+                   el.dispatchEvent(new CustomEvent('swipe-agree'));
+               } else {
+                   // Swipe left = disagree
+                   el.dispatchEvent(new CustomEvent('swipe-disagree'));
+               }
+           }
+       });
+   });
+   ```
+
+2. Add visual feedback during swipe:
+   ```blade
+   <div x-data="{ swiping: null }"
+        x-swipe-vote
+        @swipe-agree="swiping = 'agree'; $wire.vote('agree'); setTimeout(() => swiping = null, 500)"
+        @swipe-disagree="swiping = 'disagree'; $wire.vote('disagree'); setTimeout(() => swiping = null, 500)"
+        :class="{
+            'bg-green-100 border-green-500': swiping === 'agree',
+            'bg-red-100 border-red-500': swiping === 'disagree'
+        }"
+        class="transition-colors duration-200">
+       <!-- Card content -->
+
+       <!-- Swipe hint (shown on first visit) -->
+       <div x-show="!localStorage.getItem('swipe-hint-seen')"
+            x-init="setTimeout(() => localStorage.setItem('swipe-hint-seen', 'true'), 3000)"
+            class="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-sm">
+           ← Swipe to vote →
+       </div>
+   </div>
+   ```
+
+3. Add to mobile word cards only (use Tailwind breakpoints)
+
+**Files To Create/Modify:**
+- `resources/js/swipe-vote.js` (CREATE)
+- `resources/js/app.js` (MODIFY - import)
+- `resources/views/components/ui/bento-grid.blade.php` (MODIFY)
+- Word card blade files (MODIFY)
+
+**Acceptance Criteria:**
+- [ ] Swipe right = agree (Facts)
+- [ ] Swipe left = disagree (Cap)
+- [ ] Visual feedback during swipe
+- [ ] Only on mobile (touch devices)
+- [ ] First-time hint displayed
+
+---
+
+### TASK-035: Empty States with Illustrations
+```
+Status: TODO
+Priority: MEDIUM
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Friendly empty states when no content is available.
+
+**Step-by-Step:**
+1. Create empty state components:
+
+   `resources/views/components/ui/empty-state.blade.php`:
+   ```blade
+   @props(['type' => 'generic', 'title' => null, 'description' => null, 'action' => null, 'actionUrl' => null])
+
+   @php
+   $states = [
+       'no-results' => [
+           'icon' => '🔍',
+           'title' => 'No results found',
+           'description' => 'Try adjusting your search or filters.',
+       ],
+       'no-words' => [
+           'icon' => '📝',
+           'title' => 'No words yet',
+           'description' => 'Be the first to add a word!',
+           'action' => 'Submit a Word',
+           'actionUrl' => '/submit',
+       ],
+       'no-definitions' => [
+           'icon' => '💭',
+           'title' => 'No definitions yet',
+           'description' => 'This word needs your help!',
+           'action' => 'Add Definition',
+       ],
+       'no-activity' => [
+           'icon' => '😴',
+           'title' => 'Nothing happening here',
+           'description' => 'Check back later for updates.',
+       ],
+       'coming-soon' => [
+           'icon' => '🚧',
+           'title' => 'Coming Soon',
+           'description' => "We're working on something cool!",
+       ],
+   ];
+   $state = $states[$type] ?? $states['generic'];
+   @endphp
+
+   <div class="text-center py-12 px-4">
+       <div class="text-6xl mb-4">{{ $state['icon'] }}</div>
+       <h3 class="text-xl font-bold text-slate-800 mb-2">
+           {{ $title ?? $state['title'] }}
+       </h3>
+       <p class="text-slate-600 max-w-md mx-auto mb-6">
+           {{ $description ?? $state['description'] }}
+       </p>
+       @if($action ?? $state['action'] ?? false)
+           <a href="{{ $actionUrl ?? $state['actionUrl'] ?? '#' }}"
+              class="inline-block px-6 py-3 bg-[#002B5B] text-white font-bold rounded-full hover:bg-[#003d7a] transition">
+               {{ $action ?? $state['action'] }}
+           </a>
+       @endif
+   </div>
+   ```
+
+2. Apply to:
+   - Search with no results
+   - Category with no words
+   - User profile with no submissions
+   - Admin tables with no data
+
+3. Usage:
+   ```blade
+   @if($words->isEmpty())
+       <x-ui.empty-state type="no-words" />
+   @else
+       <!-- Show words -->
+   @endif
+   ```
+
+**Files To Create/Modify:**
+- `resources/views/components/ui/empty-state.blade.php` (CREATE)
+- Multiple blade views (MODIFY - add empty states)
+
+**Acceptance Criteria:**
+- [ ] Empty state component with variants
+- [ ] Applied to search results
+- [ ] Applied to category pages
+- [ ] Applied to admin tables
+- [ ] Includes call-to-action where appropriate
+
+---
+
+### TASK-036: Animated Number Counters (Count Up Effect)
+```
+Status: DONE
+Priority: HIGH
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
+```
+
+**What To Build:**
+Numbers (views, votes, stats) animate counting up from 0 to their final value when visible. Creates engaging "live data" feel.
+
+**Step-by-Step:**
+1. Create Alpine counter directive `resources/js/counter.js`:
+   ```javascript
+   document.addEventListener('alpine:init', () => {
+       Alpine.directive('counter', (el, { expression }, { evaluate }) => {
+           const target = parseInt(evaluate(expression)) || 0;
+           const duration = 1500;
+           const frameDuration = 1000 / 60;
+           const totalFrames = Math.round(duration / frameDuration);
+           let frame = 0;
+           let hasAnimated = false;
+
+           const easeOutQuad = (t) => t * (2 - t);
+
+           const animate = () => {
+               if (hasAnimated) return;
+               hasAnimated = true;
+
+               const counter = setInterval(() => {
+                   frame++;
+                   const progress = easeOutQuad(frame / totalFrames);
+                   el.textContent = Math.round(target * progress).toLocaleString();
+
+                   if (frame === totalFrames) {
+                       clearInterval(counter);
+                       el.textContent = target.toLocaleString();
+                   }
+               }, frameDuration);
+           };
+
+           const observer = new IntersectionObserver((entries) => {
+               entries.forEach(entry => {
+                   if (entry.isIntersecting) {
+                       animate();
+                       observer.unobserve(el);
+                   }
+               });
+           }, { threshold: 0.5 });
+
+           observer.observe(el);
+       });
+   });
+   ```
+
+2. Import in `resources/js/app.js`:
+   ```javascript
+   import './counter.js';
+   ```
+
+3. Usage in blade files:
+   ```blade
+   <!-- Vote counters -->
+   <span x-data x-counter="{{ $agrees }}">0</span>
+
+   <!-- View counters -->
+   <span x-data x-counter="{{ $word->views }}">0</span> views
+
+   <!-- Admin stats -->
+   <div class="text-4xl font-black" x-data x-counter="{{ $totalWords }}">0</div>
+   ```
+
+**Files To Create/Modify:**
+- `resources/js/counter.js` (CREATE)
+- `resources/js/app.js` (MODIFY)
+- `resources/views/livewire/voting-counter.blade.php` (MODIFY)
+- `resources/views/components/ui/bento-grid.blade.php` (MODIFY)
+- Admin dashboard views (MODIFY)
+
+**Acceptance Criteria:**
+- [ ] Numbers count from 0 to final value
+- [ ] Easing animation (slows at end)
+- [ ] Only triggers when visible (IntersectionObserver)
+- [ ] Works on vote counters
+- [ ] Works on view counters
+- [ ] Works on admin stats
+- [ ] Duration ~1.5 seconds
+- [ ] Formats with commas (1,234)
+
+---
+
+### TASK-037: Card Entrance Animations
+```
+Status: TODO
+Priority: MEDIUM
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Cards fade-up with staggered timing when entering viewport.
+
+**Step-by-Step:**
+1. Create animation directive `resources/js/animations.js`:
+   ```javascript
+   document.addEventListener('alpine:init', () => {
+       Alpine.directive('animate-cards', (el) => {
+           const cards = el.querySelectorAll('[data-card]');
+
+           cards.forEach((card, index) => {
+               card.style.opacity = '0';
+               card.style.transform = 'translateY(20px)';
+
+               const observer = new IntersectionObserver((entries) => {
+                   entries.forEach(entry => {
+                       if (entry.isIntersecting) {
+                           setTimeout(() => {
+                               card.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                               card.style.opacity = '1';
+                               card.style.transform = 'translateY(0)';
+                           }, index * 80);
+                           observer.unobserve(entry.target);
+                       }
+                   });
+               }, { threshold: 0.1 });
+
+               observer.observe(card);
+           });
+       });
+   });
+   ```
+
+2. Add CSS in `resources/css/app.css`:
+   ```css
+   .card-hover {
+       transition: transform 0.2s ease, box-shadow 0.2s ease;
+   }
+   .card-hover:hover {
+       transform: translateY(-4px);
+       box-shadow: 0 12px 24px -8px rgba(0, 43, 91, 0.15);
+   }
+   ```
+
+3. Apply to grids:
+   ```blade
+   <div x-data x-animate-cards class="grid gap-6">
+       @foreach($words as $word)
+           <div data-card class="card-hover bg-white rounded-2xl">...</div>
+       @endforeach
+   </div>
+   ```
+
+**Files To Create/Modify:**
+- `resources/js/animations.js` (CREATE)
+- `resources/js/app.js` (MODIFY)
+- `resources/css/app.css` (MODIFY)
+- `resources/views/components/ui/bento-grid.blade.php` (MODIFY)
+- `resources/views/word/show.blade.php` (MODIFY)
+
+**Acceptance Criteria:**
+- [ ] Cards fade up on scroll
+- [ ] Staggered timing (80ms between)
+- [ ] Hover lift effect (-4px)
+- [ ] Works on homepage grid
+- [ ] Works on definitions
+
+---
+
+### TASK-038: Input Field Animations
+```
+Status: TODO
+Priority: MEDIUM
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Floating labels that animate up, focus ring effects, shake on errors.
+
+**Step-by-Step:**
+1. Create `resources/views/components/ui/floating-input.blade.php`:
+   ```blade
+   @props(['name', 'label', 'type' => 'text', 'error' => null, 'required' => false])
+
+   <div class="relative" x-data="{ focused: false, hasValue: false }">
+       <input
+           type="{{ $type }}"
+           name="{{ $name }}"
+           id="{{ $name }}"
+           {{ $required ? 'required' : '' }}
+           @focus="focused = true"
+           @blur="focused = false; hasValue = $el.value.length > 0"
+           @input="hasValue = $el.value.length > 0"
+           {{ $attributes->merge(['class' => 'peer w-full px-4 py-3 pt-6 border-2 rounded-xl transition-all duration-200 outline-none
+               ' . ($error ? 'border-red-400' : 'border-slate-200 focus:border-[#002B5B]')]) }}
+       >
+       <label
+           for="{{ $name }}"
+           class="absolute left-4 transition-all duration-200 pointer-events-none"
+           :class="{
+               'text-xs top-2 text-[#002B5B]': focused || hasValue,
+               'text-base top-4 text-slate-500': !focused && !hasValue
+           }"
+       >{{ $label }}{{ $required ? ' *' : '' }}</label>
+
+       <div class="absolute inset-0 rounded-xl pointer-events-none transition-all"
+            :class="focused ? 'ring-4 ring-[#002B5B]/10' : ''"></div>
+
+       @if($error)
+           <p class="mt-1 text-xs text-red-500 animate-shake">{{ $error }}</p>
+       @endif
+   </div>
+   ```
+
+2. Add shake animation in `resources/css/app.css`:
+   ```css
+   @keyframes shake {
+       0%, 100% { transform: translateX(0); }
+       20%, 60% { transform: translateX(-4px); }
+       40%, 80% { transform: translateX(4px); }
+   }
+   .animate-shake { animation: shake 0.4s ease-in-out; }
+   ```
+
+3. Usage:
+   ```blade
+   <x-ui.floating-input name="term" label="Slang Term" wire:model="term" :error="$errors->first('term')" required />
+   ```
+
+**Files To Create/Modify:**
+- `resources/views/components/ui/floating-input.blade.php` (CREATE)
+- `resources/views/components/ui/floating-textarea.blade.php` (CREATE)
+- `resources/css/app.css` (MODIFY)
+- Form blade files (MODIFY)
+
+**Acceptance Criteria:**
+- [ ] Labels float up on focus
+- [ ] Labels stay up when has value
+- [ ] Focus ring glow effect
+- [ ] Shake animation on errors
+- [ ] Applied to all forms
+
+---
+
+## QUICK REFERENCE
+
+### Total Tasks: 38
+
+| Phase | Tasks | Status |
+|-------|-------|--------|
+| Phase 1: Database | TASK-001 to TASK-005 | 0/5 Done |
+| Phase 2: Frontend | TASK-006 to TASK-011 | 0/6 Done |
+| Phase 3: Admin | TASK-012 to TASK-017 | 0/6 Done |
+| Phase 4: Advanced | TASK-018 to TASK-026 | 0/9 Done (1 in progress) |
+| Phase 5: Creative/UX | TASK-027 to TASK-038 | 0/12 Done |
+
+### Next Available Tasks (TODO) - No Dependencies:
+| Task | Name | Priority |
+|------|------|----------|
+| TASK-001 | Categories Table | CRITICAL |
+| TASK-004 | Settings Table | HIGH |
+| TASK-005 | Update Users Table | CRITICAL |
+| TASK-006 | Domain Checker | CRITICAL (MONETIZATION!) |
+| TASK-007 | RFCI Score Display | HIGH |
+| TASK-008 | Lore Timeline Display | HIGH |
+| TASK-009 | Live View Counter | HIGH |
+| TASK-022 | Puter.js Audio - Listen Button | HIGH |
+| TASK-024 | Search-to-Submit Inline | HIGH |
+| TASK-027 | Word of the Day | MEDIUM |
+| TASK-028 | Rising Stars | MEDIUM |
+| TASK-031 | Skeleton Loading States | HIGH |
+| TASK-034 | Mobile Swipe Gestures | MEDIUM |
+| TASK-035 | Empty States | MEDIUM |
+| TASK-036 | Animated Number Counters | HIGH |
+| TASK-037 | Card Entrance Animations | MEDIUM |
+| TASK-038 | Input Field Animations | MEDIUM |
+
+### In Progress:
+| Task | Name | Claimed By |
+|------|------|------------|
+| TASK-019 | Vertical Feed (TikTok Scroll) | External AI |
+
+### Blocked (Waiting on Dependencies):
+| Task | Waiting For |
+|------|-------------|
+| TASK-010 | TASK-002 (Flags table) |
+| TASK-015 | TASK-001 (Categories table) |
+| TASK-016 | TASK-004 (Settings table) |
+| TASK-017 | TASK-002 (Flags table) |
+| TASK-021 | TASK-006 (Domain checker) |
+| TASK-023 | TASK-022 (Listen button) |
+| TASK-030 | TASK-005 (User roles) |
+
+### Priority Order (Recommended):
+```
+1. TASK-001 (Categories) ─────────────> Unlocks TASK-015
+2. TASK-002 (Flags) ──────────────────> Unlocks TASK-010, TASK-017
+3. TASK-004 (Settings) ───────────────> Unlocks TASK-016
+4. TASK-005 (Users update) ───────────> Unlocks TASK-030
+5. TASK-006 (Domain Checker) ─────────> MONETIZATION - Critical!
+6. TASK-022 (Puter.js Audio) ─────────> NEW FEATURE from README
+7. TASK-031 (Skeleton Loading) ───────> Better perceived performance
+8. TASK-027 (Word of the Day) ────────> Homepage engagement
+9. TASK-007 (RFCI Display)
+10. TASK-008 (Lore Timeline)
+11. TASK-009 (Live View Counter)
+12. TASK-024 (Search-to-Submit Inline)
+13. TASK-028 (Rising Stars)
+14. TASK-034 (Mobile Swipe Gestures)
+15. TASK-035 (Empty States)
+```
+
+---
+
+## FEATURE CHECKLIST (from README.md)
+
+### Core Features
+- [x] Word submission
+- [x] Agree/Disagree voting (Facts/Cap)
+- [x] Hierarchical definition ranking
+- [x] Timeframe sorting (Now/Week/Month)
+- [x] Duplicate handling
+- [ ] Categories from database (TASK-001)
+- [x] Username-only auth
+- [ ] Full admin panel (TASK-012 to TASK-017)
+
+### Word Card Requirements (README lines 69-119)
+- [x] Word Title (clickable)
+- [ ] Live view counter + green dot (TASK-009)
+- [ ] "Possible Polar Trend" badge (TASK-009)
+- [x] Description with "Read more"
+- [x] Agree/Disagree buttons
+- [x] Category tag
+- [ ] Domain Availability Checker (TASK-006) - MONETIZATION!
+- [x] Submit alternate definition
+- [ ] RFCI Score display (TASK-007)
+- [ ] AI Combined Summary (TASK-018)
+
+### Gemini's 5 Unconventional Features
+- [x] Viral Velocity Heatmap (Bento grid)
+- [ ] Slang-to-Sticker Generator (TASK-011)
+- [ ] Lore Timeline Display (TASK-008)
+- [ ] Vibe-Check Search (TASK-020)
+- [ ] Investor Dashboard (TASK-021)
+
+### NEW FEATURES (README update)
+- [ ] Puter.js Audio - Listen Button (TASK-022)
+- [ ] Puter.js Audio - Download Sound Bite (TASK-023)
+- [ ] Search-to-Submit Inline Form (TASK-024)
+- [ ] Hover Reveal Interactions (TASK-025)
+- [ ] Dark Mode with TikTok Colors (TASK-026)
+- [ ] Vertical Feed TikTok Scroll (TASK-019 - IN PROGRESS)
+
+### Creative Features (AI Recommended)
+- [ ] Word of the Day (TASK-027)
+- [ ] Rising Stars Section (TASK-028)
+- [ ] Definition Battle Mode (TASK-029)
+- [ ] User Badges/Gamification (TASK-030)
+
+### UX Enhancements (AI Recommended)
+- [ ] Skeleton Loading States (TASK-031)
+- [ ] Celebration Animations (TASK-032)
+- [ ] Keyboard Shortcuts (TASK-033)
+- [ ] Mobile Swipe Gestures (TASK-034)
+- [ ] Empty States with Illustrations (TASK-035)
+- [ ] Animated Number Counters - count up effect (TASK-036)
+- [ ] Card Entrance Animations - fade up staggered (TASK-037)
+- [ ] Input Field Animations - floating labels (TASK-038)
+
+### Technical Requirements
+- [ ] wire:poll for live counters (TASK-009)
+- [ ] Redis view buffering (future)
+- [ ] Polar trend auto-detection (future)
+
+---
+
+## CHANGE LOG
+
+| Date | Task | Action | By |
+|------|------|--------|-----|
+| 2026-01-12 | TASK-036 to TASK-038 | Added animation tasks (counters, cards, inputs) | Claude Architect |
+| 2026-01-12 | TASK-027 to TASK-035 | Added creative features & UX tasks | Claude Architect |
+| 2026-01-12 | ALL | Added strict AI rules, updated summary | Claude Architect |
+| 2026-01-11 | TASK-019 | Started | External AI |
+| 2026-01-11 | ALL | Created task board with 26 tasks | Claude Architect |
+
+---
+
+*Last Updated: 2026-01-12*
+*Total Tasks: 38 | Completed: 0 | In Progress: 1 | TODO: 37*

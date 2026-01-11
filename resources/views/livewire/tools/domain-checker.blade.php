@@ -28,7 +28,7 @@
         @else
             <div class="space-y-3 animate-fade-in-up">
                 @foreach($tlds as $tld)
-                    <a href="https://godaddy.com/domain-search/results?checkAvail=1&tmskey=&domainToCheck={{ $term }}.{{ $tld }}" 
+                    <a href="{{ $this->getAffiliateUrl($tld) }}" 
                        target="_blank"
                        rel="noopener noreferrer"
                        class="flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg group/domain transition-colors cursor-pointer">

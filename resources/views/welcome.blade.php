@@ -182,12 +182,12 @@
                                 </p>
                                 <div class="flex items-center gap-2 text-[#002B5B] text-[15px] font-bold">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
-                                    {{ number_format((int)$def->agrees) }} agreed
+                                    <span x-data x-counter="{{ (int)$def->agrees }}">0</span> agreed
                                 </div>
                             </div>
                             
                             <div class="bg-[#F1F5F9] rounded-[24px] w-[140px] h-[110px] flex flex-col items-center justify-center flex-shrink-0">
-                                <span class="block text-[42px] font-bold text-[#002B5B] tracking-tight leading-none mb-1">{{ $accuracy }}%</span>
+                                <span class="block text-[42px] font-bold text-[#002B5B] tracking-tight leading-none mb-1"><span x-data x-counter="{{ $accuracy }}">0</span>%</span>
                                 <span class="text-[#002B5B]/60 text-[13px] font-medium lowercase">accuracy</span>
                             </div>
                         </div>
@@ -268,11 +268,11 @@
                 <!-- Right Stats Grid (Blue Cards) -->
                 <div class="grid grid-cols-2 gap-6">
                     <div class="bg-[#F0F6FB] rounded-[24px] p-10 text-center flex flex-col justify-center h-48">
-                        <span class="block text-[42px] font-bold text-[#002B5B] mb-1 tracking-tight">{{ $stats['wordsLabel'] }}</span>
+                        <span class="block text-[42px] font-bold text-[#002B5B] mb-1 tracking-tight"><span x-data x-counter="{{ $stats['words'] }}">0</span>+</span>
                         <span class="text-[#002B5B]/70 text-[14px] font-bold">Words Defined</span>
                     </div>
                     <div class="bg-[#F0F6FB] rounded-[24px] p-10 text-center flex flex-col justify-center h-48">
-                        <span class="block text-[42px] font-bold text-[#002B5B] mb-1 tracking-tight">{{ $stats['definitionsLabel'] }}</span>
+                        <span class="block text-[42px] font-bold text-[#002B5B] mb-1 tracking-tight"><span x-data x-counter="{{ $stats['definitions'] }}">0</span>+</span>
                         <span class="text-[#002B5B]/70 text-[14px] font-bold">Community Votes</span>
                     </div>
                     <div class="col-span-2 bg-[#F0F6FB] rounded-[24px] p-10 text-center flex flex-col justify-center h-48">

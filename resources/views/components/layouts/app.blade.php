@@ -207,6 +207,49 @@
     <!-- html2canvas for Sticker Generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+    <!-- Alpine Counter Directive for Animated Numbers -->
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.directive('counter', (el, { expression }, { evaluate }) => {
+                const target = parseInt(evaluate(expression)) || 0;
+                const duration = 1500;
+                const frameDuration = 1000 / 60;
+                const totalFrames = Math.round(duration / frameDuration);
+                let frame = 0;
+                let hasAnimated = false;
+
+                const easeOutQuad = (t) => t * (2 - t);
+
+                const animate = () => {
+                    if (hasAnimated) return;
+                    hasAnimated = true;
+
+                    const counter = setInterval(() => {
+                        frame++;
+                        const progress = easeOutQuad(frame / totalFrames);
+                        el.textContent = Math.round(target * progress).toLocaleString();
+
+                        if (frame === totalFrames) {
+                            clearInterval(counter);
+                            el.textContent = target.toLocaleString();
+                        }
+                    }, frameDuration);
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animate();
+                            observer.unobserve(el);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                observer.observe(el);
+            });
+        });
+    </script>
+
     <!-- Livewire Scripts -->
     <!-- Livewire Scripts -->
     @livewireScripts

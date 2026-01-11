@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\Flaggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Word extends Model
 {
+    use Flaggable;
+
     protected $fillable = [
         'term',
         'slug',
@@ -50,6 +53,14 @@ class Word extends Model
     public function definitions()
     {
         return $this->hasMany(Definition::class);
+    }
+
+    /**
+     * Get the category this word belongs to (via category_id)
+     */
+    public function categoryRelation()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     /**
