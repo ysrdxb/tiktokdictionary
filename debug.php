@@ -1,26 +1,22 @@
 <?php
-// Debug Toolkit Phase 3: Root Structure Verification
+// Debug Toolkit Phase 4: Flat Structure + URL Check
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// New paths for Root Structure
+// Directory is now root
 $baseDir = __DIR__ . '/';
 $manifestFile = $baseDir . 'build/manifest.json';
-$hotFile = $baseDir . 'hot';
-$viewDir = $baseDir . 'storage/framework/views/';
+// URL Base
+$uri = $_SERVER['REQUEST_URI'];
+// /tiktokdictionary/debug.php -> base is /tiktokdictionary
+$scriptName = $_SERVER['SCRIPT_NAME'];
+$urlBase = dirname($scriptName); 
+if ($urlBase === '/' || $urlBase === '\\') $urlBase = '';
 
-echo "<style>body{font-family:sans-serif;max-width:800px;margin:20px auto;color:#333} .ok{color:green} .fail{color:red} h1{border-bottom:1px solid #ddd} .box{background:#f9f9f9;padding:15px;margin:15px 0;border:1px solid #ddd}</style>";
+echo "<style>body{font-family:sans-serif;max-width:800px;margin:20px auto} .ok{color:green} .fail{color:red} .box{background:#f9f9f9;padding:15px;margin:15px 0;border-left:5px solid #333}</style>";
 echo "<h1>🚀 Root Structure Diagnostic</h1>";
 
-// 1. HOT FILE
-if (file_exists($hotFile)) {
-    unlink($hotFile);
-    echo "<div class='box fail'>⚠ Deleted residual 'hot' file.</div>";
-} else {
-    echo "<div class='box ok'>✓ No 'hot' file found.</div>";
-}
-
-// 2. MANIFEST
+// 1. MANIFEST
 if (file_exists($manifestFile)) {
     echo "<div class='box ok'>✓ Manifest Found at: build/manifest.json</div>";
     $json = json_decode(file_get_contents($manifestFile), true);
@@ -28,30 +24,24 @@ if (file_exists($manifestFile)) {
     
     if ($css) {
         $realPath = $baseDir . 'build/' . $css;
-        echo "<div>CSS Entry: $css</div>";
-        if (file_exists($realPath)) {
-             echo "<div class='ok'>✓ CSS File Exists on Disk</div>";
-             
-             // URL Check
-             $host = $_SERVER['HTTP_HOST'];
-             $uri = dirname($_SERVER['SCRIPT_NAME']);
-             if ($uri === '/' || $uri === '\\') $uri = '';
-             $url = "http://$host$uri/build/$css";
-             
-             echo "<div>Start Verification: <a href='$url' target='_blank'>$url</a></div>";
+        // The URL should be base/build/assets/file.css
+        $assetUrl = "http://" . $_SERVER['HTTP_HOST'] . $urlBase . "/build/" . $css;
+        
+        echo "<div><strong>CSS Asset:</strong> $css</div>";
+        echo "<div><strong>Checking URL:</strong> <a href='$assetUrl' target='_blank'>$assetUrl</a></div>";
+        
+        $headers = @get_headers($assetUrl);
+        if ($headers && strpos($headers[0], '200') !== false) {
+             echo "<div class='ok'>✅ 200 OK - Asset should load!</div>";
+        } elseif ($headers) {
+             echo "<div class='fail'>❌ " . $headers[0] . " - Still Redirecting or missing?</div>";
         } else {
-             echo "<div class='fail'>❌ CSS File Missing on Disk: $realPath</div>";
+             echo "<div class='fail'>❌ Connection Failed</div>";
         }
+        
     }
 } else {
     echo "<div class='box fail'>❌ Manifest NOT FOUND at: $manifestFile</div>";
 }
-
-// 3. Clear Views
-$views = glob($viewDir . '*.php');
-foreach ($views as $f) {
-    if (is_file($f)) unlink($f);
-}
-echo "<div class='box ok'>✓ View Cache Cleared.</div>";
 
 echo "<hr><a href='index.php'>Go to Homepage</a>";
