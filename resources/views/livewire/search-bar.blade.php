@@ -46,8 +46,10 @@
                 <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-400">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
-                <h3 class="text-sm font-bold text-[#002B5B] mb-1">No results found</h3>
-                <p class="text-xs text-slate-500">We couldn't find "{{ $query }}". Want to add it?</p>
+                <h3 class="text-sm font-bold text-[#002B5B] mb-3">No results found</h3>
+                <a href="{{ route('word.create', ['term' => $query]) }}" class="inline-flex items-center justify-center w-full px-4 py-2 bg-[#002B5B] text-white text-sm font-bold rounded-lg hover:bg-slate-800 transition-colors">
+                    + Submit "{{ $query }}"
+                </a>
             </div>
         @endif
     </div>

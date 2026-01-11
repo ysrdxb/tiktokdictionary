@@ -10,9 +10,22 @@
                 <a href="{{ route('home') }}" class="text-[20px] font-semibold tracking-tight">
                     <span class="text-white drop-shadow-sm">TikTok</span><span class="text-[#002B5B] font-bold">Dictionary</span>
                 </a>
-                <a href="#" class="px-6 py-2.5 bg-[#002B5B] text-white text-[13px] font-semibold rounded-full hover:bg-slate-800 transition-colors">
-                    Login
-                </a>
+                
+                @auth
+                    <div class="flex items-center gap-4">
+                        <span class="text-[#002B5B] text-sm font-bold bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">{{ Auth::user()->username }}</span>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="px-6 py-2.5 bg-white/90 text-[#002B5B] text-[13px] font-semibold rounded-full hover:bg-white transition-colors">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="px-6 py-2.5 bg-[#002B5B] text-white text-[13px] font-semibold rounded-full hover:bg-slate-800 transition-colors">
+                        Login
+                    </a>
+                @endauth
             </div>
         </header>
         
@@ -48,45 +61,36 @@
     <!-- Main Content -->
     <main>
         
-        <!-- Trending Right Now (White BG) -->
-        <section class="bg-white py-20">
-            <div class="max-w-[1240px] mx-auto px-6">
-                <!-- Header & Filters (Left Aligned Stack) -->
-                <div class="mb-14">
-                    <h2 class="text-6xl md:text-[80px] font-bold text-[#002B5B] tracking-tight leading-none mb-4">Trending Right Now</h2>
-                    <p class="text-[#002B5B] font-medium text-xl tracking-wide mb-8">Choose the correct meaning and discover new words instantly.</p>
-                
-                    <!-- Filter Pills (Left Aligned) -->
-                    <div class="flex gap-3">
-                        <a href="{{ route('home', ['timeframe' => 'today']) }}" class="px-8 py-3 rounded-full text-[15px] font-bold transition-all {{ ($timeframe ?? 'today') === 'today' ? 'bg-[#002B5B] text-white' : 'bg-[#F1F5F9] text-[#002B5B] hover:bg-slate-200' }}">Today</a>
-                        <a href="{{ route('home', ['timeframe' => 'week']) }}" class="px-8 py-3 rounded-full text-[15px] font-bold transition-all {{ ($timeframe ?? 'today') === 'week' ? 'bg-[#002B5B] text-white' : 'bg-[#F1F5F9] text-[#002B5B] hover:bg-slate-200' }}">This Week</a>
-                        <a href="{{ route('home', ['timeframe' => 'month']) }}" class="px-8 py-3 rounded-full text-[15px] font-bold transition-all {{ ($timeframe ?? 'today') === 'month' ? 'bg-[#002B5B] text-white' : 'bg-[#F1F5F9] text-[#002B5B] hover:bg-slate-200' }}">This Month</a>
+        <!-- Viral / Trending Section (Kinetic Dark Mode) -->
+        <section class="bg-[#002B5B] py-20 relative overflow-hidden">
+            <!-- Background Glow Attributes -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-brand-secondary/20 blur-[120px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-[1240px] mx-auto px-6 relative z-10">
+                <!-- Header -->
+                <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <h2 class="text-6xl md:text-[80px] font-bold text-white tracking-tight leading-none mb-4">
+                            Viral <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-brand-accent">Velocity</span>
+                        </h2>
+                        <p class="text-white/80 font-medium text-xl tracking-wide max-w-2xl">
+                            The fastest growing words on the internet, ranked by our Kinetic Algorithm™.
+                        </p>
+                    </div>
+                    
+                    <!-- Pulsing 'Live' Indicator -->
+                    <div class="flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full">
+                        <span class="relative flex h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-accent"></span>
+                        </span>
+                        <span class="text-white text-sm font-bold tracking-wide">LIVE UPDATES</span>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @foreach($trendingWords->take(6) as $index => $word)
-                        @php $rank = $index + 1; @endphp
-                        <a href="{{ route('word.show', $word->slug) }}" class="bg-white rounded-2xl p-6 border border-[#002B5B] hover:shadow-xl transition-all group flex flex-col h-full relative">
-                            <div class="flex justify-between items-start mb-2">
-                                <div>
-                                    <h3 class="text-3xl font-bold text-[#002B5B] tracking-tight mb-2 lowercase leading-none">{{ $word->term }}</h3>
-                                    <span class="inline-block px-3 py-1 bg-[#F1F5F9] text-[#475569] text-[13px] font-bold rounded-lg">{{ $word->category ?? 'Slang' }}</span>
-                                </div>
-                                <span class="text-3xl font-bold text-[#002B5B]">#{{ $rank }}</span>
-                            </div>
-                            
-                            <p class="text-[#002B5B] text-[16px] leading-relaxed mb-6 font-medium mt-4">
-                                {{ optional($word->primaryDefinition)->definition ?? 'No definition available yet.' }}
-                            </p>
-                            
-                            <div class="flex items-center gap-2 text-[#002B5B] text-[14px] font-bold">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
-                                {{ number_format((optional($word->primaryDefinition)->agrees ?? 0) + rand(500, 2000)) }} agreed
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
+                <!-- Kinetic Bento Grid -->
+                <x-ui.bento-grid :items="$trendingWords" />
+                
             </div>
         </section>
 

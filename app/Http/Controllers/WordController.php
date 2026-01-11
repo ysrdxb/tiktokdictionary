@@ -14,8 +14,11 @@ class WordController extends Controller
         $word = Word::where('slug', $slug)
             ->with(['definitions' => function($query) {
                 $query->orderBy('agrees', 'desc');
-            }])
+            }, 'lore'])
             ->firstOrFail();
+
+        // Increment View Count (Viral Engine)
+        \App\Services\TrendingService::incrementView($word->id);
 
         return view('word.show', compact('word'));
     }

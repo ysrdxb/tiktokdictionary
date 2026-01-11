@@ -17,16 +17,31 @@ class Word extends Model
         'total_definitions',
         'total_agrees',
         'total_disagrees',
-        'velocity_score',
+        'velocity_score', // (Votes / Time) * Views
+        'admin_boost',    // Manual override
+        'rfci_score',     // "88A" grade
+        'views_buffer',   // Redis sync holding
+        'is_polar_trend', // Neon pulse trigger
+        'vibes',          // JSON tags
         'is_verified'
     ];
 
     protected $casts = [
         'is_verified' => 'boolean',
+        'is_polar_trend' => 'boolean',
         'velocity_score' => 'decimal:4',
         'related_word_ids' => 'array',
+        'vibes' => 'array',
         'first_seen_date' => 'date'
     ];
+    
+    /**
+     * Get the lore entries (timeline) for this word
+     */
+    public function lore()
+    {
+        return $this->hasMany(LoreEntry::class)->orderBy('created_at', 'desc');
+    }
 
     /**
      * Get all definitions for this word

@@ -6,6 +6,7 @@ use App\Models\Definition;
 use App\Models\Word;
 use Illuminate\Http\Request;
 use Illuminate\Support\Number;
+use App\Services\TrendingService;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,8 @@ class HomeController extends Controller
             $timeframe = 'today';
         }
 
-        $trendingWords = Word::getTrending(6, $timeframe);
+        // Use the Viral Engine to get trending words
+        $trendingWords = \App\Services\TrendingService::getTrending(12);
 
         $mostAgreedDefinitions = Definition::query()
             ->with('word')
@@ -47,14 +49,14 @@ class HomeController extends Controller
 
         // Map Figma category labels to actual stored categories
         $categoryCards = collect([
-            ['label' => 'Slang', 'query' => ['Slang']],
-            ['label' => 'TikTok Trends', 'query' => ['TikTok']],
-            ['label' => 'Memes', 'query' => ['Memes']],
-            ['label' => 'Audio Sounds', 'query' => ['TikTok']],
-            ['label' => 'Acronyms', 'query' => ['Slang']],
-            ['label' => 'Subcultures', 'query' => ['Internet', 'Gen-Z']],
-            ['label' => 'Gaming', 'query' => ['Gaming']],
-            ['label' => 'Stan Culture', 'query' => ['Gen-Z']],
+            ['label' => 'Slang 🗣️', 'query' => ['Slang']],
+            ['label' => 'TikTok Trends 🎵', 'query' => ['TikTok']],
+            ['label' => 'Memes 🐸', 'query' => ['Memes']],
+            ['label' => 'Audio Sounds 🔊', 'query' => ['TikTok']],
+            ['label' => 'Acronyms 🔡', 'query' => ['Slang']],
+            ['label' => 'Subcultures 🧛', 'query' => ['Internet', 'Gen-Z']],
+            ['label' => 'Gaming 🎮', 'query' => ['Gaming']],
+            ['label' => 'Stan Culture 💖', 'query' => ['Gen-Z']],
         ])->map(function ($card) {
             $count = Word::query()->whereIn('category', $card['query'])->count();
 

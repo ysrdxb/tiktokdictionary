@@ -25,7 +25,7 @@ class SearchBar extends Component
                     ->with('primaryDefinition')
                     ->limit(5)
                     ->get();
-                $this->showResults = $this->results->isNotEmpty();
+                $this->showResults = true; // Always show results to enable "Search-to-Submit" feature
             } catch (\Exception $e) {
                 logger()->error('SearchBar query error: ' . $e->getMessage());
                 $this->results = collect();

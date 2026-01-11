@@ -80,9 +80,22 @@
                 <a href="{{ route('home') }}" class="text-[20px] font-semibold tracking-tight">
                     <span class="text-[#002B5B]">TikTok</span><span class="text-[#002B5B] font-bold">Dictionary</span>
                 </a>
-                <a href="#" class="px-6 py-2.5 bg-[#002B5B] text-white text-[13px] font-semibold rounded-full hover:bg-slate-800 transition-colors">
-                    Login
-                </a>
+                
+                @auth
+                    <div class="flex items-center gap-4">
+                        <span class="text-[#002B5B] text-sm font-bold">{{ Auth::user()->username }}</span>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="px-6 py-2.5 bg-white border border-[#002B5B] text-[#002B5B] text-[13px] font-semibold rounded-full hover:bg-slate-50 transition-colors">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="px-6 py-2.5 bg-[#002B5B] text-white text-[13px] font-semibold rounded-full hover:bg-slate-800 transition-colors">
+                        Login
+                    </a>
+                @endauth
             </div>
         </header>
         
@@ -95,9 +108,22 @@
                 <a href="{{ route('home') }}" class="text-[20px] font-semibold tracking-tight">
                     <span class="text-[#002B5B]">TikTok</span><span class="text-[#002B5B] font-bold">Dictionary</span>
                 </a>
-                <a href="#" class="px-6 py-2.5 bg-[#002B5B] text-white text-[13px] font-semibold rounded-full hover:bg-slate-800 transition-colors">
-                    Login
-                </a>
+                
+                @auth
+                    <div class="flex items-center gap-4">
+                        <span class="text-[#002B5B] text-sm font-bold">{{ Auth::user()->username }}</span>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="px-6 py-2.5 bg-white border border-[#002B5B] text-[#002B5B] text-[13px] font-semibold rounded-full hover:bg-slate-50 transition-colors">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="px-6 py-2.5 bg-[#002B5B] text-white text-[13px] font-semibold rounded-full hover:bg-slate-800 transition-colors">
+                        Login
+                    </a>
+                @endauth
             </div>
         </header>
         

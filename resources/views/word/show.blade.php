@@ -41,6 +41,17 @@
                     ], key('primary-vote-'.$primaryDef->id))
                 </div>
             @endif
+
+             <!-- AI Combined Summary (Placeholder) -->
+             <div class="mt-8 p-4 bg-brand-primary/5 rounded-xl border border-brand-primary/10">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text text-xs font-bold uppercase tracking-wider">AI Insight</span>
+                    <svg class="w-3 h-3 text-purple-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6a1 1 0 0 0-1 1v4.32l-2.9 2.9a1 1 0 0 0 1.41 1.41l3.5-3.5a1 1 0 0 0 .29-.71V7a1 1 0 0 0-1-1z"/></svg>
+                </div>
+                <p class="text-sm text-[#002B5B]/80 italic">
+                    "This term is currently spiking in usage due to a viral sound. Most users agree it refers to `{{ Str::limit($primaryDef->definition ?? '...', 50) }}` but context varies by subculture."
+                </p>
+             </div>
         </section>
 
         <!-- Alternate Definitions Section -->
@@ -106,6 +117,63 @@
                     <div class="text-[#002B5B] font-bold text-lg">{{ $word->created_at ? $word->created_at->format('d M Y') : '18 Jul 2025' }}</div>
                 </div>
             </div>
+        </section>
+
+        <!-- Investor Block (Domain Check) -->
+        <section class="bg-[#002B5B] rounded-[32px] p-8 md:p-10 shadow-lg mb-6 text-white relative overflow-hidden">
+             <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent/20 blur-[80px] rounded-full pointer-events-none"></div>
+             
+             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                     <h3 class="text-2xl md:text-3xl font-bold font-[GRIFTER] mb-2">Investor View</h3>
+                     <p class="text-white/80 font-medium">This word is trending. Is the domain available?</p>
+                </div>
+                
+                <div x-data="{ checking: false }" class="w-full md:w-auto">
+                    <button 
+                        @click="checking = true; setTimeout(() => window.location.href='https://godaddy.com/domain-search/results?searchterms={{ $word->term }}', 1500)"
+                        class="w-full md:w-auto px-8 py-4 bg-white text-[#002B5B] font-bold rounded-xl hover:scale-105 transition-transform flex items-center justify-center gap-3"
+                    >
+                        <span x-show="!checking">Check {{ $word->term }}.com</span>
+                        <span x-show="checking" class="flex items-center gap-2">
+                             <svg class="animate-spin h-5 w-5 text-[#002B5B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                             </svg>
+                             Checking...
+                        </span>
+                    </button>
+                    <p class="text-xs text-center md:text-right mt-2 text-white/40">Powered by GoDaddy</p>
+                </div>
+             </div>
+        </section>
+
+        <!-- Lore Timeline -->
+        <section class="bg-white rounded-[32px] p-8 md:p-10 shadow-sm mb-6">
+            <h3 class="text-2xl md:text-3xl font-bold text-[#002B5B] tracking-tight mb-6 flex items-center gap-3">
+                Lore Timeline
+                <span class="text-xs bg-[#F0F6FB] text-[#002B5B] px-3 py-1 rounded-full uppercase tracking-wider font-bold">Chronology</span>
+            </h3>
+            
+            @if($word->lore->count() > 0)
+                <div class="relative border-l-2 border-[#F0F6FB] ml-3 pl-8 py-2 space-y-8">
+                    @foreach($word->lore as $entry)
+                        <div class="relative">
+                            <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-white bg-[#002B5B]"></span>
+                            <div class="text-sm text-[#002B5B]/50 font-bold mb-1">{{ $entry->date_event ? $entry->date_event->format('M Y') : 'Unknown Date' }}</div>
+                            <h4 class="text-lg font-bold text-[#002B5B] mb-2">{{ $entry->title }}</h4>
+                            <p class="text-[#002B5B]/80 font-medium leading-relaxed">{{ $entry->description }}</p>
+                            @if($entry->source_url)
+                                <a href="{{ $entry->source_url }}" target="_blank" class="inline-block mt-3 text-xs font-bold text-brand-primary uppercase tracking-wide hover:underline">View Source ↗</a>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="bg-[#F0F6FB] rounded-xl p-8 text-center">
+                    <p class="text-[#002B5B]/60 font-medium mb-4">No lore history documented yet.</p>
+                </div>
+            @endif
         </section>
 
         <!-- Report Button -->
