@@ -24,7 +24,7 @@
                             <label class="block text-sm font-bold text-[#002B5B]/80 dark:text-white/80 mb-2 pl-1">Word</label>
                             <input type="text" wire:model.live.debounce.500ms="term" required
                                    placeholder="e.g. Delulu, 'NPC'"
-                                   class="w-full px-6 py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-bold text-lg rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none">
+                                   class="w-full px-5 py-3 md:px-6 md:py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-bold text-base md:text-lg rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none">
                             @error('term')
                                 <p class="text-red-500 dark:text-red-400 font-bold text-xs mt-2 pl-1">{{ $message }}</p>
                             @enderror
@@ -35,7 +35,7 @@
                             <label class="block text-sm font-bold text-[#002B5B]/80 dark:text-white/80 mb-2 pl-1">Definition <span class="text-[#002B5B]/40 dark:text-white/40 font-normal ml-1">(keep it simple)</span></label>
                             <input type="text" wire:model="definition" required
                                    placeholder="What does it mean?"
-                                   class="w-full px-6 py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-medium text-lg rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none">
+                                   class="w-full px-5 py-3 md:px-6 md:py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-medium text-base md:text-lg rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none">
                             @error('definition')
                                 <p class="text-red-500 dark:text-red-400 font-bold text-xs mt-2 pl-1">{{ $message }}</p>
                             @enderror
@@ -47,7 +47,7 @@
                         <label class="block text-sm font-bold text-[#002B5B]/80 dark:text-white/80 mb-2 pl-1">Example Sentence</label>
                         <textarea wire:model="example" required rows="2"
                                   placeholder="Use the word in a sentence..."
-                                  class="w-full px-6 py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-medium text-lg rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none resize-none"></textarea>
+                                  class="w-full px-5 py-3 md:px-6 md:py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-medium text-base md:text-lg rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none resize-none"></textarea>
                         @error('example')
                             <p class="text-red-500 dark:text-red-400 font-bold text-xs mt-2 pl-1">{{ $message }}</p>
                         @enderror
@@ -60,7 +60,7 @@
                             <label class="block text-sm font-bold text-[#002B5B]/80 dark:text-white/80 mb-2 pl-1">Category</label>
                             <div class="relative">
                                 <select wire:model="category" required
-                                        class="w-full px-6 py-4 bg-[#F0F6FB] dark:bg-[#00152e] text-[#002B5B] dark:text-white font-bold text-base rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent cursor-pointer appearance-none outline-none">
+                                        class="w-full px-5 py-3 md:px-6 md:py-4 bg-[#F0F6FB] dark:bg-[#00152e] text-[#002B5B] dark:text-white font-bold text-base rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent cursor-pointer appearance-none outline-none">
                                     <option value="Slang">Slang</option>
                                     <option value="Gen-Z">Gen-Z</option>
                                     <option value="TikTok">TikTok</option>
@@ -78,7 +78,7 @@
                             <label class="block text-sm font-bold text-[#002B5B]/80 dark:text-white/80 mb-2 pl-1">Where did you see it? (Optional)</label>
                             <input type="url" wire:model="sourceUrl"
                                    placeholder="Paste TikTok link..."
-                                   class="w-full px-6 py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-medium text-base rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none">
+                                   class="w-full px-5 py-3 md:px-6 md:py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-medium text-base rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none">
                         </div>
                     </div>
     
@@ -87,7 +87,7 @@
                         <label class="block text-sm font-bold text-[#002B5B]/80 dark:text-white/80 mb-2 pl-1">Alternate Spellings (Optional)</label>
                         <input type="text" wire:model="alternateSpellings"
                                placeholder="e.g. rizz, riz, rizzard"
-                               class="w-full px-6 py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-medium text-base rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none">
+                               class="w-full px-5 py-3 md:px-6 md:py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-medium text-base rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none">
                     </div>
     
                     <!-- Row 5: Hashtags -->
@@ -95,7 +95,7 @@
                         <label class="block text-sm font-bold text-[#002B5B]/80 dark:text-white/80 mb-2 pl-1">Hashtags (Optional)</label>
                         <input type="text" wire:model="hashtags"
                                placeholder="#TikTokSlang"
-                               class="w-full px-6 py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-medium text-base rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none">
+                               class="w-full px-5 py-3 md:px-6 md:py-4 bg-[#F0F6FB] dark:bg-white/5 text-[#002B5B] dark:text-white font-medium text-base rounded-[20px] border border-[#002B5B]/10 dark:border-white/10 focus:ring-4 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 focus:border-[#002B5B] dark:focus:border-brand-accent placeholder:text-[#002B5B]/30 dark:placeholder:text-white/20 transition-all outline-none">
                     </div>
     
                     <!-- Submit Button -->

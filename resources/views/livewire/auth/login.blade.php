@@ -32,7 +32,7 @@
                                 <span class="text-[#002B5B]/40 dark:text-white/40 font-bold">@</span>
                             </div>
                             <input wire:model="username" id="username" type="text" required autofocus
-                                class="block w-full pl-8 pr-4 py-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[14px] text-[#002B5B] dark:text-white placeholder-slate-400 dark:placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:focus:ring-brand-accent focus:border-transparent transition-all"
+                                class="block w-full pl-8 pr-4 py-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[14px] text-[#002B5B] dark:text-white placeholder-slate-400 dark:placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:focus:ring-brand-accent focus:border-transparent transition-all text-base"
                                 placeholder="cool_user">
                         </div>
                         @error('username')
@@ -47,7 +47,7 @@
                         </label>
                         <div class="mt-1">
                             <input wire:model="password" id="password" type="password" required
-                                class="block w-full px-4 py-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[14px] text-[#002B5B] dark:text-white placeholder-slate-400 dark:placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:focus:ring-brand-accent focus:border-transparent transition-all">
+                                class="block w-full px-4 py-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[14px] text-[#002B5B] dark:text-white placeholder-slate-400 dark:placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:focus:ring-brand-accent focus:border-transparent transition-all text-base">
                         </div>
                         @error('password')
                             <p class="mt-2 text-sm text-red-500 dark:text-red-400 font-bold bg-red-50 dark:bg-red-400/10 py-1 px-2 rounded-lg inline-block">{{ $message }}</p>

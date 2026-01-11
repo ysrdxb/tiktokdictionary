@@ -3046,11 +3046,11 @@ Ensure Homepage, Bento Grid, and Word Detail pages look great on all device size
 
 ### TASK-041: Responsive Forms & Inputs
 ```
-Status: TODO
+Status: DONE
 Priority: MEDIUM
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 ```
 
 **What To Build:**

@@ -30,6 +30,16 @@
                     </div>
                 </a>
                 
+                <!-- Desktop Nav Links (Homepage Specific) -->
+                <div class="hidden lg:flex items-center gap-8 mr-8">
+                     <a href="{{ route('explore.feed') }}" class="text-sm font-bold text-white/80 hover:text-white transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4 text-brand-accent animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Live Feed
+                    </a>
+                    <a href="{{ route('word.browse') }}" class="text-sm font-bold text-white/80 hover:text-white transition-colors">Browse</a>
+                    <a href="{{ route('word.create') }}" class="text-sm font-bold text-white/80 hover:text-white transition-colors">Submit</a>
+                </div>
+
                 @auth
                     <div class="hidden lg:flex items-center gap-4">
                          @if(Auth::user()->is_admin)

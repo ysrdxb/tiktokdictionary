@@ -124,6 +124,7 @@
                         Live Feed
                     </a>
                     <a href="{{ route('word.browse') }}" class="text-sm font-bold text-slate-600 dark:text-white/80 hover:text-brand-primary dark:hover:text-white transition-colors">Browse</a>
+                    <a href="{{ route('word.create') }}" class="text-sm font-bold text-slate-600 dark:text-white/80 hover:text-brand-primary dark:hover:text-white transition-colors">Submit</a>
                     
                     <!-- Dark Mode Toggle -->
                     <button x-data="{ 
@@ -152,20 +153,20 @@
                 @auth
                     <div class="hidden lg:flex items-center gap-4">
                         @if(Auth::user()->is_admin)
-                             <a href="{{ route('admin.dashboard') }}" class="text-white/70 text-sm font-bold hover:text-white">Admin</a>
+                             <a href="{{ route('admin.dashboard') }}" class="text-[#002B5B]/70 dark:text-white/70 text-sm font-bold hover:text-[#002B5B] dark:hover:text-white transition-colors">Admin Panel</a>
                         @endif
-                         <div class="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 pl-4 pr-1 py-1 rounded-full">
-                            <span class="text-white text-sm font-bold">{{ Auth::user()->username }}</span>
+                         <div class="flex items-center gap-3 bg-[#002B5B]/5 dark:bg-white/10 backdrop-blur-md border border-[#002B5B]/10 dark:border-white/20 pl-4 pr-1 py-1 rounded-full">
+                            <span class="text-[#002B5B] dark:text-white text-sm font-bold">{{ Auth::user()->username }}</span>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="px-5 py-2 bg-white text-[#002B5B] text-[13px] font-bold rounded-full hover:bg-brand-accent hover:text-white transition-all shadow-lg">
+                                <button type="submit" class="px-5 py-2 bg-white text-[#002B5B] text-[13px] font-bold rounded-full hover:bg-brand-accent hover:text-white transition-all shadow-lg border border-[#002B5B]/10 dark:border-transparent">
                                     Logout
                                 </button>
                             </form>
                         </div>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="hidden lg:flex group relative px-6 py-2.5 bg-white text-[#002B5B] text-sm font-bold rounded-full transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] overflow-hidden">
+                    <a href="{{ route('login') }}" class="hidden lg:flex group relative px-6 py-2.5 bg-[#002B5B] dark:bg-white text-white dark:text-[#002B5B] text-sm font-bold rounded-full transition-all hover:shadow-lg overflow-hidden">
                         <span class="relative z-10">Login</span>
                         <div class="absolute inset-0 bg-brand-accent opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
                     </a>

@@ -92,7 +92,7 @@
                 wire:model="definition"
                 type="text"
                 placeholder="Text field" 
-                class="w-full pl-16 pr-5 py-4 bg-white border border-[#002B5B]/20 rounded-[16px] text-[#002B5B] font-medium placeholder:text-[#002B5B]/30 focus:outline-none focus:border-[#002B5B] focus:ring-2 focus:ring-[#002B5B]/10 transition-all @error('definition') border-red-500 @enderror">
+                class="w-full pl-16 pr-5 py-3 md:py-4 bg-white border border-[#002B5B]/20 rounded-[16px] text-[#002B5B] font-medium placeholder:text-[#002B5B]/30 focus:outline-none focus:border-[#002B5B] focus:ring-2 focus:ring-[#002B5B]/10 transition-all text-base md:text-lg @error('definition') border-red-500 @enderror">
             @error('definition') 
                 <p class="text-red-500 text-sm mt-2 ml-1 font-medium">{{ $message }}</p> 
             @enderror
