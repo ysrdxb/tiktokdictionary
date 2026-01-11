@@ -24,3 +24,8 @@ Route::prefix('tiktokdictionary')->group(function () {
     Route::get('/check-word', [WordController::class, 'check'])->name('word.check');
     Route::post('/word/{word}/definition', [WordController::class, 'storeDefinition'])->name('definition.store');
 });
+
+// DEBUG CATCH-ALL
+Route::any('{any}', function($any) {
+    return "Laravel Caught Path: " . $any . " | Request Path: " . request()->path();
+})->where('any', '.*');
