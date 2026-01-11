@@ -10,8 +10,51 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     
-    <!-- Vite Assets -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Tailwind CDN (No Build Needed) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"GRIFTER"', 'Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#002B5B',
+                            primary: '#0F62FE',
+                            secondary: '#60A5FA',
+                            accent: '#F59E0B',
+                            surface: '#F1F6FA',
+                            white: '#FFFFFF',
+                            text: '#1E293B',
+                            heroFrom: '#8FB8FF',
+                            heroVia: '#D1E5FF',
+                            heroTo: '#F1F6FA',
+                            border: '#2B5F8C',
+                            panel: '#F0F7FF',
+                            panelBorder: '#BFDBFE',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'strong': '0 0 20px rgba(0, 43, 91, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'GRIFTER';
+            src: url('fonts/grifterbold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        [x-cloak] { display: none !important; }
+    </style>
 
     <!-- Livewire Styles -->
     @livewireStyles
