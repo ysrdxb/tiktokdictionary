@@ -12,7 +12,7 @@
         $relatedWords = $word->getRelatedWords(4);
     @endphp
 
-    <div class="pb-0">
+    <div class="max-w-[1240px] mx-auto px-6 pb-0">
         
         <!-- Word Card (Main Definition) -->
         <section class="bg-white rounded-[32px] p-8 md:p-10 shadow-sm mb-6">
@@ -76,6 +76,11 @@
 
              <!-- AI Combined Summary -->
              @livewire('tools.ai-summary', ['word' => $word])
+        </section>
+
+        <!-- Investor Dashboard (TikTok Market Section) -->
+        <section class="mb-6">
+            @livewire('tools.investor-dashboard', ['word' => $word])
         </section>
 
         <!-- Alternate Definitions Section -->
