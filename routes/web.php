@@ -26,6 +26,6 @@ Route::prefix('tiktokdictionary')->group(function () {
 });
 
 // DEBUG CATCH-ALL
-Route::any('{any}', function($any) {
-    return "Laravel Caught Path: " . $any . " | Request Path: " . request()->path();
+Route::any('{any?}', function($any = null) {
+    return "Laravel Caught Path: " . ($any ?? 'NULL') . " | Request Path: " . request()->path();
 })->where('any', '.*');
