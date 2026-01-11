@@ -63,120 +63,110 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="font-sans antialiased bg-[#F0F6FB] text-[#002B5B]">
+<body class="font-sans antialiased bg-[#002B5B] text-white overflow-x-hidden min-h-screen flex flex-col">
+
+    <!-- Global Background Mesh (Fixed) -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-50">
+        <!-- Main Gradient Base -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#0F62FE] via-[#002B5B] to-[#00152e] opacity-90"></div>
+        <!-- Atmospheric Glows -->
+        <div class="absolute top-[10%] right-[10%] w-[600px] h-[600px] bg-[#EA0054] rounded-full blur-[120px] opacity-10 mix-blend-screen animate-pulse-slow"></div>
+        <div class="absolute bottom-[10%] left-[10%] w-[500px] h-[500px] bg-[#25F4EE] rounded-full blur-[100px] opacity-10 mix-blend-screen"></div>
+        <!-- Noise -->
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%221%22/%3E%3C/svg%3E');"></div>
+    </div>
 
     @php
         $isHome = request()->routeIs('home');
-        $isFullWidth = request()->routeIs('word.browse') || request()->routeIs('word.create');
+        // Define common header classes
+        $headerClasses = "relative z-50 pt-6 pb-6"; 
     @endphp
 
     @if($isHome)
-        {{-- HOMEPAGE: Header is rendered inside the page, not here --}}
-        {{ $slot }}
-    @elseif($isFullWidth)
-        {{-- FULL-WIDTH PAGES (Browse, Submit): Header only, content handles its own sections --}}
-        <header class="relative z-50 bg-[#EAF3FE] pt-6 pb-6">
-            <div class="max-w-[1240px] w-full mx-auto px-6 flex items-center justify-between">
-                <a href="{{ route('home') }}" class="text-[20px] font-semibold tracking-tight">
-                    <span class="text-[#002B5B]">TikTok</span><span class="text-[#002B5B] font-bold">Dictionary</span>
-                </a>
-                
-                @auth
-                    <div class="flex items-center gap-4">
-                        <span class="text-[#002B5B] text-sm font-bold">{{ Auth::user()->username }}</span>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="px-6 py-2.5 bg-white border border-[#002B5B] text-[#002B5B] text-[13px] font-semibold rounded-full hover:bg-slate-50 transition-colors">
-                                Logout
-                            </button>
-                        </form>
-                    </div>
-                @else
-                    <a href="{{ route('login') }}" class="px-6 py-2.5 bg-[#002B5B] text-white text-[13px] font-semibold rounded-full hover:bg-slate-800 transition-colors">
-                        Login
-                    </a>
-                @endauth
-            </div>
-        </header>
-        
-        {{-- Content handles its own full-width sections --}}
+        {{-- HOMEPAGE: Content handles its own specific header inside hero --}}
         {{ $slot }}
     @else
-        {{-- OTHER PAGES: Header + Hero Background with container --}}
-        <header class="relative z-50 bg-[#EAF3FE] pt-6 pb-6">
+        {{-- ALL OTHER PAGES: Shared Glass Header --}}
+        <header class="{{ $headerClasses }}">
             <div class="max-w-[1240px] w-full mx-auto px-6 flex items-center justify-between">
-                <a href="{{ route('home') }}" class="text-[20px] font-semibold tracking-tight">
-                    <span class="text-[#002B5B]">TikTok</span><span class="text-[#002B5B] font-bold">Dictionary</span>
+                <!-- Logo -->
+                <a href="{{ route('home') }}" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-white text-[#002B5B] rounded-lg flex items-center justify-center font-black text-2xl -rotate-6 group-hover:rotate-0 transition-transform">
+                        T
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold tracking-tight leading-none text-white">
+                            TikTok<span class="text-brand-accent">Dictionary</span>
+                        </span>
+                    </div>
                 </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-6">
+                     <a href="{{ route('explore.feed') }}" class="text-sm font-bold text-white/80 hover:text-white transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4 text-brand-accent animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Live Feed
+                    </a>
+                    <a href="{{ route('word.browse') }}" class="text-sm font-bold text-white/80 hover:text-white transition-colors">Browse</a>
+                </div>
                 
                 @auth
                     <div class="flex items-center gap-4">
-                        <span class="text-[#002B5B] text-sm font-bold">{{ Auth::user()->username }}</span>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="px-6 py-2.5 bg-white border border-[#002B5B] text-[#002B5B] text-[13px] font-semibold rounded-full hover:bg-slate-50 transition-colors">
-                                Logout
-                            </button>
-                        </form>
+                        @if(Auth::user()->is_admin)
+                             <a href="{{ route('admin.dashboard') }}" class="text-white/70 text-sm font-bold hover:text-white">Admin</a>
+                        @endif
+                         <div class="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 pl-4 pr-1 py-1 rounded-full">
+                            <span class="text-white text-sm font-bold">{{ Auth::user()->username }}</span>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="px-5 py-2 bg-white text-[#002B5B] text-[13px] font-bold rounded-full hover:bg-brand-accent hover:text-white transition-all shadow-lg">
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="px-6 py-2.5 bg-[#002B5B] text-white text-[13px] font-semibold rounded-full hover:bg-slate-800 transition-colors">
-                        Login
+                    <a href="{{ route('login') }}" class="group relative px-6 py-2.5 bg-white text-[#002B5B] text-sm font-bold rounded-full transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] overflow-hidden">
+                        <span class="relative z-10">Login</span>
+                        <div class="absolute inset-0 bg-brand-accent opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
                     </a>
                 @endauth
             </div>
         </header>
-        
-        {{-- Hero Background for Inner Pages --}}
-        <section class="relative w-full">
-            <div class="w-full h-[200px] bg-[#EAF3FE]"></div>
-            <div class="w-full flex justify-center px-6">
-                <div class="-mt-32 z-20 w-full max-w-[1240px]">
-                    {{ $slot }}
-                </div>
-            </div>
-        </section>
+
+        {{-- Main Content Wrapper --}}
+        <main class="flex-1 w-full max-w-[1240px] mx-auto px-6 py-8 relative z-10">
+            {{ $slot }}
+        </main>
     @endif
 
-    <!-- Footer -->
-    <footer class="bg-[#F0F6FB] text-[#002B5B] py-8">
+    <!-- Footer (Dark Theme) -->
+    <footer class="relative z-10 mt-auto border-t border-white/10 bg-[#00152e]/50 backdrop-blur-sm pt-12 pb-8">
         <div class="max-w-[1240px] mx-auto px-6">
-            <!-- Logo and Description -->
-            <div class="text-center mb-12">
-                <div class="flex items-center justify-center gap-2 mb-4">
-                    <span class="text-3xl">📚</span>
-                    <span class="text-2xl font-black tracking-tight">TikTokDictionary</span>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">📚</span>
+                    <span class="text-xl font-black text-white tracking-tight">TikTokDictionary</span>
                 </div>
-                <p class="text-[#002B5B]/70 text-base font-medium max-w-md mx-auto leading-relaxed">
-                    Found a new term blowing up? Add it to the dictionary with your own definition.
-                </p>
-            </div>
-            
-            <!-- Divider -->
-            <div class="border-t border-[#002B5B]/10 my-6"></div>
-            
-            <!-- Copyright and Social Icons -->
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                <p class="text-[#002B5B] text-sm font-semibold">© Copyright 2025. All Rights Reserved</p>
-                
-                <div class="flex items-center gap-3">
-                    <!-- TikTok -->
-                    <a href="#" class="w-10 h-10 rounded-full border border-[#002B5B] flex items-center justify-center text-[#002B5B] hover:bg-[#002B5B] hover:text-white transition-all">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-                    </a>
-                    <!-- Instagram -->
-                    <a href="#" class="w-10 h-10 rounded-full border border-[#002B5B] flex items-center justify-center text-[#002B5B] hover:bg-[#002B5B] hover:text-white transition-all">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    </a>
-                    <!-- X (Twitter) -->
-                    <a href="#" class="w-10 h-10 rounded-full border border-[#002B5B] flex items-center justify-center text-[#002B5B] hover:bg-[#002B5B] hover:text-white transition-all">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    </a>
+                <div class="flex gap-6 text-sm font-bold text-white/60">
+                    <a href="#" class="hover:text-white transition-colors">Submit Word</a>
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+                <div class="text-white/40 text-sm font-medium">
+                    © 2025. All Rights Reserved.
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Puter.js for Neural Audio -->
+    <script src="https://js.puter.com/v2/"></script>
+    
+    <!-- html2canvas for Sticker Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Livewire Scripts -->
     <!-- Livewire Scripts -->
     @livewireScripts
 </body>

@@ -1,29 +1,57 @@
 <x-layouts.app>
     <!-- Hero Section with Header Inside -->
-    <section class="relative min-h-[620px] overflow-hidden flex flex-col">
+    <section class="relative min-h-[620px] flex flex-col">
         <!-- Blue Gradient Background -->
-        <div class="absolute inset-0 bg-gradient-to-br from-[#8FB8FF] to-[#A6C9FF]"></div>
+        <!-- Richer Gradient Background with Mesh/Noise effect -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10 bg-[#002B5B]">
+            <!-- Main Gradient Base -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#0F62FE] via-[#002B5B] to-[#00152e] opacity-90"></div>
+            
+            <!-- Atmospheric Glows -->
+            <div class="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-[#EA0054] rounded-full blur-[120px] opacity-20 mix-blend-screen animate-pulse-slow"></div>
+            <div class="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-[#25F4EE] rounded-full blur-[100px] opacity-20 mix-blend-screen"></div>
+            
+            <!-- Noise Overlay for Texture -->
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%221%22/%3E%3C/svg%3E');"></div>
+        </div>
         
         <!-- Header (Inside Hero) -->
-        <header class="relative z-20 pt-6 pb-4">
+        <header class="relative z-20 pt-8 pb-4">
             <div class="max-w-[1240px] mx-auto px-6 flex items-center justify-between">
-                <a href="{{ route('home') }}" class="text-[20px] font-semibold tracking-tight">
-                    <span class="text-white drop-shadow-sm">TikTok</span><span class="text-[#002B5B] font-bold">Dictionary</span>
+                <!-- Larger Logo -->
+                <a href="{{ route('home') }}" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-white text-[#002B5B] rounded-lg flex items-center justify-center font-black text-2xl -rotate-6 group-hover:rotate-0 transition-transform">
+                        T
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold tracking-tight leading-none text-white">
+                            TikTok<span class="text-brand-accent">Dictionary</span>
+                        </span>
+                    </div>
                 </a>
                 
                 @auth
                     <div class="flex items-center gap-4">
-                        <span class="text-[#002B5B] text-sm font-bold bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">{{ Auth::user()->username }}</span>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="px-6 py-2.5 bg-white/90 text-[#002B5B] text-[13px] font-semibold rounded-full hover:bg-white transition-colors">
-                                Logout
-                            </button>
-                        </form>
+                         @if(Auth::user()->is_admin)
+                             <a href="{{ route('admin.dashboard') }}" class="hidden md:block text-white/80 hover:text-white text-sm font-bold transition-colors">Admin Panel</a>
+                        @endif
+                        
+                        <div class="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 pl-4 pr-1 py-1 rounded-full">
+                            <span class="text-white text-sm font-bold">{{ Auth::user()->username }}</span>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="px-5 py-2 bg-white text-[#002B5B] text-[13px] font-bold rounded-full hover:bg-brand-accent hover:text-white transition-all shadow-lg">
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="px-6 py-2.5 bg-[#002B5B] text-white text-[13px] font-semibold rounded-full hover:bg-slate-800 transition-colors">
-                        Login
+                    <!-- Improved Login Button -->
+                    <a href="{{ route('login') }}" class="group relative px-8 py-3 bg-white text-[#002B5B] text-sm font-bold rounded-full transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:-translate-y-0.5 overflow-hidden">
+                        <span class="relative z-10">Login / Sign Up</span>
+                        <div class="absolute inset-0 bg-brand-accent opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+                        <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></span>
                     </a>
                 @endauth
             </div>
@@ -33,30 +61,48 @@
         <div class="flex-1 flex flex-col justify-center py-16">
             <div class="max-w-[1240px] w-full mx-auto px-6 text-center relative z-10">
             <!-- Main Headline -->
-            <h1 class="text-[#002B5B] leading-[0.95] tracking-tight mb-14 drop-shadow-sm select-none">
-                <span class="block text-[42px] md:text-[56px] font-bold -mb-3">Search Any</span>
+            <h1 class="text-white leading-[0.95] tracking-tight mb-14 drop-shadow-2xl select-none">
+                <span class="block text-[42px] md:text-[56px] font-bold -mb-3 opacity-90">Search Any</span>
                 <span class="relative inline-block text-[58px] md:text-[76px] font-bold pb-2">
-                    <span class="relative z-10">Tiktok Word...</span>
-                    <!-- Dashed Line: Pushed down with explicit pixels -->
-                    <div class="absolute top-[85px] left-[-15%] right-[-15%] h-[1px] border-t-2 border-dashed border-[#002B5B]/30 z-0"></div>
-                    <div class="absolute top-[85px] left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#002B5B]/40 text-[10px] bg-[#97BFFF] px-1 blur-[0.5px]">✕</div>
+                    <span class="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-brand-accent">Tiktok Word...</span>
+                    <!-- Dashed Line -->
+                    <div class="absolute top-[85px] left-[-15%] right-[-15%] h-[1px] border-t-2 border-dashed border-white/20 z-0"></div>
                 </span>
             </h1>
             
-            <!-- Subtext: Added more margin-bottom -->
-            <p class="text-[#002B5B] text-[16px] font-medium mb-12 tracking-wide opacity-80">
-                Type a trend, phrase, slang you saw online.
+            <!-- Subtext -->
+            <p class="text-blue-100 text-[18px] font-medium mb-12 tracking-wide opacity-80 max-w-lg mx-auto">
+                Type a trend, phrase, or slang you saw online.
             </p>
             
-            <!-- Search Container: Explicit wide width -->
+            <!-- Search Container -->
             <div class="w-full max-w-[700px] mx-auto mb-6">
                 @livewire('search-bar')
             </div>
             
-            <p class="text-[#002B5B]/60 text-[13px] font-medium mt-6">Press <span class="font-bold text-[#002B5B]">Enter</span> to search</p>
+            <p class="text-white/40 text-[13px] font-medium mt-6">Press <span class="font-bold text-white/60">Enter</span> to search</p>
             </div>
         </div>
     </section>
+
+    <!-- Word of the Day (Architect Request) -->
+    @if($wordOfTheDay)
+        <section class="bg-brand-panel border-b border-brand-border/50 py-8">
+            <div class="max-w-[1240px] mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-6 text-center md:text-left">
+                <div class="flex items-center gap-3">
+                    <span class="bg-brand-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">Word of the Day</span>
+                    <h2 class="text-2xl font-black text-brand-dark">{{ $wordOfTheDay->term }}</h2>
+                </div>
+                <div class="hidden md:block h-8 w-px bg-brand-border/20"></div>
+                <p class="text-brand-dark/80 font-medium max-w-xl text-sm md:text-base line-clamp-1">
+                    {{ $wordOfTheDay->primaryDefinition->definition ?? 'A trending term you need to know.' }}
+                </p>
+                <a href="{{ route('word.show', $wordOfTheDay->slug) }}" class="text-brand-primary font-bold text-sm hover:underline whitespace-nowrap">
+                    Read more →
+                </a>
+            </div>
+        </section>
+    @endif
 
     <!-- Main Content -->
     <main>
@@ -68,28 +114,35 @@
 
             <div class="max-w-[1240px] mx-auto px-6 relative z-10">
                 <!-- Header -->
-                <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
                     <div>
-                        <h2 class="text-6xl md:text-[80px] font-bold text-white tracking-tight leading-none mb-4">
+                        <h2 class="text-5xl md:text-[72px] font-bold text-white tracking-tight leading-none mb-3">
                             Viral <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-brand-accent">Velocity</span>
                         </h2>
-                        <p class="text-white/80 font-medium text-xl tracking-wide max-w-2xl">
-                            The fastest growing words on the internet, ranked by our Kinetic Algorithm™.
+                        <p class="text-white/80 font-medium text-lg tracking-wide max-w-2xl">
+                            The fastest growing words ranked by our Kinetic Algorithm™.
                         </p>
                     </div>
                     
-                    <!-- Pulsing 'Live' Indicator -->
-                    <div class="flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full">
-                        <span class="relative flex h-3 w-3">
-                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-accent"></span>
-                        </span>
-                        <span class="text-white text-sm font-bold tracking-wide">LIVE UPDATES</span>
+                    <!-- Feed Entry Points -->
+                    <div class="flex flex-col items-start md:items-end gap-3 flex-shrink-0">
+                        <div class="flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full mb-1">
+                            <span class="relative flex h-2.5 w-2.5">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-accent"></span>
+                            </span>
+                            <span class="text-white text-[11px] font-bold tracking-wide uppercase">Live Updates</span>
+                        </div>
+
+                        <a href="{{ route('explore.feed') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary hover:bg-brand-secondary text-white font-bold rounded-full transition-all shadow-lg shadow-brand-primary/30 group">
+                            <span>Open Vertical Feed</span>
+                            <svg class="w-5 h-5 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Kinetic Bento Grid -->
-                <x-ui.bento-grid :items="$trendingWords" />
+                @livewire('home.live-trend-grid')
                 
             </div>
         </section>
@@ -129,7 +182,7 @@
                                 </p>
                                 <div class="flex items-center gap-2 text-[#002B5B] text-[15px] font-bold">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
-                                    {{ number_format((int)$def->agrees + rand(1000, 3000)) }} agreed
+                                    {{ number_format((int)$def->agrees) }} agreed
                                 </div>
                             </div>
                             

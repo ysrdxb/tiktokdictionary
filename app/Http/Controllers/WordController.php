@@ -33,6 +33,16 @@ class WordController extends Controller
         if ($category) {
             $query->where('category', $category);
         }
+
+        // Vibe Check Search (Phase 14)
+        $vibe = $request->get('vibe');
+        if ($vibe) {
+            $query->whereJsonContains('vibes', $vibe);
+            
+            // If searching by vibe, we return a flat list instead of the complex browse dashboard
+            $words = $query->orderBy('velocity_score', 'desc')->paginate(20);
+            return view('word.browse-results', compact('words', 'vibe'));
+        }
         
         // Apply time filter
         switch ($sort) {

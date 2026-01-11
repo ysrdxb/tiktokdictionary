@@ -316,3 +316,65 @@ Give this command: "Read this blueprint carefully. I am the Technical Lead. Your
     $this->price = '$12.99';
 }
 6. Admin Panel RequirementsThe Filament/Admin dashboard must include:The Boost Slider: A UI slider from 1 to 1000 to instantly rank a word.The RFCI Input: A text field to assign the trend "Grade" (e.g., 88A).Definition Approval: A toggle to "Verify" a user-submitted definition, giving it a checkmark badge.Final Instruction for the AI Developer:"When building the TrendingService.php class, implement the math formula above. Use Laravel's Cache::remember for the homepage query to ensure the Bento Grid loads in under 200ms, even with 10,000+ words in the database."
+
+*******NEW FEATURES********
+
+Livewire 3 + Puter.js Audio Integration
+1. Global Setup
+In your main layout file (app.blade.php), add the Puter.js script tag before @livewireScripts.
+
+HTML
+
+<script src="https://js.puter.com/v2/"></script>
+@livewireScripts
+2. The Word Card Component (Blade)
+In your Livewire component view (e.g., livewire/word-card.blade.php), use Alpine.js to handle the audio logic. This ensures the "Play" button works instantly without a server round-trip.
+
+HTML
+
+<div x-data="{ 
+    playing: false,
+    async playAudio(text) {
+        this.playing = true;
+        try {
+            // Neural AI Voice through Puter.js
+            const audio = await puter.ai.txt2speech(text, {
+                voice: 'nova', // The trendy TikTok 'Bestie' voice
+                speed: 1.1    // Slightly faster for social media vibe
+            });
+            
+            audio.onended = () => { this.playing = false; };
+            audio.play();
+        } catch (error) {
+            console.error('Audio failed:', error);
+            this.playing = false;
+        }
+    }
+}">
+    <button 
+        @click="playAudio('{{ $word->title }}: {{ $word->definition }}')"
+        :class="playing ? 'bg-pink-500 animate-pulse' : 'bg-zinc-800'"
+        class="flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold transition"
+    >
+        <span x-show="!playing">🔊 Listen</span>
+        <span x-show="playing">🔈 Playing...</span>
+    </button>
+</div>
+3. Advanced Feature: "Sound-Bite" Download
+To allow creators to use the audio on TikTok, add this function to your Alpine x-data:
+
+JavaScript
+
+async downloadAudio(text, filename) {
+    const audio = await puter.ai.txt2speech(text);
+    const link = document.createElement('a');
+    link.href = audio.src;
+    link.download = `${filename}-definition.mp3`;
+    link.click();
+}
+Why this works perfectly for your $2000 project:
+Zero Latency: By putting the logic in Alpine.js (x-data), the audio starts playing the millisecond the user clicks. No waiting for a Laravel backend response.
+
+Mobile Optimized: Puter.js works beautifully on mobile browsers, which is where 90% of your TikTokDictionary users will be.
+
+No API Costs: Unlike ElevenLabs or OpenAI direct APIs, Puter.js handles the billing on their side—keeping your overhead at $0.

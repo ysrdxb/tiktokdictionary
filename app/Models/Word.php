@@ -23,7 +23,8 @@ class Word extends Model
         'views_buffer',   // Redis sync holding
         'is_polar_trend', // Neon pulse trigger
         'vibes',          // JSON tags
-        'is_verified'
+        'is_verified',
+        'ai_summary',
     ];
 
     protected $casts = [
@@ -114,14 +115,45 @@ class Word extends Model
     }
 
     /**
-     * Find similar words for duplicate detection
+     * Find similar words for duplicate detection using Levenshtein & Similar Text
      */
     public static function findSimilar($term)
     {
-        return static::where('term', 'LIKE', '%' . $term . '%')
-            ->orWhereRaw('SOUNDEX(term) = SOUNDEX(?)', [$term])
-            ->limit(5)
+        // 1. Optimization: Only check words starting with same/similar letter or very short words
+        // fetching all is bad for scale, but for < 10k words it's fine in memory.
+        // Let's filter by first letter to be safe.
+        $firstLetter = mb_substr($term, 0, 1);
+        
+        // potential candidates from DB
+        $candidates = static::where('term', 'LIKE', $firstLetter . '%')
+            ->orWhereRaw('SOUNDEX(term) = SOUNDEX(?)', [$term]) // Keep soundex as a backup
             ->get();
+
+        $term = strtolower($term);
+        $matches = collect();
+
+        foreach ($candidates as $candidate) {
+            $candidateTerm = strtolower($candidate->term);
+            
+            // Skip exact
+            if ($candidateTerm === $term) continue;
+
+            $lev = levenshtein($term, $candidateTerm);
+            
+            // Calculate percentage
+            similar_text($term, $candidateTerm, $percent);
+
+            // Logic:
+            // 1. If very short word (< 4 chars) & distance is 1 -> flagging
+            // 2. If longer word & percent > 75% -> flagging
+            // 3. If soundex matches -> flagging
+            
+            if ($lev <= 2 || $percent > 80) {
+                 $matches->push($candidate);
+            }
+        }
+
+        return $matches->take(5);
     }
 
     /**

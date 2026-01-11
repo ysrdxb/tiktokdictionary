@@ -8,14 +8,33 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $words = Word::query()
-            ->withCount('definitions')
-            ->orderByDesc('created_at')
-            ->paginate(50);
+        $status = $request->get('status', 'all');
 
-        return view('admin.dashboard', compact('words'));
+        $query = Word::query()
+            ->withCount('definitions')
+            ->orderByDesc('created_at');
+
+        if ($status === 'pending') {
+            $query->where('is_verified', false);
+        } elseif ($status === 'verified') {
+             $query->where('is_verified', true);
+        } elseif ($status === 'polar') {
+             $query->where('is_polar_trend', true);
+        }
+
+        $words = $query->paginate(50);
+        
+        // Counts for tabs
+        $stats = [
+            'all' => Word::count(),
+            'pending' => Word::where('is_verified', false)->count(),
+            'verified' => Word::where('is_verified', true)->count(),
+            'polar' => Word::where('is_polar_trend', true)->count(),
+        ];
+
+        return view('admin.dashboard', compact('words', 'stats', 'status'));
     }
 
     public function edit(Word $word)

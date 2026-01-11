@@ -18,6 +18,7 @@
     <!-- Results Dropdown -->
     @if($showResults && strlen($query) > 0)
     <div class="absolute z-50 mt-2 w-full bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+        <div class="max-h-[60vh] overflow-y-auto"> <!-- Added scroll container -->
         @if($results->isNotEmpty())
             <div class="py-2">
                 <div class="px-5 py-2 text-xs font-bold text-slate-400 uppercase tracking-wide">Top Results</div>
@@ -52,6 +53,7 @@
                 </a>
             </div>
         @endif
+    </div>
     </div>
     @endif
 </div>

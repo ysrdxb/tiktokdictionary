@@ -21,9 +21,11 @@ class SearchBar extends Component
     {
         if (strlen($this->query) >= 2) {
             try {
-                $this->results = Word::where('term', 'LIKE', '%' . $this->query . '%')
+                $this->results = Word::where('term', 'like', '%' . $this->query . '%')
+                    ->orWhere('category', 'like', '%' . $this->query . '%')
+                    ->orWhereJsonContains('vibes', $this->query) // Vibe Search
                     ->with('primaryDefinition')
-                    ->limit(5)
+                    ->take(7)
                     ->get();
                 $this->showResults = true; // Always show results to enable "Search-to-Submit" feature
             } catch (\Exception $e) {

@@ -35,7 +35,25 @@ class TrendingService
         // View Multiplier (0.1 weight)
         $viewBonus = $views * 0.1;
         
-        return round($baseScore + $viewBonus, 4);
+        // Final Score
+        $finalScore = round($baseScore + $viewBonus, 4);
+
+        // --- AUTOMATED POLAR TREND DETECTION ---
+        // If a word has high engagement but mixed votes (controversial), it's "Polar".
+        // OR simply if velocity is extremely high.
+        // For MVP: If score > 50 (arbitrary high number) we mark it as Polar Trend.
+        // We will do this check here to save a DB write, or return a composite.
+        // Actually, let's just return the score, and let the caller or a Listener update the flag.
+        // But to be "Kinetic", let's update it right here if it changes.
+        
+        if ($finalScore > 50 && !$word->is_polar_trend) {
+             $word->update(['is_polar_trend' => true]);
+        } elseif ($finalScore < 20 && $word->is_polar_trend) {
+             // Downgrade if it falls off
+             $word->update(['is_polar_trend' => false]);
+        }
+
+        return $finalScore;
     }
 
     /**

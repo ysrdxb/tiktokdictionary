@@ -19,22 +19,41 @@ Livewire::setUpdateRoute(function($handle) {
 
 // Auth Routes
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [\App\Http\Controllers\AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login.post');
-    Route::get('/register', [\App\Http\Controllers\AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register'])->name('register.post');
+    Route::get('/login', \App\Livewire\Auth\Login::class)->name('login');
+    Route::get('/register', \App\Livewire\Auth\Register::class)->name('register');
 });
 
 Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 // Admin Routes (Protected by IsAdmin Middleware)
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
-    Route::get('/words/{word}/edit', [\App\Http\Controllers\AdminController::class, 'edit'])->name('words.edit');
-    Route::put('/words/{word}', [\App\Http\Controllers\AdminController::class, 'update'])->name('words.update');
-    Route::delete('/words/{word}', [\App\Http\Controllers\AdminController::class, 'destroy'])->name('words.destroy');
-    Route::post('/words/{word}/lore', [\App\Http\Controllers\AdminController::class, 'storeLore'])->name('words.lore.store');
+// Admin Routes (Protected by IsAdmin Middleware)
+Route::prefix('admin')->middleware(['auth', \App\Http\Middleware\IsAdmin::class])->group(function () {
+    // Dashboard (New Livewire Component)
+    Route::get('/', \App\Livewire\Admin\Dashboard::class)->name('admin.dashboard');
+
+    // Foundation Routes for Phase 17/18
+    Route::get('words', \App\Livewire\Admin\Words\Index::class)->name('admin.words'); // Placeholder
+    Route::get('definitions', \App\Livewire\Admin\Definitions\Index::class)->name('admin.definitions'); // Placeholder
+    Route::get('users', \App\Livewire\Admin\Users\Index::class)->name('admin.users'); // Placeholder
+    Route::get('categories', \App\Livewire\Admin\Categories\Index::class)->name('admin.categories'); // Placeholder
+    Route::get('settings', \App\Livewire\Admin\Settings\Index::class)->name('admin.settings'); // Placeholder
+
+    /* 
+    // OLD ROUTES (Migrating)
+    Route::get('words', \App\Livewire\Admin\Words\Index::class)->name('admin.words.index');
+    ...
+    */
+    
+    // Legacy Controller Routes (Keep until fully migrated)
+    Route::get('words/{word}/edit', [\App\Http\Controllers\AdminController::class, 'edit'])->name('admin.words.edit'); 
+    Route::put('words/{word}', [\App\Http\Controllers\AdminController::class, 'update'])->name('admin.words.update');
+    Route::delete('words/{word}', [\App\Http\Controllers\AdminController::class, 'destroy'])->name('admin.words.destroy');
+    Route::post('words/{word}/lore', [\App\Http\Controllers\AdminController::class, 'storeLore'])->name('admin.words.lore.store');
 });
+
+Route::get('/u/{username}', \App\Livewire\User\Profile::class)->name('user.profile');
+Route::get('/feed', \App\Livewire\Explore\VerticalFeed::class)->name('explore.feed');
+Route::get('/invest', \App\Livewire\Tools\InvestorDashboard::class)->name('tools.investor');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/word/{slug}', [WordController::class, 'show'])->name('word.show');

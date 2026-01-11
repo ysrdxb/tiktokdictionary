@@ -23,9 +23,41 @@
 
             @if($primaryDef)
                 <!-- Definition -->
-                <p class="text-[#002B5B] text-base md:text-lg leading-relaxed font-medium mb-2">
+                <p class="text-[#002B5B] text-base md:text-lg leading-relaxed font-medium mb-4">
                     {{ $primaryDef->definition }}
                 </p>
+
+                <!-- Audio Player (Alpine + Puter.js) -->
+                <div x-data="{ 
+                    playing: false,
+                    async playAudio(text) {
+                        if(this.playing) return;
+                        this.playing = true;
+                        try {
+                            const audio = await puter.ai.txt2speech(text, { voice: 'Kimberly', speed: 1.1 });
+                            audio.onended = () => { this.playing = false; };
+                            audio.play();
+                        } catch (error) {
+                            console.error('Audio failed:', error);
+                            this.playing = false;
+                        }
+                    }
+                }" class="mb-6">
+                    <button 
+                        @click="playAudio('{{ addslashes($word->term) }}: {{ addslashes($primaryDef->definition) }}')"
+                        :class="playing ? 'bg-pink-500 animate-pulse border-pink-500' : 'bg-slate-100 hover:bg-slate-200 border-slate-200'"
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold text-[#002B5B] transition-all border"
+                    >
+                        <span x-show="!playing" class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> 
+                            Listen
+                        </span>
+                        <span x-show="playing" class="flex items-center gap-1.5" x-cloak>
+                            <svg class="w-3.5 h-3.5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                            Playing...
+                        </span>
+                    </button>
+                </div>
 
                 @if($primaryDef->example)
                     <!-- Example -->
@@ -42,16 +74,8 @@
                 </div>
             @endif
 
-             <!-- AI Combined Summary (Placeholder) -->
-             <div class="mt-8 p-4 bg-brand-primary/5 rounded-xl border border-brand-primary/10">
-                <div class="flex items-center gap-2 mb-2">
-                    <span class="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text text-xs font-bold uppercase tracking-wider">AI Insight</span>
-                    <svg class="w-3 h-3 text-purple-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6a1 1 0 0 0-1 1v4.32l-2.9 2.9a1 1 0 0 0 1.41 1.41l3.5-3.5a1 1 0 0 0 .29-.71V7a1 1 0 0 0-1-1z"/></svg>
-                </div>
-                <p class="text-sm text-[#002B5B]/80 italic">
-                    "This term is currently spiking in usage due to a viral sound. Most users agree it refers to `{{ Str::limit($primaryDef->definition ?? '...', 50) }}` but context varies by subculture."
-                </p>
-             </div>
+             <!-- AI Combined Summary -->
+             @livewire('tools.ai-summary', ['word' => $word])
         </section>
 
         <!-- Alternate Definitions Section -->
@@ -121,29 +145,17 @@
 
         <!-- Investor Block (Domain Check) -->
         <section class="bg-[#002B5B] rounded-[32px] p-8 md:p-10 shadow-lg mb-6 text-white relative overflow-hidden">
+             <!-- Background Effect -->
              <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent/20 blur-[80px] rounded-full pointer-events-none"></div>
              
              <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div>
+                <div class="flex-1">
                      <h3 class="text-2xl md:text-3xl font-bold font-[GRIFTER] mb-2">Investor View</h3>
-                     <p class="text-white/80 font-medium">This word is trending. Is the domain available?</p>
+                     <p class="text-white/80 font-medium">This word is trending. Check if the domain is available and invest early.</p>
                 </div>
                 
-                <div x-data="{ checking: false }" class="w-full md:w-auto">
-                    <button 
-                        @click="checking = true; setTimeout(() => window.location.href='https://godaddy.com/domain-search/results?searchterms={{ $word->term }}', 1500)"
-                        class="w-full md:w-auto px-8 py-4 bg-white text-[#002B5B] font-bold rounded-xl hover:scale-105 transition-transform flex items-center justify-center gap-3"
-                    >
-                        <span x-show="!checking">Check {{ $word->term }}.com</span>
-                        <span x-show="checking" class="flex items-center gap-2">
-                             <svg class="animate-spin h-5 w-5 text-[#002B5B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                             </svg>
-                             Checking...
-                        </span>
-                    </button>
-                    <p class="text-xs text-center md:text-right mt-2 text-white/40">Powered by GoDaddy</p>
+                <div class="w-full md:w-auto">
+                    @livewire('tools.domain-checker', ['term' => $word->term])
                 </div>
              </div>
         </section>
@@ -176,13 +188,19 @@
             @endif
         </section>
 
-        <!-- Report Button -->
-        <div class="mb-12">
-            <button class="px-6 py-2.5 bg-white border border-[#002B5B] text-[#002B5B] font-medium rounded-full hover:bg-slate-50 transition-colors text-sm">
-                Report
+        <!-- Sticker Generator & Report -->
+        <div class="mb-12 flex flex-col items-center gap-4">
+            <x-tools.sticker-generator :word="$word" :definition="$primaryDef->definition ?? ''" />
+
+            <button onclick="Livewire.dispatch('openReportModal', { type: 'word', id: {{ $word->id }} })" class="text-xs font-bold text-slate-300 hover:text-red-400 flex items-center justify-center gap-1 mx-auto transition-colors">
+                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-8a2 2 0 012-2h10a2 2 0 012 2v8m2-2a2 2 0 00-2-2H5a2 2 0 00-2 2m0-10V5a2 2 0 012-2h6.19a2 2 0 011.85.93l.3.38a2 2 0 001.7 1.07h2.9A2 2 0 0121 7v6a2 2 0 01-2 2h-6.19a2 2 0 01-1.85-.93l-.3-.38a2 2 0 00-1.7-1.07H5a2 2 0 01-2-2"></path></svg>
+                 Report this Word
             </button>
         </div>
     </div>
+    
+    <!-- Report Modal (Global) -->
+    @livewire('tools.report-modal')
 
     <!-- Submit a Word Section (Dark Navy) -->
     <section class="bg-[#002B5B] py-16 text-center">

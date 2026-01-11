@@ -52,7 +52,14 @@
 
                 <!-- Footer / Micro interaction -->
                 <div class="mt-4 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span class="text-brand-primary text-xs font-bold uppercase tracking-wider">View Word →</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-brand-primary text-xs font-bold uppercase tracking-wider">View Word →</span>
+                        @if($word->rfci_score)
+                             <span class="ml-2 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-navy/50 text-brand-prmary border border-brand-primary/30" title="RFCI Score">
+                                {{ $word->rfci_score }} RFCI
+                             </span>
+                        @endif
+                    </div>
                     
                      <!-- Domain Checker Mini -->
                      <button class="flex items-center gap-1 px-2 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/5 transition-colors group/btn" 

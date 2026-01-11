@@ -20,6 +20,11 @@ class HomeController extends Controller
         // Use the Viral Engine to get trending words
         $trendingWords = \App\Services\TrendingService::getTrending(12);
 
+        // Word of the Day (Highest velocity from today, or all time fallback)
+        $wordOfTheDay = Word::whereDate('created_at', now())
+            ->orderByDesc('velocity_score')
+            ->first() ?? Word::orderByDesc('velocity_score')->first();
+
         $mostAgreedDefinitions = Definition::query()
             ->with('word')
             ->whereHas('word')
@@ -72,6 +77,7 @@ class HomeController extends Controller
         $definitionCount = Definition::count();
 
         return view('welcome', [
+            'wordOfTheDay' => $wordOfTheDay,
             'trendingWords' => $trendingWords,
             'timeframe' => $timeframe,
             'mostAgreedDefinitions' => $mostAgreedDefinitions,
