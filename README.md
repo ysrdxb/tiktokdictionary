@@ -41,7 +41,7 @@ A community-powered dictionary tracking viral slang and new trends across TikTok
     ```bash
     cp .env.example .env
     php artisan key:generate
-    php artisan migrate --seed
+    php artisan migrate:fresh --seed
     ```
 
 5.  **Run Development Server**:
