@@ -12,9 +12,19 @@
     <section class="w-full bg-white dark:bg-[#00152e]/40 py-10 transition-colors duration-300">
         <div class="max-w-[1240px] mx-auto px-6">
             <!-- Title -->
-            <h1 class="text-5xl md:text-6xl font-bold text-[#002B5B] dark:text-white tracking-tight leading-none mb-5 break-words">
-                {{ $word->term }}
-            </h1>
+            <div class="flex items-center gap-4 mb-5 flex-wrap">
+                <h1 class="text-5xl md:text-6xl font-bold text-[#002B5B] dark:text-white tracking-tight leading-none break-words">
+                    {{ $word->term }}
+                </h1>
+                @if($word->rfci_score)
+                    <x-ui.rfci-badge :score="$word->rfci_score" class="text-lg px-3 py-1.5 border-2" />
+                @endif
+            </div>
+
+            <!-- Live View Counter -->
+            <div class="mb-4">
+                @livewire('live-view-counter', ['wordId' => $word->id, 'increment' => true])
+            </div>
 
             @if($primaryDef)
                 <!-- Definition -->
@@ -87,7 +97,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
                     @foreach($word->definitions->skip(1)->take(3) as $definition)
-                        <div class="bg-white dark:bg-white/5 rounded-[16px] p-5 flex flex-col h-full border border-transparent dark:border-white/10">
+                        <div class="bg-white dark:bg-white/5 rounded-[16px] p-5 flex flex-col h-full border border-transparent dark:border-white/10 hover:shadow-lg transition-shadow duration-300">
                             <p class="text-[#002B5B] dark:text-white/90 text-sm leading-relaxed font-medium mb-4 flex-grow">
                                 "{{ Str::limit($definition->definition, 80) }}"
                             </p>
@@ -124,7 +134,7 @@
             @if($relatedWords->count() > 0)
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     @foreach($relatedWords as $related)
-                        <a href="{{ route('word.show', $related->slug) }}" wire:navigate class="px-5 py-4 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-[#002B5B] dark:text-white font-medium rounded-[12px] transition-colors text-sm text-center border border-transparent dark:border-white/10">
+                        <a href="{{ route('word.show', $related->slug) }}" wire:navigate class="px-5 py-4 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-[#002B5B] dark:text-white font-medium rounded-[12px] transition-all duration-300 text-sm text-center border border-transparent dark:border-white/10 hover:shadow-lg">
                             {{ $related->term }}
                         </a>
                     @endforeach
@@ -140,11 +150,11 @@
         <div class="max-w-[1240px] mx-auto px-6">
             <h3 class="text-2xl md:text-3xl font-bold text-[#002B5B] dark:text-white tracking-tight mb-6">Word Origin / First Use</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white dark:bg-white/5 rounded-[16px] p-5 border border-transparent dark:border-white/10">
+                <div class="bg-white dark:bg-white/5 rounded-[16px] p-5 border border-transparent dark:border-white/10 hover:shadow-lg transition-shadow duration-300">
                     <div class="text-sm text-[#002B5B]/70 dark:text-white/60 mb-1">Submitted originally by:</div>
                     <div class="text-[#002B5B] dark:text-white font-bold text-lg">{{ $primaryDef->submitted_by ?? '@username' }}</div>
                 </div>
-                <div class="bg-white dark:bg-white/5 rounded-[16px] p-5 border border-transparent dark:border-white/10">
+                <div class="bg-white dark:bg-white/5 rounded-[16px] p-5 border border-transparent dark:border-white/10 hover:shadow-lg transition-shadow duration-300">
                     <div class="text-sm text-[#002B5B]/70 dark:text-white/60 mb-1">Date first submitted:</div>
                     <div class="text-[#002B5B] dark:text-white font-bold text-lg">{{ $word->created_at ? $word->created_at->format('d M Y') : '18 Jul 2025' }}</div>
                 </div>
@@ -174,25 +184,7 @@
                 <span class="text-xs bg-slate-100 dark:bg-white/10 text-[#002B5B] dark:text-white px-3 py-1 rounded-full uppercase tracking-wider font-bold">Chronology</span>
             </h3>
             
-            @if($word->lore->count() > 0)
-                <div class="relative border-l-2 border-slate-200 dark:border-white/10 ml-3 pl-8 py-2 space-y-8">
-                    @foreach($word->lore as $entry)
-                        <div class="relative">
-                            <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-white dark:border-[#00152e] bg-[#002B5B] dark:bg-brand-accent"></span>
-                            <div class="text-sm text-[#002B5B]/50 dark:text-white/50 font-bold mb-1">{{ $entry->date_event ? $entry->date_event->format('M Y') : 'Unknown Date' }}</div>
-                            <h4 class="text-lg font-bold text-[#002B5B] dark:text-white mb-2">{{ $entry->title }}</h4>
-                            <p class="text-[#002B5B]/80 dark:text-white/70 font-medium leading-relaxed">{{ $entry->description }}</p>
-                            @if($entry->source_url)
-                                <a href="{{ $entry->source_url }}" target="_blank" class="inline-block mt-3 text-xs font-bold text-brand-primary dark:text-brand-accent uppercase tracking-wide hover:underline">View Source ↗</a>
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
-            @else
-                <div class="bg-slate-50 dark:bg-white/5 rounded-xl p-8 text-center border border-transparent dark:border-white/10">
-                    <p class="text-[#002B5B]/60 dark:text-white/50 font-medium mb-4">No lore history documented yet.</p>
-                </div>
-            @endif
+            <x-lore-timeline :entries="$word->lore" />
         </div>
     </section>
 

@@ -7,7 +7,7 @@
     $base = "relative overflow-hidden rounded-3xl transition-all duration-500 group";
     
     $variants = [
-        'glass' => 'bg-brand-dark/40 backdrop-blur-xl border border-white/10 hover:border-brand-primary/50 hover:bg-brand-dark/60 hover:shadow-strong',
+        'glass' => 'bg-brand-dark/40 backdrop-blur-xl border border-white/10 hover:border-brand-primary/50 hover:bg-brand-dark/60 hover:shadow-lg',
         'solid' => 'bg-brand-panel border border-brand-border hover:border-brand-primary',
         'neon' => 'bg-black border border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.5)] animate-shimmer relative'
     ];

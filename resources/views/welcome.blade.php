@@ -168,7 +168,7 @@
                             ];
                             $badge = $badges[$index] ?? $badges[2];
                         @endphp
-                        <div class="bg-white rounded-[32px] p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-10 hover:shadow-sm transition-shadow">
+                        <div class="bg-white rounded-[32px] p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-10 hover:shadow-lg transition-shadow duration-300">
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-5 mb-4 flex-wrap">
                                     <h3 class="text-[32px] font-bold text-[#002B5B] tracking-tight">{{ $def->word->term }}</h3>
@@ -208,7 +208,7 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @foreach($freshWords->take(4) as $word)
-                        <a href="{{ route('word.show', $word->slug) }}" class="bg-white rounded-[20px] p-8 border border-[#002B5B] hover:shadow-xl transition-all group flex flex-col h-full relative">
+                        <a href="{{ route('word.show', $word->slug) }}" class="bg-white rounded-[20px] p-8 border border-[#002B5B] hover:shadow-lg transition-all duration-300 group flex flex-col h-full relative">
                             <!-- Badges -->
                             <div class="flex items-center gap-2 mb-4">
                                 <span class="px-3 py-1 bg-[#F1F5F9] text-[#475569] text-[11px] font-bold uppercase tracking-wide rounded-md">New</span>

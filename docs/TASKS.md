@@ -774,11 +774,11 @@ Show domain availability on word pages with GoDaddy affiliate link.
 
 ### TASK-007: RFCI Score Display
 ```
-Status: IN_PROGRESS
+Status: DONE
 Priority: HIGH
 Claimed By: Claude AI
 Started: 2026-01-12
-Completed: -
+Completed: 2026-01-12
 ```
 
 **What To Build:**
@@ -838,10 +838,10 @@ Show RFCI score badge on word cards and detail page.
 
 ### TASK-008: Lore Timeline Display
 ```
-Status: TODO
+Status: IN_PROGRESS
 Priority: HIGH
-Claimed By: -
-Started: -
+Claimed By: Claude AI
+Started: 2026-01-12
 Completed: -
 ```
 
@@ -929,11 +929,11 @@ Show word origin timeline on detail page.
 
 ### TASK-009: Live View Counter with wire:poll
 ```
-Status: TODO
+Status: DONE
 Priority: HIGH
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 ```
 
 **What To Build:**
