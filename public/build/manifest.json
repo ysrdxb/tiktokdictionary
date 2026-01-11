@@ -1,0 +1,17 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-Ugd7Augo.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/fonts/grifterbold.otf": {
+    "file": "assets/grifterbold-CSvZhdrw.otf",
+    "src": "resources/fonts/grifterbold.otf"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CAiCLEjY.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
