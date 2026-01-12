@@ -393,6 +393,15 @@ Started: 2026-01-12
 Completed: 2026-01-12
 ```
 
+### TASK-044: Font Family Update
+```
+Status: DONE
+Priority: HIGH
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-13
+```
+
 ### TASK-003: Create Activity Logs Table
 ```
 Status: DONE
@@ -3093,7 +3102,14 @@ Fully responsive navigation bar with hamburger menu for mobile devices.
    - Hide desktop nav on mobile (`hidden md:flex`)
    - Show hamburger button on mobile (`block md:hidden`)
    - Include mobile menu component
-
+### TASK-045: Live Notifications
+```
+Status: DONE
+Priority: MEDIUM
+Claimed By: Claude AI
+Started: 2026-01-13
+Completed: 2026-01-13
+```
 **Acceptance Criteria:**
 - [ ] Hamburger menu opens/closes smoothly
 - [ ] Links are touch-friendly (44px min height)

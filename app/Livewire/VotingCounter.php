@@ -63,6 +63,20 @@ class VotingCounter extends Component
 
         // Update local state for optimistic UI
         $this->refreshVotes($definition);
+
+        // Send Notification
+        $this->sendNotification($definition, $type);
+    }
+
+    protected function sendNotification($definition, $type)
+    {
+        // Find the author based on username
+        $author = \App\Models\User::where('username', $definition->submitted_by)->first();
+
+        // If author exists and acts is not the current user
+        if ($author && $author->id !== auth()->id()) {
+            $author->notify(new \App\Notifications\VoteReceived($definition, $type));
+        }
     }
 
     protected function persistVote($cookieName, $type)

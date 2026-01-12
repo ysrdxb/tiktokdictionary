@@ -23,6 +23,13 @@ class SubmitWordForm extends Component
     public $showExactDuplicateModal = false;
     public $showSimilarModal = false; // "Looks like this word already exists" modal (Image 3)
     
+    public function mount()
+    {
+        if (\Illuminate\Support\Facades\Auth::check()) {
+            $this->submittedBy = \Illuminate\Support\Facades\Auth::user()->username;
+        }
+    }
+    
     // Shared duplicate data
     public $duplicateWordSlug = null;
     public $duplicateWordTerm = null;
@@ -138,6 +145,10 @@ class SubmitWordForm extends Component
         
         // Show Success Modal
         $this->showSuccessModal = true;
+
+        // Send Global Notification to ALL Users (so User 2 sees it too)
+        $users = \App\Models\User::all(); // In production, chunk this or use a channel
+        \Illuminate\Support\Facades\Notification::send($users, new \App\Notifications\WordSubmitted($word));
     }
 
     public function closeSuccessModal()

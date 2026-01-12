@@ -6,9 +6,16 @@
     <title>{{ $title ?? 'TikTokDictionary - The Internet Slang Dictionary' }}</title>
     
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <!-- Local Fonts Only -->
+    <style>
+        @font-face {
+            font-family: 'GRIFTER';
+            src: url('/fonts/grifterbold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
     
     <!-- Tailwind CDN (No Build Needed) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,7 +24,7 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"GRIFTER"', 'Outfit', 'sans-serif'],
+                        sans: ['"GRIFTER"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
                     },
                     colors: {
                         brand: {
@@ -46,13 +53,6 @@
         }
     </script>
     <style>
-        @font-face {
-            font-family: 'GRIFTER';
-            src: url('fonts/grifterbold.otf') format('opentype');
-            font-weight: 700;
-            font-style: normal;
-            font-display: swap;
-        }
         [x-cloak] { display: none !important; }
     </style>
 
@@ -255,6 +255,9 @@
     </script>
 
     <!-- Livewire Scripts -->
+    <!-- Real-Time Notifications -->
+    <livewire:real-time-notifications />
+
     <!-- Livewire Scripts -->
     @livewireScripts
 </body>
