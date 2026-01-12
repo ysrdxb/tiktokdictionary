@@ -69,13 +69,19 @@
                     <p class="text-[#002B5B]/70 dark:text-white/60 text-base mb-6 font-medium">Example: "{{ $primaryDef->example }}"</p>
                 @endif
 
-                <!-- Voting (Interactive Livewire Component) -->
-                <div class="flex items-center">
+                <div class="flex items-center gap-4">
                     @livewire('voting-counter', [
                         'definitionId' => $primaryDef->id,
                         'agrees' => $primaryDef->agrees,
                         'disagrees' => $primaryDef->disagrees
                     ], key('primary-vote-'.$primaryDef->id))
+
+                    <!-- Flag Button -->
+                    <button onclick="Livewire.dispatch('openReportModal', { type: 'App\\Models\\Definition', id: {{ $primaryDef->id }} })" 
+                            class="text-slate-400 hover:text-red-500 dark:text-white/30 dark:hover:text-red-400 transition-colors"
+                            title="Report this definition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-8a2 2 0 012-2h10a2 2 0 012 2v8m2-2a2 2 0 00-2-2H5a2 2 0 00-2 2m0-10V5a2 2 0 012-2h6.19a2 2 0 011.85.93l.3.38a2 2 0 001.7 1.07h2.9A2 2 0 0121 7v6a2 2 0 01-2 2h-6.19a2 2 0 01-1.85-.93l-.3-.38a2 2 0 00-1.7-1.07H5a2 2 0 01-2-2"></path></svg>
+                    </button>
                 </div>
             @endif
 
@@ -101,12 +107,19 @@
                             <p class="text-[#002B5B] dark:text-white/90 text-sm leading-relaxed font-medium mb-4 flex-grow">
                                 "{{ Str::limit($definition->definition, 80) }}"
                             </p>
-                            <div class="flex items-center">
+                            <div class="flex items-center gap-3">
                                 @livewire('voting-counter', [
                                     'definitionId' => $definition->id,
                                     'agrees' => $definition->agrees,
                                     'disagrees' => $definition->disagrees
                                 ], key('alt-vote-'.$definition->id))
+                                
+                                <!-- Flag Button -->
+                                <button onclick="Livewire.dispatch('openReportModal', { type: 'App\\Models\\Definition', id: {{ $definition->id }} })" 
+                                        class="text-slate-400 hover:text-red-500 dark:text-white/30 dark:hover:text-red-400 transition-colors"
+                                        title="Report this definition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-8a2 2 0 012-2h10a2 2 0 012 2v8m2-2a2 2 0 00-2-2H5a2 2 0 00-2 2m0-10V5a2 2 0 012-2h6.19a2 2 0 011.85.93l.3.38a2 2 0 001.7 1.07h2.9A2 2 0 0121 7v6a2 2 0 01-2 2h-6.19a2 2 0 01-1.85-.93l-.3-.38a2 2 0 00-1.7-1.07H5a2 2 0 01-2-2"></path></svg>
+                                </button>
                             </div>
                         </div>
                     @endforeach
@@ -193,7 +206,7 @@
         <div class="max-w-[1240px] mx-auto px-6 flex flex-col items-center gap-4">
             <x-tools.sticker-generator :word="$word" :definition="$primaryDef->definition ?? ''" />
 
-            <button onclick="Livewire.dispatch('openReportModal', { type: 'word', id: {{ $word->id }} })" class="text-xs font-bold text-[#002B5B]/40 dark:text-white/30 hover:text-red-400 flex items-center justify-center gap-1 mx-auto transition-colors">
+            <button onclick="Livewire.dispatch('openReportModal', { type: 'App\\Models\\Word', id: {{ $word->id }} })" class="text-xs font-bold text-[#002B5B]/40 dark:text-white/30 hover:text-red-400 flex items-center justify-center gap-1 mx-auto transition-colors">
                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-8a2 2 0 012-2h10a2 2 0 012 2v8m2-2a2 2 0 00-2-2H5a2 2 0 00-2 2m0-10V5a2 2 0 012-2h6.19a2 2 0 011.85.93l.3.38a2 2 0 001.7 1.07h2.9A2 2 0 0121 7v6a2 2 0 01-2 2h-6.19a2 2 0 01-1.85-.93l-.3-.38a2 2 0 00-1.7-1.07H5a2 2 0 01-2-2"></path></svg>
                  Report this Word
             </button>
@@ -217,4 +230,6 @@
             <p class="text-white/50 text-sm mt-6 font-medium">It only takes a minute to add a definition</p>
         </div>
     </section>
+    <!-- Report Modal Component -->
+    <livewire:report-modal />
 </x-layouts.app>

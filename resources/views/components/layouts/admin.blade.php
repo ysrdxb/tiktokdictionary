@@ -68,49 +68,8 @@
     @livewireStyles
 </head>
 <body class="bg-gray-900 text-white font-sans antialiased">
-    <!-- Toast Notifications Container -->
-    <div
-        x-data="{
-            notifications: [],
-            add(message, type = 'success') {
-                const id = Date.now();
-                this.notifications.push({ id, message, type });
-                setTimeout(() => this.remove(id), 4000);
-            },
-            remove(id) {
-                this.notifications = this.notifications.filter(n => n.id !== id);
-            }
-        }"
-        @notify.window="add($event.detail)"
-        class="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm"
-    >
-        <template x-for="notification in notifications" :key="notification.id">
-            <div
-                x-show="true"
-                x-transition:enter="toast-enter"
-                x-transition:leave="toast-leave"
-                :class="{
-                    'bg-green-500/90 border-green-400': notification.type === 'success',
-                    'bg-red-500/90 border-red-400': notification.type === 'error',
-                    'bg-blue-500/90 border-blue-400': notification.type === 'info'
-                }"
-                class="px-4 py-3 rounded-xl shadow-lg border backdrop-blur-sm flex items-center gap-3"
-            >
-                <svg x-show="notification.type === 'success'" class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <svg x-show="notification.type === 'error'" class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-                <span class="text-white text-sm font-medium" x-text="notification.message"></span>
-                <button @click="remove(notification.id)" class="ml-auto text-white/70 hover:text-white">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-        </template>
-    </div>
+    <!-- Toast Notifications Container - Pure JS, no Alpine conflicts -->
+    <div id="toast-container" class="fixed top-4 right-4 z-[9999] flex flex-col gap-2 max-w-sm"></div>
 
     <div class="flex h-screen overflow-hidden" x-data="{ sidebarOpen: false, sidebarCollapsed: false }">
 
@@ -249,18 +208,48 @@
         </div>
     </div>
 
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
     @livewireScripts
 
-    <!-- Livewire Event Handler for Toast Notifications -->
+    <!-- Pure JS Toast System - No Alpine conflicts -->
     <script>
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `px-4 py-3 rounded-xl shadow-lg border backdrop-blur-sm flex items-center gap-3 transform transition-all duration-300 translate-x-0 opacity-100 ${
+                type === 'success' ? 'bg-green-500/90 border-green-400' :
+                type === 'error' ? 'bg-red-500/90 border-red-400' :
+                'bg-blue-500/90 border-blue-400'
+            }`;
+            toast.style.animation = 'slideInRight 0.3s ease-out';
+
+            const icon = type === 'success'
+                ? '<svg class="w-5 h-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>'
+                : type === 'error'
+                ? '<svg class="w-5 h-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>'
+                : '<svg class="w-5 h-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+
+            toast.innerHTML = `
+                ${icon}
+                <span class="text-white text-sm font-medium">${message}</span>
+                <button onclick="this.parentElement.remove()" class="ml-auto text-white/70 hover:text-white flex-shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideOutRight 0.3s ease-in forwards';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
         document.addEventListener('livewire:init', () => {
             Livewire.on('notify', (message) => {
-                window.dispatchEvent(new CustomEvent('notify', {
-                    detail: typeof message === 'string' ? message : message[0]
-                }));
+                const msg = typeof message === 'string' ? message : (Array.isArray(message) ? message[0] : message);
+                showToast(msg, 'success');
             });
         });
     </script>

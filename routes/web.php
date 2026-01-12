@@ -3,17 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WordController;
-use Livewire\Livewire;
-
-// Livewire routes for subdirectory deployment
-
-Livewire::setScriptRoute(function($handle) {
-    return Route::get('/tiktokdictionary/livewire/livewire.js', $handle);
-});
-
-Livewire::setUpdateRoute(function($handle) {
-    return Route::post('/tiktokdictionary/livewire/update', $handle);
-});
 
 // Main Routes
 
@@ -44,11 +33,8 @@ Route::prefix('admin')->middleware(['auth', \App\Http\Middleware\IsAdmin::class]
     ...
     */
     
-    // Legacy Controller Routes (Keep until fully migrated)
-    Route::get('words/{word}/edit', [\App\Http\Controllers\AdminController::class, 'edit'])->name('admin.words.edit'); 
-    Route::put('words/{word}', [\App\Http\Controllers\AdminController::class, 'update'])->name('admin.words.update');
-    Route::delete('words/{word}', [\App\Http\Controllers\AdminController::class, 'destroy'])->name('admin.words.destroy');
-    Route::post('words/{word}/lore', [\App\Http\Controllers\AdminController::class, 'storeLore'])->name('admin.words.lore.store');
+    // Word Edit (Livewire Component)
+    Route::get('words/{word}/edit', \App\Livewire\Admin\Words\Edit::class)->name('admin.words.edit');
 });
 
 Route::get('/u/{username}', \App\Livewire\User\Profile::class)->name('user.profile');

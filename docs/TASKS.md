@@ -384,6 +384,15 @@ Allow users to report inappropriate content.
 
 ---
 
+### TASK-043: Flag Button (Report Functionality)
+```
+Status: DONE
+Priority: LOW
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
+```
+
 ### TASK-003: Create Activity Logs Table
 ```
 Status: DONE
