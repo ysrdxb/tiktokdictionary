@@ -1,17 +1,24 @@
-<div wire:poll.5s="poll" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none">
+<div wire:poll.2500ms="poll" class="fixed bottom-6 right-6 z-[100] flex flex-col-reverse gap-3 pointer-events-none">
     @foreach($notifications as $notification)
         <div wire:key="{{ $notification->id }}" 
-             x-data="{ show: true }"
+             x-data="{ 
+                show: true,
+                init() {
+                    setTimeout(() => {
+                        this.show = false;
+                        setTimeout(() => $wire.markAsRead('{{ $notification->id }}'), 300); 
+                    }, 4000);
+                }
+             }"
              x-show="show"
+             @mouseenter="show = true" 
              x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="translate-y-2 opacity-0 scale-95"
+             x-transition:enter-start="translate-y-full opacity-0 scale-95"
              x-transition:enter-end="translate-y-0 opacity-100 scale-100"
-             x-transition:leave="transition ease-in duration-200"
-             x-transition:leave-start="translate-y-0 opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-300"
+             x-transition:leave-start="translate-x-0 opacity-100 scale-100"
              x-transition:leave-end="translate-x-full opacity-0 scale-95"
-             class="pointer-events-auto bg-white dark:bg-[#002B5B] border border-slate-200 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl p-4 w-80 backdrop-blur-md relative overflow-hidden group">
-            
-            <!-- Progress Bar (Optional, simpler to just have close button for now) -->
+             class="pointer-events-auto bg-white dark:bg-[#002B5B] border border-slate-200 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl p-4 w-80 backdrop-blur-md relative overflow-hidden group cursor-pointer hover:shadow-xl transition-all">
             
             <div class="flex items-start gap-4">
                 <!-- Icon -->
@@ -21,15 +28,27 @@
 
                 <!-- Content -->
                 <div class="flex-1 min-w-0 pt-0.5">
-                    <p class="text-sm font-bold text-[#002B5B] dark:text-white mb-0.5">
+                    <p class="text-xs font-bold text-slate-400 dark:text-white/60 uppercase tracking-wider mb-1">
                         {{ $notification->data['title'] ?? 'Notification' }}
                     </p>
-                    <p class="text-xs text-slate-500 dark:text-white/60 leading-relaxed line-clamp-2">
-                        {{ $notification->data['message'] ?? '' }}
-                    </p>
+                    
+                    @if(isset($notification->data['word']))
+                        <div class="text-lg font-black text-[#002B5B] dark:text-white leading-none mb-1">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
+                                {{ $notification->data['word'] }}
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-white/60">
+                            has passed the vibe check.
+                        </p>
+                    @else
+                        <p class="text-sm font-bold text-[#002B5B] dark:text-white leading-snug">
+                            {{ $notification->data['message'] ?? '' }}
+                        </p>
+                    @endif
                 </div>
 
-                <!-- Close / Mark Read -->
+                <!-- Close Button -->
                 <button wire:click="markAsRead('{{ $notification->id }}')" 
                         @click="show = false"
                         class="flex-shrink-0 text-slate-400 hover:text-brand-primary dark:text-white/30 dark:hover:text-white transition-colors">

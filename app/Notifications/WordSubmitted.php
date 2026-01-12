@@ -42,8 +42,8 @@ class WordSubmitted extends Notification
         return [
             'word_id' => $this->word->id,
             'word' => $this->word->term,
-            'title' => 'Word Submitted!',
-            'message' => "Your word '{$this->word->term}' has been successfully submitted.",
+            'title' => 'New Word Submitted!',
+            'message' => "The word '{$this->word->term}' has just been added.",
             'icon' => '🚀',
         ];
     }

@@ -24,8 +24,12 @@ class RealTimeNotifications extends Component
     public function loadNotifications()
     {
         if (Auth::check()) {
-            // Get unread notifications
-            $this->notifications = Auth::user()->unreadNotifications->take(5);
+            // Get unread notifications from the last 24 hours only (Professional Catch-up)
+            $this->notifications = Auth::user()
+                ->unreadNotifications()
+                ->where('created_at', '>=', now()->subDay())
+                ->take(5)
+                ->get();
         } else {
             $this->notifications = collect([]);
         }
