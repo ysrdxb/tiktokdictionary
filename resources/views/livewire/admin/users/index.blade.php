@@ -1,11 +1,24 @@
 <div>
-    <h1 class="text-3xl font-bold mb-6">Users Manager</h1>
+    <!-- Page Header -->
+    <div class="flex items-center gap-4 mb-8">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        </div>
+        <div>
+            <h1 class="text-2xl md:text-3xl font-bold text-white">Users Manager</h1>
+            <p class="text-gray-400 text-sm">Manage user accounts, roles, and permissions</p>
+        </div>
+    </div>
 
+    <!-- Filters & Toolbar -->
     <div class="bg-[#001f42] p-4 rounded-t-xl border border-white/10 flex flex-col md:flex-row gap-4 justify-between items-center">
-         <input wire:model.live.debounce.300ms="search" type="text" placeholder="Search users..." 
-                   class="w-full md:w-96 pl-4 pr-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent">
-        
-         <select wire:model.live="filterRole" class="bg-black/20 border border-white/10 rounded-lg text-white text-sm px-3 py-2">
+        <div class="relative w-full md:w-96">
+            <input wire:model.live.debounce.300ms="search" type="text" placeholder="Search users..."
+                   class="w-full pl-10 pr-4 py-2.5 bg-black/20 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent transition-colors">
+            <svg class="w-5 h-5 text-gray-500 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+
+        <select wire:model.live="filterRole" class="bg-black/20 border border-white/10 rounded-lg text-white text-sm px-4 py-2.5 focus:outline-none focus:border-brand-accent transition-colors">
             <option value="all">All Roles</option>
             <option value="regular">Regular</option>
             <option value="admin">Admin</option>

@@ -2,7 +2,7 @@
 
 **Last Updated**: 2026-01-12
 **Purpose**: Central task management for multiple AI assistants
-**Total Tasks**: 38 | **Completed**: 0 | **In Progress**: 1 | **TODO**: 37
+**Total Tasks**: 39 | **Completed**: 27 | **In Progress**: 0 | **TODO**: 12
 
 > **AI ASSISTANTS**: Read the STRICT RULES section below before starting ANY work!
 
@@ -73,32 +73,44 @@ If instructions are unclear:
 
 ## WHAT'S LEFT TO BUILD (SUMMARY)
 
-### CRITICAL - Must Complete First
-| Task | Feature | Why Critical |
-|------|---------|--------------|
-| TASK-006 | Domain Checker | **MONETIZATION** - This is how site makes money! |
-| TASK-001 | Categories Table | Currently hardcoded - needed for proper data |
-| TASK-005 | User Roles | No user management without this |
-| TASK-009 | Live View Counter | Client specifically requested "feels alive" |
+### COMPLETED (27 Tasks) - DO NOT REDO THESE!
+| Task | Feature | Status |
+|------|---------|--------|
+| TASK-001 to TASK-005 | Database Foundation | DONE - All tables exist |
+| TASK-006 | Domain Checker | DONE - GoDaddy affiliate working |
+| TASK-007 | RFCI Score Display | DONE - Badge component exists |
+| TASK-008 | Lore Timeline | DONE - Displayed on word page |
+| TASK-009 | Live View Counter | DONE - Basic version |
+| TASK-010 | Report/Flag Button | DONE - ReportModal working |
+| TASK-011 | Sticker Generator | DONE - Share component exists |
+| TASK-012 to TASK-016 | Admin Panel | DONE - Modern UI with toast notifications, collapsible sidebar |
+| TASK-018 | AI Summary | DONE - OpenAI integration |
+| TASK-019 | Vertical Feed | DONE - TikTok scroll working |
+| TASK-021 | Investor Dashboard | DONE - Component exists |
+| TASK-022 | Puter.js Audio | DONE - Listen button working |
+| TASK-024 | Search-to-Submit | DONE - Inline form exists |
 
-### HIGH PRIORITY - Core Features
-| Task | Feature | Missing From README |
-|------|---------|---------------------|
-| TASK-007 | RFCI Score Display | Line 117 - required field |
-| TASK-008 | Lore Timeline | Line 176-183 - unconventional feature |
-| TASK-022 | Puter.js Audio | Line 320-380 - NEW FEATURE |
-| TASK-024 | Search-to-Submit | Line 262-263 - frictionless UX |
-| TASK-018 | AI Summary | Line 119 - OpenAI powered |
-
-### ADMIN PANEL - Currently Broken
-| Task | Feature | Current State |
-|------|---------|---------------|
-| TASK-012 | Dashboard | Only basic stats, no charts |
-| TASK-013 | Words Table | No search, no bulk actions |
-| TASK-014 | Users Table | DOESN'T EXIST |
-| TASK-015 | Categories | HARDCODED in blade files! |
-| TASK-016 | Settings | DOESN'T EXIST |
-| TASK-017 | Moderation Queue | DOESN'T EXIST |
+### REMAINING TASKS (12 TODO)
+| Task | Feature | Priority |
+|------|---------|----------|
+| TASK-017 | Moderation Queue | HIGH - Needs dedicated queue view |
+| TASK-020 | Vibe-Check Search | MEDIUM - Partial (vibes in search) |
+| TASK-023 | Download Sound Bite | MEDIUM - Audio download feature |
+| TASK-025 | Hover Reveal Interactions | LOW |
+| TASK-026 | Dark Mode Toggle | MEDIUM - Toggle hidden, needs UI button |
+| TASK-027 | Word of the Day | MEDIUM |
+| TASK-028 | Rising Stars | MEDIUM |
+| TASK-029 | Definition Battle | LOW |
+| TASK-030 | User Badges | LOW |
+| TASK-031 | Skeleton Loading | HIGH - Better UX |
+| TASK-032 | Celebration Animations | LOW |
+| TASK-033 | Keyboard Shortcuts | LOW |
+| TASK-034 | Mobile Swipe Gestures | MEDIUM |
+| TASK-035 | Empty States | MEDIUM |
+| TASK-036 | Animated Counters | HIGH - Count up effect |
+| TASK-037 | Card Animations | MEDIUM |
+| TASK-038 | Input Animations | MEDIUM |
+| TASK-039 | Live Notifications | HIGH - Freelancer-style toasts |
 
 ---
 
@@ -1099,11 +1111,11 @@ Generate shareable image of word definition.
 
 ### TASK-012: Admin Dashboard Component
 ```
-Status: TODO
+Status: DONE
 Priority: CRITICAL
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 Depends On: TASK-001, TASK-002, TASK-003
 ```
 
@@ -1112,15 +1124,24 @@ Main admin dashboard with stats and activity feed.
 
 [Detailed specs in Section 4 of claude_architect.md]
 
+**Implementation Notes (2026-01-12):**
+- Dashboard with stat cards (gradient backgrounds, hover effects)
+- Recent submissions table with status badges
+- Quick actions panel with links to all admin sections
+- Site status indicators (Database, Cache, Queue)
+- Toast notification system integrated
+- Collapsible sidebar with mobile overlay
+- Modern dark theme with consistent styling
+
 ---
 
 ### TASK-013: Admin Words Table Component
 ```
-Status: TODO
+Status: DONE
 Priority: CRITICAL
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 ```
 
 **What To Build:**
@@ -1128,15 +1149,23 @@ Searchable, sortable words table with bulk actions.
 
 [Detailed specs in Section 4 of claude_architect.md]
 
+**Implementation Notes (2026-01-12):**
+- Full CRUD with search & filter by status
+- Bulk actions (verify, delete)
+- Toggle verification and polar trend status
+- Sortable columns (term, category, views, viral score)
+- Consistent header with gradient icon
+- Toast notifications on actions
+
 ---
 
 ### TASK-014: Admin Users Table Component
 ```
-Status: TODO
+Status: DONE
 Priority: CRITICAL
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 Depends On: TASK-005
 ```
 
@@ -1145,15 +1174,22 @@ User management with roles and ban functionality.
 
 [Detailed specs in Section 4 of claude_architect.md]
 
+**Implementation Notes (2026-01-12):**
+- User listing with search and role filter
+- Role management (admin/moderator/regular)
+- Ban/unban functionality
+- Role badges with color coding
+- Consistent header with gradient icon
+
 ---
 
 ### TASK-015: Admin Categories Manager
 ```
-Status: TODO
+Status: DONE
 Priority: HIGH
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 Depends On: TASK-001
 ```
 
@@ -1162,15 +1198,22 @@ CRUD interface for categories.
 
 [Detailed specs in Section 4 of claude_architect.md]
 
+**Implementation Notes (2026-01-12):**
+- Create/Edit/Delete categories
+- Color picker with hex input
+- Optional icon field
+- Table with color preview
+- Consistent header with gradient icon
+
 ---
 
 ### TASK-016: Admin Settings Page
 ```
-Status: TODO
+Status: DONE
 Priority: HIGH
-Claimed By: -
-Started: -
-Completed: -
+Claimed By: Claude AI
+Started: 2026-01-12
+Completed: 2026-01-12
 Depends On: TASK-004
 ```
 
@@ -1178,6 +1221,13 @@ Depends On: TASK-004
 Site settings management interface.
 
 [Detailed specs in Section 4 of claude_architect.md]
+
+**Implementation Notes (2026-01-12):**
+- Tabbed interface (General, Moderation, API Keys)
+- Site name, tagline configuration
+- Maintenance mode toggle
+- Allow submissions toggle
+- Consistent header with gradient icon
 
 ---
 
@@ -1679,6 +1729,36 @@ Vote buttons and domain availability hidden by default, revealed on hover.
 - [ ] Smooth reveal on hover
 - [ ] Always visible on mobile
 - [ ] Domain check hidden until hover
+
+---
+
+### TASK-042: Dark Mode Polish
+```
+Status: TODO
+Priority: LOW
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Refine dark mode styling, ensure all components look good, and address any contrast or visibility issues.
+
+**Step-by-Step:**
+1. Review all existing components in dark mode.
+2. Adjust `dark:` classes for better contrast and aesthetics.
+3. Ensure SVGs and icons have appropriate dark mode colors.
+4. Test on various screen sizes and devices.
+
+**Files To Create/Modify:**
+- Multiple blade files (MODIFY - adjust dark: classes)
+- `tailwind.config.js` (MODIFY - if new colors/shades are needed)
+
+**Acceptance Criteria:**
+- [ ] All components are visually appealing in dark mode
+- [ ] No unreadable text or invisible elements
+- [ ] Consistent dark mode aesthetic across the app
+- [ ] Icons and SVGs adapt correctly
 
 ---
 
@@ -3053,6 +3133,15 @@ Started: 2026-01-12
 Completed: 2026-01-12
 ```
 
+### TASK-042: Dark Mode Polish
+```
+Status: TODO
+Priority: LOW
+Claimed By: -
+Started: -
+Completed: -
+```
+
 **What To Build:**
 Ensure all forms (Submit Word, Add Definition) are usable on mobile devices.
 
@@ -3070,26 +3159,315 @@ Ensure all forms (Submit Word, Add Definition) are usable on mobile devices.
 
 ---
 
+### TASK-043: Live Notifications (Freelancer-Style Real-Time Toasts)
+```
+Status: TODO
+Priority: HIGH
+Claimed By: -
+Started: -
+Completed: -
+```
+
+**What To Build:**
+Real-time toast notifications that appear site-wide when someone submits a new word, like Freelancer.com shows "New project posted" notifications. Creates social proof and engagement.
+
+**Step-by-Step:**
+1. Install Laravel Echo and Pusher (or use Reverb for self-hosted):
+   ```bash
+   composer require pusher/pusher-php-server
+   npm install --save-dev laravel-echo pusher-js
+   ```
+
+2. Configure `.env`:
+   ```env
+   BROADCAST_DRIVER=pusher
+   PUSHER_APP_ID=your-app-id
+   PUSHER_APP_KEY=your-app-key
+   PUSHER_APP_SECRET=your-secret
+   PUSHER_APP_CLUSTER=mt1
+   ```
+
+3. Create Event `app/Events/NewWordSubmitted.php`:
+   ```php
+   <?php
+   namespace App\Events;
+
+   use Illuminate\Broadcasting\Channel;
+   use Illuminate\Broadcasting\InteractsWithSockets;
+   use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+   use Illuminate\Foundation\Events\Dispatchable;
+   use App\Models\Word;
+
+   class NewWordSubmitted implements ShouldBroadcast
+   {
+       use Dispatchable, InteractsWithSockets;
+
+       public $word;
+       public $username;
+
+       public function __construct(Word $word, string $username)
+       {
+           $this->word = [
+               'id' => $word->id,
+               'term' => $word->term,
+               'slug' => $word->slug,
+               'category' => $word->category,
+           ];
+           $this->username = $username;
+       }
+
+       public function broadcastOn()
+       {
+           return new Channel('live-activity');
+       }
+
+       public function broadcastAs()
+       {
+           return 'word.submitted';
+       }
+   }
+   ```
+
+4. Create Event `app/Events/NewVoteCast.php`:
+   ```php
+   <?php
+   namespace App\Events;
+
+   use Illuminate\Broadcasting\Channel;
+   use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+
+   class NewVoteCast implements ShouldBroadcast
+   {
+       public $wordTerm;
+       public $voteType; // 'agree' or 'disagree'
+       public $newCount;
+
+       public function __construct(string $wordTerm, string $voteType, int $newCount)
+       {
+           $this->wordTerm = $wordTerm;
+           $this->voteType = $voteType;
+           $this->newCount = $newCount;
+       }
+
+       public function broadcastOn()
+       {
+           return new Channel('live-activity');
+       }
+
+       public function broadcastAs()
+       {
+           return 'vote.cast';
+       }
+   }
+   ```
+
+5. Dispatch events in `app/Livewire/SubmitWordForm.php`:
+   ```php
+   use App\Events\NewWordSubmitted;
+
+   // After word is created successfully:
+   event(new NewWordSubmitted($word, auth()->user()->username ?? 'Anonymous'));
+   ```
+
+6. Create Alpine.js toast manager `resources/js/live-notifications.js`:
+   ```javascript
+   import Echo from 'laravel-echo';
+   import Pusher from 'pusher-js';
+
+   window.Pusher = Pusher;
+
+   window.Echo = new Echo({
+       broadcaster: 'pusher',
+       key: import.meta.env.VITE_PUSHER_APP_KEY,
+       cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+       forceTLS: true
+   });
+
+   document.addEventListener('alpine:init', () => {
+       Alpine.store('notifications', {
+           items: [],
+
+           add(notification) {
+               const id = Date.now();
+               this.items.push({ id, ...notification });
+
+               // Auto-remove after 5 seconds
+               setTimeout(() => {
+                   this.remove(id);
+               }, 5000);
+           },
+
+           remove(id) {
+               this.items = this.items.filter(n => n.id !== id);
+           }
+       });
+
+       // Listen for events
+       window.Echo.channel('live-activity')
+           .listen('.word.submitted', (e) => {
+               Alpine.store('notifications').add({
+                   type: 'word',
+                   title: 'New Word Added!',
+                   message: `"${e.word.term}" was just submitted by ${e.username}`,
+                   link: `/word/${e.word.slug}`,
+                   icon: '📝'
+               });
+           })
+           .listen('.vote.cast', (e) => {
+               Alpine.store('notifications').add({
+                   type: 'vote',
+                   title: e.voteType === 'agree' ? 'Facts!' : 'Cap!',
+                   message: `Someone voted on "${e.wordTerm}"`,
+                   icon: e.voteType === 'agree' ? '👍' : '👎'
+               });
+           });
+   });
+   ```
+
+7. Create toast component `resources/views/components/ui/live-notifications.blade.php`:
+   ```blade
+   <div
+       x-data
+       class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm"
+   >
+       <template x-for="notification in $store.notifications.items" :key="notification.id">
+           <div
+               x-show="true"
+               x-transition:enter="transform ease-out duration-300"
+               x-transition:enter-start="translate-x-full opacity-0"
+               x-transition:enter-end="translate-x-0 opacity-100"
+               x-transition:leave="transform ease-in duration-200"
+               x-transition:leave-start="translate-x-0 opacity-100"
+               x-transition:leave-end="translate-x-full opacity-0"
+               class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-4 flex items-start gap-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition"
+               @click="notification.link ? window.location.href = notification.link : null"
+           >
+               <span class="text-2xl" x-text="notification.icon"></span>
+               <div class="flex-1 min-w-0">
+                   <p class="font-bold text-sm text-[#002B5B] dark:text-white" x-text="notification.title"></p>
+                   <p class="text-xs text-slate-600 dark:text-slate-400 truncate" x-text="notification.message"></p>
+               </div>
+               <button
+                   @click.stop="$store.notifications.remove(notification.id)"
+                   class="text-slate-400 hover:text-slate-600 dark:hover:text-white"
+               >
+                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                   </svg>
+               </button>
+           </div>
+       </template>
+   </div>
+   ```
+
+8. Include in app layout `resources/views/components/layouts/app.blade.php`:
+   ```blade
+   <!-- Before </body> -->
+   <x-ui.live-notifications />
+   ```
+
+**Alternative: Without Pusher (Polling-Based)**
+If you don't want to use Pusher, implement with Livewire polling:
+
+1. Create Livewire component `app/Livewire/LiveActivityFeed.php`:
+   ```php
+   <?php
+   namespace App\Livewire;
+
+   use Livewire\Component;
+   use App\Models\Word;
+   use Illuminate\Support\Facades\Cache;
+
+   class LiveActivityFeed extends Component
+   {
+       public $lastChecked;
+       public $notifications = [];
+
+       public function mount()
+       {
+           $this->lastChecked = now();
+       }
+
+       public function checkForUpdates()
+       {
+           $newWords = Word::where('created_at', '>', $this->lastChecked)
+               ->latest()
+               ->take(3)
+               ->get();
+
+           foreach ($newWords as $word) {
+               $this->dispatch('show-notification', [
+                   'title' => 'New Word Added!',
+                   'message' => "\"{$word->term}\" was just submitted",
+                   'link' => route('word.show', $word->slug),
+                   'icon' => '📝'
+               ]);
+           }
+
+           $this->lastChecked = now();
+       }
+
+       public function render()
+       {
+           return view('livewire.live-activity-feed');
+       }
+   }
+   ```
+
+2. View with polling `resources/views/livewire/live-activity-feed.blade.php`:
+   ```blade
+   <div wire:poll.10s="checkForUpdates">
+       <!-- Empty - just for polling -->
+   </div>
+   ```
+
+**Files To Create/Modify:**
+- `app/Events/NewWordSubmitted.php` (CREATE)
+- `app/Events/NewVoteCast.php` (CREATE)
+- `resources/js/live-notifications.js` (CREATE)
+- `resources/views/components/ui/live-notifications.blade.php` (CREATE)
+- `resources/views/components/layouts/app.blade.php` (MODIFY)
+- `app/Livewire/SubmitWordForm.php` (MODIFY - dispatch event)
+- `app/Livewire/VotingCounter.php` (MODIFY - dispatch event)
+- `config/broadcasting.php` (MODIFY)
+- `.env` (MODIFY - add Pusher keys)
+
+**Acceptance Criteria:**
+- [ ] Toast appears when new word submitted
+- [ ] Toast appears when vote cast (optional, can be noisy)
+- [ ] Toast slides in from right side
+- [ ] Auto-dismisses after 5 seconds
+- [ ] Click toast to navigate to word
+- [ ] X button to manually dismiss
+- [ ] Works on all pages
+- [ ] Dark mode compatible
+- [ ] Mobile responsive (bottom of screen)
+
+---
+
 ## QUICK REFERENCE
 
-### Total Tasks: 41
+### Total Tasks: 43
 
 | Phase | Tasks | Status |
 |-------|-------|--------|
 | Phase 1: Database | TASK-001 to TASK-005 | 5/5 Done |
-| Phase 2: Frontend | TASK-006 to TASK-011 | 4/6 Done |
-| Phase 3: Admin | TASK-012 to TASK-017 | 0/6 Done |
-| Phase 4: Advanced | TASK-018 to TASK-026 | 0/9 Done |
-| Phase 5: Creative/UX | TASK-027 to TASK-041 | 1/15 Done |
+| Phase 2: Frontend | TASK-006 to TASK-011 | 6/6 Done |
+| Phase 3: Admin | TASK-012 to TASK-017 | 5/6 Done |
+| Phase 4: Advanced | TASK-018 to TASK-026 | 7/9 Done |
+| Phase 5: Creative/UX | TASK-027 to TASK-043 | 4/17 Done |
 
 ### Next Available Tasks (TODO) - No Dependencies:
 | Task | Name | Priority |
 |------|------|----------|
-| TASK-010 | Report/Flag Button | HIGH |
-| TASK-011 | Slang Sticker Generator | MEDIUM |
-| TASK-039 | Mobile Resp. Navigation | HIGH |
-| TASK-040 | Responsive Layouts | HIGH |
-| TASK-041 | Responsive Forms | MEDIUM |
+| TASK-017 | Moderation Queue | HIGH |
+| TASK-020 | Vibe-Check Search Page | MEDIUM |
+| TASK-023 | Download Sound Bite | MEDIUM |
+| TASK-026 | Dark Mode Toggle Button | MEDIUM |
+| TASK-027 | Word of the Day | MEDIUM |
+| TASK-031 | Skeleton Loading States | HIGH |
+| TASK-036 | Animated Number Counters | HIGH |
+| TASK-043 | Live Notifications (Freelancer-style) | HIGH |
 
 ### UX Enhancements (AI Recommended)
 - [ ] Skeleton Loading States (TASK-031)
@@ -3207,6 +3585,7 @@ Ensure all forms (Submit Word, Add Definition) are usable on mobile devices.
 
 | Date | Task | Action | By |
 |------|------|--------|-----|
+| 2026-01-12 | TASK-012 to TASK-016 | Admin panel UI/UX improvements - modern styling, toast notifications, consistent headers | Claude Opus 4.5 |
 | 2026-01-12 | TASK-036 to TASK-038 | Added animation tasks (counters, cards, inputs) | Claude Architect |
 | 2026-01-12 | TASK-027 to TASK-035 | Added creative features & UX tasks | Claude Architect |
 | 2026-01-12 | ALL | Added strict AI rules, updated summary | Claude Architect |
@@ -3216,4 +3595,4 @@ Ensure all forms (Submit Word, Add Definition) are usable on mobile devices.
 ---
 
 *Last Updated: 2026-01-12*
-*Total Tasks: 38 | Completed: 0 | In Progress: 1 | TODO: 37*
+*Total Tasks: 39 | Completed: 27 | In Progress: 0 | TODO: 12*

@@ -1,11 +1,18 @@
 <div>
-    <div class="flex justify-between items-center mb-6">
-        <div>
-            <h1 class="text-3xl font-bold mb-2">Words Manager</h1>
-            <p class="text-gray-400">Review content, manage trends, and verify submissions.</p>
+    <!-- Page Header -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+            </div>
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold text-white">Words Manager</h1>
+                <p class="text-gray-400 text-sm">Review content, manage trends, and verify submissions</p>
+            </div>
         </div>
-        <a href="{{ route('word.create') }}" target="_blank" class="px-4 py-2 bg-brand-primary text-white font-bold rounded-lg hover:bg-brand-primary/90 transition-colors">
-            + New Word
+        <a href="{{ route('word.create') }}" target="_blank" class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-primary to-pink-600 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-brand-primary/30 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            New Word
         </a>
     </div>
 

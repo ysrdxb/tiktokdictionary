@@ -121,12 +121,12 @@
             </div>
         </div>
 
-        <!-- Footer / Dark Mode -->
+        <!-- Footer / Dark Mode (Hidden for now) -->
+        <!--
         <div class="p-6 border-t border-slate-100 dark:border-white/10 bg-slate-50 dark:bg-black/20">
             <div class="flex items-center justify-between">
                 <span class="text-sm font-bold text-slate-500 dark:text-white/60">Appearance</span>
                 
-                <!-- Dark Mode Toggle (Mobile) -->
                 <button 
                     x-data="{ 
                         isDark: localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -158,5 +158,6 @@
                 </button>
             </div>
         </div>
+        -->
     </div>
 </div>

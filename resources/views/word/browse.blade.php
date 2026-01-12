@@ -4,7 +4,7 @@
     </x-slot>
 
     <!-- Page Title -->
-    <section class="pt-12 pb-8 text-center bg-slate-50 dark:bg-transparent transition-colors duration-300">
+    <section class="pt-12 pb-8 px-6 text-center bg-slate-50 dark:bg-transparent transition-colors duration-300">
         <h1 class="text-4xl md:text-6xl font-black text-[#002B5B] dark:text-white tracking-tight leading-none mb-4 drop-shadow-2xl">
             Discover <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-brand-accent">New Words</span>
         </h1>
@@ -15,7 +15,7 @@
 
     <!-- Filters + Trending Words -->
     <div class="py-10 bg-slate-50 dark:bg-transparent transition-colors duration-300">
-        <div class="max-w-[1240px] mx-auto">
+        <div class="max-w-[1240px] mx-auto px-6">
             <!-- Sort & Filter Row -->
             <form method="GET" action="{{ route('word.browse') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                 <!-- Sort By Box -->
