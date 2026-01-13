@@ -1,3 +1,4 @@
+@if($isEnabled)
 <div class="bg-[#002B5B] rounded-2xl p-6 text-white border border-[#2B5F8C] relative overflow-hidden group">
     <!-- Background Accents -->
     <div class="absolute top-0 right-0 w-32 h-32 bg-[#0F62FE]/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
@@ -46,3 +47,4 @@
         @endif
     </div>
 </div>
+@endif

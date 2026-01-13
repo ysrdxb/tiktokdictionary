@@ -14,7 +14,28 @@
     <!-- Form Section -->
     <div class="w-full bg-white dark:bg-transparent py-12 transition-colors duration-300">
         <div class="max-w-[900px] mx-auto px-6">
-            
+
+            @if($disabledReason)
+                <!-- Disabled State -->
+                <div class="bg-white dark:bg-[#00152e]/50 dark:backdrop-blur-xl border border-[#002B5B]/10 dark:border-white/10 rounded-[32px] p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.05)] dark:shadow-[0_0_50px_rgba(0,0,0,0.2)] text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-slate-100 dark:bg-white/10 flex items-center justify-center">
+                        <svg class="w-10 h-10 text-slate-400 dark:text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-[#002B5B] dark:text-white mb-3">{{ $disabledReason }}</h2>
+                    <p class="text-[#002B5B]/60 dark:text-white/60 mb-6">Check back later or browse existing words.</p>
+                    @if($requireLogin && !auth()->check())
+                        <a href="{{ route('login') }}" class="inline-block px-8 py-3 bg-[#002B5B] dark:bg-brand-accent text-white dark:text-[#002B5B] font-bold rounded-full hover:opacity-90 transition-opacity">
+                            Log In to Submit
+                        </a>
+                    @else
+                        <a href="{{ route('word.browse') }}" class="inline-block px-8 py-3 bg-[#002B5B] dark:bg-brand-accent text-white dark:text-[#002B5B] font-bold rounded-full hover:opacity-90 transition-opacity">
+                            Browse Words
+                        </a>
+                    @endif
+                </div>
+            @else
             <div class="bg-white dark:bg-[#00152e]/50 dark:backdrop-blur-xl border border-[#002B5B]/10 dark:border-white/10 rounded-[32px] p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.05)] dark:shadow-[0_0_50px_rgba(0,0,0,0.2)]">
                 <form wire:submit="submit" class="space-y-8">
                     <!-- Row 1: Word + Definition -->
@@ -110,9 +131,10 @@
                     </div>
                 </form>
             </div>
+            @endif
         </div>
     </div>
-    
+
     <!-- Modal 1: Similar Word Warning -->
     @if($showSimilarModal)
         <div class="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-black/80 backdrop-blur-md">

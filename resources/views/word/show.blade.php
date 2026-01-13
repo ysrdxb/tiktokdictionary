@@ -176,6 +176,7 @@
     </section>
 
     <!-- Section 6: Investor Block (Domain Check) -->
+    @if(\App\Models\Setting::get('domain_checker_enabled', 'true') === 'true')
     <section class="w-full bg-[#002B5B] py-10 text-white relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent/20 blur-[80px] rounded-full pointer-events-none"></div>
         <div class="max-w-[1240px] mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -188,6 +189,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     <!-- Section 7: Lore Timeline -->
     <section class="w-full bg-white dark:bg-[#00152e]/40 py-10 transition-colors duration-300">

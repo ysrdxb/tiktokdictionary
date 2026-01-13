@@ -14,11 +14,13 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\IsAdmin::class,
             'checkBanned' => \App\Http\Middleware\CheckBanned::class,
+            'maintenance' => \App\Http\Middleware\CheckMaintenanceMode::class,
         ]);
-        
-        // Append CheckBanned to web middleware group
+
+        // Append middleware to web group
         $middleware->appendToGroup('web', [
             \App\Http\Middleware\CheckBanned::class,
+            \App\Http\Middleware\CheckMaintenanceMode::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -21,7 +21,7 @@ class Login extends Component
 
         if (Auth::attempt(['username' => $this->username, 'password' => $this->password], $this->remember)) {
             session()->regenerate();
-            return $this->redirectIntended(route('home'), navigate: true);
+            return $this->redirectIntended(route('home'), navigate: false);
         }
 
         throw ValidationException::withMessages([

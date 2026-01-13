@@ -5,7 +5,9 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Word;
 use App\Models\Definition;
+use App\Models\Setting;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class SubmitWordForm extends Component
 {
@@ -18,15 +20,31 @@ class SubmitWordForm extends Component
     public $category = 'Slang';
     public $alternateSpellings = '';
     public $hashtags = '';
-    
+
+    // Settings-based flags
+    public $submissionsEnabled = true;
+    public $requireLogin = false;
+    public $disabledReason = '';
+
     // Duplicate check
     public $showExactDuplicateModal = false;
     public $showSimilarModal = false; // "Looks like this word already exists" modal (Image 3)
-    
+
     public function mount()
     {
-        if (\Illuminate\Support\Facades\Auth::check()) {
-            $this->submittedBy = \Illuminate\Support\Facades\Auth::user()->username;
+        // Load settings
+        $this->submissionsEnabled = Setting::get('allow_submissions', 'true') === 'true';
+        $this->requireLogin = Setting::get('require_login_to_submit', 'false') === 'true';
+
+        // Set disabled reason if applicable
+        if (!$this->submissionsEnabled) {
+            $this->disabledReason = 'Word submissions are currently disabled.';
+        } elseif ($this->requireLogin && !Auth::check()) {
+            $this->disabledReason = 'Please log in to submit new words.';
+        }
+
+        if (Auth::check()) {
+            $this->submittedBy = Auth::user()->username;
         }
     }
     
@@ -116,6 +134,18 @@ class SubmitWordForm extends Component
 
     public function submit()
     {
+        // Check if submissions are enabled
+        if (!$this->submissionsEnabled) {
+            $this->addError('term', 'Word submissions are currently disabled.');
+            return;
+        }
+
+        // Check if login is required
+        if ($this->requireLogin && !Auth::check()) {
+            $this->addError('term', 'Please log in to submit new words.');
+            return;
+        }
+
         $this->validate();
 
         // Create or find the word
@@ -127,22 +157,32 @@ class SubmitWordForm extends Component
             ]
         );
 
+        // Determine username
+        $username = $this->submittedBy ?: 'Anonymous';
+        if (Auth::check() && empty($this->submittedBy)) {
+            $username = '@' . Auth::user()->username;
+        }
+
+        // Check if auto-approve is enabled
+        $autoApprove = Setting::get('auto_approve_definitions', 'false') === 'true';
+
         // Create the definition
         Definition::create([
             'word_id' => $word->id,
             'definition' => $this->definition,
             'example' => $this->example,
-            'submitted_by' => $this->submittedBy ?: 'Anonymous',
+            'submitted_by' => $username,
             'source_url' => $this->sourceUrl ?: null,
             'agrees' => 0,
             'disagrees' => 0,
+            'is_approved' => $autoApprove,
         ]);
-        
+
         $word->recalculateStats();
 
         // Reset form
         $this->reset(['term', 'definition', 'example', 'submittedBy', 'sourceUrl', 'alternateSpellings', 'hashtags']);
-        
+
         // Show Success Modal
         $this->showSuccessModal = true;
     }

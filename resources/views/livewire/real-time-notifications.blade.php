@@ -1,4 +1,4 @@
-<div wire:poll.2500ms="poll" class="fixed bottom-6 right-6 z-[100] flex flex-col-reverse gap-3 pointer-events-none">
+<div wire:poll.12s="poll" class="fixed bottom-6 right-6 z-[100] flex flex-col-reverse gap-3 pointer-events-none">
     @foreach($notifications as $notification)
         <div wire:key="{{ $notification['id'] }}" 
              x-data="{ 

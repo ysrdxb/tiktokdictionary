@@ -28,7 +28,7 @@ class Register extends Component
 
         Auth::login($user);
 
-        return $this->redirect(route('home'), navigate: true);
+        return $this->redirect(route('home'), navigate: false);
     }
 
     public function render()

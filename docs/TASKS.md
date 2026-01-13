@@ -3102,6 +3102,20 @@ Fully responsive navigation bar with hamburger menu for mobile devices.
    - Hide desktop nav on mobile (`hidden md:flex`)
    - Show hamburger button on mobile (`block md:hidden`)
    - Include mobile menu component
+
+### TASK-042: Dark Mode Polish
+```
+Status: IN_PROGRESS
+Priority: MEDIUM
+Claimed By: Claude AI
+Started: 2026-01-13
+Completed: -
+```
+**Acceptance Criteria:**
+- [ ] Dark Mode Toggle visible and working on Desktop
+- [ ] Dark Mode Toggle visible and working on Mobile
+- [ ] Verify global colors in Dark Mode
+- [ ] Verify text contrast in Dark Mode
 ### TASK-045: Live Notifications
 ```
 Status: DONE

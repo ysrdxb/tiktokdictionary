@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Definition;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Cookie;
 
 class VotingCounter extends Component
@@ -12,13 +13,17 @@ class VotingCounter extends Component
     public $agrees;
     public $disagrees;
     public $userVote = null; // 'agree', 'disagree', or null
+    public $votingEnabled = true;
 
     public function mount($definitionId, $agrees, $disagrees)
     {
         $this->definitionId = $definitionId;
         $this->agrees = $agrees;
         $this->disagrees = $disagrees;
-        
+
+        // Check if voting is enabled globally
+        $this->votingEnabled = Setting::get('allow_voting', 'true') === 'true';
+
         // Check if user has already voted
         $cookieName = 'vote_' . $this->definitionId;
         $this->userVote = Cookie::get($cookieName);
@@ -26,8 +31,13 @@ class VotingCounter extends Component
 
     public function vote($type)
     {
+        // Check if voting is enabled
+        if (!$this->votingEnabled) {
+            return;
+        }
+
         $definition = Definition::find($this->definitionId);
-        
+
         if (!$definition) {
             return;
         }

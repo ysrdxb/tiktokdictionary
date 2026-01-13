@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+@php
+    $siteName = \App\Models\Setting::get('site_name', 'TikTokDictionary');
+    $siteTagline = \App\Models\Setting::get('tagline', 'The Viral Vernacular');
+@endphp
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'TikTokDictionary - The Internet Slang Dictionary' }}</title>
+    <title>{{ $title ?? $siteName . ' - ' . $siteTagline }}</title>
     
     <!-- Fonts -->
     <!-- Local Fonts Only -->
@@ -126,8 +130,7 @@
                     <a href="{{ route('word.browse') }}" class="text-sm font-bold text-slate-600 dark:text-white/80 hover:text-brand-primary dark:hover:text-white transition-colors">Browse</a>
                     <a href="{{ route('word.create') }}" class="text-sm font-bold text-slate-600 dark:text-white/80 hover:text-brand-primary dark:hover:text-white transition-colors">Submit</a>
                     
-                    <!-- Dark Mode Toggle (Hidden for now) -->
-                    <!-- 
+                    <!-- Dark Mode Toggle -->
                     <button x-data="{ 
                                 isDark: localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
                             }" 
@@ -146,8 +149,7 @@
                         <svg x-show="isDark" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                         
                         <svg x-show="!isDark" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    </button> 
-                    -->
+                    </button>
                 </div>
                 
                 @auth
@@ -190,7 +192,7 @@
                 <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                     <div class="flex items-center gap-2">
                         <span class="text-2xl">📚</span>
-                        <span class="text-xl font-black text-[#002B5B] dark:text-white tracking-tight">TikTokDictionary</span>
+                        <span class="text-xl font-black text-[#002B5B] dark:text-white tracking-tight">{{ $siteName }}</span>
                     </div>
                     <div class="flex gap-6 text-sm font-bold text-slate-600 dark:text-white/60">
                         <a href="{{ route('word.create') }}" class="hover:text-brand-primary dark:hover:text-white transition-colors">Submit Word</a>
