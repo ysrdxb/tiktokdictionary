@@ -57,6 +57,20 @@ class VotingCounter extends Component
             // User is removing their vote
             $this->userVote = null;
             $this->deleteVote($cookieName);
+            
+            // Remove from DB (Simplest logic: remove their most recent vote of this type)
+            // Ideally we'd match exact user/ip, but for now this suffices or we can add strict check
+            $query = \Illuminate\Support\Facades\DB::table('votes')
+                ->where('definition_id', $this->definitionId)
+                ->where('type', $type);
+                
+            if (\Illuminate\Support\Facades\Auth::check()) {
+                $query->where('user_id', \Illuminate\Support\Facades\Auth::id());
+            } else {
+                $query->where('ip_address', request()->ip());
+            }
+            $query->delete();
+
         } else {
             // User is voting or changing vote
             if ($type === 'agree') {
@@ -66,6 +80,16 @@ class VotingCounter extends Component
             }
             $this->userVote = $type;
             $this->persistVote($cookieName, $type);
+            
+            // Record to DB for Analytics
+            \Illuminate\Support\Facades\DB::table('votes')->insert([
+                'definition_id' => $this->definitionId,
+                'user_id' => \Illuminate\Support\Facades\Auth::id(),
+                'ip_address' => request()->ip(),
+                'type' => $type,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
 
         $definition->save();

@@ -3105,17 +3105,31 @@ Fully responsive navigation bar with hamburger menu for mobile devices.
 
 ### TASK-042: Dark Mode Polish
 ```
-Status: IN_PROGRESS
-Priority: MEDIUM
+Status: DONE
+Priority: HIGH
 Claimed By: Claude AI
 Started: 2026-01-13
-Completed: -
+Completed: 2026-01-13
 ```
 **Acceptance Criteria:**
-- [ ] Dark Mode Toggle visible and working on Desktop
-- [ ] Dark Mode Toggle visible and working on Mobile
-- [ ] Verify global colors in Dark Mode
-- [ ] Verify text contrast in Dark Mode
+- [x] Dark Mode Toggle visible and working on Desktop
+- [x] Dark Mode Toggle visible and working on Mobile
+- [x] Verify global colors in Dark Mode
+- [x] Verify text contrast in Dark Mode
+
+### TASK-046: Admin Dashboard Repair
+```
+Status: DONE
+Priority: HIGH
+Claimed By: Claude AI
+Started: 2026-01-13
+Completed: 2026-01-13
+```
+**Acceptance Criteria:**
+- [x] Fix `votes` table error (Migration + Logic)
+- [x] Fix `reports` table error (Point to `flags`)
+- [x] Fix `admin.moderation` route error
+- [x] Verify all Admin Dashboard widgets load correctly
 ### TASK-045: Live Notifications
 ```
 Status: DONE
@@ -3131,7 +3145,20 @@ Completed: 2026-01-13
 - [ ] No horizontal scroll when menu open
 
 ---
-
+### TASK-049: Admin Moderation Queue
+```
+Status: DONE
+Priority: HIGH
+Claimed By: Claude AI
+Started: 2026-01-13
+Completed: 2026-01-13
+```
+**Acceptance Criteria:**
+- [x] View list of Pending Words (is_verified = 0)
+- [x] View list of Pending Definitions (is_approved = 0)
+- [x] Approve items (Update DB)
+- [x] Reject items (Delete from DB)
+- [x] Tabbed interface for easy switching
 ### TASK-040: Responsive Layouts (Homepage & Detail)
 ```
 Status: DONE

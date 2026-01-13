@@ -27,6 +27,10 @@ Route::prefix('admin')->middleware(['auth', \App\Http\Middleware\IsAdmin::class]
     Route::get('categories', \App\Livewire\Admin\Categories\Index::class)->name('admin.categories'); // Placeholder
     Route::get('settings', \App\Livewire\Admin\Settings\Index::class)->name('admin.settings'); // Placeholder
 
+    // Moderation
+    Route::get('moderation', \App\Livewire\Admin\Moderation\Index::class)->name('admin.moderation');
+    Route::get('reports', \App\Livewire\Admin\Reports\Index::class)->name('admin.reports');
+
     /* 
     // OLD ROUTES (Migrating)
     Route::get('words', \App\Livewire\Admin\Words\Index::class)->name('admin.words.index');

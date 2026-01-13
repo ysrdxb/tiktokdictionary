@@ -100,17 +100,17 @@
 
     <!-- Word of the Day (Architect Request) -->
     @if($wordOfTheDay)
-        <section class="bg-brand-panel border-b border-brand-border/50 py-8">
+        <section class="bg-brand-panel dark:bg-[#001a3a]/30 border-b border-brand-border/50 dark:border-white/10 py-8 transition-colors duration-300">
             <div class="max-w-[1240px] mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-6 text-center md:text-left">
                 <div class="flex items-center gap-3">
                     <span class="bg-brand-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">Word of the Day</span>
-                    <h2 class="text-2xl font-black text-brand-dark">{{ $wordOfTheDay->term }}</h2>
+                    <h2 class="text-2xl font-black text-brand-dark dark:text-white">{{ $wordOfTheDay->term }}</h2>
                 </div>
-                <div class="hidden md:block h-8 w-px bg-brand-border/20"></div>
-                <p class="text-brand-dark/80 font-medium max-w-xl text-sm md:text-base line-clamp-1">
+                <div class="hidden md:block h-8 w-px bg-brand-border/20 dark:bg-white/10"></div>
+                <p class="text-brand-dark/80 dark:text-white/70 font-medium max-w-xl text-sm md:text-base line-clamp-1">
                     {{ $wordOfTheDay->primaryDefinition->definition ?? 'A trending term you need to know.' }}
                 </p>
-                <a href="{{ route('word.show', $wordOfTheDay->slug) }}" class="text-brand-primary font-bold text-sm hover:underline whitespace-nowrap">
+                <a href="{{ route('word.show', $wordOfTheDay->slug) }}" class="text-brand-primary dark:text-brand-accent font-bold text-sm hover:underline whitespace-nowrap">
                     Read more →
                 </a>
             </div>
@@ -161,12 +161,12 @@
         </section>
 
         <!-- Most Agreed Definitions (Light Blue BG) -->
-        <section class="bg-[#F0F6FB] py-20">
+        <section class="bg-[#F0F6FB] dark:bg-[#001a3a]/50 py-20 transition-colors duration-300">
             <div class="max-w-[1240px] mx-auto px-6">
                 <!-- Header -->
                 <div class="mb-14">
-                    <h2 class="text-6xl md:text-[80px] font-bold text-[#002B5B] tracking-tight mb-4 leading-none">Most Agreed Definitions</h2>
-                    <p class="text-[#002B5B] font-medium text-xl tracking-wide">Definitions voted accurate by the community.</p>
+                    <h2 class="text-6xl md:text-[80px] font-bold text-[#002B5B] dark:text-white tracking-tight mb-4 leading-none">Most Agreed Definitions</h2>
+                    <p class="text-[#002B5B] dark:text-white/80 font-medium text-xl tracking-wide">Definitions voted accurate by the community.</p>
                 </div>
                 
                 <div class="space-y-6">
@@ -181,27 +181,27 @@
                             ];
                             $badge = $badges[$index] ?? $badges[2];
                         @endphp
-                        <div class="bg-white rounded-[32px] p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-10 hover:shadow-lg transition-shadow duration-300">
+                        <div class="bg-white dark:bg-[#002B5B] rounded-[32px] p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-10 hover:shadow-lg transition-all duration-300 border border-transparent dark:border-white/10">
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-5 mb-4 flex-wrap">
-                                    <h3 class="text-[32px] font-bold text-[#002B5B] tracking-tight">{{ $def->word->term }}</h3>
+                                    <h3 class="text-[32px] font-bold text-[#002B5B] dark:text-white tracking-tight">{{ $def->word->term }}</h3>
                                     <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[13px] font-bold tracking-wide {{ $badge['class'] }}">
                                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
                                         {{ $badge['label'] }}
                                     </span>
                                 </div>
-                                <p class="text-[#002B5B] text-[18px] leading-relaxed mb-5 font-medium">
+                                <p class="text-[#002B5B] dark:text-white/90 text-[18px] leading-relaxed mb-5 font-medium">
                                     {{ $def->definition }}
                                 </p>
-                                <div class="flex items-center gap-2 text-[#002B5B] text-[15px] font-bold">
+                                <div class="flex items-center gap-2 text-[#002B5B] dark:text-white text-[15px] font-bold">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
                                     <span x-data x-counter="{{ (int)$def->agrees }}">0</span> agreed
                                 </div>
                             </div>
                             
-                            <div class="bg-[#F1F5F9] rounded-[24px] w-[140px] h-[110px] flex flex-col items-center justify-center flex-shrink-0">
-                                <span class="block text-[42px] font-bold text-[#002B5B] tracking-tight leading-none mb-1"><span x-data x-counter="{{ $accuracy }}">0</span>%</span>
-                                <span class="text-[#002B5B]/60 text-[13px] font-medium lowercase">accuracy</span>
+                            <div class="bg-[#F1F5F9] dark:bg-white/5 rounded-[24px] w-[140px] h-[110px] flex flex-col items-center justify-center flex-shrink-0">
+                                <span class="block text-[42px] font-bold text-[#002B5B] dark:text-white tracking-tight leading-none mb-1"><span x-data x-counter="{{ $accuracy }}">0</span>%</span>
+                                <span class="text-[#002B5B]/60 dark:text-white/40 text-[13px] font-medium lowercase">accuracy</span>
                             </div>
                         </div>
                     @endforeach
@@ -211,30 +211,30 @@
 
 
         <!-- Fresh Submissions (White BG) -->
-        <section class="bg-white py-20">
+        <section class="bg-white dark:bg-transparent py-20 transition-colors duration-300">
             <div class="max-w-[1240px] mx-auto px-6">
                 <!-- Header -->
                 <div class="mb-14">
-                    <h2 class="text-4xl md:text-[80px] font-bold text-[#002B5B] tracking-tight mb-4 leading-none">Fresh Submissions</h2>
-                    <p class="text-[#002B5B] font-medium text-xl tracking-wide">Latest words discovered by users like you.</p>
+                    <h2 class="text-4xl md:text-[80px] font-bold text-[#002B5B] dark:text-white tracking-tight mb-4 leading-none">Fresh Submissions</h2>
+                    <p class="text-[#002B5B] dark:text-white/80 font-medium text-xl tracking-wide">Latest words discovered by users like you.</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @foreach($freshWords->take(4) as $word)
-                        <a href="{{ route('word.show', $word->slug) }}" class="bg-white rounded-[20px] p-8 border border-[#002B5B] hover:shadow-lg transition-all duration-300 group flex flex-col h-full relative">
+                        <a href="{{ route('word.show', $word->slug) }}" class="bg-white dark:bg-[#002B5B] rounded-[20px] p-8 border border-[#002B5B] dark:border-white/10 hover:shadow-lg transition-all duration-300 group flex flex-col h-full relative">
                             <!-- Badges -->
                             <div class="flex items-center gap-2 mb-4">
-                                <span class="px-3 py-1 bg-[#F1F5F9] text-[#475569] text-[11px] font-bold uppercase tracking-wide rounded-md">New</span>
-                                <span class="px-4 py-1 bg-[#002B5B] text-white text-[11px] font-bold rounded-full">{{ $word->category ?? 'Slang' }}</span>
+                                <span class="px-3 py-1 bg-[#F1F5F9] dark:bg-white/10 text-[#475569] dark:text-white/60 text-[11px] font-bold uppercase tracking-wide rounded-md">New</span>
+                                <span class="px-4 py-1 bg-[#002B5B] dark:bg-brand-primary text-white text-[11px] font-bold rounded-full">{{ $word->category ?? 'Slang' }}</span>
                             </div>
 
-                            <h3 class="text-3xl font-bold text-[#002B5B] mb-3 tracking-tight">{{ $word->term }}</h3>
+                            <h3 class="text-3xl font-bold text-[#002B5B] dark:text-white mb-3 tracking-tight">{{ $word->term }}</h3>
                             
-                            <p class="text-[#002B5B] text-[16px] leading-relaxed mb-8 flex-grow font-medium line-clamp-3">
+                            <p class="text-[#002B5B] dark:text-white/80 text-[16px] leading-relaxed mb-8 flex-grow font-medium line-clamp-3">
                                 {{ optional($word->primaryDefinition)->definition ?? 'No definition available.' }}
                             </p>
                             
-                            <div class="flex items-center gap-1.5 text-[#002B5B] text-[12px] font-bold mt-auto">
+                            <div class="flex items-center gap-1.5 text-[#002B5B] dark:text-white/60 text-[12px] font-bold mt-auto">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 Submitted {{ $word->created_at->diffForHumans() }}
                             </div>
@@ -245,19 +245,19 @@
         </section>
 
         <!-- Explore Categories (Light Blue BG) -->
-        <section class="bg-[#F0F6FB] py-20">
+        <section class="bg-[#F0F6FB] dark:bg-[#001a3a]/50 py-20 transition-colors duration-300">
             <div class="max-w-[1240px] mx-auto px-6">
                 <!-- Header -->
                 <div class="mb-14">
-                    <h2 class="text-6xl md:text-[80px] font-bold text-[#002B5B] tracking-tight mb-4 leading-none">Explore Categories</h2>
-                    <p class="text-[#002B5B] font-medium text-xl tracking-wide">Definitions voted accurate by the community.</p>
+                    <h2 class="text-6xl md:text-[80px] font-bold text-[#002B5B] dark:text-white tracking-tight mb-4 leading-none">Explore Categories</h2>
+                    <p class="text-[#002B5B] dark:text-white/80 font-medium text-xl tracking-wide">Definitions voted accurate by the community.</p>
                 </div>
                 
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
                     @foreach($categoryCards as $category)
-                        <a href="{{ route('word.browse', ['category' => $category['category']]) }}" class="bg-white border border-[#002B5B] rounded-[24px] p-6 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all group h-40">
-                            <h4 class="text-[20px] font-bold text-[#002B5B] mb-2 group-hover:text-[#1E40AF] transition-colors tracking-tight">{{ $category['label'] }}</h4>
-                            <span class="text-[#002B5B]/70 text-[14px] font-bold">{{ $category['countLabel'] }}</span>
+                        <a href="{{ route('word.browse', ['category' => $category['category']]) }}" class="bg-white dark:bg-[#002B5B] border border-[#002B5B] dark:border-white/10 rounded-[24px] p-6 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all group h-40">
+                            <h4 class="text-[20px] font-bold text-[#002B5B] dark:text-white mb-2 group-hover:text-[#1E40AF] dark:group-hover:text-brand-primary transition-colors tracking-tight">{{ $category['label'] }}</h4>
+                            <span class="text-[#002B5B]/70 dark:text-white/60 text-[14px] font-bold">{{ $category['countLabel'] }}</span>
                         </a>
                     @endforeach
                 </div>
@@ -265,32 +265,32 @@
         </section>
 
         <!-- Why TikTok Dictionary Exists (White BG) -->
-        <section class="bg-white py-24">
+        <section class="bg-white dark:bg-transparent py-24 transition-colors duration-300">
             <div class="max-w-[1240px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <!-- Left Text -->
                 <div>
-                   <h2 class="text-4xl md:text-[80px] font-bold text-[#002B5B] leading-[0.95] tracking-tight mb-8">
+                   <h2 class="text-4xl md:text-[80px] font-bold text-[#002B5B] dark:text-white leading-[0.95] tracking-tight mb-8">
                         Why TikTok<br>
                         Dictionary Exists
                     </h2>
-                    <p class="text-[#002B5B]/80 text-[18px] leading-relaxed font-medium max-w-lg">
+                    <p class="text-[#002B5B]/80 dark:text-white/80 text-[18px] leading-relaxed font-medium max-w-lg">
                         A community-powered dictionary tracking viral slang and new trends across TikTok and online culture. No ads. No influencers. 100% organic.
                     </p>
                 </div>
 
                 <!-- Right Stats Grid (Blue Cards) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="bg-[#F0F6FB] rounded-[24px] p-10 text-center flex flex-col justify-center h-48">
-                        <span class="block text-[42px] font-bold text-[#002B5B] mb-1 tracking-tight"><span x-data x-counter="{{ $stats['words'] }}">0</span>+</span>
-                        <span class="text-[#002B5B]/70 text-[14px] font-bold">Words Defined</span>
+                    <div class="bg-[#F0F6FB] dark:bg-[#001a3a]/50 rounded-[24px] p-10 text-center flex flex-col justify-center h-48 border border-transparent dark:border-white/10">
+                        <span class="block text-[42px] font-bold text-[#002B5B] dark:text-white mb-1 tracking-tight"><span x-data x-counter="{{ $stats['words'] }}">0</span>+</span>
+                        <span class="text-[#002B5B]/70 dark:text-white/60 text-[14px] font-bold">Words Defined</span>
                     </div>
-                    <div class="bg-[#F0F6FB] rounded-[24px] p-10 text-center flex flex-col justify-center h-48">
-                        <span class="block text-[42px] font-bold text-[#002B5B] mb-1 tracking-tight"><span x-data x-counter="{{ $stats['definitions'] }}">0</span>+</span>
-                        <span class="text-[#002B5B]/70 text-[14px] font-bold">Community Votes</span>
+                    <div class="bg-[#F0F6FB] dark:bg-[#001a3a]/50 rounded-[24px] p-10 text-center flex flex-col justify-center h-48 border border-transparent dark:border-white/10">
+                        <span class="block text-[42px] font-bold text-[#002B5B] dark:text-white mb-1 tracking-tight"><span x-data x-counter="{{ $stats['definitions'] }}">0</span>+</span>
+                        <span class="text-[#002B5B]/70 dark:text-white/60 text-[14px] font-bold">Community Votes</span>
                     </div>
-                    <div class="col-span-2 bg-[#F0F6FB] rounded-[24px] p-10 text-center flex flex-col justify-center h-48">
-                        <span class="block text-[42px] font-bold text-[#002B5B] mb-1 tracking-tight">Live</span>
-                        <span class="text-[#002B5B]/70 text-[14px] font-bold">Real-Time Updates</span>
+                    <div class="col-span-2 bg-[#F0F6FB] dark:bg-[#001a3a]/50 rounded-[24px] p-10 text-center flex flex-col justify-center h-48 border border-transparent dark:border-white/10">
+                        <span class="block text-[42px] font-bold text-[#002B5B] dark:text-white mb-1 tracking-tight">Live</span>
+                        <span class="text-[#002B5B]/70 dark:text-white/60 text-[14px] font-bold">Real-Time Updates</span>
                     </div>
                 </div>
             </div>

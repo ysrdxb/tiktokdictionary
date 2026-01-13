@@ -19,11 +19,13 @@ class Definition extends Model
         'agrees',
         'disagrees',
         'velocity_score',
-        'is_primary'
+        'is_primary',
+        'is_approved' // Added for moderation
     ];
 
     protected $casts = [
         'is_primary' => 'boolean',
+        'is_approved' => 'boolean',
         'velocity_score' => 'decimal:4'
     ];
 

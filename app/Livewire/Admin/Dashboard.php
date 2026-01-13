@@ -166,7 +166,7 @@ class Dashboard extends Component
         return [
             'words' => Word::where('is_verified', false)->count(),
             'definitions' => Definition::where('is_approved', false)->count(),
-            'reports' => DB::table('reports')->where('status', 'pending')->count(),
+            'reports' => \App\Models\Flag::where('status', 'pending')->count(),
         ];
     }
 
