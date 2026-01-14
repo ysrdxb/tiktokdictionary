@@ -32,9 +32,9 @@ class SubmitWordForm extends Component
 
     public function mount()
     {
-        // Load settings
-        $this->submissionsEnabled = Setting::get('allow_submissions', 'true') === 'true';
-        $this->requireLogin = Setting::get('require_login_to_submit', 'false') === 'true';
+        // Load settings (tolerate boolean/string values)
+        $this->submissionsEnabled = filter_var(Setting::get('allow_submissions', true), FILTER_VALIDATE_BOOLEAN);
+        $this->requireLogin = filter_var(Setting::get('require_login_to_submit', false), FILTER_VALIDATE_BOOLEAN);
 
         // Set disabled reason if applicable
         if (!$this->submissionsEnabled) {
@@ -164,7 +164,7 @@ class SubmitWordForm extends Component
         }
 
         // Check if auto-approve is enabled
-        $autoApprove = Setting::get('auto_approve_definitions', 'false') === 'true';
+        $autoApprove = filter_var(Setting::get('auto_approve_definitions', false), FILTER_VALIDATE_BOOLEAN);
 
         // Create the definition
         Definition::create([

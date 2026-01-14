@@ -11,7 +11,13 @@ class LoreEntry extends Model
         'platform', // tiktok, twitter, instagram
         'source_url',
         'description',
-        'creator_handle'
+        'creator_handle',
+        'date_event',
+        'title',
+    ];
+
+    protected $casts = [
+        'date_event' => 'datetime',
     ];
 
     public function word()

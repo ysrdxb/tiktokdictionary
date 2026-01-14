@@ -22,7 +22,7 @@
                 <!-- Content -->
                 <div>
                     <div class="text-xs text-slate-500 dark:text-white/50 font-bold uppercase tracking-wider mb-1">
-                        {{ $entry->date_event->format('M d, Y') }}
+                        {{ $entry->date_event ? \Illuminate\Support\Carbon::parse($entry->date_event)->format('M d, Y') : 'Date N/A' }}
                     </div>
                     <h4 class="font-bold text-[#002B5B] dark:text-white">{{ $entry->title }}</h4>
                     <p class="text-slate-600 dark:text-white/70 text-sm mt-1">{{ $entry->description }}</p>
