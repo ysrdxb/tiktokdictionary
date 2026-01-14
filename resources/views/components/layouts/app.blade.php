@@ -15,12 +15,12 @@
     $accentColor = \App\Models\Setting::get('accent_color', '#F59E0B');
     $logoUrl = \App\Models\Setting::get('logo_url', '');
     $faviconUrl = \App\Models\Setting::get('favicon_url', '');
-    $announceEnabled = \App\Models\Setting::get('announcement_enabled', 'false') === 'true';
+    $announceEnabled = filter_var(\App\Models\Setting::get('announcement_enabled', false), FILTER_VALIDATE_BOOLEAN);
     $announceText = \App\Models\Setting::get('announcement_text', '');
     $announceLink = \App\Models\Setting::get('announcement_link', '');
     $announceBg = \App\Models\Setting::get('announcement_bg_color', '#0F62FE');
     $footerText = \App\Models\Setting::get('footer_text', '');
-    $showPoweredBy = \App\Models\Setting::get('show_powered_by', 'false') === 'true';
+    $showPoweredBy = filter_var(\App\Models\Setting::get('show_powered_by', false), FILTER_VALIDATE_BOOLEAN);
     $darkDefault = \App\Models\Setting::get('dark_mode_default', false);
 @endphp
 <head>

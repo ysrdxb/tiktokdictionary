@@ -2,7 +2,7 @@
 @php
     $siteName = \App\Models\Setting::get('site_name', 'TikTokDictionary');
     $logoUrl = \App\Models\Setting::get('logo_url', '');
-    $announceEnabled = \App\Models\Setting::get('announcement_enabled', 'false') === 'true';
+    $announceEnabled = filter_var(\App\Models\Setting::get('announcement_enabled', false), FILTER_VALIDATE_BOOLEAN);
     $announceText = \App\Models\Setting::get('announcement_text', '');
     $announceLink = \App\Models\Setting::get('announcement_link', '');
     $announceBg = \App\Models\Setting::get('announcement_bg_color', '#0F62FE');
