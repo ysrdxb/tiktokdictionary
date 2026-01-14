@@ -1,4 +1,12 @@
 <x-layouts.app>
+@php
+    $siteName = \App\Models\Setting::get('site_name', 'TikTokDictionary');
+    $logoUrl = \App\Models\Setting::get('logo_url', '');
+    $announceEnabled = \App\Models\Setting::get('announcement_enabled', 'false') === 'true';
+    $announceText = \App\Models\Setting::get('announcement_text', '');
+    $announceLink = \App\Models\Setting::get('announcement_link', '');
+    $announceBg = \App\Models\Setting::get('announcement_bg_color', '#0F62FE');
+@endphp
     <!-- Hero Section with Header Inside -->
     <section class="relative min-h-[620px] flex flex-col overflow-hidden">
         <!-- Blue Gradient Background -->
@@ -20,12 +28,16 @@
             <div class="max-w-[1240px] mx-auto px-6 flex items-center justify-between">
                 <!-- Larger Logo -->
                 <a href="{{ route('home') }}" class="flex items-center gap-2 group">
-                    <div class="w-10 h-10 bg-white text-[#002B5B] rounded-lg flex items-center justify-center font-black text-2xl -rotate-6 group-hover:rotate-0 transition-transform">
-                        T
-                    </div>
+                    @if(!empty($logoUrl))
+                        <img src="{{ $logoUrl }}" alt="{{ $siteName }}" class="w-10 h-10 rounded-lg object-contain bg-white/90 p-1">
+                    @else
+                        <div class="w-10 h-10 bg-white text-[#002B5B] rounded-lg flex items-center justify-center font-black text-2xl -rotate-6 group-hover:rotate-0 transition-transform">
+                            T
+                        </div>
+                    @endif
                     <div class="flex flex-col">
                         <span class="text-2xl font-bold tracking-tight leading-none text-white">
-                            TikTok<span class="text-brand-accent">Dictionary</span>
+                            {{ $siteName }}
                         </span>
                     </div>
                 </a>
@@ -69,6 +81,17 @@
                 <x-layouts.mobile-nav theme="dark" />
             </div>
         </header>
+
+        @if($announceEnabled && (!empty($announceText)))
+            <div class="w-full" style="background: {{ $announceBg }}">
+                <div class="max-w-[1240px] mx-auto px-6 py-2 text-white text-sm font-bold flex items-center justify-between">
+                    <div>{{ $announceText }}</div>
+                    @if(!empty($announceLink))
+                        <a href="{{ $announceLink }}" class="underline decoration-white/60 hover:decoration-white">Learn more</a>
+                    @endif
+                </div>
+            </div>
+        @endif
         
         <!-- Hero Content Container -->
         <div class="flex-1 flex flex-col justify-center py-16">
@@ -77,7 +100,7 @@
             <h1 class="text-white leading-[0.95] tracking-tight mb-14 drop-shadow-2xl select-none">
                 <span class="block text-4xl md:text-[56px] font-bold -mb-3 opacity-90">Search Any</span>
                 <span class="relative inline-block text-5xl md:text-[76px] font-bold pb-2">
-                    <span class="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-brand-accent">Tiktok Word...</span>
+                    <span class="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-brand-accent" style="background-image: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,1), var(--brand-accent));">Tiktok Word...</span>
                     <!-- Dashed Line -->
                     <div class="absolute top-[85px] left-[-15%] right-[-15%] h-[1px] border-t-2 border-dashed border-white/20 z-0"></div>
                 </span>
@@ -103,7 +126,7 @@
         <section class="bg-brand-panel dark:bg-[#001a3a]/30 border-b border-brand-border/50 dark:border-white/10 py-8 transition-colors duration-300">
             <div class="max-w-[1240px] mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-6 text-center md:text-left">
                 <div class="flex items-center gap-3">
-                    <span class="bg-brand-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">Word of the Day</span>
+                    <span class="bg-brand-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse" style="background-color: var(--brand-accent)">Word of the Day</span>
                     <h2 class="text-2xl font-black text-brand-dark dark:text-white">{{ $wordOfTheDay->term }}</h2>
                 </div>
                 <div class="hidden md:block h-8 w-px bg-brand-border/20 dark:bg-white/10"></div>

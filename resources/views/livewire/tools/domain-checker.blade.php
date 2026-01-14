@@ -7,7 +7,12 @@
         <h3 class="text-lg font-bold mb-1 flex items-center gap-2">
             <span>🚀</span> Investor View
         </h3>
-        <p class="text-white/60 text-sm mb-4">Because this slang might be the next big thing.</p>
+        <p class="text-white/60 text-sm mb-2">Because this slang might be the next big thing.</p>
+        @if($lastCheckedAt)
+            <p class="text-white/30 text-[11px] mb-4">Last checked: {{ $lastCheckedAt }}</p>
+        @else
+            <p class="text-white/30 text-[11px] mb-4">No checks yet</p>
+        @endif
 
         @if(!$hasChecked)
             <div class="flex flex-col gap-3">
@@ -40,8 +45,27 @@
                         </div>
                     </a>
                 @endforeach
-                <div class="text-center pt-2">
+                @if(!empty($alternates))
+                    <div class="pt-2">
+                        <details class="group">
+                            <summary class="text-[11px] text-white/50 cursor-pointer hover:text-white/70">Try variations (may be more available)</summary>
+                            <div class="mt-2 grid grid-cols-2 gap-2">
+                                @foreach($alternates as $alt)
+                                    @foreach($tlds as $tld)
+                                        <a href="{{ $this->getAffiliateUrl($tld, $alt) }}" target="_blank" rel="noopener noreferrer" class="px-2 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/10 font-mono text-[11px] text-white/70 hover:text-white flex items-center justify-between">
+                                            <span>{{ $alt }}.{{ $tld }}</span>
+                                            <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                        </a>
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        </details>
+                    </div>
+                @endif
+
+                <div class="text-center pt-2 space-y-1">
                      <p class="text-[10px] text-white/40 uppercase tracking-widest">Powered by GoDaddy</p>
+                     <p class="text-[10px] text-white/30">We may earn a commission if you buy through these links.</p>
                 </div>
             </div>
         @endif

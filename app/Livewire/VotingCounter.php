@@ -21,8 +21,8 @@ class VotingCounter extends Component
         $this->agrees = $agrees;
         $this->disagrees = $disagrees;
 
-        // Check if voting is enabled globally
-        $this->votingEnabled = Setting::get('allow_voting', 'true') === 'true';
+        // Check if voting is enabled globally (tolerate boolean/string values)
+        $this->votingEnabled = filter_var(Setting::get('allow_voting', true), FILTER_VALIDATE_BOOLEAN);
 
         // Check if user has already voted
         $cookieName = 'vote_' . $this->definitionId;

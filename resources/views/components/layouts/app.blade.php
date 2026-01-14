@@ -3,11 +3,47 @@
 @php
     $siteName = \App\Models\Setting::get('site_name', 'TikTokDictionary');
     $siteTagline = \App\Models\Setting::get('tagline', 'The Viral Vernacular');
+    $metaDescription = \App\Models\Setting::get('meta_description', '');
+    $metaKeywords = \App\Models\Setting::get('meta_keywords', '');
+    $ogImage = \App\Models\Setting::get('og_image', '');
+    $gaId = \App\Models\Setting::get('google_analytics_id', '');
+    $gsc = \App\Models\Setting::get('google_search_console', '');
+    $fbPixel = \App\Models\Setting::get('facebook_pixel_id', '');
+    $customHead = \App\Models\Setting::get('custom_head_scripts', '');
+    $customFooter = \App\Models\Setting::get('custom_footer_scripts', '');
+    $primaryColor = \App\Models\Setting::get('primary_color', '#002B5B');
+    $accentColor = \App\Models\Setting::get('accent_color', '#F59E0B');
+    $logoUrl = \App\Models\Setting::get('logo_url', '');
+    $faviconUrl = \App\Models\Setting::get('favicon_url', '');
+    $announceEnabled = \App\Models\Setting::get('announcement_enabled', 'false') === 'true';
+    $announceText = \App\Models\Setting::get('announcement_text', '');
+    $announceLink = \App\Models\Setting::get('announcement_link', '');
+    $announceBg = \App\Models\Setting::get('announcement_bg_color', '#0F62FE');
+    $footerText = \App\Models\Setting::get('footer_text', '');
+    $showPoweredBy = \App\Models\Setting::get('show_powered_by', 'false') === 'true';
+    $darkDefault = \App\Models\Setting::get('dark_mode_default', false);
 @endphp
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? $siteName . ' - ' . $siteTagline }}</title>
+    @if(!empty($metaDescription))
+        <meta name="description" content="{{ $metaDescription }}">
+    @endif
+    @if(!empty($metaKeywords))
+        <meta name="keywords" content="{{ $metaKeywords }}">
+    @endif
+    @if(!empty($gsc))
+        <meta name="google-site-verification" content="{{ $gsc }}">
+    @endif
+    @if(!empty($ogImage))
+        <meta property="og:image" content="{{ $ogImage }}">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:image" content="{{ $ogImage }}">
+    @endif
+    @if(!empty($faviconUrl))
+        <link rel="icon" href="{{ $faviconUrl }}" />
+    @endif
     
     <!-- Fonts -->
     <!-- Local Fonts Only -->
@@ -65,14 +101,46 @@
 
     <style>
         [x-cloak] { display: none !important; }
+        :root { --brand-primary: {{ $primaryColor }}; --brand-accent: {{ $accentColor }}; }
     </style>
     <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
+        try {
+            const hasPref = 'theme' in localStorage;
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const settingDarkDefault = @json((bool)$darkDefault);
+            if (!hasPref) {
+                if (settingDarkDefault || prefersDark) {
+                    document.documentElement.classList.add('dark');
+                    localStorage.theme = 'dark';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.theme = 'light';
+                }
+            } else {
+                if (localStorage.theme === 'dark') document.documentElement.classList.add('dark');
+                else document.documentElement.classList.remove('dark');
+            }
+        } catch(e) {}
     </script>
+    @if(!empty($gaId))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gaId }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '{{ $gaId }}');
+        </script>
+    @endif
+    @if(!empty($fbPixel))
+        <script>
+          !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+          n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '{{ $fbPixel }}'); fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{ $fbPixel }}&ev=PageView&noscript=1"/></noscript>
+    @endif
+    @if(!empty($customHead)) {!! $customHead !!} @endif
 </head>
 <body class="font-sans antialiased bg-slate-50 dark:bg-[#002B5B] text-slate-900 dark:text-white overflow-x-hidden min-h-screen flex flex-col transition-colors duration-300">
 
@@ -111,12 +179,16 @@
             <div class="max-w-[1240px] w-full mx-auto px-6 flex items-center justify-between">
                 <!-- Logo -->
                 <a href="{{ route('home') }}" class="flex items-center gap-2 group">
-                    <div class="w-10 h-10 bg-[#002B5B] dark:bg-white text-white dark:text-[#002B5B] rounded-lg flex items-center justify-center font-black text-2xl -rotate-6 group-hover:rotate-0 transition-transform shadow-lg">
-                        T
-                    </div>
+                    @if(!empty($logoUrl))
+                        <img src="{{ $logoUrl }}" alt="{{ $siteName }}" class="w-10 h-10 rounded-lg object-contain bg-white dark:bg-white/10 p-1 shadow-lg">
+                    @else
+                        <div class="w-10 h-10 bg-[#002B5B] dark:bg-white text-white dark:text-[#002B5B] rounded-lg flex items-center justify-center font-black text-2xl -rotate-6 group-hover:rotate-0 transition-transform shadow-lg">
+                            T
+                        </div>
+                    @endif
                     <div class="flex flex-col">
                         <span class="text-2xl font-bold tracking-tight leading-none text-[#002B5B] dark:text-white">
-                            TikTok<span class="text-brand-primary dark:text-brand-accent">Dictionary</span>
+                            {{ $siteName }}
                         </span>
                     </div>
                 </a>
@@ -179,6 +251,18 @@
             </div>
         </header>
 
+        {{-- Announcement Banner --}}
+        @if($announceEnabled && (!empty($announceText)))
+            <div class="w-full" style="background: {{ $announceBg }}">
+                <div class="max-w-[1240px] mx-auto px-6 py-2 text-white text-sm font-bold flex items-center justify-between">
+                    <div>{{ $announceText }}</div>
+                    @if(!empty($announceLink))
+                        <a href="{{ $announceLink }}" class="underline decoration-white/60 hover:decoration-white">Learn more</a>
+                    @endif
+                </div>
+            </div>
+        @endif
+
         {{-- Main Content Wrapper (Full Width) --}}
         <main class="flex-1 w-full relative z-10">
             {{ $slot }}
@@ -199,8 +283,14 @@
                         <a href="#" class="hover:text-brand-primary dark:hover:text-white transition-colors">Privacy</a>
                         <a href="#" class="hover:text-brand-primary dark:hover:text-white transition-colors">Terms</a>
                     </div>
-                    <div class="text-slate-400 dark:text-white/40 text-sm font-medium">
+                    <div class="text-slate-400 dark:text-white/40 text-sm font-medium text-center md:text-right">
+                        @if(!empty($footerText))
+                            <div class="mb-1">{!! $footerText !!}</div>
+                        @endif
                         © 2025. All Rights Reserved.
+                        @if($showPoweredBy)
+                            <span class="block text-xs opacity-70">Powered by TikTokDictionary</span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -262,5 +352,6 @@
 
     <!-- Livewire Scripts -->
     @livewireScripts
+    @if(!empty($customFooter)) {!! $customFooter !!} @endif
 </body>
 </html>
