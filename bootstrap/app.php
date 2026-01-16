@@ -20,8 +20,10 @@ return Application::configure(basePath: dirname(__DIR__))
         // Append middleware to web group
         $middleware->appendToGroup('web', [
             \App\Http\Middleware\CheckBanned::class,
-            \App\Http\Middleware\CheckMaintenanceMode::class,
         ]);
+
+        // Global Middleware (Runs on EVERY request)
+        $middleware->append(\App\Http\Middleware\CheckMaintenanceMode::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
