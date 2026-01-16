@@ -3,6 +3,7 @@
     <button
         wire:click="vote('agree')"
         @if(!$votingEnabled) disabled @endif
+        @click="window.confetti && window.confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#00336E', '#F59E0B'] })"
         class="group flex items-center gap-2 px-3 py-1.5 rounded-full transition-all border {{ !$votingEnabled ? 'opacity-50 cursor-not-allowed' : '' }} {{ $userVote === 'agree' ? 'bg-green-500/10 border-green-500/30 text-green-600 dark:text-green-400' : 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-500 dark:text-white/60 hover:bg-green-50 dark:hover:bg-green-500/10 hover:border-green-300 dark:hover:border-green-500/30 hover:text-green-600 dark:hover:text-green-400' }}"
         title="{{ $votingEnabled ? 'This definition is accurate' : 'Voting is currently disabled' }}"
     >

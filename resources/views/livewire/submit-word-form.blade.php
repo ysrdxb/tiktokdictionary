@@ -175,7 +175,9 @@
 
     <!-- Modal 3: Success Modal -->
     @if($showSuccessModal)
-        <div class="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-black/80 backdrop-blur-md">
+        <div class="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-black/80 backdrop-blur-md"
+             x-data
+             x-init="window.confetti && window.confetti({ particleCount: 200, spread: 150, origin: { y: 0.6 }, drift: 0.5, ticks: 200 })">
             <div class="bg-white dark:bg-[#00152e] border border-[#00336E]/10 dark:border-white/10 rounded-[32px] p-10 max-w-md w-full shadow-2xl relative text-center">
                 <button wire:click="closeSuccessModal" class="absolute top-6 right-6 text-[#00336E]/50 dark:text-white/50 hover:text-[#00336E] dark:hover:text-white">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>

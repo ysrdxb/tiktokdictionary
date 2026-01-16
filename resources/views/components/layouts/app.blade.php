@@ -26,6 +26,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <title>{{ $title ?? $siteName . ' - ' . $siteTagline }}</title>
     @if(!empty($metaDescription))
         <meta name="description" content="{{ $metaDescription }}">
