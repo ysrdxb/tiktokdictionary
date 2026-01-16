@@ -9,7 +9,7 @@
     @endphp
 
     <!-- Hero Background Section (Top) -->
-    <div class="w-full bg-[#E9F2FE] pt-28 pb-40 px-6 text-center relative z-10">
+    <div class="w-full bg-[#E9F2FE] pt-24 md:pt-28 pb-40 px-6 text-center relative z-10">
         <p class="text-[#00336E]/60 font-bold uppercase tracking-widest text-xs mb-4 animate-pulse">Word of the Moment</p>
     </div>
 

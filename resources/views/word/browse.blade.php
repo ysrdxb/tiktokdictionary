@@ -4,7 +4,7 @@
     </x-slot>
 
     <!-- Hero Background Section -->
-    <div class="w-full bg-[#E9F2FE] pt-32 pb-24 px-6 text-center">
+    <div class="w-full bg-[#E9F2FE] pt-24 md:pt-32 pb-24 px-6 text-center">
         <h1 class="text-[#00336E] font-bold text-4xl md:text-7xl mb-4 font-title leading-none reveal-on-scroll">
             Discover New Words
         </h1>

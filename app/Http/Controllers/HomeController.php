@@ -18,16 +18,19 @@ class HomeController extends Controller
         }
 
         // Use the Viral Engine to get trending words
-        $trendingWords = \App\Services\TrendingService::getTrending(12);
+        $trendingWords = \App\Services\TrendingService::getTrending(12, $timeframe);
 
         // Word of the Day (Highest velocity from today, or all time fallback)
-        $wordOfTheDay = Word::whereDate('created_at', now())
+        $wordOfTheDay = Word::where('is_verified', true)
+            ->whereDate('created_at', now())
             ->orderByDesc('velocity_score')
-            ->first() ?? Word::orderByDesc('velocity_score')->first();
+            ->first() ?? Word::where('is_verified', true)->orderByDesc('velocity_score')->first();
 
         $mostAgreedDefinitions = Definition::query()
             ->with('word')
-            ->whereHas('word')
+            ->whereHas('word', function ($q) {
+                $q->where('is_verified', true);
+            })
             ->where(function ($query) {
                 $query->where('agrees', '>', 0)
                     ->orWhere('disagrees', '>', 0);
@@ -47,6 +50,7 @@ class HomeController extends Controller
             });
 
         $freshWords = Word::query()
+            ->where('is_verified', true)
             ->with('primaryDefinition')
             ->latest()
             ->limit(4)

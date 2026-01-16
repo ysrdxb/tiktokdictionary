@@ -252,7 +252,10 @@
                 
                 <!-- Mobile Nav Component -->
                 <div class="lg:hidden ml-auto">
-                    <x-layouts.mobile-nav />
+                    <!-- Trigger Button Only - The actual menu is effectively "teleported" via fixed positioning, 
+                         but for z-index safety we keep the component here or relying on its own fixed strategy. 
+                         However, if clipped, we should actually move the component to root. -->
+                     <x-layouts.mobile-nav /> 
                 </div>
             </div>
         </header>

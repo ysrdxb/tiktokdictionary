@@ -1,6 +1,6 @@
 <div>
     <!-- Hero Background Section -->
-    <div class="w-full bg-[#E9F2FE] pt-32 pb-48 px-6 text-center relative z-10">
+    <div class="w-full bg-[#E9F2FE] pt-24 md:pt-32 pb-48 px-6 text-center relative z-10">
         <h1 class="text-[#00336E] font-bold text-4xl md:text-7xl tracking-tighter mb-4 font-title leading-none">
             Join the Club
         </h1>

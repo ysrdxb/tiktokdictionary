@@ -36,9 +36,12 @@ class SearchBar extends Component
             }
 
             try {
-                $this->results = Word::where('term', 'like', '%' . $this->query . '%')
-                    ->orWhere('category', 'like', '%' . $this->query . '%')
-                    ->orWhereJsonContains('vibes', $this->query) // Vibe Search
+                $this->results = Word::where('is_verified', true)
+                    ->where(function($q) {
+                        $q->where('term', 'like', '%' . $this->query . '%')
+                          ->orWhere('category', 'like', '%' . $this->query . '%')
+                          ->orWhereJsonContains('vibes', $this->query);
+                    })
                     ->with('primaryDefinition')
                     ->take(7)
                     ->get();

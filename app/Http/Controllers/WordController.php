@@ -28,7 +28,7 @@ class WordController extends Controller
         $category = $request->get('category');
         $sort = $request->get('sort', 'today');
         
-        $query = Word::with('primaryDefinition');
+        $query = Word::where('is_verified', true)->with('primaryDefinition');
         
         if ($category) {
             $query->where('category', $category);
@@ -58,20 +58,24 @@ class WordController extends Controller
             // 'all' = no time filter
         }
         
+
         $trendingWords = (clone $query)->orderBy('velocity_score', 'desc')->limit(12)->get();
         $fastestGrowing = Word::with('primaryDefinition')
+            ->where('is_verified', true)
             ->where('created_at', '>=', now()->subDays(7))
             ->orderBy('total_agrees', 'desc')
             ->limit(9)
             ->get();
         
         $mostControversial = Word::with('primaryDefinition')
+            ->where('is_verified', true)
             ->whereRaw('total_disagrees > total_agrees * 0.3')
             ->orderBy('total_disagrees', 'desc')
             ->limit(6)
             ->get();
 
         $memeWords = Word::query()
+            ->where('is_verified', true)
             ->whereIn('category', ['Memes', 'Internet'])
             ->with('primaryDefinition')
             ->orderBy('velocity_score', 'desc')
@@ -79,14 +83,18 @@ class WordController extends Controller
             ->get();
 
         $audioTrendWords = Word::query()
-            ->where('term', 'like', '#%') // Simplistic check for hashtags
-            ->orWhereIn('category', ['TikTok', 'Music'])
+            ->where('is_verified', true)
+            ->where(function($q) {
+                $q->where('term', 'like', '#%')
+                  ->orWhereIn('category', ['TikTok', 'Music']);
+            })
             ->with('primaryDefinition')
             ->orderBy('created_at', 'desc')
             ->limit(2)
             ->get();
 
         $subcultureWords = Word::query()
+            ->where('is_verified', true)
             ->whereIn('category', ['Gaming', 'AAVE', 'Stan Culture', 'Anime', 'Fitness'])
             ->limit(4)
             ->get();

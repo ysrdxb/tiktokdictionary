@@ -55,7 +55,9 @@
                 </div>
                 
                 <!-- Mobile Nav Component -->
-                <x-layouts.mobile-nav theme="light" />
+                <div class="lg:hidden ml-auto">
+                    <x-layouts.mobile-nav theme="light" />
+                </div>
             </div>
         </header>
 
@@ -70,7 +72,7 @@
             </div>
         @endif
         <!-- Hero Content Container -->
-        <div class="flex-1 flex flex-col justify-center pb-32" 
+        <div class="flex-1 flex flex-col justify-center pb-60" 
              x-data="{ 
                 shown: false,
                 init() {
@@ -116,29 +118,43 @@
 
 
     <!-- Word of the Day (Figma Style - Yellow Banner) -->
-    @if($wordOfTheDay)
-        <section class="bg-[#FFB703] py-3 shadow-sm border-b border-black/5">
-            <div class="max-w-[1240px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
-                <div class="flex items-center gap-3">
-                    <span class="bg-white text-[#FFB703] text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider">WORD OF THE DAY</span>
-                    <span class="text-black font-bold text-base h-5 leading-tight select-all tracking-tight">"{{ $wordOfTheDay->term }}"</span>
-                </div>
-                <div class="hidden sm:block h-3 w-px bg-black/20"></div>
-                <p class="text-black/80 text-sm font-medium italic line-clamp-1">
-                    {{ $wordOfTheDay->primaryDefinition->definition ?? 'A trending term you need to know.' }}
-                </p>
-                <a href="{{ route('word.show', $wordOfTheDay->slug) }}" class="text-black font-bold text-sm hover:underline whitespace-nowrap">
-                    Read more →
-                </a>
-            </div>
-        </section>
-    @endif
+    <!-- Word of the Day (Floating Card Style) -->
+    <!-- Moved inside Main section for better stacking -->
 
     <!-- Main Content -->
     <main>
         
         <!-- Trending Right Now (Enhanced to Match Image) -->
-        <section class="bg-white py-24">
+        <section class="bg-white pb-24 relative">
+            <!-- Word of the Day (Floating Card Style) - Moved Inside for seamless BG -->
+            @if($wordOfTheDay)
+                <div class="relative z-30 -mt-12 mb-20 px-6">
+                    <div class="max-w-[1240px] mx-auto bg-white rounded-[25px] p-8 shadow-xl shadow-blue-900/10 border border-[#00336E]/10 flex flex-col md:flex-row items-center justify-between gap-8 hover:transform hover:scale-[1.005] transition-all duration-300">
+                        <div class="flex flex-col md:flex-row items-center gap-6 text-center md:text-left flex-1 min-w-0">
+                            <div class="flex flex-col items-center md:items-start min-w-fit">
+                                <span class="bg-[#FFB703] text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-2 shadow-sm">Word Of The Day</span>
+                                <h2 class="text-4xl font-black text-[#00336E] leading-none tracking-tight">
+                                    {{ $wordOfTheDay->term }}
+                                </h2>
+                            </div>
+                            
+                            <div class="hidden md:block w-px h-12 bg-[#00336E]/10"></div>
+                            
+                            <p class="text-[#00336E]/80 text-lg font-medium leading-relaxed line-clamp-2 md:line-clamp-2 max-w-2xl">
+                                "{{ $wordOfTheDay->primaryDefinition->definition ?? 'A trending term you need to know.' }}"
+                            </p>
+                        </div>
+
+                        <a href="{{ route('word.show', $wordOfTheDay->slug) }}" class="flex-shrink-0 bg-[#EFF6FE] text-[#00336E] hover:bg-[#00336E] hover:text-white px-10 py-4 rounded-xl text-sm font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-2 group whitespace-nowrap shadow-sm hover:shadow-md">
+                            Learn Use Case
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            @else
+                <div class="pt-24"></div> 
+            @endif
+
             <div class="max-w-[1240px] mx-auto px-6">
                 <!-- Section Header -->
                 <div class="mb-12 reveal-on-scroll">
@@ -148,9 +164,18 @@
 
                 <!-- Tabs -->
                 <div class="flex items-center gap-3 mb-10 reveal-on-scroll">
-                    <button class="bg-[#00336E] text-white px-8 py-3 rounded-full text-sm font-black shadow-lg shadow-blue-900/10">Today</button>
-                    <button class="bg-[#F1F5F9] text-[#00336E] px-8 py-3 rounded-full text-sm font-black hover:bg-slate-200 transition-colors">This Week</button>
-                    <button class="bg-[#F1F5F9] text-[#00336E] px-8 py-3 rounded-full text-sm font-black hover:bg-slate-200 transition-colors">This Month</button>
+                    <a href="{{ route('home', ['timeframe' => 'today']) }}" 
+                       class="{{ request('timeframe', 'today') === 'today' ? 'bg-[#00336E] text-white shadow-lg shadow-blue-900/10' : 'bg-[#F1F5F9] text-[#00336E] hover:bg-slate-200' }} px-8 py-3 rounded-full text-sm font-black transition-colors">
+                        Today
+                    </a>
+                    <a href="{{ route('home', ['timeframe' => 'week']) }}" 
+                       class="{{ request('timeframe') === 'week' ? 'bg-[#00336E] text-white shadow-lg shadow-blue-900/10' : 'bg-[#F1F5F9] text-[#00336E] hover:bg-slate-200' }} px-8 py-3 rounded-full text-sm font-black transition-colors">
+                        This Week
+                    </a>
+                    <a href="{{ route('home', ['timeframe' => 'month']) }}" 
+                       class="{{ request('timeframe') === 'month' ? 'bg-[#00336E] text-white shadow-lg shadow-blue-900/10' : 'bg-[#F1F5F9] text-[#00336E] hover:bg-slate-200' }} px-8 py-3 rounded-full text-sm font-black transition-colors">
+                        This Month
+                    </a>
                 </div>
 
                 <!-- Trending Card Grid -->

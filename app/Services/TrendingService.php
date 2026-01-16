@@ -59,13 +59,30 @@ class TrendingService
     /**
      * Get Trending Words (Cached for speed)
      */
-    public static function getTrending($limit = 12)
+    public static function getTrending($limit = 12, $timeframe = 'today')
     {
         // Cache this query for 2 minutes to serve Bento Grid instantly
-        return Cache::remember('homepage_bento_grid', 120, function() use ($limit) {
-            return Word::where('is_verified', true) // Optional: only show verified? for now allow all
-                ->orderBy('velocity_score', 'desc')
-                ->with('primaryDefinition')
+        $cacheKey = "homepage_trending_{$timeframe}";
+        
+        return Cache::remember($cacheKey, 120, function() use ($limit, $timeframe) {
+            $query = Word::where('is_verified', true)
+                ->with('primaryDefinition');
+
+            // Apply logic similar to HomeController browsing
+            switch ($timeframe) {
+                case 'week':
+                    $query->where('created_at', '>=', now()->subDays(7));
+                    break;
+                case 'month':
+                    $query->where('created_at', '>=', now()->subDays(30));
+                    break;
+                case 'today':
+                default:
+                    $query->where('created_at', '>=', now()->subDay());
+                    break;
+            }
+
+            return $query->orderBy('velocity_score', 'desc')
                 ->limit($limit)
                 ->get();
         });

@@ -18,7 +18,7 @@ class CheckMaintenanceMode
         $maintenanceMode = Setting::get('maintenance_mode', 'false');
 
         // Check if maintenance mode is enabled
-        if ($maintenanceMode === 'true' || $maintenanceMode === true) {
+        if (filter_var($maintenanceMode, FILTER_VALIDATE_BOOLEAN)) {
             // Allow admins through
             if (auth()->check() && auth()->user()->is_admin) {
                 return $next($request);
