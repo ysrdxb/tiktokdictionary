@@ -52,7 +52,7 @@
     <style>
         @font-face {
             font-family: 'GRIFTER';
-            src: url('{{ asset("fonts/grifterbold.otf") }}') format('opentype');
+            src: url('{{ \Illuminate\Support\Facades\Request::root() }}/fonts/grifterbold.otf') format('opentype');
             font-weight: 700;
             font-style: normal;
             font-display: swap;
