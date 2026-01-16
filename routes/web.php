@@ -48,7 +48,7 @@ Route::get('/invest', \App\Livewire\Tools\InvestorDashboard::class)->name('tools
 
 // Utility Routes
 Route::get('/overview', function () {
-    return response()->file(public_path('overview.html'));
+    return response()->file(base_path('public/overview.html'));
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
