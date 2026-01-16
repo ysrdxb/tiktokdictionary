@@ -55,8 +55,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/word/{slug}', [WordController::class, 'show'])->name('word.show');
 Route::get('/browse', [WordController::class, 'browse'])->name('word.browse');
 
-// Submission Routes (Wired to Livewire)
-Route::get('/submit', \App\Livewire\SubmitWordForm::class)->name('word.create');
+// Submission Routes
+Route::get('/submit', [WordController::class, 'create'])->name('word.create');
 
 // AJAX/API checks
 Route::get('/check-word', [WordController::class, 'check'])->name('word.check');
