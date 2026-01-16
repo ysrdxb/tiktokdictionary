@@ -16,46 +16,49 @@
                 </a>
             </div>
         @else
-            <div class="premium-card bg-white rounded-[30px] p-8 md:p-12 shadow-xl border border-[#00336E]/10">
-                <form wire:submit="submit" class="space-y-8">
+            <div class="premium-card bg-white/70 backdrop-blur-3xl rounded-[30px] p-8 md:p-12 shadow-2xl border border-white/40 relative overflow-hidden">
+                <!-- Subtle Glass Shine -->
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>
+
+                <form wire:submit="submit" class="space-y-8 relative z-10">
                     <!-- Row 1: Word + Definition -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Word -->
-                        <div class="relative group">
-                            <label class="absolute -top-2.5 left-4 bg-white px-2 text-sm font-bold text-[#00336E] z-10 transition-colors">Word</label>
+                        <div class="group">
+                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Word</label>
                             <input type="text" wire:model.live.debounce.500ms="term" required
-                                   placeholder="Enter the word or phrase (e.g., 'Delulu', 'Rizz')"
-                                   class="w-full px-6 py-4 bg-transparent border border-[#00336E]/20 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:ring-1 focus:ring-[#00336E] transition-all placeholder:text-gray-300">
-                            @error('term') <span class="text-red-500 text-xs font-bold ml-4 mt-1 block">{{ $message }}</span> @enderror
+                                   placeholder="e.g., 'Delulu', 'Rizz'"
+                                   class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30">
+                            @error('term') <span class="text-red-500 text-xs font-bold ml-1 mt-1 block animate-pulse">{{ $message }}</span> @enderror
                         </div>
                         
                         <!-- Definition -->
-                        <div class="relative group">
-                            <label class="absolute -top-2.5 left-4 bg-white px-2 text-sm font-bold text-[#00336E] z-10">Definition <span class="text-[#00336E]/40 font-normal ml-1 text-xs">(Helps us verify origin)</span></label>
-                            <input type="text" wire:model="definition" required
-                                   placeholder="Write the clearest, simplest definition."
-                                   class="w-full px-6 py-4 bg-transparent border border-[#00336E]/20 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:ring-1 focus:ring-[#00336E] transition-all placeholder:text-gray-300">
-                            @error('definition') <span class="text-red-500 text-xs font-bold ml-4 mt-1 block">{{ $message }}</span> @enderror
+                        <div class="group">
+                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Definition</label>
+                            <textarea wire:model="definition" required rows="1"
+                                   placeholder="What does it mean?"
+                                   class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30 min-h-[64px]"></textarea>
+                            @error('definition') <span class="text-red-500 text-xs font-bold ml-1 mt-1 block animate-pulse">{{ $message }}</span> @enderror
                         </div>
                     </div>
     
                     <!-- Row 2: Example Sentence -->
-                    <div class="relative group">
-                        <label class="absolute -top-2.5 left-4 bg-white px-2 text-sm font-bold text-[#00336E] z-10">Example Sentence</label>
+                    <div class="group">
+                        <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Example Sentence</label>
                         <input type="text" wire:model="example" required
-                               placeholder="Use the word in a real sentence (e.g., 'He\'s got insane rizz.')"
-                               class="w-full px-6 py-4 bg-transparent border border-[#00336E]/20 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:ring-1 focus:ring-[#00336E] transition-all placeholder:text-gray-300">
-                        @error('example') <span class="text-red-500 text-xs font-bold ml-4 mt-1 block">{{ $message }}</span> @enderror
+                               placeholder="Use it in a sentence..."
+                               class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30">
+                        @error('example') <span class="text-red-500 text-xs font-bold ml-1 mt-1 block animate-pulse">{{ $message }}</span> @enderror
                     </div>
     
                     <!-- Row 3: Category + Source -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Category -->
-                        <div class="relative group">
-                            <label class="absolute -top-2.5 left-4 bg-white px-2 text-sm font-bold text-[#00336E] z-10">Category</label>
+                        <div class="group">
+                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Category</label>
                             <div class="relative">
                                 <select wire:model="category" required
-                                        class="w-full px-6 py-4 bg-transparent border border-[#00336E]/20 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:ring-1 focus:ring-[#00336E] transition-all appearance-none cursor-pointer">
+                                        class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-bold text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all appearance-none cursor-pointer">
                                     <option value="" disabled selected>Select a category</option>
                                     <option value="Slang">Slang</option>
                                     <option value="Gen-Z">Gen-Z</option>
@@ -65,25 +68,25 @@
                                     <option value="Internet">Internet</option>
                                     <option value="AAVE">AAVE</option>
                                 </select>
-                                <svg class="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-[#00336E]/30 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                <svg class="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-[#00336E]/50 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
                         </div>
                         
                         <!-- Source URL -->
-                        <div class="relative group">
-                            <label class="absolute -top-2.5 left-4 bg-white px-2 text-sm font-bold text-[#00336E] z-10">Where Did You See This Word? <span class="text-[#00336E]/40 font-normal ml-1 text-xs">(Optional)</span></label>
+                        <div class="group">
+                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Source URL <span class="text-[#00336E]/40 font-normal ml-1 text-xs normal-case">(Optional)</span></label>
                             <input type="url" wire:model="sourceUrl"
-                                   placeholder="Paste TikTok link (optional)"
-                                   class="w-full px-6 py-4 bg-transparent border border-[#00336E]/20 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:ring-1 focus:ring-[#00336E] transition-all placeholder:text-gray-300">
+                                   placeholder="https://tiktok.com/..."
+                                   class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30">
                         </div>
                     </div>
     
                     <!-- Row 4: Alternate Spellings -->
-                    <div class="relative group">
-                        <label class="absolute -top-2.5 left-4 bg-white px-2 text-sm font-bold text-[#00336E] z-10">Alternate Spellings</label>
+                    <div class="group">
+                        <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Alternate Spellings</label>
                         <input type="text" wire:model="alternateSpellings"
-                               placeholder="Add variations (e.g., 'rizz', 'riz', 'rizzed')"
-                               class="w-full px-6 py-4 bg-transparent border border-[#00336E]/20 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:ring-1 focus:ring-[#00336E] transition-all placeholder:text-gray-300">
+                               placeholder="e.g. 'rizz', 'riz', 'rizzed'"
+                               class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30">
                     </div>
     
                     <!-- Submit Button -->

@@ -68,23 +68,28 @@
                 <div x-ref="trendingScroll" class="flex overflow-x-auto gap-6 snap-x snap-mandatory scroll-smooth py-10 -mx-6 px-6 no-scrollbar reveal-on-scroll">
                     @forelse($trendingWords->take(9) as $word)
                         <div class="min-w-[300px] md:min-w-[400px] snap-center">
-                            <a href="{{ route('word.show', $word->slug) }}" class="group bg-white rounded-[20px] p-8 border border-[#00336E] hover:shadow-xl transition-all flex flex-col h-full active:scale-[0.98]">
-                                <h3 class="text-3xl font-black text-[#00152e] mb-4 tracking-tight">{{ $word->term }}</h3>
-                                
-                                <!-- Badges -->
-                                <div class="flex flex-wrap gap-3 mb-6">
-                                    <span class="bg-[#EFF6FE] text-[#00336E] text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wider flex items-center gap-1.5">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
-                                        {{ $word->total_agrees > 0 ? round(($word->total_agrees / max(($word->total_agrees + $word->total_disagrees), 1)) * 100) : 0 }}%
-                                    </span>
-                                    <span class="bg-[#EFF6FE] text-[#00336E] text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wider flex items-center gap-1.5">
-                                        <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.45-.412-1.725a1 1 0 00-1.422-.865c-.247.114-.491.29-.718.538a5.2 5.2 0 00-1.069 2.235c-.15.68-.078 1.436.326 2.088.35.565.88.89 1.401 1.15.26.13.527.266.79.408l.004.002c.87.458 1.83.96 2.87 1.043a6.793 6.793 0 004.145-1.077 6.436 6.436 0 002.502-3.832 6.55 6.55 0 00-.236-4.223c-.32-.888-.788-1.58-1.352-2.144z" clip-rule="evenodd" /></svg>
-                                        {{ $word->category == 'TikTok' ? 'Viral Audio' : 'Trending Today' }}
-                                    </span>
+                            <a href="{{ route('word.show', $word->slug) }}" class="group block h-full">
+                                <div class="premium-card h-full bg-white/70 backdrop-blur-xl rounded-[30px] p-8 border border-white/40 shadow-lg group-hover:shadow-2xl group-hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+                                     <!-- Glass Shine -->
+                                    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    
+                                    <h3 class="text-3xl font-black text-[#00336E] mb-4 tracking-tight group-hover:text-[#F59E0B] transition-colors">{{ $word->term }}</h3>
+                                    
+                                    <!-- Badges -->
+                                    <div class="flex flex-wrap gap-3 mb-6 relative z-10">
+                                        <span class="bg-white/50 border border-[#00336E]/10 text-[#00336E] text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
+                                            {{ $word->total_agrees > 0 ? round(($word->total_agrees / max(($word->total_agrees + $word->total_disagrees), 1)) * 100) : 0 }}%
+                                        </span>
+                                        <span class="bg-white/50 border border-[#00336E]/10 text-[#00336E] text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                                            <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.45-.412-1.725a1 1 0 00-1.422-.865c-.247.114-.491.29-.718.538a5.2 5.2 0 00-1.069 2.235c-.15.68-.078 1.436.326 2.088.35.565.88.89 1.401 1.15.26.13.527.266.79.408l.004.002c.87.458 1.83.96 2.87 1.043a6.793 6.793 0 004.145-1.077 6.436 6.436 0 002.502-3.832 6.55 6.55 0 00-.236-4.223c-.32-.888-.788-1.58-1.352-2.144z" clip-rule="evenodd" /></svg>
+                                            {{ $word->category == 'TikTok' ? 'Viral Audio' : 'Trending Today' }}
+                                        </span>
+                                    </div>
+                                    <p class="text-[#00336E]/80 text-sm font-medium leading-relaxed">
+                                        {{ Str::limit(optional($word->primaryDefinition)->definition, 60) }}
+                                    </p>
                                 </div>
-                                <p class="text-[#00336E]/80 text-sm font-medium leading-relaxed">
-                                    {{ Str::limit(optional($word->primaryDefinition)->definition, 60) }}
-                                </p>
                             </a>
                         </div>
                     @empty

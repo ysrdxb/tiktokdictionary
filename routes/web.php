@@ -9,6 +9,7 @@ use App\Http\Controllers\WordController;
 // Auth Routes
 Route::middleware('guest')->group(function () {
     Route::get('/login', \App\Livewire\Auth\Login::class)->name('login');
+    Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login.post'); // Keep for POST fallback if needed
     Route::get('/register', \App\Livewire\Auth\Register::class)->name('register');
 });
 
@@ -48,7 +49,10 @@ Route::get('/invest', \App\Livewire\Tools\InvestorDashboard::class)->name('tools
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/word/{slug}', [WordController::class, 'show'])->name('word.show');
 Route::get('/browse', [WordController::class, 'browse'])->name('word.browse');
-Route::get('/submit', [WordController::class, 'create'])->name('word.create');
-Route::post('/submit', [WordController::class, 'store'])->name('word.store');
+
+// Submission Routes (Wired to Livewire)
+Route::get('/submit', \App\Livewire\SubmitWordForm::class)->name('word.create');
+
+// AJAX/API checks
 Route::get('/check-word', [WordController::class, 'check'])->name('word.check');
 Route::post('/word/{word}/definition', [WordController::class, 'storeDefinition'])->name('definition.store');
