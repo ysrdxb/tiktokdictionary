@@ -164,6 +164,12 @@ class SubmitWordForm extends Component
 
         $this->validate();
 
+        // Bottleneck A: Content Quality & Spam (Basic implementation)
+        if ($this->hasProfanity($this->term) || $this->hasProfanity($this->definition) || $this->hasProfanity($this->example)) {
+            $this->addError('term', 'Your submission contains flagged content. Please keep it clean.');
+            return;
+        }
+
         // Create or find the word
         $word = Word::firstOrCreate(
             ['term' => $this->term],
@@ -215,5 +221,17 @@ class SubmitWordForm extends Component
     public function render()
     {
         return view('livewire.submit-word-form');
+    }
+
+    protected function hasProfanity($text)
+    {
+        $banned = ['badword', 'hate', 'spam', 'scam', 'violence']; // MVP Blocklist - extensible
+        $normalized = strtolower($text);
+        foreach ($banned as $word) {
+            if (str_contains($normalized, $word)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

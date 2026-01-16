@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Overview - TikTokDictionary</title>
+    <title>Project Verification - TikTokDictionary</title>
     <style>
+        /* Keeping your brand font just for headers so it matches the site */
         @font-face {
             font-family: 'GRIFTER';
             src: url('fonts/grifterbold.otf') format('opentype');
@@ -13,228 +14,96 @@
         }
 
         body {
-            font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-            /* Use Outfit/System for body */
+            font-family: sans-serif;
             line-height: 1.6;
-            color: #333;
-            max-width: 900px;
+            color: #222;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
-            background-color: #f9fafb;
-        }
-
-        .container {
-            background: white;
-            padding: 50px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        h1,
-        h2 {
-            font-family: 'GRIFTER', sans-serif;
-            /* Apply Grifter to headers */
-            text-transform: uppercase;
+            padding: 40px;
+            background-color: #fff;
         }
 
         h1 {
+            font-family: 'GRIFTER', sans-serif;
             color: #00336E;
-            font-size: 2.5rem;
-            border-bottom: 2px solid #eaeaea;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
         }
 
         h2 {
+            font-family: 'GRIFTER', sans-serif;
             color: #00336E;
             margin-top: 40px;
-            font-size: 1.8rem;
-            border-left: 5px solid #F59E0B;
-            /* Accent color */
-            padding-left: 15px;
+            font-size: 1.5rem;
         }
 
-        h3 {
-            color: #444;
-            margin-top: 30px;
-            font-size: 1.4rem;
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
         }
 
-        ul {
-            padding-left: 20px;
+        ul,
+        ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
         }
 
         li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
-        strong {
-            color: #000;
-        }
-
-        code {
-            background-color: #f3f4f6;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Consolas', monospace;
-            font-size: 0.9em;
-            color: #d63384;
-        }
-
-        .note {
-            background-color: #e0f2fe;
-            border-left: 4px solid #0284c7;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
+        .highlight {
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #d0e3ff;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>User Requirements Document (URD)</h1>
-        <p><strong>Project:</strong> TikTokDictionary</p>
 
-        <h2>1. High Level Overview</h2>
-        <p>TikTokDictionary is a community-driven, dynamic glossary designed to track, define, and archive the rapidly
-            evolving language of the internet (specifically TikTok and Gen-Z slang). Unlike traditional dictionaries, it
-            operates on a "Velocity" model where terms are ranked by current relevance and viral trend status, not just
-            alphabetical order.</p>
+    <h1>TikTokDictionary</h1>
+    <p>This is a custom dictionary platform built for Gen-Z slang. It allows users to post words, vote on definitions,
+        and see what is trending right now.</p>
 
-        <div class="note">
-            <strong>Core Concept:</strong> "The Urban Dictionary for the TikTok Era, but Premium."
-        </div>
-
-        <h3>Key Mechanics:</h3>
-        <ul>
-            <li><strong>Crowdsourced data:</strong> Users submit words, definitions, and usage examples.</li>
-            <li><strong>Democratic Validation:</strong> A reddit-style "Agree/Disagree" voting system determines the
-                most accurate definition for a word.</li>
-            <li><strong>Trend Tracking:</strong> A dedicated "Trending" algorithm highlights words that are spiking in
-                usage (Today, This Week, This Month).</li>
-            <li><strong>Premium Aesthetic:</strong> A glassmorphism-based, high-fidelity UI that treats slang with the
-                visual respect of a high-end fashion brand.</li>
-        </ul>
-
-        <h2>2. User Flows</h2>
-
-        <h3>A. The "Explorer" (Guest/Viewer)</h3>
-        <ul>
-            <li><strong>Goal:</strong> Find the meaning of a specific slang term or discover what is currently popular.
-            </li>
-            <li><strong>Flow:</strong>
-                <ol>
-                    <li>Lands on <strong>Homepage</strong>.</li>
-                    <li>Sees "Word of the Day" and "Trending Now" sections.</li>
-                    <li>Uses <strong>Search Bar</strong> to find a specific term (e.g., "Mewing").</li>
-                    <li>Arrives at <strong>Word Detail Page</strong>.</li>
-                    <li>Reads top-rated definition and usage examples.</li>
-                    <li>(Optional) Clicks "Live Feed" to see real-time submissions.</li>
-                </ol>
-            </li>
-        </ul>
-
-        <h3>B. The "Contributor" (Registered User)</h3>
-        <ul>
-            <li><strong>Goal:</strong> Add a missing word or define an existing one better.</li>
-            <li><strong>Flow:</strong>
-                <ol>
-                    <li>Logs in via <strong>Login Page</strong>.</li>
-                    <li>Clicks <strong>"Submit Word"</strong>.</li>
-                    <li><strong>Step 1:</strong> Enters the Word (System checks for duplicates instantly).</li>
-                    <li><strong>Step 2:</strong> Enters Definition, Example usage, and Categories.</li>
-                    <li><strong>Step 3:</strong> Reviews and Submits.</li>
-                    <li>System validates content (basic profanity/spam check).</li>
-                    <li>Word goes to <strong>Moderation Queue</strong> (or auto-publishes based on reputation).</li>
-                </ol>
-            </li>
-        </ul>
-
-        <h3>C. The "Judge" (Community Voter)</h3>
-        <ul>
-            <li><strong>Goal:</strong> Validate correct logic and bury spam/bias.</li>
-            <li><strong>Voting:</strong> Users see "Agree" (Up) and "Disagree" (Down) buttons on every definition.
-                Higher net votes push a definition to the top of the Word Detail page.</li>
-        </ul>
-
-        <h3>D. The "Administrator"</h3>
-        <ul>
-            <li><strong>Goal:</strong> Maintain quality and manage the platform.</li>
-            <li><strong>Flow:</strong>
-                <ol>
-                    <li>Accesses <strong>Admin Dashboard</strong>.</li>
-                    <li>Reviews <strong>Flagged/Reported</strong> content.</li>
-                    <li>Manages <strong>Users</strong> (ban/mute).</li>
-                    <li>Configures site-wide settings (Maintenance Mode, Announcement Banners).</li>
-                </ol>
-            </li>
-        </ul>
-
-        <h2>3. Screens / Pages Needed</h2>
-
-        <h3>Core Public Pages</h3>
-        <ol>
-            <li><strong>Homepage (<code>/</code>):</strong> High-impact "Word of the Day", Search Hero, and Trending
-                Lists (Velocity-based).</li>
-            <li><strong>Live Feed (<code>/feed</code>):</strong> A TikTok-style vertical scroll of the newest approved
-                definitions.</li>
-            <li><strong>Browse / Dictionary (<code>/browse</code>):</strong> A-Z filtered list, searchable and sortable
-                by category.</li>
-            <li><strong>Word Detail (<code>/word/{slug}</code>):</strong> The "Wiki" page for a specific word. Shows the
-                word, its pronunciation (optional), and list of user-submitted definitions ordered by votes.</li>
-            <li><strong>User Profile (<code>/u/{username}</code>):</strong> Shows a user's submitted words, total
-                reputation score, and badges.</li>
-        </ol>
-
-        <h3>Auth Pages</h3>
-        <ol start="6">
-            <li><strong>Login (<code>/login</code>):</strong> Premium glass-card interface.</li>
-            <li><strong>Register (<code>/register</code>):</strong> Account creation flow.</li>
-        </ol>
-
-        <h3>User Interaction</h3>
-        <ol start="8">
-            <li><strong>Submit Word (<code>/submit</code>):</strong> Multi-step form for contributing data.</li>
-            <li><strong>Edit Submission:</strong> Allow users to fix typos in their own unapproved content.</li>
-        </ol>
-
-        <h3>Admin / Utility</h3>
-        <ol start="10">
-            <li><strong>Admin Dashboard:</strong> Stats overview.</li>
-            <li><strong>Moderation Queue:</strong> Rapid-fire interface to Approve/Reject new words.</li>
-            <li><strong>Maintenance Page:</strong> "We'll Be Back Soon" screen (with Admin bypass).</li>
-        </ol>
-
-        <h2>4. Expected Bottlenecks & Solutions</h2>
-
-        <h3>A. Content Quality & Spam</h3>
-        <ul>
-            <li><strong>Bottleneck:</strong> Users submitting "inside jokes" (names of their friends) or hate speech.
-            </li>
-            <li><strong>Solution:</strong> Pre-Moderation (MVP), Post-Moderation Reports, and AI Keyword Filtering.</li>
-        </ul>
-
-        <h3>B. Duplicate Entries</h3>
-        <ul>
-            <li><strong>Bottleneck:</strong> Users submitting "Rizz", "Rizzing", and "Rizzes" as separate entries.</li>
-            <li><strong>Solution:</strong> Input Normalization (lowercase/trim) and "Did you mean?" suggestions during
-                submission.</li>
-        </ul>
-
-        <h3>C. Search Performance</h3>
-        <ul>
-            <li><strong>Bottleneck:</strong> Database search speed as content grows.</li>
-            <li><strong>Solution:</strong> Database Indexing (MVP) and Laravel Scout/Algolia (Phase 2).</li>
-        </ul>
-
-        <h3>D. Visual Consistency ("Vibe Coding" Risk)</h3>
-        <ul>
-            <li><strong>Bottleneck:</strong> Inconsistent fonts and low-effort UI elements.</li>
-            <li><strong>Solution:</strong> Strict adherence to design system (Grifter font for headers) and reusable
-                Blade components for uniform inputs.</li>
-        </ul>
+    <div class="highlight">
+        <p><strong>Goal:</strong> To create a premium, clean version of Urban Dictionary tailored for TikTok culture.
+        </p>
     </div>
+
+    <h2>1. User Journey</h2>
+    <p>Here is how a normal user uses the website:</p>
+    <ol>
+        <li><strong>Visitor:</strong> A guest lands on the homepage and can search for words or see the "Word of the
+            Day".</li>
+        <li><strong>Sign Up:</strong> To contribute, they go to the Register page and create an account.</li>
+        <li><strong>Submission:</strong> The user clicks "Submit Word" and adds a new slang term (e.g., "Rizz").</li>
+        <li><strong>Voting:</strong> Other users see this word and can upvote (Agree) or downvote (Disagree).</li>
+        <li><strong>Trending:</strong> If a word gets enough activity, it shows up on the "Trending" list on the
+            homepage.</li>
+    </ol>
+
+    <h2>2. Project Modules Covered</h2>
+    <p>I have built the following core features:</p>
+    <ul>
+        <li><strong>Authentication Module:</strong> secure Login and Registration pages.</li>
+        <li><strong>Dictionary Module:</strong> capability to Add words, Define them, and add Examples.</li>
+        <li><strong>Voting System:</strong> dynamic Up/Down voting logic that updates in real-time.</li>
+        <li><strong>Search & Browse:</strong> filters to find words by Category (Gaming, TikTok, Slang, etc.).</li>
+        <li><strong>Vertical Feed:</strong> a TikTok-style scrolling feed to explore random words.</li>
+        <li><strong>Admin Panel:</strong> a dashboard to manage users and delete bad words.</li>
+    </ul>
+
+    <h2>3. How to Use</h2>
+    <ul>
+        <li><strong>To Test Login:</strong> Go to <code>/login</code> and use username "admin" (or create a new one).
+        </li>
+        <li><strong>To Test Submitting:</strong> Click the "+" button or "Submit Word" in the menu.</li>
+        <li><strong>To See Code:</strong> The main logic is in the <code>app/Livewire</code> folder.</li>
+    </ul>
+
 </body>
 
 </html>
