@@ -1,4 +1,4 @@
-<div class="fixed inset-0 bg-[#002B5B] z-[100] overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+<div class="fixed inset-0 bg-[#00336E] z-[100] overflow-y-scroll snap-y snap-mandatory scroll-smooth">
     
     <!-- Close Button -->
     <a href="{{ route('home') }}" class="fixed top-6 right-6 z-[110] p-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition-all">
@@ -122,7 +122,7 @@
                 <div class="h-screen w-full flex flex-col items-center justify-center snap-start text-white text-center px-6">
                     <h2 class="text-3xl font-black mb-4">You've reached the end! 🎬</h2>
                     <p class="text-white/60 font-medium mb-8">You're officially caught up on all the slang.</p>
-                    <a href="{{ route('word.create') }}" class="px-8 py-4 bg-white text-[#002B5B] font-bold rounded-full hover:bg-slate-200 transition-colors">
+                    <a href="{{ route('word.create') }}" class="px-8 py-4 bg-white text-[#00336E] font-bold rounded-full hover:bg-slate-200 transition-colors">
                         Submit a New Word
                     </a>
                 </div>

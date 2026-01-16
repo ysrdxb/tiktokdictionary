@@ -5,7 +5,7 @@
             <!-- Header -->
             <div class="flex items-center justify-between mb-8">
                 <div>
-                    <h1 class="text-3xl font-bold text-[#002B5B]">Dictionary Mainframe</h1>
+                    <h1 class="text-3xl font-bold text-[#00336E]">Dictionary Mainframe</h1>
                     <p class="text-slate-500">Manage viral content and community submissions.</p>
                 </div>
                 <div class="flex gap-4">
@@ -17,13 +17,13 @@
             <div class="grid grid-cols-4 gap-4 mb-4">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                     <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Words</div>
-                    <div class="text-3xl font-black text-[#002B5B]">{{ number_format($stats['all']) }}</div>
+                    <div class="text-3xl font-black text-[#00336E]">{{ number_format($stats['all']) }}</div>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                     <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Verified</div>
                     <div class="text-3xl font-black text-blue-600">{{ number_format($stats['verified']) }}</div>
                 </div>
-                <div class="bg-[#002B5B] p-6 rounded-xl shadow-sm border border-[#002B5B] text-white">
+                <div class="bg-[#00336E] p-6 rounded-xl shadow-sm border border-[#00336E] text-white">
                     <div class="text-xs font-bold text-white/50 uppercase tracking-wider">Viral Velocity</div>
                     <div class="text-3xl font-black">{{ number_format($stats['polar']) }}</div>
                 </div>
@@ -37,7 +37,7 @@
             <!-- Filter Tabs -->
             <div class="flex items-center gap-2 mb-6 border-b border-slate-200 pb-1">
                  <a href="{{ route('admin.dashboard') }}" 
-                    class="px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border-b-2 {{ $status === 'all' ? 'text-[#002B5B] border-[#002B5B] bg-white' : 'text-slate-500 border-transparent hover:text-slate-700' }}">
+                    class="px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border-b-2 {{ $status === 'all' ? 'text-[#00336E] border-[#00336E] bg-white' : 'text-slate-500 border-transparent hover:text-slate-700' }}">
                     All Words
                 </a>
                 <a href="{{ route('admin.dashboard', ['status' => 'pending']) }}" 
@@ -73,7 +73,7 @@
                             @foreach($words as $word)
                                 <tr class="hover:bg-slate-50 transition-colors">
                                     <td class="px-6 py-4">
-                                        <div class="font-bold text-[#002B5B]">{{ $word->term }}</div>
+                                        <div class="font-bold text-[#00336E]">{{ $word->term }}</div>
                                         <div class="text-xs text-slate-400">{{ $word->slug }}</div>
                                     </td>
                                     <td class="px-6 py-4">

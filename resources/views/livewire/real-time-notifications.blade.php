@@ -29,7 +29,7 @@
              x-transition:leave="transition ease-in duration-300"
              x-transition:leave-start="translate-x-0 opacity-100 scale-100"
              x-transition:leave-end="translate-x-full opacity-0 scale-95"
-             class="pointer-events-auto bg-white dark:bg-[#002B5B] border border-slate-200 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl p-4 w-80 backdrop-blur-md relative overflow-hidden group cursor-pointer hover:shadow-xl transition-all">
+             class="pointer-events-auto bg-white dark:bg-[#00336E] border border-slate-200 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl p-4 w-80 backdrop-blur-md relative overflow-hidden group cursor-pointer hover:shadow-xl transition-all">
             
             <div class="flex items-start gap-4">
                 <!-- Icon -->
@@ -44,7 +44,7 @@
                     </p>
                     
                     @if(isset($notification['data']['word']))
-                        <div class="text-lg font-black text-[#002B5B] dark:text-white leading-none mb-1">
+                        <div class="text-lg font-black text-[#00336E] dark:text-white leading-none mb-1">
                             <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
                                 {{ $notification['data']['word'] }}
                             </span>
@@ -53,7 +53,7 @@
                             has passed the vibe check.
                         </p>
                     @else
-                        <p class="text-sm font-bold text-[#002B5B] dark:text-white leading-snug">
+                        <p class="text-sm font-bold text-[#00336E] dark:text-white leading-snug">
                             {{ $notification['data']['message'] ?? '' }}
                         </p>
                     @endif

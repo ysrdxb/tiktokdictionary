@@ -27,7 +27,7 @@
                 
                 <!-- Header -->
                 <div class="bg-slate-50 dark:bg-white/5 px-6 py-4 border-b border-slate-100 dark:border-white/10 flex items-center justify-between">
-                    <h3 class="text-lg font-bold text-[#002B5B] dark:text-white flex items-center gap-2">
+                    <h3 class="text-lg font-bold text-[#00336E] dark:text-white flex items-center gap-2">
                         <span class="text-red-500">🚩</span> Report Content
                     </h3>
                     <button wire:click="close" class="text-slate-400 hover:text-slate-600 dark:text-white/40 dark:hover:text-white transition-colors">
@@ -60,7 +60,7 @@
                                             : 'border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5' }}">
                                 <input type="radio" wire:model="reason" value="{{ $value }}" class="mt-1 text-brand-primary focus:ring-brand-primary border-slate-300">
                                 <div>
-                                    <div class="font-bold text-sm text-[#002B5B] dark:text-white">{{ $value }}</div>
+                                    <div class="font-bold text-sm text-[#00336E] dark:text-white">{{ $value }}</div>
                                     <div class="text-xs text-slate-500 dark:text-white/50">{{ $description }}</div>
                                 </div>
                             </label>
@@ -72,7 +72,7 @@
                         <label class="block text-xs font-bold text-slate-500 dark:text-white/60 mb-2 uppercase tracking-wider">Additional Details (Optional)</label>
                         <textarea wire:model="details" 
                                   rows="3" 
-                                  class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-3 text-sm text-[#002B5B] dark:text-white placeholder:text-slate-400 focus:border-brand-primary focus:ring-brand-primary dark:focus:border-brand-accent dark:focus:ring-brand-accent outline-none transition-all"
+                                  class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-3 text-sm text-[#00336E] dark:text-white placeholder:text-slate-400 focus:border-brand-primary focus:ring-brand-primary dark:focus:border-brand-accent dark:focus:ring-brand-accent outline-none transition-all"
                                   placeholder="Provide any extra context..."></textarea>
                     </div>
                 </div>

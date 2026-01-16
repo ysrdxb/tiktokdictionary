@@ -4,7 +4,7 @@
     <!-- Hamburger Button -->
     <button 
         @click="open = true" 
-        class="lg:hidden p-2 rounded-lg transition-colors {{ $theme === 'dark' ? 'text-white hover:bg-white/10' : 'text-[#002B5B] dark:text-white hover:bg-slate-100 dark:hover:bg-white/10' }}"
+        class="lg:hidden p-2 rounded-lg transition-colors {{ $theme === 'dark' ? 'text-white hover:bg-white/10' : 'text-[#00336E] dark:text-white hover:bg-slate-100 dark:hover:bg-white/10' }}"
         aria-label="Open Menu"
     >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,12 +35,12 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="translate-x-0"
         x-transition:leave-end="translate-x-full"
-        class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white dark:bg-[#002B5B] shadow-2xl z-50 lg:hidden flex flex-col border-l border-slate-200 dark:border-white/10"
+        class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white dark:bg-[#00336E] shadow-2xl z-50 lg:hidden flex flex-col border-l border-slate-200 dark:border-white/10"
         style="display: none;"
     >
         <!-- Header -->
         <div class="flex items-center justify-between p-6 border-b border-slate-100 dark:border-white/10">
-            <span class="text-xl font-black text-[#002B5B] dark:text-white tracking-tight">
+            <span class="text-xl font-black text-[#00336E] dark:text-white tracking-tight">
                 TikTok<span class="text-brand-primary dark:text-brand-accent">Dictionary</span>
             </span>
             <button 
@@ -61,7 +61,7 @@
                     type="search" 
                     name="q"
                     placeholder="Search slang..." 
-                    class="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-[#002B5B] dark:text-white focus:ring-2 focus:ring-brand-primary outline-none transition-all placeholder:text-slate-400"
+                    class="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-[#00336E] dark:text-white focus:ring-2 focus:ring-brand-primary outline-none transition-all placeholder:text-slate-400"
                 >
                 <svg class="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -70,19 +70,19 @@
 
             <!-- Navigation Links -->
             <nav class="flex flex-col space-y-4">
-                <a href="{{ route('home') }}" class="flex items-center gap-3 text-lg font-bold text-[#002B5B] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
+                <a href="{{ route('home') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
                     <span class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/10 flex items-center justify-center">🏠</span>
                     Home
                 </a>
-                <a href="{{ route('explore.feed') }}" class="flex items-center gap-3 text-lg font-bold text-[#002B5B] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
+                <a href="{{ route('explore.feed') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
                     <span class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/10 flex items-center justify-center">🔥</span>
                     Live Feed
                 </a>
-                <a href="{{ route('word.browse') }}" class="flex items-center gap-3 text-lg font-bold text-[#002B5B] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
+                <a href="{{ route('word.browse') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
                     <span class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/10 flex items-center justify-center">📚</span>
                     Browse Dictionary
                 </a>
-                <a href="{{ route('word.create') }}" class="flex items-center gap-3 text-lg font-bold text-[#002B5B] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
+                <a href="{{ route('word.create') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
                     <span class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/10 flex items-center justify-center">➕</span>
                     Submit Word
                 </a>
@@ -96,25 +96,25 @@
                             {{ substr(Auth::user()->username, 0, 1) }}
                         </div>
                         <div>
-                            <div class="font-bold text-[#002B5B] dark:text-white">{{ Auth::user()->username }}</div>
+                            <div class="font-bold text-[#00336E] dark:text-white">{{ Auth::user()->username }}</div>
                             <div class="text-xs text-slate-500 dark:text-white/60">Logged In</div>
                         </div>
                     </div>
                     
                     @if(Auth::user()->is_admin)
-                        <a href="{{ route('admin.dashboard') }}" class="block w-full py-3 mb-3 text-center rounded-xl bg-slate-100 dark:bg-white/10 text-[#002B5B] dark:text-white font-bold hover:bg-slate-200 transition-colors">
+                        <a href="{{ route('admin.dashboard') }}" class="block w-full py-3 mb-3 text-center rounded-xl bg-slate-100 dark:bg-white/10 text-[#00336E] dark:text-white font-bold hover:bg-slate-200 transition-colors">
                             Admin Dashboard
                         </a>
                     @endif
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="w-full py-3 bg-[#002B5B] dark:bg-white text-white dark:text-[#002B5B] font-bold rounded-xl hover:bg-brand-primary transition-colors shadow-lg">
+                        <button type="submit" class="w-full py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] font-bold rounded-xl hover:bg-brand-primary transition-colors shadow-lg">
                             Sign Out
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="block w-full py-3 bg-[#002B5B] dark:bg-white text-white dark:text-[#002B5B] text-center font-bold rounded-xl hover:bg-brand-primary transition-colors shadow-lg mb-3">
+                    <a href="{{ route('login') }}" class="block w-full py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] text-center font-bold rounded-xl hover:bg-brand-primary transition-colors shadow-lg mb-3">
                         Login / Register
                     </a>
                 @endauth

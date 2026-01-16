@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Definition;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\RateLimiter;
 
 class VotingCounter extends Component
 {
@@ -34,6 +35,20 @@ class VotingCounter extends Component
         // Check if voting is enabled
         if (!$this->votingEnabled) {
             return;
+        }
+        
+        // Rate limiting (Admin-controlled)
+        $enabled = filter_var(Setting::get('rate_limit_enabled', false), FILTER_VALIDATE_BOOLEAN);
+        $max = (int) Setting::get('rate_limit_requests', 60);
+        $period = (int) Setting::get('rate_limit_period', 1); // minutes
+        $key = 'vote:' . request()->ip();
+        if ($enabled && RateLimiter::tooManyAttempts($key, $max)) {
+            $wait = RateLimiter::availableIn($key);
+            $this->dispatch('notify', [
+                'type' => 'error',
+                'message' => "You're doing that too fast. Try again in {$wait}s."
+            ]);
+            return; // Ignore extra attempts, show toast
         }
 
         $definition = Definition::find($this->definitionId);
@@ -97,6 +112,11 @@ class VotingCounter extends Component
 
         // Update local state for optimistic UI
         $this->refreshVotes($definition);
+
+        // Rate limiter hit bookkeeping
+        if ($enabled) {
+            RateLimiter::hit($key, $period * 60);
+        }
 
         // Send Notification
         $this->sendNotification($definition, $type);

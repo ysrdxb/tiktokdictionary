@@ -8,6 +8,7 @@ use App\Models\Definition;
 use App\Models\Setting;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 
 class SubmitWordForm extends Component
 {
@@ -140,6 +141,21 @@ class SubmitWordForm extends Component
             return;
         }
 
+        // Rate limiting (Admin-controlled)
+        $enabled = filter_var(Setting::get('rate_limit_enabled', false), FILTER_VALIDATE_BOOLEAN);
+        $max = (int) Setting::get('rate_limit_requests', 60);
+        $period = (int) Setting::get('rate_limit_period', 1); // minutes
+        $key = 'submit_word:' . request()->ip();
+        if ($enabled && RateLimiter::tooManyAttempts($key, $max)) {
+            $wait = RateLimiter::availableIn($key);
+            $this->addError('term', 'Too many attempts. Please try again later.');
+            $this->dispatch('notify', [
+                'type' => 'error',
+                'message' => "Too many attempts. Try again in {$wait}s."
+            ]);
+            return;
+        }
+
         // Check if login is required
         if ($this->requireLogin && !Auth::check()) {
             $this->addError('term', 'Please log in to submit new words.');
@@ -185,6 +201,10 @@ class SubmitWordForm extends Component
 
         // Show Success Modal
         $this->showSuccessModal = true;
+
+        if ($enabled) {
+            RateLimiter::hit($key, $period * 60);
+        }
     }
 
     public function closeSuccessModal()

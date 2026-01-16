@@ -78,7 +78,20 @@ class WordController extends Controller
             ->limit(3)
             ->get();
 
-        return view('word.browse', compact('trendingWords', 'fastestGrowing', 'mostControversial', 'memeWords'));
+        $audioTrendWords = Word::query()
+            ->where('term', 'like', '#%') // Simplistic check for hashtags
+            ->orWhereIn('category', ['TikTok', 'Music'])
+            ->with('primaryDefinition')
+            ->orderBy('created_at', 'desc')
+            ->limit(2)
+            ->get();
+
+        $subcultureWords = Word::query()
+            ->whereIn('category', ['Gaming', 'AAVE', 'Stan Culture', 'Anime', 'Fitness'])
+            ->limit(4)
+            ->get();
+
+        return view('word.browse', compact('trendingWords', 'fastestGrowing', 'mostControversial', 'memeWords', 'audioTrendWords', 'subcultureWords'));
     }
 
     public function create()

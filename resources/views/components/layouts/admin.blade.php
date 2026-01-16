@@ -15,7 +15,7 @@
                 extend: {
                     colors: {
                         brand: {
-                            dark: '#002B5B',
+                            dark: '#00336E',
                             primary: '#EA0054',
                             accent: '#25F4EE',
                         }

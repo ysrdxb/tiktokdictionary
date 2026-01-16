@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Word;
+use App\Models\Setting;
+use Illuminate\Support\Facades\RateLimiter;
 
 class SearchBar extends Component
 {
@@ -20,6 +22,19 @@ class SearchBar extends Component
     public function updatedQuery()
     {
         if (strlen($this->query) >= 2) {
+            // Rate limiting (Admin-controlled)
+            $enabled = filter_var(Setting::get('rate_limit_enabled', false), FILTER_VALIDATE_BOOLEAN);
+            $max = (int) Setting::get('rate_limit_requests', 60);
+            $period = (int) Setting::get('rate_limit_period', 1); // minutes
+            $key = 'search:' . request()->ip();
+
+            if ($enabled && RateLimiter::tooManyAttempts($key, $max)) {
+                // Do not perform search when throttled
+                $this->results = collect();
+                $this->showResults = false;
+                return;
+            }
+
             try {
                 $this->results = Word::where('term', 'like', '%' . $this->query . '%')
                     ->orWhere('category', 'like', '%' . $this->query . '%')
@@ -32,6 +47,10 @@ class SearchBar extends Component
                 logger()->error('SearchBar query error: ' . $e->getMessage());
                 $this->results = collect();
                 $this->showResults = false;
+            } finally {
+                if ($enabled) {
+                    RateLimiter::hit($key, $period * 60);
+                }
             }
         } else {
             $this->results = collect();

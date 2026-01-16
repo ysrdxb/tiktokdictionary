@@ -38,7 +38,7 @@
     }
 }">
     <!-- Trigger Button -->
-    <button @click="generateSticker" :disabled="generating" class="inline-flex items-center gap-2 px-4 py-2 bg-[#002B5B]/10 dark:bg-white/10 hover:bg-[#002B5B]/20 dark:hover:bg-white/20 text-[#002B5B] dark:text-white text-sm font-bold rounded-lg transition-colors disabled:opacity-50 border border-[#002B5B]/10 dark:border-white/10">
+    <button @click="generateSticker" :disabled="generating" class="inline-flex items-center gap-2 px-4 py-2 bg-[#00336E]/10 dark:bg-white/10 hover:bg-[#00336E]/20 dark:hover:bg-white/20 text-[#00336E] dark:text-white text-sm font-bold rounded-lg transition-colors disabled:opacity-50 border border-[#00336E]/10 dark:border-white/10">
         <svg x-show="!generating" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
         <svg x-show="generating" x-cloak class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
         <span x-text="generating ? 'Creating Sticker...' : 'Share as Sticker'"></span>

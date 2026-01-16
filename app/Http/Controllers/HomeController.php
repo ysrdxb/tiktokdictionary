@@ -75,6 +75,7 @@ class HomeController extends Controller
 
         $wordCount = Word::count();
         $definitionCount = Definition::count();
+        $voteCount = Definition::sum('agrees') + Definition::sum('disagrees');
 
         return view('welcome', [
             'wordOfTheDay' => $wordOfTheDay,
@@ -86,8 +87,10 @@ class HomeController extends Controller
             'stats' => [
                 'words' => $wordCount,
                 'definitions' => $definitionCount,
+                'votes' => $voteCount,
                 'wordsLabel' => Number::abbreviate($wordCount) . '+',
                 'definitionsLabel' => Number::abbreviate($definitionCount) . '+',
+                'votesLabel' => Number::abbreviate($voteCount) . '+',
             ],
         ]);
     }

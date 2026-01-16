@@ -1,70 +1,78 @@
 <x-layouts.app>
-    <div class="min-h-[60vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-brand-bg">
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <h2 class="mt-6 text-center text-3xl font-extrabold text-brand-navy">
-                Join TikTokDictionary
-            </h2>
-            <p class="mt-2 text-center text-sm text-gray-600">
-                Already have an account?
-                <a href="{{ route('login') }}" class="font-medium text-brand-blue hover:text-brand-dark">
-                    Sign in
-                </a>
-            </p>
-        </div>
+    <x-slot:title>
+        Join our community - TikTokDictionary
+    </x-slot>
 
-        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-gray-100">
-                <form class="space-y-6" action="{{ route('register.post') }}" method="POST">
+    <!-- Hero Background Section -->
+    <div class="w-full bg-[#E9F2FE] pt-32 pb-48 px-6 text-center relative z-10">
+        <h1 class="text-[#00336E] font-bold text-4xl md:text-7xl tracking-tighter mb-4 font-title leading-none">
+            Join the Club
+        </h1>
+        <p class="text-[#00336E] text-lg md:text-xl font-medium max-w-2xl mx-auto">
+            Create an account to submit words and frame the culture.
+        </p>
+    </div>
+
+    <!-- Main Content Wrapper (Transparent Container) -->
+    <div class="w-full min-h-[60vh] -mt-32 relative z-20 pb-20">
+        <!-- Lower Page Global Background -->
+        <div class="absolute top-32 bottom-0 left-0 right-0 bg-[#FFFFFF] -z-10"></div>
+
+        <div class="max-w-[600px] mx-auto px-6">
+            <div class="premium-card bg-white rounded-[30px] p-8 md:p-12 shadow-xl border border-[#00336E]/10">
+                <form class="space-y-8" action="{{ route('register.post') }}" method="POST">
                     @csrf
 
-                    <div>
-                        <label for="username" class="block text-sm font-medium text-gray-700">
-                            Username
-                        </label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm">@</span>
-                            </div>
-                            <input id="username" name="username" type="text" required autofocus
-                                class="focus:ring-brand-blue focus:border-brand-blue block w-full pl-7 sm:text-sm border-gray-300 rounded-md py-2"
-                                placeholder="cool_user">
-                        </div>
-                        <p class="mt-1 text-xs text-gray-500">Only letters, numbers, dashes and underscores.</p>
+                    <!-- Username -->
+                    <div class="relative group">
+                        <label for="username" class="absolute -top-2.5 left-4 bg-white px-2 text-sm font-bold text-[#00336E] z-10 transition-colors">Username</label>
+                        <input id="username" name="username" type="text" required autofocus
+                            class="w-full px-6 py-4 bg-transparent border border-[#00336E]/20 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:ring-1 focus:ring-[#00336E] transition-all placeholder:text-gray-300"
+                            placeholder="Choose a username">
+                        <p class="mt-2 text-[11px] font-bold text-[#00336E]/40 ml-4">Only letters, numbers, and underscores.</p>
                         @error('username')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs font-bold text-red-500 flex items-center gap-1">
+                                {{ $message }}
+                            </p>
                         @enderror
                     </div>
 
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">
-                            Password
-                        </label>
-                        <div class="mt-1">
-                            <input id="password" name="password" type="password" required
-                                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm">
-                        </div>
+                    <!-- Password -->
+                    <div class="relative group">
+                        <label for="password" class="absolute -top-2.5 left-4 bg-white px-2 text-sm font-bold text-[#00336E] z-10 transition-colors">Password</label>
+                        <input id="password" name="password" type="password" required
+                            class="w-full px-6 py-4 bg-transparent border border-[#00336E]/20 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:ring-1 focus:ring-[#00336E] transition-all placeholder:text-gray-300"
+                            placeholder="Create a password">
                         @error('password')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs font-bold text-red-500 flex items-center gap-1">
+                                {{ $message }}
+                            </p>
                         @enderror
                     </div>
 
-                    <div>
-                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700">
-                            Confirm Password
-                        </label>
-                        <div class="mt-1">
-                            <input id="password_confirmation" name="password_confirmation" type="password" required
-                                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm">
-                        </div>
+                    <!-- Confirm Password -->
+                    <div class="relative group">
+                        <label for="password_confirmation" class="absolute -top-2.5 left-4 bg-white px-2 text-sm font-bold text-[#00336E] z-10 transition-colors">Confirm Password</label>
+                        <input id="password_confirmation" name="password_confirmation" type="password" required
+                            class="w-full px-6 py-4 bg-transparent border border-[#00336E]/20 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:ring-1 focus:ring-[#00336E] transition-all placeholder:text-gray-300"
+                            placeholder="Repeat password">
                     </div>
 
-                    <div>
+                    <!-- Submit Button -->
+                    <div class="pt-2">
                         <button type="submit"
-                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-navy hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue transition-colors">
-                            Register
+                            class="w-full flex justify-center items-center py-4 bg-[#00336E] text-white text-lg font-bold rounded-full hover:bg-[#002855] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0">
+                            Create Account
                         </button>
                     </div>
                 </form>
+
+                <p class="mt-8 text-center text-sm font-bold text-[#00336E]/60">
+                    Already have an account?
+                    <a href="{{ route('login') }}" class="text-[#00336E] hover:underline font-black">
+                        Sign in here →
+                    </a>
+                </p>
             </div>
         </div>
     </div>

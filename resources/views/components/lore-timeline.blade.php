@@ -2,7 +2,7 @@
 
 @if($entries->count() > 0)
 <div class="bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 p-6">
-    <h3 class="text-xl font-bold text-[#002B5B] dark:text-white mb-6 flex items-center gap-2">
+    <h3 class="text-xl font-bold text-[#00336E] dark:text-white mb-6 flex items-center gap-2">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
@@ -17,14 +17,14 @@
             @foreach($entries->sortByDesc('date_event') as $entry)
             <div class="relative pl-10">
                 <!-- Dot -->
-                <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-[#002B5B] dark:bg-white border-2 border-white dark:border-[#002B5B]"></div>
+                <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-[#00336E] dark:bg-white border-2 border-white dark:border-[#00336E]"></div>
 
                 <!-- Content -->
                 <div>
                     <div class="text-xs text-slate-500 dark:text-white/50 font-bold uppercase tracking-wider mb-1">
                         {{ $entry->date_event ? \Illuminate\Support\Carbon::parse($entry->date_event)->format('M d, Y') : 'Date N/A' }}
                     </div>
-                    <h4 class="font-bold text-[#002B5B] dark:text-white">{{ $entry->title }}</h4>
+                    <h4 class="font-bold text-[#00336E] dark:text-white">{{ $entry->title }}</h4>
                     <p class="text-slate-600 dark:text-white/70 text-sm mt-1">{{ $entry->description }}</p>
                     @if($entry->source_url)
                         <a href="{{ $entry->source_url }}" target="_blank"

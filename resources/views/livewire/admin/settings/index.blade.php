@@ -279,7 +279,7 @@
                                 <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Secondary Color</label>
                                 <div class="flex gap-2">
                                     <input wire:model="settings.secondary_color" type="color" class="w-12 h-12 rounded-lg border border-white/10 cursor-pointer">
-                                    <input wire:model="settings.secondary_color" type="text" class="flex-1 bg-black/20 border border-white/10 rounded-lg p-3 text-white font-mono text-sm" placeholder="#002B5B">
+                                    <input wire:model="settings.secondary_color" type="text" class="flex-1 bg-black/20 border border-white/10 rounded-lg p-3 text-white font-mono text-sm" placeholder="#00336E">
                                 </div>
                             </div>
                         </div>

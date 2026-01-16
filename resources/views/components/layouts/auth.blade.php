@@ -22,7 +22,7 @@
                     },
                     colors: {
                         brand: {
-                            dark: '#002B5B',
+                            dark: '#00336E',
                             primary: '#EA0054',
                             accent: '#25F4EE',
                         }
@@ -62,10 +62,10 @@
 
     @livewireStyles
 </head>
-<body class="font-sans antialiased bg-[#002B5B] min-h-screen">
+<body class="font-sans antialiased bg-[#00336E] min-h-screen">
     <!-- Background Effects -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute inset-0 bg-gradient-to-br from-[#001a3a] via-[#002B5B] to-[#00152e]"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-[#001a3a] via-[#00336E] to-[#00152e]"></div>
         <div class="absolute top-[10%] right-[20%] w-[500px] h-[500px] bg-brand-primary rounded-full blur-[150px] opacity-20 animate-pulse-glow"></div>
         <div class="absolute bottom-[20%] left-[10%] w-[400px] h-[400px] bg-brand-accent rounded-full blur-[120px] opacity-15 animate-pulse-glow" style="animation-delay: 2s;"></div>
         <div class="absolute top-[50%] left-[50%] w-[600px] h-[600px] bg-purple-600 rounded-full blur-[180px] opacity-10"></div>

@@ -13,7 +13,7 @@
         .float { animation: float 3s ease-in-out infinite; }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-[#001a38] via-[#002B5B] to-[#001a38] flex items-center justify-center p-6">
+<body class="min-h-screen bg-gradient-to-br from-[#001a38] via-[#00336E] to-[#001a38] flex items-center justify-center p-6">
     <div class="text-center max-w-lg">
         <!-- Animated Icon -->
         <div class="float mb-8">

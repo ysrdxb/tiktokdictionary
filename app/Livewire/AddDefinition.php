@@ -7,6 +7,7 @@ use App\Models\Definition;
 use App\Models\Word;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 
 class AddDefinition extends Component
 {
@@ -66,6 +67,21 @@ class AddDefinition extends Component
         // Check if submissions are enabled
         if (!$this->submissionsEnabled) {
             $this->addError('definition', 'Submissions are currently disabled.');
+            return;
+        }
+
+        // Rate limiting (Admin-controlled)
+        $enabled = filter_var(Setting::get('rate_limit_enabled', false), FILTER_VALIDATE_BOOLEAN);
+        $max = (int) Setting::get('rate_limit_requests', 60);
+        $period = (int) Setting::get('rate_limit_period', 1); // minutes
+        $key = 'add_definition:' . request()->ip();
+        if ($enabled && RateLimiter::tooManyAttempts($key, $max)) {
+            $wait = RateLimiter::availableIn($key);
+            $this->addError('definition', 'Too many attempts. Please try again later.');
+            $this->dispatch('notify', [
+                'type' => 'error',
+                'message' => "Too many attempts. Try again in {$wait}s."
+            ]);
             return;
         }
 
@@ -145,6 +161,10 @@ class AddDefinition extends Component
 
         // Reload page after short delay to show new definition
         $this->dispatch('refresh-page');
+
+        if ($enabled) {
+            RateLimiter::hit($key, $period * 60);
+        }
     }
 
     protected function checkDailyLimit(): bool

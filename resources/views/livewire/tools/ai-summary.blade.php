@@ -12,7 +12,7 @@
                 </span>
             </div>
 
-            <p class="text-[#002B5B]/90 dark:text-white/90 font-medium text-[15px] leading-relaxed relative z-10 mb-3">
+            <p class="text-[#00336E]/90 dark:text-white/90 font-medium text-[15px] leading-relaxed relative z-10 mb-3">
                 "{!! $summary !!}"
             </p>
 

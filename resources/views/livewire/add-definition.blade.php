@@ -35,7 +35,7 @@
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                     </div>
 
-                    <h3 class="mt-5 text-2xl md:text-3xl font-extrabold text-[#002B5B] dark:text-white tracking-tight">Definition added</h3>
+                    <h3 class="mt-5 text-2xl md:text-3xl font-extrabold text-[#00336E] dark:text-white tracking-tight">Definition added</h3>
                     <p class="mt-2 text-slate-600 dark:text-white/60 font-semibold">Thanks — your definition has been submitted.</p>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
 
-                <h3 class="text-2xl md:text-3xl font-bold text-[#002B5B] dark:text-white mb-2 text-center leading-tight">
+                <h3 class="text-2xl md:text-3xl font-bold text-[#00336E] dark:text-white mb-2 text-center leading-tight">
                     @if($duplicateWordSlug)
                         "{{ $duplicateWordTerm }}" Already Exists as a Word.
                     @else
@@ -58,7 +58,7 @@
                     @endif
                 </h3>
 
-                <p class="text-[#002B5B]/70 dark:text-white/60 text-center font-medium mb-8">
+                <p class="text-[#00336E]/70 dark:text-white/60 text-center font-medium mb-8">
                     @if($duplicateWordSlug)
                         Check out its page instead?
                     @else
@@ -68,11 +68,11 @@
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <button wire:click="redirectToExisting"
-                       class="px-8 py-3 bg-[#002B5B] dark:bg-brand-accent text-white dark:text-[#002B5B] font-bold rounded-full hover:bg-slate-800 dark:hover:bg-brand-accent/90 transition-colors text-center shadow-lg shadow-blue-900/10 dark:shadow-brand-accent/20">
+                       class="px-8 py-3 bg-[#00336E] dark:bg-brand-accent text-white dark:text-[#00336E] font-bold rounded-full hover:bg-slate-800 dark:hover:bg-brand-accent/90 transition-colors text-center shadow-lg shadow-blue-900/10 dark:shadow-brand-accent/20">
                         View Existing
                     </button>
                     <button wire:click="confirmDuplicate"
-                            class="px-8 py-3 bg-white dark:bg-white/10 text-[#002B5B] dark:text-white border border-[#002B5B]/20 dark:border-white/20 font-bold rounded-full hover:bg-slate-50 dark:hover:bg-white/20 transition-colors">
+                            class="px-8 py-3 bg-white dark:bg-white/10 text-[#00336E] dark:text-white border border-[#00336E]/20 dark:border-white/20 font-bold rounded-full hover:bg-slate-50 dark:hover:bg-white/20 transition-colors">
                         Continue Anyway
                     </button>
                 </div>
@@ -91,7 +91,7 @@
             </div>
             <p class="text-slate-600 dark:text-white/60 font-medium">{{ $disabledReason }}</p>
             @if($requireLogin && !auth()->check())
-                <a href="{{ route('login') }}" class="inline-block mt-4 px-6 py-2 bg-[#002B5B] dark:bg-brand-accent text-white dark:text-[#002B5B] font-bold rounded-full hover:opacity-90 transition-opacity">
+                <a href="{{ route('login') }}" class="inline-block mt-4 px-6 py-2 bg-[#00336E] dark:bg-brand-accent text-white dark:text-[#00336E] font-bold rounded-full hover:opacity-90 transition-opacity">
                     Log In
                 </a>
             @endif
@@ -101,14 +101,14 @@
 
             <!-- Definition -->
             <div class="mb-6 relative">
-                 <div class="absolute top-1/2 -translate-y-1/2 left-5 flex items-center justify-center w-8 h-8 rounded-full bg-[#002B5B] dark:bg-white text-white dark:text-[#002B5B] pointer-events-none z-10">
+                 <div class="absolute top-1/2 -translate-y-1/2 left-5 flex items-center justify-center w-8 h-8 rounded-full bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] pointer-events-none z-10">
                      <span class="text-sm font-bold">!</span>
                 </div>
                 <input
                     wire:model="definition"
                     type="text"
                     placeholder="Add your definition..."
-                    class="w-full pl-16 pr-5 py-3 md:py-4 bg-white dark:bg-white/5 border border-[#002B5B]/20 dark:border-white/20 rounded-[16px] text-[#002B5B] dark:text-white font-medium placeholder:text-[#002B5B]/30 dark:placeholder:text-white/30 focus:outline-none focus:border-[#002B5B] dark:focus:border-brand-accent focus:ring-2 focus:ring-[#002B5B]/10 dark:focus:ring-brand-accent/20 transition-all text-base md:text-lg @error('definition') border-red-500 @enderror">
+                    class="w-full pl-16 pr-5 py-3 md:py-4 bg-white dark:bg-white/5 border border-[#00336E]/20 dark:border-white/20 rounded-[16px] text-[#00336E] dark:text-white font-medium placeholder:text-[#00336E]/30 dark:placeholder:text-white/30 focus:outline-none focus:border-[#00336E] dark:focus:border-brand-accent focus:ring-2 focus:ring-[#00336E]/10 dark:focus:ring-brand-accent/20 transition-all text-base md:text-lg @error('definition') border-red-500 @enderror">
                 @error('definition')
                     <p class="text-red-500 text-sm mt-2 ml-1 font-medium">{{ $message }}</p>
                 @enderror
@@ -118,7 +118,7 @@
                  <!-- Submit Button -->
                 <button
                     type="submit"
-                    class="px-8 py-3 bg-[#002B5B] dark:bg-brand-accent hover:bg-slate-800 dark:hover:bg-brand-accent/90 text-white dark:text-[#002B5B] font-bold rounded-full transition-colors shadow-lg shadow-blue-900/10 dark:shadow-brand-accent/20">
+                    class="px-8 py-3 bg-[#00336E] dark:bg-brand-accent hover:bg-slate-800 dark:hover:bg-brand-accent/90 text-white dark:text-[#00336E] font-bold rounded-full transition-colors shadow-lg shadow-blue-900/10 dark:shadow-brand-accent/20">
                     Submit
                 </button>
             </div>
