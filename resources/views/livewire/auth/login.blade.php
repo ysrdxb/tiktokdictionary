@@ -16,45 +16,50 @@
 
         <div class="max-w-[1000px] mx-auto px-6">
             <div class="max-w-[600px] mx-auto">
-                <div class="premium-card bg-white rounded-[30px] p-8 md:p-12 shadow-xl border border-[#00336E]/10">
-                    <form wire:submit="login" class="space-y-8">
+                <div class="premium-card bg-white/70 backdrop-blur-3xl rounded-[30px] p-8 md:p-12 shadow-2xl border border-white/40 relative overflow-hidden">
+                    <!-- Subtle Glass Shine -->
+                    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>
+
+                    <form wire:submit="login" class="space-y-8 relative z-10">
                         
                         <!-- Username -->
-                        <div class="relative group">
-                            <label for="username" class="absolute -top-2.5 left-4 bg-white px-2 text-sm font-bold text-[#00336E] z-10 transition-colors">Username</label>
+                        <div class="group">
+                            <label for="username" class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Username</label>
                             <input wire:model="username" id="username" type="text" required autofocus
-                                class="w-full px-6 py-4 bg-transparent border border-[#00336E]/20 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:ring-1 focus:ring-[#00336E] transition-all placeholder:text-gray-300"
+                                class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30"
                                 placeholder="Enter your username">
                             @error('username')
-                                <p class="mt-2 text-xs font-bold text-red-500 flex items-center gap-1">
+                                <p class="mt-2 text-xs font-bold text-red-500 flex items-center gap-1 animate-pulse">
                                     {{ $message }}
                                 </p>
                             @enderror
                         </div>
 
                         <!-- Password -->
-                        <div class="relative group">
-                            <label for="password" class="absolute -top-2.5 left-4 bg-white px-2 text-sm font-bold text-[#00336E] z-10 transition-colors">Password</label>
+                        <div class="group">
+                            <label for="password" class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Password</label>
                             <input wire:model="password" id="password" type="password" required
-                                class="w-full px-6 py-4 bg-transparent border border-[#00336E]/20 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:ring-1 focus:ring-[#00336E] transition-all placeholder:text-gray-300"
+                                class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30"
                                 placeholder="Enter your password">
                             @error('password')
-                                <p class="mt-2 text-xs font-bold text-red-500 flex items-center gap-1">
+                                <p class="mt-2 text-xs font-bold text-red-500 flex items-center gap-1 animate-pulse">
                                     {{ $message }}
                                 </p>
                             @enderror
                         </div>
 
                         <!-- Actions -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <input wire:model="remember" id="remember" type="checkbox"
-                                    class="h-5 w-5 text-[#00336E] focus:ring-[#00336E]/20 border-gray-300 rounded-lg transition-all cursor-pointer">
-                                <label for="remember" class="ml-3 block text-sm font-bold text-[#00336E] cursor-pointer select-none">
-                                    Keep me logged in
-                                </label>
-                            </div>
-                            <a href="#" class="text-sm font-black text-[#00336E] hover:underline uppercase tracking-tight">
+                        <div class="flex items-center justify-between pt-2">
+                            <label class="flex items-center cursor-pointer group">
+                                <div class="relative">
+                                    <input wire:model="remember" type="checkbox" class="sr-only peer">
+                                    <div class="w-6 h-6 border-2 border-[#00336E]/30 rounded-lg peer-checked:bg-[#00336E] peer-checked:border-[#00336E] transition-all"></div>
+                                    <svg class="absolute top-1 left-1 w-4 h-4 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
+                                <span class="ml-3 text-sm font-bold text-[#00336E] group-hover:text-blue-600 transition-colors">Keep me logged in</span>
+                            </label>
+                            
+                            <a href="#" class="text-sm font-black text-[#00336E] hover:text-blue-600 hover:underline uppercase tracking-tight transition-colors">
                                 Forgot?
                             </a>
                         </div>
