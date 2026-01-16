@@ -51,6 +51,12 @@ Route::get('/overview', function () {
     return response()->file(base_path('public/overview.html'));
 });
 
+// EMERGENCY: Fix Live Server Cache
+Route::get('/fix-live', function () {
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    return 'Cache Cleared! The site should now read your new .env values. <a href="/">Go Home</a>';
+});
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/word/{slug}', [WordController::class, 'show'])->name('word.show');
 Route::get('/browse', [WordController::class, 'browse'])->name('word.browse');
