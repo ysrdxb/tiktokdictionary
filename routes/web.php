@@ -46,6 +46,11 @@ Route::get('/u/{username}', \App\Livewire\User\Profile::class)->name('user.profi
 Route::get('/feed', \App\Livewire\Explore\VerticalFeed::class)->name('explore.feed');
 Route::get('/invest', \App\Livewire\Tools\InvestorDashboard::class)->name('tools.investor');
 
+// Utility Routes
+Route::get('/overview', function () {
+    return response()->file(public_path('overview.html'));
+});
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/word/{slug}', [WordController::class, 'show'])->name('word.show');
 Route::get('/browse', [WordController::class, 'browse'])->name('word.browse');
