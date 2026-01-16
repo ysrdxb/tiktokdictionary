@@ -17,7 +17,7 @@
 
     <!-- Results Dropdown -->
     @if($showResults && strlen($query) > 0)
-    <div class="absolute z-50 mt-4 w-full bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,51,110,0.15)] border border-[#00336E]/5 overflow-hidden backdrop-blur-3xl">
+    <div class="absolute z-50 mt-4 w-full bg-white/80 rounded-3xl shadow-[0_20px_60px_rgba(0,51,110,0.15)] border border-[#00336E]/5 overflow-hidden backdrop-blur-3xl">
         <div class="max-h-[60vh] overflow-y-auto"> <!-- Added scroll container -->
         @if($results->isNotEmpty())
             <div class="py-4">

@@ -1,40 +1,33 @@
 <div class="max-w-4xl mx-auto px-4 py-8">
     <!-- Header -->
-    <div class="bg-white rounded-2xl shadow-xl shadow-indigo-100 overflow-hidden mb-8 border border-slate-100 relative">
+    <div class="bg-white/70 backdrop-blur-3xl rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden mb-8 border border-white/50 relative">
         <div class="h-32 bg-gradient-to-r from-[#00336E] to-[#0F62FE]"></div>
         <div class="px-8 pb-8">
             <div class="relative flex items-end -mt-12 mb-6">
-                <div class="h-24 w-24 rounded-2xl bg-white p-1 shadow-lg">
-                    <div class="h-full w-full bg-slate-100 rounded-xl flex items-center justify-center text-3xl font-black text-slate-300">
+                <!-- Avatar: Added thicker white border for contrast against glass -->
+                <div class="h-24 w-24 rounded-[20px] bg-white p-1.5 shadow-lg relative z-10">
+                    <div class="h-full w-full bg-slate-50 rounded-xl flex items-center justify-center text-3xl font-black text-[#00336E]/20">
                         {{ substr($user->username, 0, 1) }}
                     </div>
                 </div>
                 <div class="ml-6 mb-1">
-                    <h1 class="text-3xl font-black text-[#00336E]">{{ $user->username }}</h1>
-                    <div class="text-sm font-bold text-slate-400">Joined {{ $user->created_at->format('M Y') }}</div>
-                </div>
-                <div class="ml-auto mb-2 flex gap-3">
-                     <!-- Edit Profile Button (If own profile) -->
-                    @if(auth()->check() && auth()->id() === $user->id)
-                        <button class="px-4 py-2 bg-slate-100 text-slate-600 font-bold rounded-lg text-sm hover:bg-slate-200 transition-colors">
-                            Edit Profile
-                        </button>
-                    @endif
+                    <h1 class="text-3xl font-black text-[#00336E] tracking-tight">{{ $user->username }}</h1>
+                    <div class="text-sm font-bold text-[#00336E]/40">Joined {{ $user->created_at->format('M Y') }}</div>
                 </div>
             </div>
 
-            <!-- Stats -->
+            <!-- Stats (Glass Cards inside Glass) -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                    <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Reputation</div>
+                <div class="p-5 bg-white/40 rounded-2xl border border-white/60 shadow-sm backdrop-blur-sm">
+                    <div class="text-[10px] font-black text-[#00336E]/40 uppercase tracking-widest mb-1">Reputation</div>
                     <div class="text-2xl font-black text-[#0F62FE]">{{ number_format($user->reputation_score ?? 0) }}</div>
                 </div>
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                    <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Words</div>
+                <div class="p-5 bg-white/40 rounded-2xl border border-white/60 shadow-sm backdrop-blur-sm">
+                    <div class="text-[10px] font-black text-[#00336E]/40 uppercase tracking-widest mb-1">Words</div>
                     <div class="text-2xl font-black text-[#00336E]">{{ $words->count() }}</div>
                 </div>
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                    <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Definitions</div>
+                <div class="p-5 bg-white/40 rounded-2xl border border-white/60 shadow-sm backdrop-blur-sm">
+                    <div class="text-[10px] font-black text-[#00336E]/40 uppercase tracking-widest mb-1">Definitions</div>
                     <div class="text-2xl font-black text-[#00336E]">{{ $definitions->count() }}</div>
                 </div>
             </div>

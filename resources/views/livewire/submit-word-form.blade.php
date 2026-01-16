@@ -81,12 +81,19 @@
                         </div>
                     </div>
     
-                    <!-- Row 4: Alternate Spellings -->
-                    <div class="group">
-                        <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Alternate Spellings</label>
-                        <input type="text" wire:model="alternateSpellings"
-                               placeholder="e.g. 'rizz', 'riz', 'rizzed'"
-                               class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30">
+                    <!-- Row 4: Alternate Spellings + RFCI -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="group">
+                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Alternate Spellings</label>
+                            <input type="text" wire:model="alternateSpellings"
+                                   placeholder="e.g. 'rizz', 'riz', 'rizzed'"
+                                   class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30">
+                        </div>
+                        <div class="group">
+                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">RFCI Score <span class="text-[#00336E]/40 font-normal ml-1 text-xs normal-case">(Optional: e.g. "82A")</span></label>
+                            <input type="text" wire:model="rfci_score" placeholder="00X"
+                                   class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30 uppercase">
+                        </div>
                     </div>
     
                     <!-- Submit Button -->

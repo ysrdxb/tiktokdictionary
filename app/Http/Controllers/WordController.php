@@ -59,7 +59,13 @@ class WordController extends Controller
         }
         
 
-        $trendingWords = (clone $query)->orderBy('velocity_score', 'desc')->limit(12)->get();
+
+        
+        // Fix: Use the robust service (same as Homepage) to ensure we always get trending words even with filters
+        // Pass 'all' as timeframe to get general trending, OR use $sort if we want it strictly filtered.
+        // User complaint: "It is empty".
+        // Solution: Use fallback-capable service.
+        $trendingWords = \App\Services\TrendingService::getTrending(12, $sort ?? 'all');
         $fastestGrowing = Word::with('primaryDefinition')
             ->where('is_verified', true)
             ->where('created_at', '>=', now()->subDays(7))

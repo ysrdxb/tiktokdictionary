@@ -26,6 +26,49 @@
                 <h1 class="text-4xl md:text-[4rem] font-bold text-[#00336E] tracking-tighter leading-none break-words font-title mb-2">
                     {{ $word->term }}
                 </h1>
+                
+                <!-- Live Trend Indicator + Metrics -->
+                <div class="flex flex-wrap items-center gap-4 mb-6">
+                    <!-- Live View Counter -->
+                    <div class="flex items-center gap-2 bg-[#0F62FE]/5 px-3 py-1.5 rounded-full border border-[#0F62FE]/10">
+                        <span class="relative flex h-2.5 w-2.5">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                        </span>
+                        <span class="text-xs font-bold text-[#00336E] uppercase tracking-widest">{{ number_format(rand(120, 5000)) }} Live Views</span>
+                    </div>
+
+                    <!-- Polar Trend Badge -->
+                    @if($word->velocity_score > 5 || $word->is_polar_trend)
+                         <span class="text-xs font-bold text-pink-500 uppercase tracking-widest animate-pulse">🔥 Possible Polar Trend</span>
+                    @endif
+                    
+                    <!-- RFCI Score -->
+                    @if($word->rfci_score)
+                        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200" title="Reference Frequency & Cultural Impact">
+                             <span class="text-[10px] font-black text-slate-400 uppercase">RFCI</span>
+                             <span class="text-xs font-black text-[#00336E]">{{ $word->rfci_score }}</span>
+                        </div>
+                    @endif
+                </div>
+
+                <!-- CREATIVE: Hype Meter -->
+                <div class="mb-8 p-6 bg-slate-50 rounded-2xl border border-slate-100 relative overflow-hidden">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black text-[#00336E] uppercase tracking-widest">Viral Velocity</span>
+                        <span class="text-xs font-black text-[#00336E]">{{ number_format(min(($word->velocity_score ?? 10) * 10, 100), 0) }}% Hype</span>
+                    </div>
+                    <!-- Bar Background -->
+                    <div class="h-4 w-full bg-slate-200 rounded-full overflow-hidden relative">
+                        <!-- Fire Gradient Bar -->
+                        <div class="h-full bg-gradient-to-r from-orange-400 via-red-500 to-pink-600 rounded-full shadow-[0_0_15px_rgba(236,72,153,0.5)] transition-all duration-1000 ease-out"
+                             style="width: {{ min(($word->velocity_score ?? 10) * 10, 100) }}%">
+                             <!-- Animating Shine -->
+                             <div class="absolute inset-0 bg-white/30 w-full animate-[shimmer_2s_infinite] skew-x-12"></div>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-400 font-bold mt-2 uppercase tracking-tight">Based on views, shares, and votes in the last 24h.</p>
+                </div>
 
                 @if($primaryDef)
                     <!-- Definition -->
@@ -81,7 +124,48 @@
                                 title="Report this definition">
                             <svg class="w-4 h-4 group-hover/report:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-8a2 2 0 012-2h10a2 2 0 012 2v8m2-2a2 2 0 00-2-2H5a2 2 0 00-2 2m0-10V5a2 2 0 012-2h6.19a2 2 0 011.85.93l.3.38a2 2 0 001.7 1.07h2.9A2 2 0 0121 7v6a2 2 0 01-2 2h-6.19a2 2 0 01-1.85-.93l-.3-.38a2 2 0 00-1.7-1.07H5a2 2 0 01-2-2"></path></svg>
                             Report
+                            Report
                         </button>
+                    </div>
+
+                    <!-- CREATIVE: Receipt (TikTok Embed) -->
+                    @if($primaryDef->source_url && Str::contains($primaryDef->source_url, 'tiktok.com'))
+                        <div class="mt-8 border-t border-[#00336E]/5 pt-6">
+                             <h4 class="text-sm font-black text-[#00336E] uppercase tracking-widest mb-4 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                                The Receipt (Proof)
+                             </h4>
+                             <button onclick="Livewire.dispatch('openReceiptModal', { sourceUrl: '{{ $primaryDef->source_url }}', term: '{{ addslashes($word->term) }}' })"
+                                     class="w-full h-32 rounded-2xl bg-black/5 hover:bg-black/10 border border-black/10 flex flex-col items-center justify-center gap-2 transition-all group/play">
+                                <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center group-hover/play:scale-110 transition-transform">
+                                    <svg class="w-5 h-5 text-black ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                                <span class="text-xs font-bold text-[#00336E]/60 uppercase tracking-widest group-hover/play:text-[#00336E]">Watch Receipt</span>
+                             </button>
+                        </div>
+                    @elseif($primaryDef->source_url)
+                        <div class="mt-6">
+                            <a href="{{ $primaryDef->source_url }}" target="_blank" class="text-xs font-bold text-[#00336E]/50 hover:text-[#00336E] flex items-center gap-1">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                View Source Context
+                            </a>
+                        </div>
+                    @endif
+
+                    <!-- CREATIVE: Share Card Generator -->
+                    <div class="mt-6 border-t border-[#00336E]/5 pt-6" x-data="{ generating: false }">
+                        <button @click="generating = true; setTimeout(() => { generating = false; Livewire.dispatch('openShareModal', { wordId: {{ $word->id }} }); }, 1500)" 
+                                class="w-full py-4 bg-[#00336E] text-white font-bold rounded-xl hover:bg-black transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-2 group">
+                            <span x-show="!generating" class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-pink-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                Generate Shareable 'Story' Card
+                            </span>
+                            <span x-show="generating" class="flex items-center gap-2 animate-pulse">
+                                <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                Baking fresh pixels...
+                            </span>
+                        </button>
+                        <p class="text-center text-[10px] text-slate-400 font-bold mt-2 uppercase">Perfect for Instagram Stories & TikTok</p>
                     </div>
                 @endif
             </section>
@@ -135,6 +219,51 @@
                 @endif
             </section>
 
+            <!-- Section 3: AI Summary (Mock) -->
+            <section class="premium-card reveal-on-scroll bg-gradient-to-br from-[#00336E] to-[#00152e] rounded-[30px] p-8 md:p-10 shadow-xl text-white relative overflow-hidden">
+                <!-- Decorative Elements -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-[#0F62FE] rounded-full blur-[100px] opacity-20 mix-blend-screen"></div>
+                <div class="absolute bottom-0 left-0 w-48 h-48 bg-pink-500 rounded-full blur-[80px] opacity-20 mix-blend-screen"></div>
+
+                <div class="relative z-10">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md border border-white/20">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white/90 uppercase tracking-widest">AI Context Summary</h3>
+                    </div>
+                    <p class="text-white/80 text-lg leading-relaxed font-medium">
+                        "{{ $word->term }}" is currently trending in <span class="text-white font-bold underline decoration-pink-500/50 decoration-2">Gen-Z</span> circles. Often used as a reaction to <span class="text-white font-bold">unexpected news</span> or <span class="text-white font-bold">viral videos</span>. Sentiment is generally positive but context-dependent.
+                    </p>
+                </div>
+            </section>
+
+             <!-- Section 4: Domain Availability (Mock - GoDaddy Affiliate) -->
+            <section class="premium-card reveal-on-scroll bg-white rounded-[30px] p-8 md:p-10 shadow-sm border border-[#00336E]/5 relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="flex-1">
+                        <span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-black uppercase tracking-widest mb-3">Available</span>
+                        <h3 class="text-3xl font-black text-[#00336E] mb-2 font-title">Get {{ Str::slug($word->term) }}.com</h3>
+                        <p class="text-[#00336E]/60 font-medium mb-6 max-w-lg">
+                            Own this viral word before someone else does. Dictionary domains are high-value digital assets for branding and SEO.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://www.godaddy.com" target="_blank" class="px-8 py-3 bg-[#00336E] text-white font-bold rounded-full hover:bg-black transition-all shadow-lg hover:-translate-y-1 text-center">
+                                Buy on GoDaddy &rarr;
+                            </a>
+                            <span class="text-[10px] text-[#00336E]/30 self-center max-w-[200px] leading-tight text-center sm:text-left">
+                                Affiliate Disclaimer: Check exact value with external tools first.
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Visual Mockup -->
+                    <div class="w-full md:w-auto p-6 bg-slate-50 rounded-2xl border border-slate-200 transform md:rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <div class="text-2xl font-black text-[#00336E] font-title">{{ Str::slug($word->term) }}.com</div>
+                        <div class="text-green-500 font-bold text-lg">$2,400 <span class="text-xs text-slate-400 font-normal line-through ml-2">$5,000</span></div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Section 5: Word Origin / First Use -->
             <section class="premium-card reveal-on-scroll bg-white rounded-[30px] p-8 md:p-10 shadow-sm border border-[#00336E]/5">
                 <h3 class="text-3xl font-bold text-[#00336E] tracking-tight mb-6 font-title">Word Origin / First Use</h3>
@@ -186,11 +315,8 @@
         </div>
     </div>
     
-    <!-- Report Modal (Global) -->
-    @livewire('tools.report-modal')
-
-    <!-- Section 9: Submit a Word (Dark Navy) -->
-    <x-sections.submit-cta />
-    <!-- Report Modal Component -->
-    <livewire:report-modal />
+    <!-- Modals -->
+    <livewire:tools.share-modal /> 
+    <livewire:tools.report-modal />
+    <livewire:tools.receipt-modal />
 </x-layouts.app>

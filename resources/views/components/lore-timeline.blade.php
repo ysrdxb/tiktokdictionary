@@ -41,4 +41,12 @@
         </div>
     </div>
 </div>
+@else
+    <div class="bg-slate-50 rounded-2xl border border-slate-200 border-dashed p-8 text-center">
+        <div class="w-12 h-12 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-3">
+             <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <p class="text-[#00336E]/60 font-medium">No recorded timeline events for this word yet.</p>
+        <p class="text-xs text-slate-400 mt-1">Is this word old news? Submit an origin story.</p>
+    </div>
 @endif

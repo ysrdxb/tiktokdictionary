@@ -21,6 +21,7 @@ class SubmitWordForm extends Component
     public $category = 'Slang';
     public $alternateSpellings = '';
     public $hashtags = '';
+    public $rfci_score = ''; // New field
 
     // Settings-based flags
     public $submissionsEnabled = true;

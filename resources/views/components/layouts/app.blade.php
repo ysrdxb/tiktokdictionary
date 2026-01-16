@@ -402,5 +402,55 @@
     <!-- Livewire Scripts -->
     @livewireScripts
     @if(!empty($customFooter)) {!! $customFooter !!} @endif
+    <!-- Global Toast Notification System -->
+    <div x-data="{ 
+        notifications: [],
+        add(e) {
+            this.notifications.push({
+                id: Date.now(),
+                message: e.detail.message || e.detail,
+                type: e.detail.type || 'success',
+            });
+            // Auto remove after 3s
+            setTimeout(() => { this.remove(this.notifications[this.notifications.length - 1].id) }, 3000);
+        },
+        remove(id) {
+            this.notifications = this.notifications.filter(n => n.id !== id);
+        }
+    }" 
+    @notify.window="add($event)"
+    class="fixed bottom-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none">
+        <template x-for="note in notifications" :key="note.id">
+            <div x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-8 scale-90"
+                 x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-90"
+                 class="pointer-events-auto flex items-center gap-3 px-6 py-4 bg-white/90 backdrop-blur-xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl min-w-[300px] max-w-md"
+                 :class="note.type === 'error' ? 'border-red-500/20 bg-red-50/90' : 'border-white/50 bg-white/90'">
+                
+                <!-- Icon -->
+                <div class="shrink-0">
+                    <template x-if="note.type === 'success'">
+                        <div class="w-8 h-8 rounded-full bg-green-500/10 text-green-600 flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                    </template>
+                    <template x-if="note.type === 'error'">
+                        <div class="w-8 h-8 rounded-full bg-red-500/10 text-red-600 flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Text -->
+                <div>
+                    <h4 class="text-sm font-black text-[#00336E]" x-text="note.type === 'error' ? 'Error' : 'Success'"></h4>
+                    <p class="text-xs font-bold text-slate-500 mt-0.5" x-text="note.message"></p>
+                </div>
+            </div>
+        </template>
+    </div>
 </body>
 </html>
