@@ -87,10 +87,14 @@
                     <div class="flex flex-wrap items-center gap-6 border-t border-[#00336E]/5 pt-6 mt-6">
                         <!-- Voting -->
                         @livewire('voting-counter', [
-                            'definitionId' => $primaryDef->id,
-                            'agrees' => $primaryDef->agrees,
+                            'definitionId' => $primaryDef->id, 
+                            'agrees' => $primaryDef->agrees, 
                             'disagrees' => $primaryDef->disagrees
-                        ], key('primary-vote-'.$primaryDef->id))
+                        ])
+                        
+                        <!-- Vibe Check -->
+                        <div class="h-8 w-px bg-slate-200 dark:bg-white/10 mx-2"></div>
+                        @livewire('reaction-bar', ['definitionId' => $primaryDef->id], key('primary-vote-'.$primaryDef->id))
 
                         <!-- Audio Player -->
                         <div x-data="{ 

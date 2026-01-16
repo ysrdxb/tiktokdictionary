@@ -20,7 +20,11 @@ class Definition extends Model
         'disagrees',
         'velocity_score',
         'is_primary',
-        'is_approved' // Added for moderation
+        'is_approved', // Added for moderation
+        'reaction_fire',
+        'reaction_skull',
+        'reaction_melt',
+        'reaction_clown'
     ];
 
     protected $casts = [
@@ -35,6 +39,14 @@ class Definition extends Model
     public function word()
     {
         return $this->belongsTo(Word::class);
+    }
+
+    /**
+     * Get the reactions for this definition
+     */
+    public function reactions()
+    {
+        return $this->hasMany(DefinitionReaction::class);
     }
 
     /**
