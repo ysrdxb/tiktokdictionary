@@ -61,6 +61,7 @@ Route::get('/fix-live', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/word/{slug}', [WordController::class, 'show'])->name('word.show');
 Route::get('/browse', [WordController::class, 'browse'])->name('word.browse');
+Route::get('/search', [WordController::class, 'search'])->name('word.search');
 
 // Submission Routes
 Route::get('/submit', [WordController::class, 'create'])->name('word.create');

@@ -30,12 +30,15 @@ class OpenAIService
             return "Error: Admin needs to set OpenAI API Key in Settings.";
         }
 
+        // Debug: Log key prefix to ensure it's the new one
+        Log::info('OpenAI Key Prefix: ' . substr($this->apiKey, 0, 10) . '...');
+
         try {
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->apiKey,
                 'Content-Type' => 'application/json',
             ])->post($this->baseUrl . '/chat/completions', [
-                'model' => 'gpt-3.5-turbo', // Cost-effective & fast
+                'model' => 'gpt-4o-mini', // Better, cheaper, faster than 3.5
                 'messages' => [
                     [
                         'role' => 'system',
@@ -54,12 +57,15 @@ class OpenAIService
                 return trim($response->json('choices.0.message.content'));
             }
 
+            $errorData = $response->json();
+            $errorMessage = $errorData['error']['message'] ?? 'Unknown API Error';
+            
             Log::error('OpenAI API Error: ' . $response->body());
-            return "bruh... the AI is tweaking rn (API Error) 💀";
+            return "OpenAI Error: " . $errorMessage;
 
         } catch (\Exception $e) {
             Log::error('OpenAI Connection Error: ' . $e->getMessage());
-            return "wifi must be cooked... connection error 📉";
+            return "Connection Error: " . $e->getMessage();
         }
     }
 }

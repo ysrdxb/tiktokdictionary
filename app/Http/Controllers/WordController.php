@@ -9,6 +9,34 @@ use Illuminate\Support\Str;
 
 class WordController extends Controller
 {
+    public function search(Request $request)
+    {
+        $query = $request->get('q');
+        
+        if (!$query) {
+            return redirect()->route('word.browse');
+        }
+
+        // 1. "Starts With" matches (Highest Relevance)
+        $startsWith = Word::where('is_verified', true)
+            ->where('term', 'like', $query . '%')
+            ->with('primaryDefinition')
+            ->orderBy('term', 'asc')
+            ->get();
+
+        $startsWithIds = $startsWith->pluck('id');
+
+        // 2. "Contains" matches (Lower Relevance, exclude startsWith)
+        $contains = Word::where('is_verified', true)
+            ->where('term', 'like', '%' . $query . '%')
+            ->whereNotIn('id', $startsWithIds)
+            ->with('primaryDefinition')
+            ->orderBy('term', 'asc')
+            ->get();
+
+        return view('word.search-results', compact('startsWith', 'contains', 'query'));
+    }
+
     public function show($slug)
     {
         $word = Word::where('slug', $slug)

@@ -8,7 +8,7 @@
     $announceBg = \App\Models\Setting::get('announcement_bg_color', '#0F62FE');
 @endphp
     <!-- Hero Section (Full Height - Exact Figma Match) -->
-    <section class="relative min-h-screen flex flex-col overflow-hidden bg-gradient-to-b from-[#90C0F8] to-[#62A2EC]">
+    <section class="relative z-10 min-h-screen flex flex-col bg-gradient-to-b from-[#90C0F8] to-[#62A2EC] overflow-visible">
         
         <!-- Header (Inside Hero) -->
         <header class="relative z-20 pt-8 pb-4">
@@ -72,7 +72,7 @@
             </div>
         @endif
         <!-- Hero Content Container -->
-        <div class="flex-1 flex flex-col justify-center pb-60" 
+        <div class="flex-1 flex flex-col justify-center pb-24 relative z-30" 
              x-data="{ 
                 shown: false,
                 init() {
@@ -102,7 +102,7 @@
                 </p>
                 
                 <!-- Search Container -->
-                <div class="w-full max-w-[850px] mx-auto group/search transition-all duration-[1200ms] ease-out delay-[450ms]"
+                <div class="relative z-40 w-full max-w-[850px] mx-auto group/search transition-all duration-[1200ms] ease-out delay-[450ms]"
                      :class="shown ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'">
                     @livewire('search-bar')
                 </div>
@@ -113,48 +113,40 @@
                 </p>
             </div>
         </div>
+
+        <!-- Word of the Day (Moved inside Hero for stacking) -->
+        @if($wordOfTheDay)
+            <div class="relative z-20 -mb-12 px-6 mt-auto">
+                <div class="max-w-[1240px] mx-auto bg-white rounded-[25px] p-8 shadow-xl shadow-blue-900/10 border border-[#00336E]/10 flex flex-col md:flex-row items-center justify-between gap-8 hover:transform hover:scale-[1.005] transition-all duration-300">
+                    <div class="flex flex-col md:flex-row items-center gap-6 text-center md:text-left flex-1 min-w-0">
+                        <div class="flex flex-col items-center md:items-start min-w-fit">
+                            <span class="bg-[#FFB703] text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-2 shadow-sm">Word Of The Day</span>
+                            <h2 class="text-4xl font-black text-[#00336E] leading-none tracking-tight">
+                                {{ $wordOfTheDay->term }}
+                            </h2>
+                        </div>
+                        
+                        <div class="hidden md:block w-px h-12 bg-[#00336E]/10"></div>
+                        
+                        <p class="text-[#00336E]/80 text-lg font-medium leading-relaxed line-clamp-2 md:line-clamp-2 max-w-2xl">
+                            "{{ $wordOfTheDay->primaryDefinition->definition ?? 'A trending term you need to know.' }}"
+                        </p>
+                    </div>
+
+                    <a href="{{ route('word.show', $wordOfTheDay->slug) }}" class="flex-shrink-0 bg-[#EFF6FE] text-[#00336E] hover:bg-[#00336E] hover:text-white px-10 py-4 rounded-xl text-sm font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-2 group whitespace-nowrap shadow-sm hover:shadow-md">
+                        Learn Use Case
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+        @endif
     </section>
 
-
-
-    <!-- Word of the Day (Figma Style - Yellow Banner) -->
-    <!-- Word of the Day (Floating Card Style) -->
-    <!-- Moved inside Main section for better stacking -->
-
     <!-- Main Content -->
-    <main>
+    <main class="relative z-0">
         
-        <!-- Trending Right Now (Enhanced to Match Image) -->
-        <section class="bg-white pb-24 relative">
-            <!-- Word of the Day (Floating Card Style) - Moved Inside for seamless BG -->
-            @if($wordOfTheDay)
-                <div class="relative z-30 -mt-12 mb-20 px-6">
-                    <div class="max-w-[1240px] mx-auto bg-white rounded-[25px] p-8 shadow-xl shadow-blue-900/10 border border-[#00336E]/10 flex flex-col md:flex-row items-center justify-between gap-8 hover:transform hover:scale-[1.005] transition-all duration-300">
-                        <div class="flex flex-col md:flex-row items-center gap-6 text-center md:text-left flex-1 min-w-0">
-                            <div class="flex flex-col items-center md:items-start min-w-fit">
-                                <span class="bg-[#FFB703] text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-2 shadow-sm">Word Of The Day</span>
-                                <h2 class="text-4xl font-black text-[#00336E] leading-none tracking-tight">
-                                    {{ $wordOfTheDay->term }}
-                                </h2>
-                            </div>
-                            
-                            <div class="hidden md:block w-px h-12 bg-[#00336E]/10"></div>
-                            
-                            <p class="text-[#00336E]/80 text-lg font-medium leading-relaxed line-clamp-2 md:line-clamp-2 max-w-2xl">
-                                "{{ $wordOfTheDay->primaryDefinition->definition ?? 'A trending term you need to know.' }}"
-                            </p>
-                        </div>
-
-                        <a href="{{ route('word.show', $wordOfTheDay->slug) }}" class="flex-shrink-0 bg-[#EFF6FE] text-[#00336E] hover:bg-[#00336E] hover:text-white px-10 py-4 rounded-xl text-sm font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-2 group whitespace-nowrap shadow-sm hover:shadow-md">
-                            Learn Use Case
-                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </a>
-                    </div>
-                </div>
-            @else
-                <div class="pt-24"></div> 
-            @endif
-
+        <!-- Trending Right Now -->
+        <section class="bg-white pt-20 pb-24 relative">
             <div class="max-w-[1240px] mx-auto px-6">
                 <!-- Section Header -->
                 <div class="mb-12 reveal-on-scroll">
@@ -181,31 +173,7 @@
                 <!-- Trending Card Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                     @foreach($trendingWords->take(6) as $word)
-                        <div class="premium-card reveal-on-scroll p-6 max-w-[400px] h-[179px] flex flex-col mx-auto w-full">
-                            <div class="flex justify-between items-start mb-2">
-                                <a href="{{ route('word.show', $word->slug) }}" class="block min-w-0 flex-1">
-                                    <h3 class="text-xl font-bold text-[#000000] group-hover:text-[#00336E] transition-colors leading-tight tracking-tight truncate">{{ $word->term }}</h3>
-                                </a>
-                                <span class="text-lg font-bold text-[#000000] ml-2">#<span x-counter="{{ $loop->iteration }}">1</span></span>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-[9px] font-bold bg-[#00336E]/[0.05] text-[#00336E] uppercase tracking-widest">
-                                    {{ $word->category ?? 'Slang' }}
-                                </span>
-                            </div>
-                            
-                            <p class="text-[#00336E] text-[14px] font-medium leading-[1.3] line-clamp-2 overflow-hidden mb-auto">
-                                {{ Str::limit(optional($word->primaryDefinition)->definition ?? 'No definition available.', 90) }}
-                            </p>
-                            
-                            <div class="flex items-center gap-2 text-[#00336E] mt-3">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                                </svg>
-                                <span class="text-[11px] font-bold"><span x-counter="{{ $word->total_agrees }}">0</span> agreed</span>
-                            </div>
-                        </div>
+                        <x-word-card :word="$word" class="reveal-on-scroll" />
                     @endforeach
                 </div>
                 <!-- Footer Link -->

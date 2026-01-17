@@ -38,7 +38,7 @@
                 @endforeach
             </div>
             <div class="bg-[#00336E]/5 px-8 py-4 text-center border-t border-[#00336E]/5">
-                <a href="{{ route('word.browse') }}" class="text-xs font-black text-[#00336E] hover:underline uppercase tracking-widest">
+                <a href="{{ route('word.search', ['q' => $query]) }}" class="text-xs font-black text-[#00336E] hover:underline uppercase tracking-widest">
                     See all results for "{{ $query }}" →
                 </a>
             </div>
