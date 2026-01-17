@@ -127,13 +127,14 @@ class WordController extends Controller
             ->limit(2)
             ->get();
 
+        $activeSubculture = $request->get('subculture', 'Gen Z');
         $subcultureWords = Word::query()
             ->where('is_verified', true)
-            ->whereIn('category', ['Gaming', 'AAVE', 'Stan Culture', 'Anime', 'Fitness'])
+            ->where('category', $activeSubculture)
             ->limit(4)
             ->get();
 
-        return view('word.browse', compact('trendingWords', 'fastestGrowing', 'mostControversial', 'memeWords', 'audioTrendWords', 'subcultureWords'));
+        return view('word.browse', compact('trendingWords', 'fastestGrowing', 'mostControversial', 'memeWords', 'audioTrendWords', 'subcultureWords', 'activeSubculture'));
     }
 
     public function create()

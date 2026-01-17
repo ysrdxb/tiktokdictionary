@@ -236,29 +236,38 @@
             </section>
             
             <!-- Subculture Words -->
-            <section class="reveal-on-scroll">
+            <section id="subculture-section" class="reveal-on-scroll">
                  <div class="mb-10">
                     <h2 class="text-4xl md:text-5xl font-black text-[#00336E] font-title mb-6">Subculture Words</h2>
                     
                     <!-- Subculture Pills -->
                     <div class="flex flex-wrap gap-3">
-                        <button class="px-6 py-2.5 bg-[#00336E] text-white rounded-full text-sm font-bold shadow-lg shadow-blue-900/10">Gen Z</button>
-                        @foreach(['Gaming', 'AAVE', 'Stan Culture', 'Anime', 'Fitness', 'NSFW'] as $sc)
-                            <button class="px-6 py-2.5 bg-[#F1F5F9] text-[#00336E] rounded-full text-sm font-bold hover:bg-slate-200 transition-colors">{{ $sc }}</button>
+                        @foreach(['Gen Z', 'Gaming', 'AAVE', 'Stan Culture', 'Anime', 'Fitness', 'NSFW'] as $sc)
+                            <a href="{{ route('word.browse', ['subculture' => $sc]) }}#subculture-section" 
+                               class="px-6 py-2.5 rounded-full text-sm font-bold transition-all {{ $activeSubculture === $sc ? 'bg-[#00336E] text-white shadow-lg shadow-blue-900/10' : 'bg-[#F1F5F9] text-[#00336E] hover:bg-slate-200' }}">
+                                {{ $sc }}
+                            </a>
                         @endforeach
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                     @forelse($subcultureWords->take(4) as $word)
-                        <a href="{{ route('word.show', $word->slug) }}" class="bg-white rounded-[20px] p-8 hover:shadow-lg transition-all group border border-[#00336E] flex flex-col justify-between h-50">
-                            <h3 class="text-xl font-black text-[#00336E] mb-4">{{ $word->term }}</h3>
-                            <div>
-                                <span class="text-xs font-bold text-[#00336E] bg-slate-100 px-3 py-1.5 rounded-full">{{ $word->category }}</span>
+                     @forelse($subcultureWords as $word)
+                        <a href="{{ route('word.show', $word->slug) }}" class="bg-white rounded-[20px] p-8 hover:shadow-lg transition-all group border border-[#00336E]/10 flex flex-col justify-between h-50 relative overflow-hidden">
+                            <!-- Subtle Gradient Glow on Hover -->
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#00336E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            
+                            <h3 class="text-xl font-black text-[#00336E] mb-4 relative z-10">{{ $word->term }}</h3>
+                            <div class="relative z-10">
+                                <span class="text-[10px] font-bold text-[#00336E]/60 bg-slate-100 px-3 py-1.5 rounded-full uppercase tracking-widest">{{ $word->category }}</span>
                             </div>
                         </a>
                      @empty
-                        <div class="col-span-4 text-center text-[#00336E]/50">Select a subculture.</div>
+                        <div class="col-span-4 text-center py-12 bg-slate-50 rounded-[20px] border-2 border-dashed border-slate-200">
+                            <span class="text-4xl mb-4 block">🏝️</span>
+                            <h3 class="text-xl font-bold text-[#00336E] mb-1">No words in this subculture yet.</h3>
+                            <p class="text-[#00336E]/50">Be the first to <a href="{{ route('word.create') }}" class="font-bold underline">submit one</a>!</p>
+                        </div>
                      @endforelse
                 </div>
             </section>
