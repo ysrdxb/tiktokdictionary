@@ -45,6 +45,7 @@ Route::prefix('admin')->middleware(['auth', \App\Http\Middleware\IsAdmin::class]
 Route::get('/u/{username}', \App\Livewire\User\Profile::class)->name('user.profile');
 Route::get('/feed', \App\Livewire\Explore\VerticalFeed::class)->name('explore.feed');
 Route::get('/invest', \App\Livewire\Tools\InvestorDashboard::class)->name('tools.investor');
+Route::get('/translator', \App\Livewire\Tools\Translator::class)->name('tools.translator');
 
 // Utility Routes
 Route::get('/overview', function () {
