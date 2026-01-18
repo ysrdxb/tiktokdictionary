@@ -21,7 +21,6 @@ class SubmitWordForm extends Component
     public $category = 'Slang';
     public $alternateSpellings = '';
     public $hashtags = '';
-    public $rfci_score = ''; // New field
 
     // Settings-based flags
     public $submissionsEnabled = true;
@@ -177,6 +176,8 @@ class SubmitWordForm extends Component
             [
                 'slug' => Str::slug($this->term),
                 'category' => $this->category,
+                'alternate_spellings' => $this->alternateSpellings,
+                'vibes' => array_map('trim', explode(',', $this->hashtags)),
             ]
         );
 

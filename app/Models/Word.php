@@ -13,6 +13,7 @@ class Word extends Model
     protected $fillable = [
         'term',
         'slug',
+        'alternate_spellings',
         'category',
         'origin_source',
         'first_seen_date',

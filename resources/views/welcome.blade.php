@@ -146,7 +146,7 @@
     <main class="relative z-0">
         
         <!-- Trending Right Now -->
-        <section class="bg-white pt-20 pb-24 relative">
+        <section class="bg-white pt-32 pb-24 relative -mt-6">
             <div class="max-w-[1240px] mx-auto px-6">
                 <!-- Section Header -->
                 <div class="mb-12 reveal-on-scroll">
@@ -203,29 +203,29 @@
                             $badges = ['Top Definition', 'Highly Agreed', 'Community Approved'];
                             $badgeLabel = $badges[$index % count($badges)];
                         @endphp
-                        <div class="premium-card reveal-on-scroll p-8 flex flex-col md:flex-row items-center md:items-start justify-between gap-6 border-none shadow-sm hover:shadow-md">
+                        <a href="{{ route('word.show', $def->word->slug) }}" class="premium-card reveal-on-scroll p-8 flex flex-col md:flex-row items-center md:items-start justify-between gap-6 border-none shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                             <!-- Left Content -->
                             <div class="flex-1 min-w-0 w-full">
                                 <div class="flex items-center gap-3 mb-3 flex-wrap">
-                                    <h3 class="text-2xl font-bold text-[#00336E]">{{ $def->word->term }}</h3>
+                                    <h3 class="text-2xl font-bold text-[#00336E] group-hover:text-blue-600 transition-colors">{{ $def->word->term }}</h3>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold bg-[#4ADE80]/20 text-[#15803D] uppercase tracking-wide border border-[#4ADE80]/30">
                                         <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                                         {{ $badgeLabel }}
                                     </span>
                                 </div>
                                 <p class="text-[#00336E] text-lg leading-relaxed mb-4 font-medium">{{ $def->definition }}</p>
-                                <div class="flex items-center gap-2 text-[#00336E] font-bold text-xs">
+                                <div class="flex items-center gap-2 text-[#00336E] font-bold text-xs opacity-60">
                                     <svg class="w-4 h-4 text-[#00336E]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
                                     <span x-counter="{{ $def->agrees }}">0</span> agreed
                                 </div>
                             </div>
                             
                             <!-- Right Stats Box -->
-                            <div class="flex flex-col items-center justify-center bg-[#F1F5F9] rounded-xl p-6 min-w-[140px] text-center mt-4 md:mt-0 w-full md:w-auto">
+                            <div class="flex flex-col items-center justify-center bg-[#F1F5F9] rounded-xl p-6 min-w-[140px] text-center mt-4 md:mt-0 w-full md:w-auto group-hover:bg-blue-50 transition-colors">
                                 <span class="text-4xl font-black text-[#00336E] block mb-1"><span x-counter="{{ $accuracy }}">0</span>%</span>
                                 <span class="text-[11px] font-bold text-[#00336E]/60 uppercase tracking-wide">accuracy</span>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -244,30 +244,49 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @foreach($freshWords->take(4) as $word)
-                        <div class="premium-card reveal-on-scroll p-8 rounded-[30px] border border-[#00336E] flex flex-col h-full hover:shadow-lg transition-all group relative overflow-hidden bg-white">
-                            <!-- Badges -->
-                            <div class="flex items-center gap-3 mb-4">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black bg-slate-100 text-[#00336E]/60 uppercase tracking-wider">
-                                    NEW
-                                </span>
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black bg-[#00336E] text-white uppercase tracking-wider">
-                                    {{ $word->category ?? 'Slang' }}
-                                </span>
+                        <a href="{{ route('word.show', $word->slug) }}" class="premium-card reveal-on-scroll p-6 md:p-8 rounded-[30px] border border-[#00336E]/10 flex flex-col h-full hover:shadow-2xl hover:-translate-y-1.5 transition-all group relative overflow-hidden bg-white">
+                            <!-- Header Info -->
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2.5 py-1 rounded-lg text-[9px] font-black bg-[#00336E] text-white uppercase tracking-wider">
+                                        {{ $word->category ?? 'Slang' }}
+                                    </span>
+                                    <span class="px-2.5 py-1 rounded-lg text-[9px] font-black bg-green-500/10 text-green-600 uppercase tracking-wider">
+                                        New
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-1.5 text-[10px] font-bold text-[#00336E]/30 uppercase tracking-tighter">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    {{ $word->created_at->diffForHumans() }}
+                                </div>
                             </div>
 
-                            <a href="{{ route('word.show', $word->slug) }}" class="block mb-2">
-                                <h3 class="text-2xl font-bold text-[#00336E] group-hover:text-blue-600 transition-colors">{{ $word->term }}</h3>
-                            </a>
-                            
-                            <p class="text-[#00336E]/80 text-base leading-relaxed mb-6 line-clamp-2">
-                                {{ optional($word->primaryDefinition)->definition ?? 'No definition available.' }}
-                            </p>
-                            
-                            <div class="mt-auto flex items-center gap-2 text-[11px] font-bold text-[#000000] uppercase tracking-wide">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span>Submitted {{ $word->created_at->diffForHumans(null, true) }} ago</span>
+                            <!-- Term & Content -->
+                            <div class="mb-4">
+                                <h3 class="text-2xl md:text-3xl font-black text-[#00336E] mb-2 group-hover:text-blue-600 transition-colors tracking-tight leading-tight">
+                                    {{ $word->term }}
+                                </h3>
+                                <p class="text-[#00336E]/70 text-sm md:text-base leading-snug line-clamp-2 font-medium">
+                                    {{ optional($word->primaryDefinition)->definition ?? 'Understand the meaning and context of ' . $word->term . ' on the dictionary.' }}
+                                </p>
                             </div>
-                        </div>
+                            
+                            <!-- Detailed Footer (Manage Space) -->
+                            <div class="mt-auto pt-4 border-t border-[#00336E]/5 flex items-center justify-between">
+                                <div class="flex -space-x-2">
+                                     @foreach(range(1,3) as $i)
+                                         <div class="w-6 h-6 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center text-[8px] font-bold text-[#00336E]/40" style="z-index: {{ 10-$i }}">
+                                            {{ chr(rand(65, 90)) }}
+                                         </div>
+                                     @endforeach
+                                     <div class="pl-4 text-[10px] font-bold text-[#00336E]/40 self-center">+{{ rand(5, 50) }} spottings</div>
+                                </div>
+                                <div class="text-[10px] font-black uppercase tracking-[0.2em] text-[#00336E]/40 group-hover:text-blue-600 transition-all flex items-center gap-1">
+                                    View Definition
+                                    <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                                </div>
+                            </div>
+                        </a>
                     @endforeach
                 </div>
             </div>

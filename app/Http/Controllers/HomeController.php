@@ -24,7 +24,7 @@ class HomeController extends Controller
         $wordOfTheDay = Word::where('is_verified', true)
             ->whereDate('created_at', now())
             ->orderByDesc('velocity_score')
-            ->first() ?? Word::where('is_verified', true)->orderByDesc('velocity_score')->first();
+            ->first() ?? Word::where('is_verified', true)->orderByDesc('velocity_score')->first() ?? Word::latest()->first();
 
         $mostAgreedDefinitions = Definition::query()
             ->with('word')
@@ -50,8 +50,7 @@ class HomeController extends Controller
             });
 
         $freshWords = Word::query()
-            ->where('is_verified', true)
-            ->with('primaryDefinition')
+            ->with(['primaryDefinition', 'definitions'])
             ->latest()
             ->limit(4)
             ->get();
