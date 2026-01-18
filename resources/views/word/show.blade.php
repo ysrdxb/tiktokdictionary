@@ -265,13 +265,6 @@
         </div>
     </div>
 
-            <!-- Section 8: Sticker & Report -->
-            <section class="flex flex-col items-center gap-6 py-6">
-                 <button onclick="Livewire.dispatch('openReportModal', { type: 'App\\Models\\Word', id: {{ $word->id }} })" class="px-6 py-2 rounded-full border border-[#00336E]/10 text-xs font-bold text-[#00336E]/50 hover:text-red-500 hover:border-red-200 hover:bg-red-50 flex items-center justify-center gap-2 transition-all bg-white shadow-sm hover:shadow-md">
-                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-8a2 2 0 012-2h10a2 2 0 012 2v8m2-2a2 2 0 00-2-2H5a2 2 0 00-2 2m0-10V5a2 2 0 012-2h6.19a2 2 0 011.85.93l.3.38a2 2 0 001.7 1.07h2.9A2 2 0 0121 7v6a2 2 0 01-2 2h-6.19a2 2 0 01-1.85-.93l-.3-.38a2 2 0 00-1.7-1.07H5a2 2 0 01-2-2"></path></svg>
-                     Report this Word
-                </button>
-            </section>
         </div>
     </div>
     

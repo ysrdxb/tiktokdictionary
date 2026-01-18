@@ -40,5 +40,17 @@ document.addEventListener('alpine:init', () => {
         }, { threshold: 0.5 });
 
         observer.observe(el);
+
+        // Reactivity: Re-animate if the value change (Livewire updates)
+        Alpine.effect(() => {
+            const newValue = parseInt(evaluate(expression)) || 0;
+            // Only re-animate if value actually changed and we are not in the middle of an animation
+            if (newValue !== target) {
+                // Update target and reset frame to restart animation
+                frame = 0;
+                hasAnimated = false;
+                animate();
+            }
+        });
     });
 });

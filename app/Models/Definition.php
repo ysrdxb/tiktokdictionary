@@ -148,7 +148,25 @@ class Definition extends Model
         return [
             'label' => 'Contested',
             'detail' => 'More disagreement than agreement',
-            'class' => 'bg-rose-50 text-rose-900 border-rose-200',
         ];
+    }
+
+    /**
+     * Resync aggregate counts with the votes table
+     */
+    public function resyncVotes()
+    {
+        $this->agrees = \Illuminate\Support\Facades\DB::table('votes')
+            ->where('definition_id', $this->id)
+            ->where('type', 'agree')
+            ->count();
+            
+        $this->disagrees = \Illuminate\Support\Facades\DB::table('votes')
+            ->where('definition_id', $this->id)
+            ->where('type', 'disagree')
+            ->count();
+            
+        $this->save();
+        $this->updateVelocityScore();
     }
 }

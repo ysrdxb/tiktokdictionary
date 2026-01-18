@@ -19,10 +19,13 @@ class VotingCounter extends Component
     public function mount($definitionId, $agrees, $disagrees)
     {
         $this->definitionId = $definitionId;
-        $this->agrees = $agrees;
-        $this->disagrees = $disagrees;
+        
+        // Always refresh counts from DB to avoid stale data from parent
+        $definition = Definition::find($definitionId);
+        $this->agrees = $definition->agrees ?? 0;
+        $this->disagrees = $definition->disagrees ?? 0;
 
-        // Check if voting is enabled globally (tolerate boolean/string values)
+        // Check if voting is enabled globally
         $this->votingEnabled = filter_var(Setting::get('allow_voting', true), FILTER_VALIDATE_BOOLEAN);
 
         // Check if user has already voted
@@ -62,32 +65,29 @@ class VotingCounter extends Component
 
         // Remove previous vote if exists
         if ($existingVote === 'agree') {
-            $definition->agrees--;
+            $definition->agrees = max(0, $definition->agrees - 1);
         } elseif ($existingVote === 'disagree') {
-            $definition->disagrees--;
+            $definition->disagrees = max(0, $definition->disagrees - 1);
         }
 
         // Add new vote if different from existing
         if ($type === $existingVote) {
-            // User is removing their vote
             $this->userVote = null;
             $this->deleteVote($cookieName);
             
-            // Remove from DB (Simplest logic: remove their most recent vote of this type)
-            // Ideally we'd match exact user/ip, but for now this suffices or we can add strict check
-            $query = \Illuminate\Support\Facades\DB::table('votes')
+            \Illuminate\Support\Facades\DB::table('votes')
                 ->where('definition_id', $this->definitionId)
-                ->where('type', $type);
-                
-            if (\Illuminate\Support\Facades\Auth::check()) {
-                $query->where('user_id', \Illuminate\Support\Facades\Auth::id());
-            } else {
-                $query->where('ip_address', request()->ip());
-            }
-            $query->delete();
+                ->where(function($q) {
+                    if (\Illuminate\Support\Facades\Auth::check()) {
+                        $q->where('user_id', \Illuminate\Support\Facades\Auth::id());
+                    } else {
+                        $q->where('ip_address', request()->ip());
+                    }
+                })
+                ->where('type', $type)
+                ->delete();
 
         } else {
-            // User is voting or changing vote
             if ($type === 'agree') {
                 $definition->agrees++;
             } elseif ($type === 'disagree') {
@@ -96,15 +96,18 @@ class VotingCounter extends Component
             $this->userVote = $type;
             $this->persistVote($cookieName, $type);
             
-            // Record to DB for Analytics
-            \Illuminate\Support\Facades\DB::table('votes')->insert([
-                'definition_id' => $this->definitionId,
-                'user_id' => \Illuminate\Support\Facades\Auth::id(),
-                'ip_address' => request()->ip(),
-                'type' => $type,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            // Record to DB using updateOrInsert to prevent duplicates
+            \Illuminate\Support\Facades\DB::table('votes')->updateOrInsert(
+                [
+                    'definition_id' => $this->definitionId,
+                    'user_id' => \Illuminate\Support\Facades\Auth::id(),
+                    'ip_address' => \Illuminate\Support\Facades\Auth::check() ? null : request()->ip(),
+                ],
+                [
+                    'type' => $type,
+                    'updated_at' => now(),
+                ]
+            );
         }
 
         $definition->save();
