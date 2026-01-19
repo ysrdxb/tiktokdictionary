@@ -10,10 +10,7 @@
 
     <div class="w-full bg-[#E9F2FE] pt-24 md:pt-32 pb-44 px-6 text-center relative z-10 overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[400px] blur-[120px] rounded-full"></div>
-        <div class="relative z-10 inline-flex items-center gap-2 px-4 py-1.5 bg-[#00336E]/5 rounded-full border border-[#00336E]/10 mb-6 group hover:bg-brand-accent/10 transition-all cursor-default">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span>
-            <p class="text-[#00336E] font-black uppercase tracking-[0.25em] text-[10px]">Word of the Moment</p>
-        </div>
+
     </div>
 
     <div class="w-full min-h-screen -mt-40 md:-mt-48 relative z-20 pb-24">
