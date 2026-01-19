@@ -56,10 +56,10 @@
                                     <div class="w-6 h-6 border-2 border-[#00336E]/30 rounded-lg peer-checked:bg-[#00336E] peer-checked:border-[#00336E] transition-all"></div>
                                     <svg class="absolute top-1 left-1 w-4 h-4 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                 </div>
-                                <span class="ml-3 text-sm font-bold text-[#00336E] group-hover:text-blue-600 transition-colors">Keep me logged in</span>
+                                <span class="ml-3 text-sm font-bold text-[#00336E] group-hover:text-brand-accent transition-colors">Keep me logged in</span>
                             </label>
                             
-                            <a href="#" class="text-sm font-black text-[#00336E] hover:text-blue-600 hover:underline uppercase tracking-tight transition-colors">
+                            <a href="#" class="text-sm font-black text-[#00336E] hover:text-brand-accent hover:underline uppercase tracking-tight transition-colors">
                                 Forgot?
                             </a>
                         </div>
@@ -67,7 +67,7 @@
                         <!-- Submit Button -->
                         <div class="pt-2">
                             <button type="submit"
-                                class="w-full flex justify-center items-center py-4 bg-[#00336E] text-white text-lg font-bold rounded-full hover:bg-[#002855] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0">
+                                class="w-full flex justify-center items-center py-4 bg-[#00336E] text-white text-lg font-bold rounded-full hover:bg-brand-accent hover:text-[#00336E] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0">
                                 <span wire:loading.remove wire:target="login">Sign In</span>
                                 <span wire:loading wire:target="login">Signing In...</span>
                             </button>

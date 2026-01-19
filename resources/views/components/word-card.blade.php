@@ -1,9 +1,9 @@
 @props(['word'])
 
-<div {{ $attributes->merge(['class' => 'premium-card p-6 flex flex-col w-full h-full min-h-[180px] bg-white rounded-[24px] shadow-sm hover:shadow-xl transition-all duration-300 border border-[#00336E]/5 hover:-translate-y-1']) }}>
+<div {{ $attributes->merge(['class' => 'premium-card p-6 flex flex-col w-full h-full min-h-[180px] bg-white rounded-[24px] shadow-card hover:shadow-card-hover transition-all duration-300 border border-[#00336E]/5 hover:-translate-y-1']) }}>
     <div class="flex justify-between items-start mb-2">
         <a href="{{ route('word.show', $word->slug) }}" class="block min-w-0 flex-1 group">
-            <h3 class="text-xl font-bold text-[#00336E] group-hover:text-blue-600 transition-colors leading-tight tracking-tight truncate">
+            <h3 class="text-xl font-bold text-[#00336E] group-hover:text-brand-accent transition-colors leading-tight tracking-tight truncate">
                 {{ $word->term }}
             </h3>
         </a>
@@ -27,7 +27,7 @@
             <span class="text-[11px] font-black tracking-tight">{{ number_format($word->total_agrees ?? 0) }} Agreed</span>
         </div>
         
-        <a href="{{ route('word.show', $word->slug) }}" class="text-[10px] font-black text-[#00336E]/40 hover:text-[#00336E] uppercase tracking-widest transition-colors">
+        <a href="{{ route('word.show', $word->slug) }}" class="text-[10px] font-black text-[#00336E]/40 hover:text-brand-accent uppercase tracking-widest transition-colors">
             View Details →
         </a>
     </div>

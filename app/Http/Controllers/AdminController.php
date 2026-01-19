@@ -49,7 +49,6 @@ class AdminController extends Controller
             'term' => 'required|string|max:100',
             'category' => 'required|string',
             'admin_boost' => 'required|integer|min:0|max:10000',
-            'rfci_score' => 'nullable|string|max:10',
             'is_verified' => 'boolean',
             'is_polar_trend' => 'boolean',
         ]);
@@ -58,7 +57,6 @@ class AdminController extends Controller
             'term' => $validated['term'],
             'category' => $validated['category'],
             'admin_boost' => $validated['admin_boost'],
-            'rfci_score' => $validated['rfci_score'],
             'is_verified' => $request->boolean('is_verified'),
             'is_polar_trend' => $request->boolean('is_polar_trend'),
         ]);

@@ -1,5 +1,4 @@
 <div x-data="{ open: @entangle('isOpen') }">
-    <!-- Backdrop -->
     <div x-show="open" x-cloak
          class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity"
          x-transition:enter="ease-out duration-300"
@@ -9,7 +8,6 @@
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0">
 
-        <!-- Modal Container -->
         <div @click.away="open = false"
              class="relative flex flex-col items-center gap-6 transform transition-all"
              x-transition:enter="ease-out duration-300"
@@ -19,37 +17,27 @@
              x-transition:leave-start="opacity-100 scale-100 translate-y-0"
              x-transition:leave-end="opacity-0 scale-95 translate-y-4">
 
-            <!-- Title -->
             <div class="text-white font-bold uppercase tracking-widest text-sm flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                 Share to Story
             </div>
 
-            <!-- The Story Card (Can be screenshotted) -->
-            <!-- FIX: Using radial-gradients instead of blurred divs for perfect export -->
             <div id="story-card" 
-                 class="w-[320px] aspect-[9/16] rounded-[24px] p-8 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl border border-white/10"
-                 style="background: radial-gradient(circle at top right, rgba(15,98,254,0.4), transparent 40%), 
-                        radial-gradient(circle at bottom left, rgba(236,72,153,0.3), transparent 40%), 
-                        linear-gradient(135deg, #00336E, #001A38);">
+                 class="w-[320px] aspect-[9/16] rounded-[24px] p-8 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl border border-white/10 bg-[#00336E]">
 
-                <!-- Content -->
                 <div class="relative z-10 flex flex-col h-full justify-between py-6">
-                    <!-- Branding Top -->
                     <div class="text-white/40 text-[10px] uppercase font-black tracking-[0.2em]">TikTok Dictionary</div>
 
-                    <!-- Middle -->
                     <div>
                         <h1 class="text-4xl font-black text-white font-[GRIFTER] mb-4 leading-none break-words">
                             {{ $term }}
                         </h1>
-                        <div class="w-12 h-1 bg-pink-500 mx-auto rounded-full mb-6"></div>
+                        <div class="w-12 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>
                         <p class="text-white/90 text-lg font-medium leading-relaxed italic">
                             "{{ Str::limit($definition, 150) }}"
                         </p>
                     </div>
 
-                    <!-- Footer -->
                     <div class="space-y-2">
                         <div class="inline-flex items-center gap-2 bg-[#ffffff20] px-4 py-2 rounded-full border border-white/20">
                              <span class="text-xl">🔥</span>
@@ -60,7 +48,6 @@
                 </div>
             </div>
 
-            <!-- Actions -->
             <div class="flex flex-col gap-3 w-full max-w-[320px]" x-data="{ downloading: false }">
                 <button @click="
                             downloading = true;
@@ -75,7 +62,7 @@
                                 open = false;
                             });
                         " 
-                        class="w-full py-4 bg-white text-[#00336E] font-bold rounded-xl hover:bg-slate-100 transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-2">
+                        class="w-full py-4 bg-white text-[#00336E] font-bold rounded-xl hover:bg-brand-accent hover:text-[#00336E] transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-2">
                     <span x-show="!downloading" class="flex items-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         Download Image

@@ -45,7 +45,7 @@
                 <!-- Footer / Micro interaction -->
                 <div class="mt-4 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div class="flex items-center gap-2">
-                        <span class="text-brand-primary text-xs font-bold uppercase tracking-wider">View Word →</span>
+                        <span class="text-white/80 group-hover:text-brand-accent text-xs font-bold uppercase tracking-wider transition-colors">View Word →</span>
                         @if($word->rfci_score)
                              <x-ui.rfci-badge :score="$word->rfci_score" class="ml-2" />
                         @endif

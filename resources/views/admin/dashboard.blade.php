@@ -45,7 +45,7 @@
                     Pending Review ({{ $stats['pending'] }})
                 </a>
                 <a href="{{ route('admin.dashboard', ['status' => 'verified']) }}" 
-                    class="px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border-b-2 {{ $status === 'verified' ? 'text-blue-700 border-blue-500 bg-blue-50' : 'text-slate-500 border-transparent hover:text-blue-600' }}">
+                    class="px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border-b-2 {{ $status === 'verified' ? 'text-blue-700 border-blue-500 bg-blue-50' : 'text-slate-500 border-transparent hover:text-brand-accent' }}">
                     Verified
                 </a>
                  <a href="{{ route('admin.dashboard', ['status' => 'polar']) }}" 

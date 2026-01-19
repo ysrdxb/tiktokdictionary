@@ -11,7 +11,7 @@
                 </div>
                 <h2 class="text-3xl font-bold text-[#00336E] mb-4 font-title">{{ $disabledReason }}</h2>
                 <p class="text-slate-500 mb-10 text-lg">Check back later or browse existing words.</p>
-                <a href="{{ route('word.browse') }}" class="px-12 py-4 bg-[#00336E] text-white font-bold rounded-full hover:bg-black transition-all shadow-lg">
+                <a href="{{ route('word.browse') }}" class="px-12 py-4 bg-[#00336E] text-white font-bold rounded-full hover:bg-brand-accent hover:text-[#00336E] transition-all shadow-lg">
                     Browse Words
                 </a>
             </div>
@@ -25,7 +25,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Word -->
                         <div class="group">
-                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Word</label>
+                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Word <span class="text-red-500">*</span></label>
                             <input type="text" wire:model.live.debounce.500ms="term" required
                                    placeholder="e.g., 'Delulu', 'Rizz'"
                                    class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30">
@@ -34,7 +34,7 @@
                         
                         <!-- Definition -->
                         <div class="group">
-                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Definition</label>
+                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Definition <span class="text-red-500">*</span></label>
                             <textarea wire:model="definition" required rows="1"
                                    placeholder="What does it mean?"
                                    class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30 min-h-[64px]"></textarea>
@@ -44,7 +44,7 @@
     
                     <!-- Row 2: Example Sentence -->
                     <div class="group">
-                        <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Example Sentence</label>
+                        <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Example Sentence <span class="text-red-500">*</span></label>
                         <input type="text" wire:model="example" required
                                placeholder="Use it in a sentence..."
                                class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30">
@@ -55,7 +55,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Category -->
                         <div class="group">
-                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Category</label>
+                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Category <span class="text-red-500">*</span></label>
                             <div class="relative">
                                 <select wire:model="category" required
                                         class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-bold text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all appearance-none cursor-pointer">
@@ -81,25 +81,18 @@
                         </div>
                     </div>
     
-                    <!-- Row 4: Alternate Spellings + RFCI -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="group">
-                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Alternate Spellings</label>
-                            <input type="text" wire:model="alternateSpellings"
-                                   placeholder="e.g. 'rizz', 'riz', 'rizzed'"
-                                   class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30">
-                        </div>
-                        <div class="group">
-                            <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">RFCI Score <span class="text-[#00336E]/40 font-normal ml-1 text-xs normal-case">(Optional: e.g. "82A")</span></label>
-                            <input type="text" wire:model="rfci_score" placeholder="00X"
-                                   class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30 uppercase">
-                        </div>
+                    <!-- Row 4: Alternate Spellings -->
+                    <div class="group">
+                        <label class="block text-sm font-bold text-[#00336E] mb-2 uppercase tracking-wide">Alternate Spellings <span class="text-[#00336E]/40 font-normal ml-1 text-xs normal-case">(Optional)</span></label>
+                        <input type="text" wire:model="alternateSpellings"
+                               placeholder="e.g. 'rizz', 'riz', 'rizzed'"
+                               class="w-full px-6 py-4 bg-white/50 border-2 border-[#00336E]/10 rounded-[20px] text-[#00336E] font-medium text-lg outline-none focus:border-[#00336E] focus:bg-white transition-all duration-300 placeholder:text-[#00336E]/30">
                     </div>
     
                     <!-- Submit Button -->
                     <div class="pt-4">
                         <button type="submit" 
-                                class="inline-flex items-center gap-3 px-8 py-4 bg-[#00336E] text-white font-bold text-lg rounded-full hover:bg-[#002855] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0">
+                                class="inline-flex items-center gap-3 px-8 py-4 bg-[#00336E] text-white font-bold text-lg rounded-full hover:bg-brand-accent hover:text-[#00336E] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0">
                             Add Word
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -165,7 +158,7 @@
                     <a href="{{ route('word.show', $duplicateWordSlug) }}" class="flex-1 py-3 bg-[#F0F6FB] dark:bg-white/5 border border-[#00336E]/10 dark:border-white/10 text-[#00336E] dark:text-white font-bold rounded-full text-center hover:bg-[#00336E]/10 dark:hover:bg-white/10 transition-colors text-sm">
                         View Word ↗
                     </a>
-                    <a href="{{ route('word.show', $duplicateWordSlug) }}#contribute" class="flex-1 py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] font-bold rounded-full text-center hover:bg-slate-800 dark:hover:bg-brand-accent dark:hover:text-white transition-colors text-sm">
+                    <a href="{{ route('word.show', $duplicateWordSlug) }}#contribute" class="flex-1 py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] font-bold rounded-full text-center hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-[#00336E] transition-colors text-sm">
                         Add New Definition ↗
                     </a>
                 </div>
@@ -194,7 +187,7 @@
                     Your definition will appear once reviewed. Thanks for contributing!
                 </p>
                 
-                <button wire:click="closeSuccessModal" class="px-8 py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] font-bold rounded-full hover:bg-slate-800 dark:hover:bg-brand-accent dark:hover:text-white transition-colors w-full sm:w-auto shadow-lg">
+                <button wire:click="closeSuccessModal" class="px-8 py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] font-bold rounded-full hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-[#00336E] transition-colors w-full sm:w-auto shadow-lg">
                     Add Another Word ↗
                 </button>
             </div>

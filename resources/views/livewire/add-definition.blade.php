@@ -1,127 +1,113 @@
-<div>
-    <!-- Success Modal -->
-    @if($showSuccess)
-        <div
-            x-data="{ open: true }"
-            x-show="open"
-            x-cloak
-            x-init="setTimeout(() => { open = false; $wire.set('showSuccess', false) }, 3500)"
-            @keydown.escape.window="open = false; $wire.set('showSuccess', false)"
-            class="fixed inset-0 z-40 flex items-center justify-center px-6 py-10">
-            <div
-                class="absolute inset-0 bg-slate-900/60 dark:bg-black/60 backdrop-blur-sm"
-                @click="open = false; $wire.set('showSuccess', false)">
-            </div>
+<div x-data="{ 
+    showSuccess: @entangle('showSuccess'),
+    showDuplicate: @entangle('showDuplicateModal')
+}">
+    <!-- Success Modal Teleported to Body -->
+    <template x-teleport="body">
+        <div x-show="showSuccess" 
+             x-cloak 
+             class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-init="window.confetti && window.confetti({ particleCount: 200, spread: 150, origin: { y: 0.6 }, drift: 0.5, ticks: 200 })">
+            
+            <div class="relative w-full max-w-md bg-white dark:bg-[#00152e] border border-[#00336E]/10 dark:border-white/10 rounded-[32px] p-10 text-center shadow-2xl"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 scale-90 translate-y-4"
+                 x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                 @click.outside="showSuccess = false">
 
-            <div
-                x-transition:enter="transition ease-out duration-200"
-                x-transition:enter-start="opacity-0 translate-y-3 scale-95"
-                x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                x-transition:leave="transition ease-in duration-150"
-                x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                x-transition:leave-end="opacity-0 translate-y-3 scale-95"
-                class="relative w-full max-w-lg bg-white dark:bg-[#0a1628] rounded-3xl border border-slate-200 dark:border-white/10 shadow-strong p-8 md:p-10">
-
-                <button
-                    type="button"
-                    class="absolute top-4 right-4 inline-flex items-center justify-center w-11 h-11 rounded-full bg-white dark:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-white/60 hover:bg-slate-100 dark:hover:bg-white/20 hover:text-slate-900 dark:hover:text-white transition-colors"
-                    @click="open = false; $wire.set('showSuccess', false)"
-                    aria-label="Close">
+                 <button @click="showSuccess = false" class="absolute top-6 right-6 text-[#00336E]/50 dark:text-white/50 hover:text-[#00336E] dark:hover:text-white">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-
-                <div class="text-center">
-                    <div class="mx-auto w-14 h-14 rounded-2xl bg-emerald-100 dark:bg-emerald-500/20 border border-emerald-200 dark:border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                    </div>
-
-                    <h3 class="mt-5 text-2xl md:text-3xl font-extrabold text-[#00336E] dark:text-white tracking-tight">Definition added</h3>
-                    <p class="mt-2 text-slate-600 dark:text-white/60 font-semibold">Thanks — your definition has been submitted.</p>
-                </div>
+                 </button>
+                 
+                 <div class="flex items-center justify-center mb-6 text-green-500 dark:text-green-400">
+                     <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                     </svg>
+                 </div>
+                 
+                 <h3 class="text-3xl font-bold text-[#00336E] dark:text-white mb-2 font-title">Success!</h3>
+                 <p class="text-[#00336E]/70 dark:text-white/70 text-base font-medium mb-8 leading-relaxed">Your definition will appear once reviewed. Thanks for contributing!</p>
+                 
+                 <button @click="showSuccess = false" 
+                         class="px-8 py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] font-bold rounded-full hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-[#00336E] transition-colors w-full sm:w-auto shadow-lg">
+                    Add Another Definition ↗
+                 </button>
             </div>
         </div>
-    @endif
+    </template>
 
-    <!-- Duplicate Warning Modal -->
-    @if($showDuplicateModal)
-        <div class="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-black/40 dark:bg-black/60 backdrop-blur-sm">
-            <div class="bg-white dark:bg-[#0a1628] rounded-[24px] p-8 max-w-lg w-full shadow-2xl relative border border-transparent dark:border-white/10">
-                <button wire:click="$set('showDuplicateModal', false)" class="absolute top-6 right-6 text-slate-400 dark:text-white/40 hover:text-slate-600 dark:hover:text-white">
+    <!-- Duplicate Modal Teleported to Body -->
+    <template x-teleport="body">
+        <div x-show="showDuplicate" 
+             x-cloak 
+             class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100">
+            
+            <div class="relative w-full max-w-lg bg-white dark:bg-[#00152e] border border-[#00336E]/10 dark:border-white/10 rounded-[32px] p-8 text-center shadow-2xl"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 scale-90 translate-y-4"
+                 x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                 @click.outside="showDuplicate = false">
+                
+                <button @click="showDuplicate = false" class="absolute top-6 right-6 text-[#00336E]/50 dark:text-white/50 hover:text-[#00336E] dark:hover:text-white">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
+                
+                <div class="flex items-center justify-center mb-4">
+                    <div class="text-amber-500 bg-amber-500/10 p-4 rounded-full">
+                        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                           <path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
 
-                <h3 class="text-2xl md:text-3xl font-bold text-[#00336E] dark:text-white mb-2 text-center leading-tight">
-                    @if($duplicateWordSlug)
-                        "{{ $duplicateWordTerm }}" Already Exists as a Word.
-                    @else
-                        {{ $existingCount }} People Already Submitted This Definition.
-                    @endif
-                </h3>
-
-                <p class="text-[#00336E]/70 dark:text-white/60 text-center font-medium mb-8">
-                    @if($duplicateWordSlug)
-                        Check out its page instead?
-                    @else
-                        It already exists above — want to continue?
-                    @endif
+                <h3 class="text-2xl font-bold text-[#00336E] dark:text-white mb-4 font-title">Duplicate Detected</h3>
+                <p class="text-[#00336E] dark:text-white/80 text-lg font-medium mb-6 leading-relaxed bg-[#F0F6FB] dark:bg-white/5 p-4 rounded-xl">
+                    This definition might essentially already exist.
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button wire:click="redirectToExisting"
-                       class="px-8 py-3 bg-[#00336E] dark:bg-brand-accent text-white dark:text-[#00336E] font-bold rounded-full hover:bg-slate-800 dark:hover:bg-brand-accent/90 transition-colors text-center shadow-lg shadow-blue-900/10 dark:shadow-brand-accent/20">
-                        View Existing
+                <div class="flex flex-row gap-4 justify-center">
+                    <button wire:click="redirectToExisting" class="flex-1 py-3 bg-[#F0F6FB] dark:bg-white/5 border border-[#00336E]/10 dark:border-white/10 text-[#00336E] dark:text-white font-bold rounded-full text-center hover:bg-[#00336E]/10 dark:hover:bg-white/10 transition-colors text-sm">
+                        View Existing ↗
                     </button>
-                    <button wire:click="confirmDuplicate"
-                            class="px-8 py-3 bg-white dark:bg-white/10 text-[#00336E] dark:text-white border border-[#00336E]/20 dark:border-white/20 font-bold rounded-full hover:bg-slate-50 dark:hover:bg-white/20 transition-colors">
-                        Continue Anyway
+                    <button wire:click="confirmDuplicate" class="flex-1 py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] font-bold rounded-full text-center hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-[#00336E] transition-colors text-sm">
+                        Add Anyway ↗
                     </button>
                 </div>
             </div>
         </div>
-    @endif
+    </template>
 
-    <!-- Add Definition Form -->
+    <!-- Form Section -->
     @if($disabledReason)
-        <!-- Disabled State -->
-        <div class="mt-4 p-6 bg-slate-100 dark:bg-white/5 rounded-[16px] border border-slate-200 dark:border-white/10 text-center">
-            <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-slate-200 dark:bg-white/10 flex items-center justify-center">
-                <svg class="w-6 h-6 text-slate-400 dark:text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                </svg>
-            </div>
-            <p class="text-slate-600 dark:text-white/60 font-medium">{{ $disabledReason }}</p>
-            @if($requireLogin && !auth()->check())
-                <a href="{{ route('login') }}" class="inline-block mt-4 px-6 py-2 bg-[#00336E] dark:bg-brand-accent text-white dark:text-[#00336E] font-bold rounded-full hover:opacity-90 transition-opacity">
-                    Log In
-                </a>
-            @endif
+        <div class="mt-4 p-8 bg-slate-50 rounded-[24px] border border-slate-200 text-center">
+            <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest">{{ $disabledReason }}</p>
         </div>
     @else
-        <form wire:submit="submit" class="mt-4">
+        <form wire:submit.prevent="submit" class="mt-4">
+            <div class="space-y-4">
+                 <div class="relative group">
+                      <div class="absolute top-1/2 -translate-y-1/2 left-4 w-6 h-6 rounded-full bg-black text-white flex items-center justify-center z-10">
+                          <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                      </div>
+                      <input wire:model="definition" 
+                             type="text" 
+                             placeholder="Text field" 
+                             class="w-full pl-14 pr-4 py-4 bg-white border border-[#00336E]/20 rounded-lg text-[#00336E] font-medium text-sm focus:outline-none focus:border-[#00336E] transition-all placeholder:text-[#00336E]/40">
+                 </div>
 
-            <!-- Definition -->
-            <div class="mb-6 relative">
-                 <div class="absolute top-1/2 -translate-y-1/2 left-5 flex items-center justify-center w-8 h-8 rounded-full bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] pointer-events-none z-10">
-                     <span class="text-sm font-bold">!</span>
-                </div>
-                <input
-                    wire:model="definition"
-                    type="text"
-                    placeholder="Add your definition..."
-                    class="w-full pl-16 pr-5 py-3 md:py-4 bg-white dark:bg-white/5 border border-[#00336E]/20 dark:border-white/20 rounded-[16px] text-[#00336E] dark:text-white font-medium placeholder:text-[#00336E]/30 dark:placeholder:text-white/30 focus:outline-none focus:border-[#00336E] dark:focus:border-brand-accent focus:ring-2 focus:ring-[#00336E]/10 dark:focus:ring-brand-accent/20 transition-all text-base md:text-lg @error('definition') border-red-500 @enderror">
-                @error('definition')
-                    <p class="text-red-500 text-sm mt-2 ml-1 font-medium">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="text-left">
-                 <!-- Submit Button -->
-                <button
-                    type="submit"
-                    class="px-8 py-3 bg-[#00336E] dark:bg-brand-accent hover:bg-slate-800 dark:hover:bg-brand-accent/90 text-white dark:text-[#00336E] font-bold rounded-full transition-colors shadow-lg shadow-blue-900/10 dark:shadow-brand-accent/20">
+                 <button type="submit" class="px-8 py-3 bg-[#00336E] text-white font-medium text-sm rounded-full hover:bg-brand-accent hover:text-[#00336E] transition-all shadow-sm">
                     Submit
                 </button>
             </div>
+            @error('definition')
+                <p class="text-red-500 text-[10px] font-bold mt-2 ml-1">{{ $message }}</p>
+            @enderror
         </form>
     @endif
 </div>

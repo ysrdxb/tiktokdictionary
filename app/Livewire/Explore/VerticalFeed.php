@@ -16,19 +16,24 @@ class VerticalFeed extends Component
     {
         if (!$this->readyToLoad || !$this->hasMore) return;
 
-        // Pull a mix: 3 Latest, 2 High Velocity
+        // Pull a mix: 4 Latest, 4 Trending (Hot)
         $latest = Word::with(['primaryDefinition', 'definitions'])
+            ->where('is_verified', true)
             ->whereNotIn('id', $this->loadedIds)
             ->latest()
-            ->take(3)
+            ->take(4)
             ->get();
 
         $trending = Word::with(['primaryDefinition', 'definitions'])
+            ->where('is_verified', true)
             ->whereNotIn('id', $this->loadedIds)
             ->whereNotIn('id', $latest->pluck('id'))
             ->orderByDesc('velocity_score')
-            ->take(2)
+            ->take(4)
             ->get();
+
+        foreach ($latest as $w) $w->feed_label = 'NEW';
+        foreach ($trending as $w) $w->feed_label = 'HOT';
 
         $newWords = $latest->concat($trending)->shuffle();
         

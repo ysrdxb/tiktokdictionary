@@ -14,7 +14,7 @@
     </div>
 
     <!-- Main Content Wrapper (Transparent Container) -->
-    <div class="w-full min-h-screen -mt-32 relative z-20 pb-20">
+    <div class="w-full min-h-screen -mt-32 relative z-20 pb-24">
         <!-- Lower Page Global Background (Starts after overlap) -->
         <div class="absolute top-32 bottom-0 left-0 right-0 bg-[#FFFFFF] -z-10"></div>
 

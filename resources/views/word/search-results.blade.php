@@ -5,12 +5,12 @@
             <!-- Search Stats & Query -->
             <div class="mb-12">
                 <nav class="flex items-center gap-2 text-sm font-bold text-[#00336E]/40 uppercase tracking-widest mb-4">
-                    <a href="{{ route('home') }}" class="hover:text-[#00336E]">Home</a>
+                    <a href="{{ route('home') }}" class="hover:text-brand-accent">Home</a>
                     <span>/</span>
                     <span class="text-[#00336E]">Search</span>
                 </nav>
                 <h1 class="text-4xl md:text-6xl font-black text-[#00336E] tracking-tighter uppercase">
-                    Results for <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">"{{ $query }}"</span>
+                    Results for <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-[#FFB703]">"{{ $query }}"</span>
                 </h1>
                 <p class="mt-4 text-lg text-[#00336E]/60 font-medium">
                     Found {{ $startsWith->count() + $contains->count() }} matches across the dictionary.
@@ -62,7 +62,7 @@
                         We couldn't find any words for "{{ $query }}". Maybe it's too new or you just invented it?
                     </p>
                     <a href="{{ route('word.create', ['term' => $query]) }}" 
-                       class="inline-flex items-center justify-center px-10 py-4 bg-[#00336E] text-white font-black rounded-2xl hover:bg-black transition-all hover:scale-105 shadow-lg active:scale-95 transform">
+                       class="inline-flex items-center justify-center px-10 py-4 bg-[#00336E] text-white font-black rounded-2xl hover:bg-brand-accent hover:text-[#00336E] transition-all hover:scale-105 shadow-lg active:scale-95 transform">
                        + SUBMIT THIS WORD
                     </a>
                 </div>

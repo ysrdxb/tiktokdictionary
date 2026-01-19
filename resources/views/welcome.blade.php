@@ -15,7 +15,7 @@
             <div class="max-w-[1400px] mx-auto px-10 flex items-center">
                 <!-- Logo: TikTok (Bold) Dictionary (Regular) -->
                 <a href="{{ route('home') }}" class="flex items-center group overflow-hidden">
-                    <span class="text-2xl tracking-tighter text-[#00336E] transition-all duration-300 group-hover:tracking-normal">
+                    <span class="text-3xl tracking-tighter text-[#00336E] transition-all duration-300 group-hover:tracking-normal">
                         <span class="font-bold">Tiktok</span><span class="font-medium">Dictionary</span>
                     </span>
                 </a>
@@ -24,9 +24,9 @@
                 <div class="hidden lg:flex items-center gap-10 ml-auto">
                     <!-- Nav Menu -->
                     <div class="flex items-center gap-8">
-                        <a href="{{ route('explore.feed') }}" class="text-sm font-bold text-[#00336E] hover:text-blue-600 transition-all hover:scale-105 transform active:scale-95">Live Feed</a>
-                        <a href="{{ route('word.browse') }}" class="text-sm font-bold text-[#00336E] hover:text-blue-600 transition-all hover:scale-105 transform active:scale-95">Browse</a>
-                        <a href="{{ route('word.create') }}" class="text-sm font-bold text-[#00336E] hover:text-blue-600 transition-all hover:scale-105 transform active:scale-95">Submit</a>
+                        <a href="{{ route('explore.feed') }}" class="text-sm font-bold text-[#00336E] hover:text-brand-accent transition-all hover:scale-105 transform active:scale-95">Live Feed</a>
+                        <a href="{{ route('word.browse') }}" class="text-sm font-bold text-[#00336E] hover:text-brand-accent transition-all hover:scale-105 transform active:scale-95">Browse</a>
+                        <a href="{{ route('word.create') }}" class="text-sm font-bold text-[#00336E] hover:text-brand-accent transition-all hover:scale-105 transform active:scale-95">Submit</a>
                     </div>
 
                     @auth
@@ -36,19 +36,19 @@
                                 <div class="flex items-center gap-2">
                                     <span class="text-[#00336E] text-sm font-bold">{{ Auth::user()->username }}</span>
                                     @if(auth()->user()->is_admin)
-                                        <a href="{{ route('admin.dashboard') }}" class="text-[10px] font-bold bg-[#00336E] text-white px-2 py-0.5 rounded-sm hover:bg-blue-600 transition-colors uppercase">Admin</a>
+                                        <a href="{{ route('admin.dashboard') }}" class="text-[10px] font-bold bg-[#00336E] text-white px-2 py-0.5 rounded-sm hover:bg-brand-accent hover:text-[#00336E] transition-colors uppercase">Admin</a>
                                     @endif
                                 </div>
                             </div>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="px-8 py-2.5 bg-[#00336E] text-white text-sm font-bold rounded-full hover:bg-blue-800 transition-all hover:shadow-lg active:scale-95 transform">
+                                <button type="submit" class="px-8 py-2.5 bg-[#00336E] text-white text-sm font-bold rounded-full hover:bg-brand-accent hover:text-[#00336E] transition-all hover:shadow-lg active:scale-95 transform">
                                     Logout
                                 </button>
                             </form>
                         </div>
                     @else
-                        <a href="{{ route('login') }}" class="px-10 py-3 bg-[#00336E] text-white text-sm font-bold rounded-full hover:bg-blue-800 transition-all hover:shadow-[0_10px_30px_rgba(0,51,110,0.3)] active:scale-95 transform">
+                        <a href="{{ route('login') }}" class="px-10 py-3 bg-[#00336E] text-white text-sm font-bold rounded-full hover:bg-brand-accent hover:text-[#00336E] transition-all hover:shadow-[0_10px_30px_rgba(0,51,110,0.3)] active:scale-95 transform">
                             Login
                         </a>
                     @endauth
@@ -87,7 +87,7 @@
              }">
             <div class="max-w-[1240px] w-full mx-auto px-6 text-center relative z-10">
                 <!-- Main Headline (GRIFTER Font Applied) -->
-                <h1 class="text-[#00336E] tracking-tight mb-8 select-none font-title transition-all duration-[1200ms] ease-out delay-150"
+                <h1 class="text-[#00336E] tracking-tight my-4 select-none font-title transition-all duration-[1200ms] ease-out delay-150"
                     :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
                     <span class="block text-5xl md:text-7xl font-[600] mb-4">Search Any</span>
                     <span class="block text-6xl md:text-[6rem] md:leading-[1] font-[600]">
@@ -96,7 +96,7 @@
                 </h1>
                 
                 <!-- Subtext -->
-                <p class="text-[#00336E] text-[18px] md:text-[23px] font-[300] mb-6 opacity-90 max-w-3xl mx-auto tracking-tight transition-all duration-[1200ms] [transition-timing-function:cubic-bezier(0,0,0.2,1)] delay-300"
+                <p class="text-[#00336E] text-[18px] md:text-[23px] font-[300] mb-4 opacity-90 max-w-3xl mx-auto tracking-tight transition-all duration-[1200ms] [transition-timing-function:cubic-bezier(0,0,0.2,1)] delay-300"
                    :class="shown ? 'opacity-90 translate-y-0' : 'opacity-0 translate-y-10'">
                     Type a trend, phrase, or slang you saw online.
                 </p>
@@ -107,7 +107,7 @@
                     @livewire('search-bar')
                 </div>
                 
-                <p class="text-[#00336E] text-base md:text-lg mt-10 opacity-70 transition-all duration-1000 delay-700"
+                <p class="text-[#00336E] text-base md:text-lg mt-4 opacity-70 transition-all duration-1000 delay-700"
                    :class="shown ? 'opacity-70' : 'opacity-0'">
                    Press <span class="font-bold">Enter</span> to search
                 </p>
@@ -146,7 +146,7 @@
     <main class="relative z-0">
         
         <!-- Trending Right Now -->
-        <section class="bg-white pt-32 pb-24 relative -mt-6">
+        <section class="bg-white py-20 md:py-24 relative mt-12">
             <div class="max-w-[1240px] mx-auto px-6">
                 <!-- Section Header -->
                 <div class="mb-12 reveal-on-scroll">
@@ -178,7 +178,7 @@
                 </div>
                 <!-- Footer Link -->
                 <div class="text-left mt-8">
-                    <a href="{{ route('word.browse') }}" class="inline-flex items-center text-[#00336E]/60 font-black text-xs uppercase tracking-widest hover:text-[#00336E] group transition-colors">
+                    <a href="{{ route('word.browse') }}" class="inline-flex items-center text-[#00336E]/60 font-black text-xs uppercase tracking-widest hover:text-brand-accent group transition-colors">
                         Browse all trending words
                         <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </a>
@@ -187,7 +187,7 @@
         </section>
 
         <!-- Most Agreed Definitions (Figma Layout) -->
-        <section class="bg-[#EFF6FE] py-16">
+        <section class="bg-[#EFF6FE] py-20 md:py-24">
             <div class="max-w-[1240px] mx-auto px-6">
                 <!-- Header -->
                 <div class="mb-10">
@@ -207,7 +207,7 @@
                             <!-- Left Content -->
                             <div class="flex-1 min-w-0 w-full">
                                 <div class="flex items-center gap-3 mb-3 flex-wrap">
-                                    <h3 class="text-2xl font-bold text-[#00336E] group-hover:text-blue-600 transition-colors">{{ $def->word->term }}</h3>
+                                    <h3 class="text-2xl font-bold text-[#00336E] group-hover:text-brand-accent transition-colors">{{ $def->word->term }}</h3>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold bg-[#4ADE80]/20 text-[#15803D] uppercase tracking-wide border border-[#4ADE80]/30">
                                         <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                                         {{ $badgeLabel }}
@@ -221,7 +221,7 @@
                             </div>
                             
                             <!-- Right Stats Box -->
-                            <div class="flex flex-col items-center justify-center bg-[#F1F5F9] rounded-xl p-6 min-w-[140px] text-center mt-4 md:mt-0 w-full md:w-auto group-hover:bg-blue-50 transition-colors">
+                            <div class="flex flex-col items-center justify-center bg-[#F1F5F9] rounded-xl p-6 min-w-[140px] text-center mt-4 md:mt-0 w-full md:w-auto group-hover:bg-brand-accent transition-colors">
                                 <span class="text-4xl font-black text-[#00336E] block mb-1"><span x-counter="{{ $accuracy }}">0</span>%</span>
                                 <span class="text-[11px] font-bold text-[#00336E]/60 uppercase tracking-wide">accuracy</span>
                             </div>
@@ -234,7 +234,7 @@
 
 
         <!-- Fresh Submissions (Figma Grid Layout) -->
-        <section class="bg-white py-16">
+        <section class="bg-white py-20 md:py-24">
             <div class="max-w-[1240px] mx-auto px-6">
                 <!-- Header -->
                 <div class="mb-10 reveal-on-scroll">
@@ -263,7 +263,7 @@
 
                             <!-- Term & Content -->
                             <div class="mb-4">
-                                <h3 class="text-2xl md:text-3xl font-black text-[#00336E] mb-2 group-hover:text-blue-600 transition-colors tracking-tight leading-tight">
+                                <h3 class="text-2xl md:text-3xl font-black text-[#00336E] mb-2 group-hover:text-brand-accent transition-colors tracking-tight leading-tight">
                                     {{ $word->term }}
                                 </h3>
                                 <p class="text-[#00336E]/70 text-sm md:text-base leading-snug line-clamp-2 font-medium">
@@ -281,7 +281,7 @@
                                      @endforeach
                                      <div class="pl-4 text-[10px] font-bold text-[#00336E]/40 self-center">+{{ rand(5, 50) }} spottings</div>
                                 </div>
-                                <div class="text-[10px] font-black uppercase tracking-[0.2em] text-[#00336E]/40 group-hover:text-blue-600 transition-all flex items-center gap-1">
+                                <div class="text-[10px] font-black uppercase tracking-[0.2em] text-[#00336E]/40 group-hover:text-brand-accent transition-all flex items-center gap-1">
                                     View Definition
                                     <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
                                 </div>
@@ -293,7 +293,7 @@
         </section>
 
         <!-- Explore Categories (Figma Cards) -->
-        <section class="bg-[#EFF6FE] py-20">
+        <section class="bg-[#EFF6FE] py-20 md:py-24">
             <div class="max-w-[1240px] mx-auto px-6">
                 <!-- Header -->
                 <div class="mb-12 text-center md:text-left reveal-on-scroll">
@@ -304,7 +304,7 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     @foreach($categoryCards as $category)
                         <a href="{{ route('word.browse', ['category' => $category['category']]) }}" class="premium-card reveal-on-scroll p-8 text-center group bg-[#EFF6FE] border border-[#00336E] rounded-[20px] hover:bg-white hover:shadow-lg transition-all flex flex-col justify-center h-[140px]">
-                            <h4 class="text-xl font-bold text-[#00336E] mb-1 group-hover:text-blue-600 transition-colors leading-tight">{{ $category['label'] }}</h4>
+                            <h4 class="text-xl font-bold text-[#00336E] mb-1 group-hover:text-brand-accent transition-colors leading-tight">{{ $category['label'] }}</h4>
                             <span class="text-sm font-medium text-[#00336E]/70">{{ $category['countLabel'] }}</span>
                         </a>
                     @endforeach
@@ -313,7 +313,7 @@
         </section>
 
         <!-- Why TikTok Dictionary Exists (Figma Style) -->
-        <section class="bg-white py-24">
+        <section class="bg-white py-20 md:py-24">
             <div class="max-w-[1240px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <!-- Left Text -->
                 <div class="reveal-on-scroll">

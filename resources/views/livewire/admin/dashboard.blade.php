@@ -53,7 +53,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
         <!-- Total Words -->
         <div class="stat-card bg-gradient-to-br from-[#00336E] to-[#001a3a] rounded-2xl p-6 border border-white/10 relative overflow-hidden group">
-            <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-colors"></div>
+            <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-brand-accent/20 transition-colors"></div>
             <div class="relative">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">

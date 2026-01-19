@@ -160,6 +160,7 @@ class WordController extends Controller
             [
                 'slug' => Str::slug($validated['term']),
                 'category' => $validated['category'],
+                'is_verified' => true,
             ]
         );
 
@@ -172,6 +173,7 @@ class WordController extends Controller
             'source_url' => $validated['source_url'] ?? null,
             'agrees' => 0,
             'disagrees' => 0,
+            'is_primary' => true,
         ]);
 
         // Recalculate word stats
@@ -211,9 +213,12 @@ class WordController extends Controller
             'submitted_by' => 'Anonymous',
             'agrees' => 0,
             'disagrees' => 0,
+            'is_primary' => $word->definitions()->count() === 0,
         ]);
 
         $word->recalculateStats();
+
+        \Illuminate\Support\Facades\Cache::forget('homepage_trending_today');
 
         return redirect()->route('word.show', $word->slug)
             ->with('success', 'Definition added successfully!');

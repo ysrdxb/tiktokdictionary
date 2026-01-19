@@ -65,7 +65,7 @@
                         </p>
                         <div class="absolute bottom-4 right-4">
                              <button onclick="navigator.clipboard.writeText('{{ addslashes($outputText) }}'); alert('Copied to clipboard!')" 
-                                     class="p-2 bg-white rounded-full shadow-sm hover:scale-110 transition-transform text-[#00336E]/50 hover:text-[#00336E]" title="Copy">
+                                     class="p-2 bg-white rounded-full shadow-sm hover:scale-110 transition-transform text-[#00336E]/50 hover:text-brand-accent" title="Copy">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                              </button>
                         </div>

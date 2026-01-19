@@ -14,7 +14,6 @@ class Edit extends Component
     public $term;
     public $category;
     public $admin_boost;
-    public $rfci_score;
     public $is_verified;
     public $is_polar_trend;
 
@@ -28,7 +27,6 @@ class Edit extends Component
         'term' => 'required|string|max:100',
         'category' => 'required|string',
         'admin_boost' => 'required|integer|min:0|max:10000',
-        'rfci_score' => 'nullable|string|max:10',
         'is_verified' => 'boolean',
         'is_polar_trend' => 'boolean',
     ];
@@ -39,7 +37,6 @@ class Edit extends Component
         $this->term = $word->term;
         $this->category = $word->category;
         $this->admin_boost = $word->admin_boost ?? 0;
-        $this->rfci_score = $word->rfci_score;
         $this->is_verified = $word->is_verified ?? false;
         $this->is_polar_trend = $word->is_polar_trend ?? false;
     }
@@ -52,7 +49,6 @@ class Edit extends Component
             'term' => $this->term,
             'category' => $this->category,
             'admin_boost' => $this->admin_boost,
-            'rfci_score' => $this->rfci_score,
             'is_verified' => $this->is_verified,
             'is_polar_trend' => $this->is_polar_trend,
         ]);

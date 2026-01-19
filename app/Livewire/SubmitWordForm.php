@@ -178,6 +178,7 @@ class SubmitWordForm extends Component
                 'category' => $this->category,
                 'alternate_spellings' => $this->alternateSpellings,
                 'vibes' => array_map('trim', explode(',', $this->hashtags)),
+                'is_verified' => true, // Auto-verify new submissions for immediate visibility
             ]
         );
 
@@ -200,9 +201,16 @@ class SubmitWordForm extends Component
             'agrees' => 0,
             'disagrees' => 0,
             'is_approved' => $autoApprove,
+            'is_primary' => $word->definitions()->count() === 0, // Set as primary if it's the first definition
         ]);
 
         $word->recalculateStats();
+
+        // Clear trending cache to show new word instantly
+        \Illuminate\Support\Facades\Cache::forget('homepage_trending_today');
+        \Illuminate\Support\Facades\Cache::forget('homepage_trending_week');
+        \Illuminate\Support\Facades\Cache::forget('homepage_trending_month');
+        \Illuminate\Support\Facades\Cache::forget('homepage_trending_all');
 
         // Reset form
         $this->reset(['term', 'definition', 'example', 'submittedBy', 'sourceUrl', 'alternateSpellings', 'hashtags']);

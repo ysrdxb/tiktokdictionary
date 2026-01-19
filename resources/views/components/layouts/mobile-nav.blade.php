@@ -72,19 +72,19 @@
 
                     <!-- Navigation Links -->
                     <nav class="flex flex-col space-y-4">
-                        <a href="{{ route('home') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
+                        <a href="{{ route('home') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-accent dark:hover:text-brand-accent transition-colors">
                             <span class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/10 flex items-center justify-center">🏠</span>
                             Home
                         </a>
-                        <a href="{{ route('explore.feed') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
+                        <a href="{{ route('explore.feed') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-accent dark:hover:text-brand-accent transition-colors">
                             <span class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/10 flex items-center justify-center">🔥</span>
                             Live Feed
                         </a>
-                        <a href="{{ route('word.browse') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
+                        <a href="{{ route('word.browse') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-accent dark:hover:text-brand-accent transition-colors">
                             <span class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/10 flex items-center justify-center">📚</span>
                             Browse Dictionary
                         </a>
-                        <a href="{{ route('word.create') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-primary dark:hover:text-brand-accent transition-colors">
+                        <a href="{{ route('word.create') }}" class="flex items-center gap-3 text-lg font-bold text-[#00336E] dark:text-white hover:text-brand-accent dark:hover:text-brand-accent transition-colors">
                             <span class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/10 flex items-center justify-center">➕</span>
                             Submit Word
                         </a>
@@ -111,14 +111,14 @@
 
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="w-full py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] font-bold rounded-xl hover:bg-brand-primary transition-colors shadow-lg">
+                                <button type="submit" class="w-full py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] font-bold rounded-xl hover:bg-brand-accent hover:text-[#00336E] transition-colors shadow-lg">
                                     Sign Out
                                 </button>
                             </form>
                         @else
-                            <a href="{{ route('login') }}" class="block w-full py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] text-center font-bold rounded-xl hover:bg-brand-primary transition-colors shadow-lg mb-3">
-                                Login / Register
-                            </a>
+                             <a href="{{ route('login') }}" class="block w-full py-3 bg-[#00336E] dark:bg-white text-white dark:text-[#00336E] text-center font-bold rounded-xl hover:bg-brand-accent hover:text-[#00336E] transition-colors shadow-lg mb-3">
+                                 Login / Register
+                             </a>
                         @endauth
                     </div>
                 </div>

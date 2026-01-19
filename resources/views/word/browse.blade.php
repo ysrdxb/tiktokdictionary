@@ -14,7 +14,7 @@
     </div>
 
     <!-- Section 1: Filters & Trending (White Background) -->
-    <div class="w-full bg-white pt-16 pb-16">
+    <div class="w-full bg-white py-20 md:py-24">
         <div class="max-w-[1240px] mx-auto px-6 space-y-16">
             
             <!-- Filters & Sorting (Standalone) -->
@@ -59,7 +59,7 @@
                         <button @click="$refs.trendingScroll.scrollBy({ left: -400, behavior: 'smooth' })" class="w-12 h-12 rounded-full border border-[#00336E]/30 flex items-center justify-center text-[#00336E] hover:bg-slate-50 transition-colors active:scale-90">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                         </button>
-                        <button @click="$refs.trendingScroll.scrollBy({ left: 400, behavior: 'smooth' })" class="w-12 h-12 rounded-full bg-[#00336E] text-white flex items-center justify-center hover:bg-[#002855] transition-colors shadow-lg active:scale-90">
+                        <button @click="$refs.trendingScroll.scrollBy({ left: 400, behavior: 'smooth' })" class="w-12 h-12 rounded-full bg-[#00336E] text-white flex items-center justify-center hover:bg-brand-accent hover:text-[#00336E] transition-colors shadow-lg active:scale-90">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </button>
                     </div>
@@ -69,11 +69,11 @@
                     @forelse($trendingWords->take(9) as $word)
                         <div class="min-w-[300px] md:min-w-[400px] snap-center">
                             <a href="{{ route('word.show', $word->slug) }}" class="group block h-full">
-                                <div class="premium-card h-full bg-white/70 backdrop-blur-xl rounded-[30px] p-8 border border-white/40 shadow-lg group-hover:shadow-2xl group-hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+                                <div class="premium-card h-full bg-white/70 backdrop-blur-xl rounded-[30px] p-8 border border-white/40 shadow-card group-hover:shadow-card-hover group-hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
                                      <!-- Glass Shine -->
                                     <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                     
-                                    <h3 class="text-3xl font-black text-[#00336E] mb-4 tracking-tight group-hover:text-[#F59E0B] transition-colors">{{ $word->term }}</h3>
+                                    <h3 class="text-3xl font-black text-[#00336E] mb-4 tracking-tight group-hover:text-brand-accent transition-colors">{{ $word->term }}</h3>
                                     
                                     <!-- Badges -->
                                     <div class="flex flex-wrap gap-3 mb-6 relative z-10">
@@ -109,7 +109,7 @@
                     <button @click="$refs.growingScroll.scrollBy({ left: -400, behavior: 'smooth' })" class="w-12 h-12 rounded-full border border-[#00336E]/30 flex items-center justify-center text-[#00336E] hover:bg-white/50 transition-colors active:scale-90">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     </button>
-                    <button @click="$refs.growingScroll.scrollBy({ left: 400, behavior: 'smooth' })" class="w-12 h-12 rounded-full bg-[#00336E] text-white flex items-center justify-center hover:bg-[#002855] transition-colors shadow-lg active:scale-90">
+                    <button @click="$refs.growingScroll.scrollBy({ left: 400, behavior: 'smooth' })" class="w-12 h-12 rounded-full bg-[#00336E] text-white flex items-center justify-center hover:bg-brand-accent hover:text-[#00336E] transition-colors shadow-lg active:scale-90">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                 </div>
@@ -186,7 +186,7 @@
                     <button @click="$refs.memeScroll.scrollBy({ left: -400, behavior: 'smooth' })" class="w-12 h-12 rounded-full border border-[#00336E]/30 flex items-center justify-center text-[#00336E] hover:bg-white/50 transition-colors active:scale-90">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     </button>
-                    <button @click="$refs.memeScroll.scrollBy({ left: 400, behavior: 'smooth' })" class="w-12 h-12 rounded-full bg-[#00336E] text-white flex items-center justify-center hover:bg-[#002855] transition-colors shadow-lg active:scale-90">
+                    <button @click="$refs.memeScroll.scrollBy({ left: 400, behavior: 'smooth' })" class="w-12 h-12 rounded-full bg-[#00336E] text-white flex items-center justify-center hover:bg-brand-accent hover:text-[#00336E] transition-colors shadow-lg active:scale-90">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                 </div>
@@ -218,7 +218,7 @@
             <section class="reveal-on-scroll">
                 <div class="flex items-center justify-between mb-8">
                     <h2 class="text-4xl md:text-5xl font-black text-[#00336E] font-title">Audio / Hashtag Trends</h2>
-                    <a href="#" class="px-8 py-3 bg-[#00336E] text-white text-sm font-bold rounded-full hover:bg-black transition-colors flex items-center gap-2">
+                    <a href="#" class="px-8 py-3 bg-[#00336E] text-white text-sm font-bold rounded-full hover:bg-brand-accent hover:text-[#00336E] transition-colors flex items-center gap-2">
                         View More 
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7"></path></svg>
                     </a>

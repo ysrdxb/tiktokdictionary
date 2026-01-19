@@ -62,12 +62,6 @@
                             @error('admin_boost') <span class="text-red-400 text-xs mt-1">{{ $message }}</span> @enderror
                         </div>
 
-                        <div>
-                            <label class="block text-xs font-bold text-gray-400 uppercase mb-2">RFCI Score (Optional)</label>
-                            <input type="text" wire:model="rfci_score" placeholder="e.g., A+, B-, C"
-                                   class="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-accent transition-colors">
-                            @error('rfci_score') <span class="text-red-400 text-xs mt-1">{{ $message }}</span> @enderror
-                        </div>
 
                         <div class="flex flex-wrap items-center gap-6 pt-4 border-t border-white/10">
                             <label class="flex items-center gap-3 cursor-pointer group">
@@ -80,7 +74,7 @@
                             <label class="flex items-center gap-3 cursor-pointer group">
                                 <input type="checkbox" wire:model="is_verified"
                                        class="w-5 h-5 rounded bg-black/20 border-white/20 text-blue-500 focus:ring-blue-500 focus:ring-offset-0">
-                                <span class="font-bold text-white group-hover:text-blue-400 transition-colors">Verified</span>
+                                <span class="font-bold text-white group-hover:text-brand-accent transition-colors">Verified</span>
                                 <span class="text-xs text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">Blue Check</span>
                             </label>
                         </div>

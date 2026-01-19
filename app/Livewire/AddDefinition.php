@@ -144,9 +144,12 @@ class AddDefinition extends Component
             'source_url' => $this->sourceUrl ?: null,
             'agrees' => 0,
             'disagrees' => 0,
-            'is_primary' => false,
             'is_approved' => $autoApprove,
+            'is_primary' => Word::find($this->wordId)->definitions()->count() === 0,
         ]);
+
+        // Clear trending cache
+        \Illuminate\Support\Facades\Cache::forget('homepage_trending_today');
 
         // Reset form
         $this->definition = '';
@@ -158,9 +161,6 @@ class AddDefinition extends Component
 
         // Refresh the page data
         $this->dispatch('definitionAdded');
-
-        // Reload page after short delay to show new definition
-        $this->dispatch('refresh-page');
 
         if ($enabled) {
             RateLimiter::hit($key, $period * 60);

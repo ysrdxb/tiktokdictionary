@@ -34,22 +34,22 @@
 
                 <div class="space-y-3 mb-6">
                     <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-white/10 cursor-pointer hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
-                        <input type="radio" wire:model="reason" value="spam" class="text-[#0F62FE] focus:ring-[#0F62FE]">
+                        <input type="radio" wire:model="reason" value="spam" class="text-brand-accent focus:ring-brand-accent">
                         <span class="text-sm font-bold text-slate-700 dark:text-white">Spam or Advertising</span>
                     </label>
                     <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-white/10 cursor-pointer hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
-                        <input type="radio" wire:model="reason" value="offensive" class="text-[#0F62FE] focus:ring-[#0F62FE]">
+                        <input type="radio" wire:model="reason" value="offensive" class="text-brand-accent focus:ring-brand-accent">
                         <span class="text-sm font-bold text-slate-700 dark:text-white">Offensive / Hateful</span>
                     </label>
                     <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-white/10 cursor-pointer hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
-                        <input type="radio" wire:model="reason" value="incorrect" class="text-[#0F62FE] focus:ring-[#0F62FE]">
+                        <input type="radio" wire:model="reason" value="incorrect" class="text-brand-accent focus:ring-brand-accent">
                         <span class="text-sm font-bold text-slate-700 dark:text-white">Factually Incorrect</span>
                     </label>
                 </div>
 
                 <div class="mb-6">
                     <label class="block text-xs font-bold text-slate-400 dark:text-white/40 uppercase tracking-wider mb-2">Details (Optional)</label>
-                    <textarea wire:model="details" rows="2" class="w-full rounded-lg border-slate-200 dark:border-white/20 bg-white dark:bg-white/5 text-slate-900 dark:text-white text-sm focus:border-[#0F62FE] focus:ring-[#0F62FE] placeholder:text-slate-400 dark:placeholder:text-white/30" placeholder="Any extra context?"></textarea>
+                    <textarea wire:model="details" rows="2" class="w-full rounded-lg border-slate-200 dark:border-white/20 bg-white dark:bg-white/5 text-slate-900 dark:text-white text-sm focus:border-brand-accent focus:ring-brand-accent placeholder:text-slate-400 dark:placeholder:text-white/30" placeholder="Any extra context?"></textarea>
                 </div>
 
                 <div class="flex gap-3">

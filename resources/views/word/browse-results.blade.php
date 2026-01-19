@@ -21,17 +21,17 @@
             @if($words->count() > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($words as $word)
-                         <a href="{{ route('word.show', $word->slug) }}" class="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-violet-500/50 hover:shadow-lg dark:hover:bg-white/10 transition-all rounded-[24px] p-8 group relative overflow-hidden">
+                         <a href="{{ route('word.show', $word->slug) }}" class="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-brand-accent/50 hover:shadow-lg dark:hover:bg-white/10 transition-all rounded-[24px] p-8 group relative overflow-hidden">
                             <!-- Card Glow -->
-                            <div class="absolute inset-0 bg-gradient-to-br from-violet-600/0 to-violet-600/0 group-hover:to-violet-600/5 dark:group-hover:to-violet-600/10 transition-all duration-500"></div>
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#FFB703]/0 to-[#FFB703]/0 group-hover:to-[#FFB703]/5 dark:group-hover:to-[#FFB703]/10 transition-all duration-500"></div>
                             
                             <!-- Badges -->
                             <div class="flex items-center gap-2 mb-4 relative z-10">
                                 <span class="px-3 py-1 bg-slate-100 dark:bg-white/10 text-[#00336E] dark:text-white text-[11px] font-bold rounded-full border border-slate-200 dark:border-transparent">{{ $word->category }}</span>
-                                <span class="px-2 py-1 bg-violet-500/10 dark:bg-violet-500/20 text-violet-700 dark:text-violet-200 text-[10px] font-bold rounded-md border border-violet-500/20 dark:border-violet-500/30">#{{ $vibe }}</span>
+                                <span class="px-2 py-1 bg-brand-accent/10 dark:bg-brand-accent/20 text-[#00336E] dark:text-brand-accent text-[10px] font-bold rounded-md border border-brand-accent/20 dark:border-brand-accent/30">#{{ $vibe }}</span>
                             </div>
 
-                            <h3 class="text-3xl font-bold text-[#00336E] dark:text-white mb-3 tracking-tight group-hover:text-violet-600 dark:group-hover:text-violet-200 transition-colors relative z-10">{{ $word->term }}</h3>
+                            <h3 class="text-3xl font-bold text-[#00336E] dark:text-white mb-3 tracking-tight group-hover:text-brand-accent dark:group-hover:text-brand-accent transition-colors relative z-10">{{ $word->term }}</h3>
                             
                             <p class="text-[#00336E]/70 dark:text-white/70 text-[15px] leading-relaxed mb-6 font-medium line-clamp-3 relative z-10">
                                 {{ optional($word->primaryDefinition)->definition ?? 'No definition available.' }}
@@ -56,7 +56,7 @@
                     <div class="text-6xl mb-4">👻</div>
                     <h3 class="text-2xl font-bold text-[#00336E] dark:text-white mb-2">No words found for this vibe.</h3>
                     <p class="text-[#00336E]/50 dark:text-white/50">Maybe you should submit one?</p>
-                    <a href="{{ route('word.create') }}" class="inline-block mt-6 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-full transition-colors">Submit a Word</a>
+                    <a href="{{ route('word.create') }}" class="inline-block mt-6 px-6 py-3 bg-[#00336E] hover:bg-brand-accent hover:text-[#00336E] text-white font-bold rounded-full transition-colors">Submit a Word</a>
                 </div>
             @endif
         </div>
