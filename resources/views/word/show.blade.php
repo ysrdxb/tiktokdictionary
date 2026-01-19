@@ -23,46 +23,60 @@
                 <div class="flex flex-col">
                     <div class="w-full">
                         <div class="flex flex-col mb-8">
-                            <div class="flex items-center gap-4 mb-6">
-                                <h1 class="text-6xl md:text-[5rem] font-bold text-[#00336E] tracking-tight leading-none font-title drop-shadow-sm text-left">
-                                    {{ $word->term }}
-                                </h1>
-                                
-                                <div x-data="{ 
-                                    playing: false,
-                                    async playAudio(text) {
-                                        if(this.playing) return;
-                                        this.playing = true;
-                                        try {
-                                            const audio = await puter.ai.txt2speech(text, { voice: 'Kimberly', speed: 1.1 });
-                                            audio.onended = () => { this.playing = false; };
-                                            audio.play();
-                                        } catch (error) {
-                                            console.error('Audio failed:', error);
-                                            this.playing = false;
+                            <div class="flex flex-wrap md:flex-nowrap items-start md:items-center justify-between gap-6 mb-6">
+                                <div class="flex items-center gap-4">
+                                    <h1 class="text-6xl md:text-[5rem] font-bold text-[#00336E] tracking-tight leading-none font-title drop-shadow-sm text-left">
+                                        {{ $word->term }}
+                                    </h1>
+                                    
+                                    <div x-data="{ 
+                                        playing: false,
+                                        async playAudio(text) {
+                                            if(this.playing) return;
+                                            this.playing = true;
+                                            try {
+                                                const audio = await puter.ai.txt2speech(text, { voice: 'Kimberly', speed: 1.1 });
+                                                audio.onended = () => { this.playing = false; };
+                                                audio.play();
+                                            } catch (error) {
+                                                console.error('Audio failed:', error);
+                                                this.playing = false;
+                                            }
                                         }
-                                    }
-                                }" class="relative top-1 md:top-2">
-                                    <button 
-                                        @click="playAudio('{{ addslashes($word->term) }}: {{ addslashes($primaryDef->definition) }}')"
-                                        :class="playing ? 'text-brand-accent scale-110' : 'text-[#00336E]/30 hover:text-brand-accent'"
-                                        class="group flex items-center justify-center transition-all bg-transparent focus:outline-none"
-                                        title="Listen to pronunciation"
-                                    >
-                                        <!-- Standard Speaker Icon -->
-                                        <svg x-show="!playing" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5l-5 4H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.08M19.07 4.93a10 10 0 010 14.14"></path>
-                                        </svg>
-                                        
-                                        <!-- Loading/Playing State -->
-                                        <div x-show="playing" class="flex items-center gap-1 h-8">
-                                            <span class="w-1 h-3 bg-brand-accent rounded-full animate-[bounce_0.8s_infinite]"></span>
-                                            <span class="w-1 h-5 bg-brand-accent rounded-full animate-[bounce_1.0s_infinite]"></span>
-                                            <span class="w-1 h-3 bg-brand-accent rounded-full animate-[bounce_1.2s_infinite]"></span>
-                                            <span class="w-1 h-5 bg-brand-accent rounded-full animate-[bounce_0.9s_infinite]"></span>
-                                        </div>
-                                    </button>
+                                    }" class="relative top-1 md:top-2">
+                                        <button 
+                                            @click="playAudio('{{ addslashes($word->term) }}: {{ addslashes($primaryDef->definition) }}')"
+                                            :class="playing ? 'text-brand-accent scale-110' : 'text-[#00336E]/30 hover:text-brand-accent'"
+                                            class="group flex items-center justify-center transition-all bg-transparent focus:outline-none"
+                                            title="Listen to pronunciation"
+                                        >
+                                            <!-- Standard Speaker Icon -->
+                                            <svg x-show="!playing" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5l-5 4H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.08M19.07 4.93a10 10 0 010 14.14"></path>
+                                            </svg>
+                                            
+                                            <!-- Loading/Playing State -->
+                                            <div x-show="playing" class="flex items-center gap-1 h-8">
+                                                <span class="w-1 h-3 bg-brand-accent rounded-full animate-[bounce_0.8s_infinite]"></span>
+                                                <span class="w-1 h-5 bg-brand-accent rounded-full animate-[bounce_1.0s_infinite]"></span>
+                                                <span class="w-1 h-3 bg-brand-accent rounded-full animate-[bounce_1.2s_infinite]"></span>
+                                                <span class="w-1 h-5 bg-brand-accent rounded-full animate-[bounce_0.9s_infinite]"></span>
+                                            </div>
+                                        </button>
+                                    </div>
                                 </div>
+                                
+                                <!-- Domain Trigger Pill (Right Aligned) -->
+                                <button onclick="Livewire.dispatch('openDomainModal', { term: '{{ addslashes($word->term) }}' })" 
+                                        class="hidden md:inline-flex items-center gap-3 px-5 py-3 bg-[#F0F6FB] hover:bg-[#E1EAF5] rounded-xl transition-all group/domain cursor-pointer border border-[#00336E]/5 hover:scale-[1.02] active:scale-[0.98]">
+                                    <div class="w-8 h-8 rounded-lg bg-[#00336E] text-white flex items-center justify-center shadow-md group-hover/domain:bg-brand-accent group-hover/domain:text-[#00336E] transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                                    </div>
+                                    <div class="text-left">
+                                        <div class="text-xs font-black text-[#00336E] uppercase tracking-wider leading-none mb-1 group-hover/domain:text-brand-accent text-[#00336E] transition-colors">{{ Str::slug($word->term) }}.com</div>
+                                        <div class="text-[9px] font-bold text-[#00336E]/40 leading-none">Check Availability →</div>
+                                    </div>
+                                </button>
                             </div>
                             
                             @if($primaryDef)
@@ -130,9 +144,10 @@
                                 <!-- Actions -->
                                 <div class="flex items-center gap-3 ml-auto">
                                     <button onclick="Livewire.dispatch('openShareModal', { wordId: {{ $word->id }} })" 
-                                            class="w-12 h-12 flex items-center justify-center bg-[#00336E] text-white rounded-full hover:bg-brand-accent hover:text-[#00336E] transition-all shadow-md active:scale-95"
-                                            title="Share Now">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                            class="px-5 py-2.5 flex items-center gap-2 bg-[#00336E] text-white rounded-full hover:bg-brand-accent hover:text-[#00336E] transition-all shadow-md active:scale-95 text-xs font-black uppercase tracking-wider"
+                                            title="Share Story Sticker">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                        Share Sticker
                                     </button>
                                     
                                     <button onclick="Livewire.dispatch('openReportModal', { type: 'App\\Models\\Word', id: {{ $word->id }} })" 
@@ -183,6 +198,8 @@
                     </div>
                 </div>
             </section>
+
+
 
                 <section class="premium-card reveal-on-scroll bg-white rounded-[30px] p-8 md:p-10 shadow-sm border border-[#00336E]/5 mb-8">
                     <h2 class="text-3xl font-bold text-[#00336E] tracking-tight mb-8 font-title">Alternate Definitions</h2>
@@ -268,34 +285,12 @@
 
             <!-- Domain Advertisement Section -->
             <!-- Smart Domain Advertisement -->
-            <section class="premium-card reveal-on-scroll bg-[#00336E] rounded-[24px] p-6 shadow-md text-white relative overflow-hidden group/domain border-none">
-                <div class="absolute inset-0 bg-gradient-to-r from-[#00336E] to-[#011a3b]"></div>
-                <div class="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-brand-accent/10 rounded-full blur-3xl opacity-0 group-hover/domain:opacity-100 transition-opacity duration-700"></div>
 
-                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="flex items-center gap-5">
-                        <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/20 shadow-inner group-hover/domain:scale-110 transition-transform">
-                            <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                        </div>
-                        <div class="text-center md:text-left">
-                            <h3 class="text-lg font-black font-title leading-tight mb-1">Start your own legacy.</h3>
-                            <p class="text-xs text-white/70 font-medium">Secure this domain today.</p>
-                        </div>
-                    </div>
-
-                    <a href="https://www.godaddy.com" target="_blank" rel="noopener noreferrer" 
-                       class="group/btn relative px-6 py-3 bg-white text-[#00336E] font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-[#FFB703] hover:text-[#00336E] transition-all overflow-hidden shadow-lg w-full md:w-auto text-center border-2 border-transparent hover:border-white/20">
-                        <span class="relative z-10 flex items-center justify-center gap-2">
-                            Check Availability
-                            <svg class="w-3 h-3 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                        </span>
-                    </a>
-                </div>
-            </section>
         </div>
     </div>
     
     <livewire:tools.share-modal /> 
     <livewire:tools.report-modal />
     <livewire:tools.receipt-modal />
+    <livewire:tools.domain-modal />
 </x-layouts.app>
