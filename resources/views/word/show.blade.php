@@ -67,18 +67,28 @@
                                 </div>
                                 
                                 <!-- Domain Trigger Pill (Right Aligned - Premium Widget) -->
+                                <!-- Domain Trigger Pill (Right Aligned - High CTR) -->
                                 <button onclick="Livewire.dispatch('openDomainModal', { term: @js($word->term) })" 
-                                        class="hidden md:flex flex-col items-end group/domain cursor-pointer transition-transform active:scale-95">
-                                    <div class="inline-flex items-center gap-3 px-5 py-3 bg-white border border-[#00336E]/10 rounded-2xl shadow-sm hover:shadow-md hover:border-[#00336E]/20 transition-all">
-                                        <div class="text-right">
-                                            <div class="text-[10px] font-bold text-[#00336E]/40 uppercase tracking-widest mb-0.5">Registration</div>
-                                            <div class="text-sm font-black text-[#00336E] group-hover/domain:text-brand-accent transition-colors flex items-center gap-1 justify-end">
-                                                {{ Str::slug($word->term) }}.com
-                                                <svg class="w-3 h-3 opacity-50 transform group-hover/domain:translate-x-0.5 group-hover/domain:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                        class="hidden md:flex flex-col items-end group/domain cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95">
+                                    <div class="relative overflow-hidden inline-flex items-center gap-4 px-6 py-3 bg-[#00336E] text-white rounded-2xl shadow-xl shadow-brand-accent/10 border border-[#00336E]/5 group-hover/domain:shadow-brand-accent/20 group-hover/domain:border-brand-accent/50 transition-all">
+                                        <!-- Shine Effect -->
+                                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 translate-x-[-150%] group-hover/domain:animate-[shimmer_1s_infinite]"></div>
+
+                                        <div class="text-right relative z-10">
+                                            <div class="flex items-center justify-end gap-2 mb-0.5">
+                                                <span class="relative flex h-2 w-2">
+                                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                                </span>
+                                                <span class="text-[10px] font-black uppercase tracking-widest text-[#FFB703]">Available Now</span>
+                                            </div>
+                                            <div class="text-base font-black leading-none group-hover/domain:text-[#FFB703] transition-colors">
+                                                Get {{ Str::slug($word->term) }}.com
                                             </div>
                                         </div>
-                                        <div class="w-10 h-10 rounded-xl bg-[#00336E]/5 text-[#00336E] flex items-center justify-center group-hover/domain:bg-[#00336E] group-hover/domain:text-white transition-colors">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                                        
+                                        <div class="relative z-10 w-10 h-10 rounded-xl bg-[#FFB703] text-[#00336E] flex items-center justify-center shadow-lg group-hover/domain:scale-110 group-hover/domain:rotate-[-10deg] transition-all">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                                         </div>
                                     </div>
                                 </button>

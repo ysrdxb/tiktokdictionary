@@ -14,9 +14,15 @@ class DomainModal extends Component
 
     protected $listeners = ['openDomainModal'];
 
-    public function openDomainModal($data = [])
+    public function openDomainModal($term = null)
     {
-        $this->term = $data['term'] ?? '';
+        // Handle if passed as array or direct value
+        if (is_array($term)) {
+            $this->term = $term['term'] ?? '';
+        } else {
+            $this->term = $term ?? '';
+        }
+
         $this->domain = Str::slug($this->term) . '.com';
         
         // Generate variations
