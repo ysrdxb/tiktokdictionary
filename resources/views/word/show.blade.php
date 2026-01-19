@@ -66,15 +66,20 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Domain Trigger Pill (Right Aligned) -->
-                                <button onclick="Livewire.dispatch('openDomainModal', { term: '{{ addslashes($word->term) }}' })" 
-                                        class="hidden md:inline-flex items-center gap-3 px-5 py-3 bg-[#F0F6FB] hover:bg-[#E1EAF5] rounded-xl transition-all group/domain cursor-pointer border border-[#00336E]/5 hover:scale-[1.02] active:scale-[0.98]">
-                                    <div class="w-8 h-8 rounded-lg bg-[#00336E] text-white flex items-center justify-center shadow-md group-hover/domain:bg-brand-accent group-hover/domain:text-[#00336E] transition-colors">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                                    </div>
-                                    <div class="text-left">
-                                        <div class="text-xs font-black text-[#00336E] uppercase tracking-wider leading-none mb-1 group-hover/domain:text-brand-accent text-[#00336E] transition-colors">{{ Str::slug($word->term) }}.com</div>
-                                        <div class="text-[9px] font-bold text-[#00336E]/40 leading-none">Check Availability →</div>
+                                <!-- Domain Trigger Pill (Right Aligned - Premium Widget) -->
+                                <button onclick="Livewire.dispatch('openDomainModal', { term: @js($word->term) })" 
+                                        class="hidden md:flex flex-col items-end group/domain cursor-pointer transition-transform active:scale-95">
+                                    <div class="inline-flex items-center gap-3 px-5 py-3 bg-white border border-[#00336E]/10 rounded-2xl shadow-sm hover:shadow-md hover:border-[#00336E]/20 transition-all">
+                                        <div class="text-right">
+                                            <div class="text-[10px] font-bold text-[#00336E]/40 uppercase tracking-widest mb-0.5">Registration</div>
+                                            <div class="text-sm font-black text-[#00336E] group-hover/domain:text-brand-accent transition-colors flex items-center gap-1 justify-end">
+                                                {{ Str::slug($word->term) }}.com
+                                                <svg class="w-3 h-3 opacity-50 transform group-hover/domain:translate-x-0.5 group-hover/domain:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                            </div>
+                                        </div>
+                                        <div class="w-10 h-10 rounded-xl bg-[#00336E]/5 text-[#00336E] flex items-center justify-center group-hover/domain:bg-[#00336E] group-hover/domain:text-white transition-colors">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                                        </div>
                                     </div>
                                 </button>
                             </div>

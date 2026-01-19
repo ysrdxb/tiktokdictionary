@@ -14,7 +14,7 @@ class DomainModal extends Component
 
     protected $listeners = ['openDomainModal'];
 
-    public function openDomainModal($data)
+    public function openDomainModal($data = [])
     {
         $this->term = $data['term'] ?? '';
         $this->domain = Str::slug($this->term) . '.com';
